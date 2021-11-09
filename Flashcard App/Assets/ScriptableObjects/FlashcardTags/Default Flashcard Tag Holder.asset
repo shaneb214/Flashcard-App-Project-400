@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f3b29568f14644bba2f5860f12b24c, type: 3}
+  m_Name: Default Flashcard Tag Holder
+  m_EditorClassIdentifier: 
+  defaultFlashcardTagList:
+  - name: Masculine
+    colour: {r: 1, g: 0, b: 0, a: 1}
+  - name: Feminine
+    colour: {r: 1, g: 0, b: 0.6640477, a: 1}
+  - name: Neuter
+    colour: {r: 0, g: 1, b: 0.77877903, a: 1}
+  - name: Noun
+    colour: {r: 0, g: 0, b: 0, a: 1}
+  - name: Adjective
+    colour: {r: 0.148332, g: 1, b: 0, a: 1}
+  - name: Verb
+    colour: {r: 0.03901863, g: 0, b: 1, a: 1}
+  - name: Number
+    colour: {r: 0.55522346, g: 0, b: 1, a: 1}
+  - name: Adverb
+    colour: {r: 1, g: 1, b: 1, a: 1}
+  - name: Preposition
+    colour: {r: 1, g: 0.29354292, b: 0, a: 1}
