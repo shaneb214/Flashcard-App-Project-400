@@ -17,12 +17,12 @@ public class FlashcardTagDataHolder : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < defaultTagsHolder.defaultFlashcardTagList.Count; i++)
-        {
-            print(defaultTagsHolder.defaultFlashcardTagList[i].name);
-        }
+        //for (int i = 0; i < defaultTagsHolder.defaultFlashcardTagList.Count; i++)
+        //{
+        //    print(defaultTagsHolder.defaultFlashcardTagList[i].name);
+        //}
 
-        defaultTagsHolder.defaultFlashcardTagList.Add(new FlashcardTag("Test", Color.white));
+        //defaultTagsHolder.defaultFlashcardTagList.Add(new FlashcardTag("Test", Color.white));
     }
 
     private void OnFlashcardTagCreated(FlashcardTag newFlashcardTag)

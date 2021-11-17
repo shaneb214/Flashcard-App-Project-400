@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class Set : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //Default set? Have this in some sort of controller maybe. 
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
