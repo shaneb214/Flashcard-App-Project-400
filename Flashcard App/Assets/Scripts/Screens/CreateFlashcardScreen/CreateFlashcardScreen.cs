@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BlitzyUI;
 
-public class ScreenNewFlashcard : BlitzyUI.Screen
+public class CreateFlashcardScreen : BlitzyUI.Screen
 {
     public override void OnFocus()
     {
@@ -17,12 +17,15 @@ public class ScreenNewFlashcard : BlitzyUI.Screen
 
     public override void OnPop()
     {
-        
+
+
+        PopFinished();
     }
 
-    public override void OnPush(Data data)
+    public override void OnPush(ScreenData data)
     {
-        
+
+        PushFinished();
     }
 
     public override void OnSetup()
@@ -30,5 +33,3 @@ public class ScreenNewFlashcard : BlitzyUI.Screen
         
     }
 }
-
-

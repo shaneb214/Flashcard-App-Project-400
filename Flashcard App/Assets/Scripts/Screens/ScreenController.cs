@@ -7,9 +7,8 @@ public class ScreenController : MonoBehaviour
 {
     public static ScreenController Instance;
 
-
-    public static readonly BlitzyUI.Screen.Id ScreenId_Screen1 = new BlitzyUI.Screen.Id("Screen 1");
-    public static readonly BlitzyUI.Screen.Id ScreenId_Screen2 = new BlitzyUI.Screen.Id("Screen 2");
+    public static readonly BlitzyUI.Screen.ScreenID ScreenId_Screen1 = new BlitzyUI.Screen.ScreenID("Screen 1");
+    public static readonly BlitzyUI.Screen.ScreenID ScreenId_Screen2 = new BlitzyUI.Screen.ScreenID("Screen 2");
 
     private void Awake()
     {
@@ -19,7 +18,7 @@ public class ScreenController : MonoBehaviour
 
     private void Start()
     {
-        UIManager.Instance.QueuePush(ScreenId_Screen1, null, "Screen1", null);
+        //UIManager.Instance.QueuePush(ScreenId_Screen1, null, "Screen1", null);
     }
 
 
@@ -27,7 +26,12 @@ public class ScreenController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            
+            UIManager.Instance.QueuePop(null);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            UIManager.Instance.QueuePush(ScreenId_Screen1, null, "Screen1", null);
         }
     }
 }

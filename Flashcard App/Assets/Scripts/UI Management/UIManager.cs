@@ -3,6 +3,19 @@
 //#define PRINT_CACHE
 //#define PRINT_FOCUS
 
+
+/*Notes for myself:
+ * CACHED: 
+ * Meaning: screen is disabled in hierarchy to be reenabled later. 
+ * _cache dictionary: keeps track of cached screens. Dictionary that holds prefab name and screen that is cached.
+ * Can make a screen cache by setting keepCached variable in Screen class.
+ * 
+ * 
+ * 
+ */
+
+
+//Script to handle switching between screens. Screen ID's are held in ScreenController.
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -16,13 +29,12 @@ namespace BlitzyUI
 
         private abstract class QueuedScreen
         {
-            public BlitzyUI.Screen.Id id;
+            public BlitzyUI.Screen.ScreenID id;
         }
-
 
         private class QueuedScreenPush : QueuedScreen
         {
-            public BlitzyUI.Screen.Data data;
+            public BlitzyUI.Screen.ScreenData data;
             public string prefabName;
             public PushedDelegate callback;
 
@@ -44,7 +56,7 @@ namespace BlitzyUI
         }
 
         public delegate void PushedDelegate (Screen screen);
-        public delegate void PoppedDelegate (Screen.Id id);
+        public delegate void PoppedDelegate (Screen.ScreenID id);
 
         public static UIManager Instance { get; private set; }
 
@@ -61,8 +73,8 @@ namespace BlitzyUI
         private CanvasScaler _rootCanvasScalar;
         private Dictionary<string, Screen> _cache;
         private Queue<QueuedScreen> _queue;
-        private List<Screen> _stack;
-        private HashSet<BlitzyUI.Screen.Id> _stackIdSet;
+        [SerializeField] private List<Screen> _stack;
+        private HashSet<BlitzyUI.Screen.ScreenID> _stackIdSet;
         private State _state;
 
         private PushedDelegate _activePushCallback;
@@ -111,7 +123,7 @@ namespace BlitzyUI
         /// Queue the screen to be pushed onto the screen stack. 
         /// Callback will be invoked when the screen is pushed to the stack.
         /// </summary>
-        public void QueuePush (BlitzyUI.Screen.Id id, BlitzyUI.Screen.Data data, string prefabName = null, PushedDelegate callback = null)
+        public void QueuePush (BlitzyUI.Screen.ScreenID id, BlitzyUI.Screen.ScreenData data, string prefabName = null, PushedDelegate callback = null)
         {
             string prefab = prefabName ?? id.defaultPrefabName;
             #if PRINT_QUEUE
@@ -150,7 +162,7 @@ namespace BlitzyUI
         /// Queue the screen to be popped from the screen stack. This will pop all screens on top of it as well.
         /// Callback will be invoked when the screen is reached, or popped if 'include' is true.
         /// </summary>
-        public void QueuePopTo (BlitzyUI.Screen.Id id, bool include, PoppedDelegate callback = null)
+        public void QueuePopTo (BlitzyUI.Screen.ScreenID id, bool include, PoppedDelegate callback = null)
         {
             #if PRINT_QUEUE
             DebugPrintQueue(string.Format("[UIManager] QueuePopTo id: {0}, include: {1}", id, include));
@@ -245,7 +257,7 @@ namespace BlitzyUI
             return null;
         }
 
-        public Screen GetScreen (BlitzyUI.Screen.Id id)
+        public Screen GetScreen (BlitzyUI.Screen.ScreenID id)
         {
             int count = _stack.Count;
             for (int i = 0; i < count; i++)
@@ -257,7 +269,7 @@ namespace BlitzyUI
             return null;
         }
 
-        public T GetScreen<T> (BlitzyUI.Screen.Id id) where T : BlitzyUI.Screen
+        public T GetScreen<T> (BlitzyUI.Screen.ScreenID id) where T : BlitzyUI.Screen
         {
             Screen screen = GetScreen(id);
             return (T)screen;
@@ -317,6 +329,9 @@ namespace BlitzyUI
                 QueuedScreenPush queuedPush = (QueuedScreenPush)queued;
                 Screen screenInstance;
 
+
+                //Is the screen I'm pushing cached (part of cached dict. therefore disabled in hierarchy)?
+                //If yes.. Don't instantiate a new screen, just re-enable cached screen.
                 if (_cache.TryGetValue(queuedPush.prefabName, out screenInstance))
                 {
                     // Use cached instance of screen.
@@ -328,7 +343,6 @@ namespace BlitzyUI
 
                     // Move cached to the front of the transfrom heirarchy so that it is sorted properly.
                     screenInstance.transform.SetAsLastSibling();
-
                     screenInstance.gameObject.SetActive(true);
                 }
                 else
@@ -366,7 +380,7 @@ namespace BlitzyUI
                 DebugPrintStack(string.Format("[UIManager] Pushing Screen: {0}, Frame: {1}", queued.id, Time.frameCount));
                 #endif
 
-                screenInstance.onPushFinished += HandlePushFinished;
+                screenInstance.PushFinishedEvent += HandlePushFinished;
                 screenInstance.OnPush(queuedPush.data);
 
                 if (_queue.Count == 0)
@@ -421,7 +435,7 @@ namespace BlitzyUI
                 DebugPrintStack(string.Format("[UIManager] Popping Screen: {0}, Frame: {1}", queued.id, Time.frameCount));
                 #endif
 
-                screenToPop.onPopFinished += HandlePopFinished;
+                screenToPop.PopFinishedEvent += HandlePopFinished;
                 screenToPop.OnPop();
             }
         }
@@ -511,7 +525,7 @@ namespace BlitzyUI
 
         private void HandlePushFinished (Screen screen)
         {
-            screen.onPushFinished -= HandlePushFinished;
+            screen.PushFinishedEvent -= HandlePushFinished;
 
             _state = State.Ready;
 
@@ -527,7 +541,7 @@ namespace BlitzyUI
 
         private void HandlePopFinished (Screen screen)
         {
-            screen.onPopFinished -= HandlePopFinished;
+            screen.PopFinishedEvent -= HandlePopFinished;
 
             if (screen.keepCached)
             {

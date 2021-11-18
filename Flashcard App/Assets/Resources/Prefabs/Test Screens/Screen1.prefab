@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430b9606223f7af458cdc34b5c898da6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepCached: 0
+  keepCached: 1
   overrideManagedSorting: 0
   overrideSortValue: 0
   btnGoToScreen2: {fileID: 1569246949575555320}
