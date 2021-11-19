@@ -40,6 +40,6 @@ public class Screen2 : BlitzyUI.Screen
     void GoScreen1()
     {
         UIManager.Instance.QueuePop(null);
-        UIManager.Instance.QueuePush(ScreenController.ScreenId_Screen1, null, "Screen1", null);
+        //UIManager.Instance.QueuePush(ScreenController.ScreenId_Screen1, null, "Screen1", null);
     }
 }

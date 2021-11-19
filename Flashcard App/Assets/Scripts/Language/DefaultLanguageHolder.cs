@@ -7,5 +7,5 @@ public class DefaultLanguageHolder : ScriptableObject
 {
     public List<Language> defaultLanguageList = new List<Language>();
 
-    public Language FindDefaultLanguage(string name) => defaultLanguageList.Find(lang => lang._name == name);
+    public Language FindDefaultLanguage(string iso) => defaultLanguageList.Find(lang => lang.ISO == iso);
 }

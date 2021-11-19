@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44814f47bcb3fc345b17ce77555e8a69, type: 3}
   m_Name: Def_Lang_Holder
   m_EditorClassIdentifier: 
+  Id: d76a9a06-f620-4d61-8fc0-a33cc9063973
   defaultLanguageList:
   - _name: English
     ISO: en

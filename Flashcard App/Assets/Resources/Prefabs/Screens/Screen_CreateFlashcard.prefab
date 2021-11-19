@@ -736,7 +736,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ab7fdfb3c6462694894d1d501f1bd1ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a9697cb73fe5c01498e1074fd0c4d4ca, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -971,7 +971,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 43d2f32d7ac17fa48a3beb7971b514cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18f599eed8471d740a82161d4ec10786, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3881,7 +3881,7 @@ GameObject:
   - component: {fileID: 7742874550472872049}
   - component: {fileID: 1652067332}
   m_Layer: 5
-  m_Name: Add Card Screen V2
+  m_Name: Screen_CreateFlashcard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

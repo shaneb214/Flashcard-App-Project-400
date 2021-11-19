@@ -23,37 +23,9 @@ using System.Collections.Generic;
 
 namespace BlitzyUI
 {
-    public class UIManager : MonoBehaviour
+    public partial class UIManager : MonoBehaviour
     {
         public const string Version = "1.0.0";
-
-        private abstract class QueuedScreen
-        {
-            public BlitzyUI.Screen.ScreenID id;
-        }
-
-        private class QueuedScreenPush : QueuedScreen
-        {
-            public BlitzyUI.Screen.ScreenData data;
-            public string prefabName;
-            public PushedDelegate callback;
-
-            public override string ToString()
-            {
-                return string.Format("[Push] {0}", id);
-            }
-        }
-
-
-        private class QueuedScreenPop : QueuedScreen
-        {
-            public PoppedDelegate callback;
-
-            public override string ToString()
-            {
-                return string.Format("[Pop] {0}", id);
-            }
-        }
 
         public delegate void PushedDelegate (Screen screen);
         public delegate void PoppedDelegate (Screen.ScreenID id);
@@ -89,7 +61,8 @@ namespace BlitzyUI
             Pop
         }
 
-        private void Awake() {
+        private void Awake() 
+        {
             if (Instance == null) {
                 Instance = this;
             }
@@ -113,8 +86,10 @@ namespace BlitzyUI
             }
         }
 
-        private void OnDestroy() {
-            if (Instance == this) {
+        private void OnDestroy() 
+        {
+            if (Instance == this)
+            {
                 Instance = null;
             }
         }

@@ -6,17 +6,22 @@ using UnityEngine;
 [Serializable]
 public class LanguageProfile
 {
-    //Current profile - put in controller probably?
-    //User? 
     public Guid ID;
-    public Guid UserID;
+    public bool currentProfile;
 
-    public Language basicLanguage;
-    public Language learningLanguage;
+    //public Language nativeLanguage;
+    //public Language learningLanguage;
 
-    public LanguageProfile()
+    public string nativeISO;
+    public string learningISO;
+
+    public LanguageProfile(string nativeISO, string learningISO, bool setCurrentProfile)
     {
         ID = Guid.NewGuid();
-        //Set user ID here - get it from somewhere?
+
+        this.nativeISO = nativeISO;
+        this.learningISO = learningISO;
+
+        currentProfile = setCurrentProfile;
     }
 }

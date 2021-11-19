@@ -11,8 +11,8 @@ public class Screen1 : BlitzyUI.Screen
     private void OnClickScreen2Button()
     {
         // Way to pop then push?
-        UIManager.Instance.QueuePop(null);
-        UIManager.Instance.QueuePush(ScreenController.ScreenId_Screen2, null, "Screen2", null);
+        //UIManager.Instance.QueuePop(null);
+        //UIManager.Instance.QueuePush(ScreenController.ScreenId_Screen2, null, "Screen2", null);
 
         //UIManager.Instance.QueuePopTo(ScreenController.ScreenId_Screen2, true, null);
     }

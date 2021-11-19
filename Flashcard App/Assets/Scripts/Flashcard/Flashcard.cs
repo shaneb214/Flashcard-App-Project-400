@@ -13,11 +13,11 @@ public class Flashcard
 
     //Native language.
     [SerializeField] private string nativeSide;
-    public string FirstSide { get => nativeSide; set => nativeSide = value; }
+    public string NativeSide { get => nativeSide; set => nativeSide = value; }
 
     //Learning language.
     [SerializeField] private string learningSide;
-    public string SecondSide { get => learningSide; set => learningSide = value; }
+    public string LearningSide { get => learningSide; set => learningSide = value; }
 
     private string optionalComments;
     public string OptionalComments { get => optionalComments; set => optionalComments = value; }
@@ -45,6 +45,6 @@ public class Flashcard
 
     public override string ToString()
     {
-        return string.Format($"{FirstSide} <> {SecondSide}");
+        return string.Format($"{NativeSide} <> {LearningSide}");
     }
 }

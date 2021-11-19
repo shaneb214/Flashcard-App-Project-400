@@ -1,12 +1,8 @@
 using System;
-using UnityEngine;
 
-//Allow user to create language themselves?
-//Have ID? 
 [Serializable]
 public class Language
 {
+    public string ISO;  //Using this as language ID.
     public string _name;
-    public string ISO;
-    //Flag Icon. ?
 }
