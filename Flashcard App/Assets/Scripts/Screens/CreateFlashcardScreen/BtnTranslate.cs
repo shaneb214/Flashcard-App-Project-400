@@ -21,11 +21,22 @@ public class BtnTranslate : MonoBehaviour
         button.onClick.AddListener(OnButtonClick);
     }
 
+    private void Start()
+    {
+        
+    }
+
+    private void OnEnable()
+    {
+        
+    }
+
     private void OnButtonClick()
     {
         //Create animation for arrow.
+        //Dont call translate if it's already in process of translating.
 
-        Translator translator = Translator.Create(LanguageISO.Auto, LanguageISO.Russian); //Hard coded for now.
+        Translator translator = Translator.Create(LanguageProfileController.Instance.userCurrentLanguageProfile.nativeISO, LanguageProfileController.Instance.userCurrentLanguageProfile.learningISO);
         translator.Run(txtTranslateFrom.text, (results) =>
         {
             string translation = string.Empty;

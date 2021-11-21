@@ -14,6 +14,8 @@
  * 
  */
 
+//TO DO: pressing escape / back goes back to previous screen. Need to take into account disabled screens in cache dictionary and non cached in _stack list.
+
 
 //Script to handle switching between screens. Screen ID's are held in ScreenController.
 using UnityEngine;
@@ -53,6 +55,7 @@ namespace BlitzyUI
         private PoppedDelegate _activePopCallback;
 
         public Vector2 ReferenceResolution { get { return _rootCanvasScalar.referenceResolution; } }
+        public bool CurrentScreenIsLastOnStack() => _stack.Count == 1;
 
         private enum State
         {
@@ -67,8 +70,6 @@ namespace BlitzyUI
                 Instance = this;
             }
 
-            Debug.Log("[UIManager] Version: " + Version);
-
             _rootCanvasScalar = rootCanvas.GetComponent<CanvasScaler>();
             if (_rootCanvasScalar == null) {
                 throw new System.Exception(string.Format("{0} must have a CanvasScalar component attached to it for UIManager.", rootCanvas.name));
@@ -80,10 +81,10 @@ namespace BlitzyUI
             _state = State.Ready;
 
             // Remove any objects that may be lingering underneath the root.
-            foreach (Transform child in rootCanvas.transform)
-            {
-                Object.Destroy(child.gameObject);
-            }
+            //foreach (Transform child in rootCanvas.transform)
+            //{
+            //    Object.Destroy(child.gameObject);
+            //}
         }
 
         private void OnDestroy() 

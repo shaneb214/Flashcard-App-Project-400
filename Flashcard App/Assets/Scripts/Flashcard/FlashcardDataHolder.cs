@@ -16,7 +16,7 @@ public class FlashcardDataHolder : MonoBehaviour
 
     private void Start()
     {
-        Flashcard someFlashcard = new Flashcard("Hi", "Привет", null, Color.black, null);
+       //Flashcard someFlashcard = new Flashcard("Hi", "Привет", null, Color.black, null);
     }
 
     private void OnFlashcardCreated(Flashcard flashcardCreated)

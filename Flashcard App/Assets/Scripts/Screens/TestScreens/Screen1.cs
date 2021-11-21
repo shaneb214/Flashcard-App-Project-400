@@ -33,7 +33,9 @@ public class Screen1 : BlitzyUI.Screen
 
     public override void OnPop()
     {
-
+        //On pop is called.
+        //Call Popfinished at end which raises event ui manager has subscribed to - then it disables / destroys screen.
+        
 
 
         PopFinished(); // Make sure to call last. Raises pop finished event.

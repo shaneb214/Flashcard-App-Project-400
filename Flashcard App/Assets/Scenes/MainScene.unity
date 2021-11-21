@@ -473,10 +473,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2da7a1497ac1af43b5309a5f6b57668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageProfileJSONResourcePath: /JSON Data/LanguageProfiles
-  currentLanguageProfileJSONFileName: CurrentLanguageProfile
+  languageProfilesListJSONPath: /JSON Data/LanguageProfiles/LanguageProfilesList.json
+  currentProfileJSONPath: /JSON Data/LanguageProfiles/CurrentLanguageProfile.json
   userLanguageProfilesList: []
   userCurrentLanguageProfile:
+    ID: 
     currentProfile: 0
     nativeISO: 
     learningISO: 

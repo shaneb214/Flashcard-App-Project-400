@@ -4,17 +4,24 @@ using System.IO;
 using UnityEngine;
 
 //TO DO - make class that reads / writes json from / to specific folder.
-
-
 public class LanguageProfileController : MonoBehaviour
 {
+    public static LanguageProfileController Instance;
+
     [Header("Storing JSON Location")]
-    [SerializeField] private string languageProfileJSONResourcePath;
-    [SerializeField] private string currentLanguageProfileJSONFileName; 
+    [SerializeField] private string languageProfilesListJSONPath;
+    [SerializeField] private string currentProfileJSONPath;
+
 
     [Header("User's language profile info")]
     [SerializeField] private List<LanguageProfile> userLanguageProfilesList;
-    [SerializeField] private LanguageProfile userCurrentLanguageProfile;
+    public LanguageProfile userCurrentLanguageProfile;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
 
     private void Start()
     {
@@ -22,28 +29,50 @@ public class LanguageProfileController : MonoBehaviour
 
         // Read language profiles from json. Store in list.
         // Find current language. 
+        userLanguageProfilesList = ReadLanguageProfileListFromJSON();
+        userCurrentLanguageProfile = userLanguageProfilesList.Find(profile => profile.currentProfile == true);
 
+        //LanguageProfile userCurrentLanuguageProfile = ReadCurrentLanguageProfileFromJSON();
 
-        LanguageProfile userCurrentLanuguageProfile = ReadCurrentLanguageProfileFromJSON();
+        //List<LanguageProfile> languageProfiles = new List<LanguageProfile>()
+        //{
+        //    new LanguageProfile("en","ru",true),
+        //    new LanguageProfile("en","ja",false),
+        //    new LanguageProfile("en","it",false),
+        //};
 
-        
+        //SaveListOfLanguageProfilesToJSON(languageProfiles);
+
     }
 
     //Testing.
+    private void SaveListOfLanguageProfilesToJSON(List<LanguageProfile> languageProfilesList)
+    {
+        string json = JSONHelper.ToJson(languageProfilesList);
+
+        File.WriteAllText(Application.dataPath + languageProfilesListJSONPath, json);
+    }
+    private List<LanguageProfile> ReadLanguageProfileListFromJSON()
+    {
+        string json = File.ReadAllText(Application.dataPath + languageProfilesListJSONPath);
+
+        List<LanguageProfile> profiles = JSONHelper.FromJson<LanguageProfile>(json);
+
+        return profiles;
+    }
     private void SaveEngRuAsCurrentLanguageProfileToJson()
     {
         LanguageProfile englishRussianProfile = new LanguageProfile("en", "ru", true);
 
         string profileAsJSON = JsonUtility.ToJson(englishRussianProfile);
 
-        string filePath = Application.dataPath + languageProfileJSONResourcePath + languageProfileJSONResourcePath + "/" + currentLanguageProfileJSONFileName + ".json";
+        string filePath = Application.dataPath + currentProfileJSONPath;
 
         File.WriteAllText(filePath, profileAsJSON);
     }
-
     private LanguageProfile ReadCurrentLanguageProfileFromJSON()
     {
-        LanguageProfile currentLanguageProfile = JsonUtility.FromJson<LanguageProfile>(File.ReadAllText(Application.dataPath + languageProfileJSONResourcePath + "/" + currentLanguageProfileJSONFileName + ".json"));
+        LanguageProfile currentLanguageProfile = JsonUtility.FromJson<LanguageProfile>(File.ReadAllText(Application.dataPath + currentProfileJSONPath));
         return currentLanguageProfile;
     }
 }

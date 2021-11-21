@@ -8,6 +8,7 @@ namespace BlitzyUI
         public ScreenID id { get; private set; }
         public string PrefabName { get; private set; }
 
+        [Header("Screen Info")]
         public bool keepCached = false;
         public bool overrideManagedSorting;
         public int overrideSortValue;

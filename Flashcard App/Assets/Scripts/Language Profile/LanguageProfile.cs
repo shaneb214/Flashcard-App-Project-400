@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class LanguageProfile
 {
-    public Guid ID;
+    public string ID;
     public bool currentProfile;
 
     //public Language nativeLanguage;
@@ -17,7 +17,7 @@ public class LanguageProfile
 
     public LanguageProfile(string nativeISO, string learningISO, bool setCurrentProfile)
     {
-        ID = Guid.NewGuid();
+        ID = Guid.NewGuid().ToString(); //So it saves to json.
 
         this.nativeISO = nativeISO;
         this.learningISO = learningISO;
