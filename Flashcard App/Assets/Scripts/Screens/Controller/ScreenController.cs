@@ -24,6 +24,8 @@ public class ScreenController : MonoBehaviour
     private void Start()
     {
         UIManager.Instance.QueuePush(ScreenId_CreateFlashcard, null, "Screen_CreateFlashcard", null);
+        UIManager.Instance.QueuePush(ScreenId_Screen1, null, "Screen1", null);
+        UIManager.Instance.QueuePush(ScreenId_Screen2, null, "Screen2", null);
     }
 
 
@@ -31,7 +33,18 @@ public class ScreenController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            UIManager.Instance.QueuePop(null);
+            BlitzyUI.Screen topScreen = UIManager.Instance.GetTopScreen();
+
+            if(topScreen.AllowPopScreenOnPressingBack)
+            {
+                topScreen.OnBackButtonPressed();
+
+                //If last screen - minimise
+
+                //Otherwise pop
+
+                //UIManager.Instance.QueuePop(null);
+            }
 
 
 

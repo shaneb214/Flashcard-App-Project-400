@@ -3733,6 +3733,7 @@ MonoBehaviour:
   keepCached: 1
   overrideManagedSorting: 0
   overrideSortValue: 0
+  popScreenOnPressingBack: 1
 --- !u!1001 &2121745118
 PrefabInstance:
   m_ObjectHideFlags: 0

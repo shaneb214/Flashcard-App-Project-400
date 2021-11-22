@@ -250,6 +250,7 @@ MonoBehaviour:
   keepCached: 1
   overrideManagedSorting: 0
   overrideSortValue: 0
+  popScreenOnPressingBack: 1
   btnGoToScreen2: {fileID: 1569246949575555320}
 --- !u!1 &4279824576293223332
 GameObject:

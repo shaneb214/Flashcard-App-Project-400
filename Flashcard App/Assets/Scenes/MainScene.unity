@@ -477,10 +477,10 @@ MonoBehaviour:
   currentProfileJSONPath: /JSON Data/LanguageProfiles/CurrentLanguageProfile.json
   userLanguageProfilesList: []
   userCurrentLanguageProfile:
-    ID: 
-    currentProfile: 0
-    nativeISO: 
-    learningISO: 
+    ID: currentprofileid1
+    currentProfile: 1
+    nativeISO: en
+    learningISO: ru
 --- !u!1 &1188239623
 GameObject:
   m_ObjectHideFlags: 0

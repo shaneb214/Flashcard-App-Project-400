@@ -234,11 +234,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0f6288dfb2c6b4fbfa858e9ab96562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepCached: 1
+  keepCached: 0
   overrideManagedSorting: 0
   overrideSortValue: 0
   naviconObject: {fileID: 2025696886752851687}
-  naviconTimeToMoveToTarget: 0.32
+  naviconTimeToMoveToTarget: 3
   moveTweenType: 10
   btnHideNavicon: {fileID: 2025696884852389783}
   btnHideNaviconImage: {fileID: 2025696884852389780}

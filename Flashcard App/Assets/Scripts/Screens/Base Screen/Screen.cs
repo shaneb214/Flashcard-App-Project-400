@@ -13,9 +13,14 @@ namespace BlitzyUI
         public bool overrideManagedSorting;
         public int overrideSortValue;
 
+
         public delegate void ScreenDelegate (Screen screen);
         public event ScreenDelegate PushFinishedEvent;
         public event ScreenDelegate PopFinishedEvent;
+
+        //I added this for when pressing back.
+        private bool allowPopScreenOnPressingBack = true;
+        public virtual bool AllowPopScreenOnPressingBack { get { return allowPopScreenOnPressingBack; } set { allowPopScreenOnPressingBack = value; } } 
 
         public void Setup(ScreenID id, string prefabName)
         {
@@ -53,6 +58,11 @@ namespace BlitzyUI
         /// Called by the UIManager when this Screen is no longer the top most screen in the stack.
         /// </summary>
         public abstract void OnFocusLost();
+
+        //Added this myself which screen controller calls when back button is pressed. 
+        //Default thing to happen is that the ui manager just pops the screen. 
+        //Can override this in any screen to do something before you pop the screen (in navicon screen - move navicon off screen using leantween then queuepop once that's done.
+        public virtual void OnBackButtonPressed() { UIManager.Instance.QueuePop(null); } 
 
         protected void PushFinished ()
         {
