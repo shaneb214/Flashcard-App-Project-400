@@ -1,12 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using BlitzyUI;
 using UnityEngine.UI;
 
+// Navicon screen which appears when you press the navicon button (top left of screen).
+// As soon as this screen is pushed or "activated" it moves the navicon onto the screen - see OnPush method below.
+// Can only start to hide it when it is not moving and fully on screen.
+// Can be hidden by pressing back (Screen Controller deals with pressing back input) or by pressing to the side of the navicon (button in background)
+
+//Notes: 
 //Keep this screen cached I think.
+
 public class NaviconScreen : BlitzyUI.Screen
 {
+    [Header("Target positions for movement")]
     private Vector3 posOffScreen;
     private Vector3 posOnScreen;
     private Vector3 targetPosition;
@@ -16,18 +22,20 @@ public class NaviconScreen : BlitzyUI.Screen
     [SerializeField] private float naviconTimeToMoveToTarget;
     [SerializeField] private LeanTweenType moveTweenType;
 
-    [Header("Hide Background Button")]
+    [Header("Background Hide Button")]
     [SerializeField] private Button btnHideNavicon; 
     [SerializeField] private Image btnHideNaviconImage;
     [SerializeField] [Range(0, 1)] private float darkAlphaTarget;
     private float currentAlphaTarget;
 
+    //Only allows screen controller to start to pop this screen when its not moving / tweening.
     public override bool AllowPopScreenOnPressingBack 
     { 
         get => !LeanTween.isTweening(naviconObject); 
         set => base.AllowPopScreenOnPressingBack = value;
     }
 
+    //Start / Setup.
     private void Awake() => btnHideNavicon.onClick.AddListener(OnHideNaviconButtonPressed);
     public override void OnSetup()
     {

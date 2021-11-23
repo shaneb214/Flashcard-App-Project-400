@@ -5,27 +5,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using BlitzyUI;
 
-public class BtnNavicon : MonoBehaviour
+//Not used by navicon button prefab - can probably delete this unless I plan to do something extra with the button.
+//Navicon button prefab just uses BtnPushScreen as its script.
+
+public class BtnNavicon : BtnPushScreen
 {
-    private Button button;
-
-    private void Awake()
+    public override void Awake()
     {
-        button = GetComponent<Button>();
+        base.Awake();
     }
 
-    private void Start()
+    public override void OnButtonClick()
     {
-        button.onClick.AddListener(OnButtonClick);
+        base.OnButtonClick();
     }
 
-    private void OnButtonClick()
+    public override void OnDestroy()
     {
-        UIManager.Instance.QueuePush(ScreenController.ScreenId_Navicon, null, "Screen_Navicon", null);
+        base.OnDestroy();
     }
 
-    private void OnDestroy()
+    public override void Start()
     {
-        button.onClick.RemoveListener(OnButtonClick);
+        base.Start();
     }
 }

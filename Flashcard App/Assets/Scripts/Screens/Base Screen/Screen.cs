@@ -62,7 +62,10 @@ namespace BlitzyUI
         //Added this myself which screen controller calls when back button is pressed. 
         //Default thing to happen is that the ui manager just pops the screen. 
         //Can override this in any screen to do something before you pop the screen (in navicon screen - move navicon off screen using leantween then queuepop once that's done.
-        public virtual void OnBackButtonPressed() { UIManager.Instance.QueuePop(null); } 
+        public virtual void OnBackButtonPressed()
+        {
+            UIManager.Instance.QueuePop(null); 
+        } 
 
         protected void PushFinished ()
         {

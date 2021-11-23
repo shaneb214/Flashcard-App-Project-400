@@ -1,11 +1,17 @@
-﻿namespace BlitzyUI
+﻿using System;
+
+namespace BlitzyUI
 {
     public abstract partial class Screen
     {
+        [Serializable]
         public class ScreenID
         {
-            readonly string name;
-            public readonly string defaultPrefabName;
+            //readonly string name;
+            //public readonly string defaultPrefabName;
+
+            public string name;
+            public string defaultPrefabName;
 
             public ScreenID (string name)
             {
