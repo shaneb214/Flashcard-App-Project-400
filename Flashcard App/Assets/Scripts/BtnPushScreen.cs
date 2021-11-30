@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using BlitzyUI;
 
 
-//Base button class that will push a screen when pressed.
+//Base button class helps to push a screen when button is pressed.
 
 [RequireComponent(typeof(Button))]
 public class BtnPushScreen : MonoBehaviour
@@ -13,7 +13,8 @@ public class BtnPushScreen : MonoBehaviour
 
     [Header("Pushing new screen")]
     [SerializeField] protected ScreenPushData myScreenToPush;
-    [SerializeField] private bool popCurrentScreen;
+    [Tooltip("If using base onbuttonclick and this is enabled, it will pop the current screen and not call its pop sequence")]
+    [SerializeField] private bool popAndSkipPopSequence; 
 
     public virtual void Awake()
     {
@@ -27,14 +28,9 @@ public class BtnPushScreen : MonoBehaviour
 
     public virtual void OnButtonClick()
     {
-        if (popCurrentScreen)
+        if (popAndSkipPopSequence)
             UIManager.Instance.QueuePop();
 
         UIManager.Instance.QueuePush(myScreenToPush.ID, null, null);
-    }
-
-    public virtual void OnDestroy()
-    {
-        button.onClick.RemoveListener(OnButtonClick);
     }
 }

@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 8909363878115353441}
   - component: {fileID: 8909363878115353446}
   - component: {fileID: 8909363878115353447}
+  - component: {fileID: 375408662}
   m_Layer: 5
   m_Name: Navicon Button
   m_TagString: Untagged
@@ -197,6 +198,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &375408662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8909363878115353445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8aeffc2cec6f34aaf753276f6eb4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myScreenToPush: {fileID: 11400000, guid: a265d7c149c54854aa9c5fc0221fb213, type: 2}
+  popCurrentScreen: 1
 --- !u!1 &8909363878425634337
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +247,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 40.8, y: 0}
-  m_SizeDelta: {x: 218.9, y: 50}
+  m_SizeDelta: {x: 284.7, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8909363878425634338
 CanvasRenderer:
@@ -262,7 +277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Navicon Button
+  m_text: Lanuguage Profiles
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a940b10242ff9e4aa99aa5e6e91e81f, type: 2}
   m_sharedMaterial: {fileID: -4619257622809158593, guid: 9a940b10242ff9e4aa99aa5e6e91e81f, type: 2}
@@ -289,8 +304,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

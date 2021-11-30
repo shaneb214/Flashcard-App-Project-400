@@ -1,7 +1,12 @@
+using System;
 using UnityEngine;
 
 namespace BlitzyUI
 {
+    //Remember to call popfinished & push finished.
+    //Remember to override OnBackButtonPressed if you want it to trigger pop sequence.
+
+
     [RequireComponent(typeof(Canvas))]
     public abstract partial class Screen : MonoBehaviour
     {
@@ -19,8 +24,8 @@ namespace BlitzyUI
         public event ScreenDelegate PopFinishedEvent;
 
         //I added this for when pressing back.
-        private bool allowPopScreenOnPressingBack = true;
-        public virtual bool AllowPopScreenOnPressingBack { get { return allowPopScreenOnPressingBack; } set { allowPopScreenOnPressingBack = value; } } 
+        private bool allowStartPoppingSequence = true;
+        public virtual bool AllowStartPoppingSequence { get { return allowStartPoppingSequence; } set { allowStartPoppingSequence = value; } } 
 
         public void Setup(ScreenID id, string prefabName)
         {
@@ -59,12 +64,19 @@ namespace BlitzyUI
         /// </summary>
         public abstract void OnFocusLost();
 
+
         //Added this myself which screen controller calls when back button is pressed. 
         //Default thing to happen is that the ui manager just pops the screen. 
         //Can override this in any screen to do something before you pop the screen (in navicon screen - move navicon off screen using leantween then queuepop once that's done.
-        public virtual void OnBackButtonPressed()
+        /// <summary>
+        /// Can make a call to this to start the sequence of popping the screen. 
+        /// At end of sequence make sure to call UIManager's pop screen and invoke the callback after. 
+        /// </summary>
+        public virtual void StartPoppingSequence(Action callbackOnPopEnd = null)
         {
-            UIManager.Instance.QueuePop(null); 
+            UIManager.Instance.QueuePop(null);
+
+            callbackOnPopEnd?.Invoke();
         } 
 
         protected void PushFinished ()

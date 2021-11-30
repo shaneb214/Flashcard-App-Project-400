@@ -20,11 +20,6 @@ public class BtnNavicon : BtnPushScreen
         base.OnButtonClick();
     }
 
-    public override void OnDestroy()
-    {
-        base.OnDestroy();
-    }
-
     public override void Start()
     {
         base.Start();

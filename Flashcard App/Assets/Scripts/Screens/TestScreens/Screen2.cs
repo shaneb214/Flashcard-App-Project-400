@@ -9,7 +9,7 @@ public class Screen2 : BlitzyUI.Screen
 
     [SerializeField] Button btnGoScreen1;
 
-    public override bool AllowPopScreenOnPressingBack { get => base.AllowPopScreenOnPressingBack; set => base.AllowPopScreenOnPressingBack = value; }
+    public override bool AllowStartPoppingSequence { get => base.AllowStartPoppingSequence; set => base.AllowStartPoppingSequence = value; }
 
     public override void OnFocus()
     {

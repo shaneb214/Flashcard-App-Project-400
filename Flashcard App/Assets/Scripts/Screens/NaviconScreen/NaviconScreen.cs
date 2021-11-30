@@ -1,6 +1,7 @@
 using UnityEngine;
 using BlitzyUI;
 using UnityEngine.UI;
+using System;
 
 // Navicon screen which appears when you press the navicon button (top left of screen).
 // As soon as this screen is pushed or "activated" it moves the navicon onto the screen - see OnPush method below.
@@ -29,10 +30,10 @@ public class NaviconScreen : BlitzyUI.Screen
     private float currentAlphaTarget;
 
     //Only allows screen controller to start to pop this screen when its not moving / tweening.
-    public override bool AllowPopScreenOnPressingBack 
+    public override bool AllowStartPoppingSequence 
     { 
         get => !LeanTween.isTweening(naviconObject); 
-        set => base.AllowPopScreenOnPressingBack = value;
+        set => base.AllowStartPoppingSequence = value;
     }
 
     //Start / Setup.
@@ -67,10 +68,10 @@ public class NaviconScreen : BlitzyUI.Screen
 
     //Popping - moving navicon off screen.
     public override void OnPop() => PopFinished();
-    public override void OnBackButtonPressed() => MoveNaviconOffScreen();
-    private void OnHideNaviconButtonPressed() => MoveNaviconOffScreen();
+    public override void StartPoppingSequence(Action callback = null) => MoveNaviconOffScreen(callback);
+    private void OnHideNaviconButtonPressed() => MoveNaviconOffScreen(callback: null);
 
-    private void MoveNaviconOffScreen()
+    private void MoveNaviconOffScreen(Action callback)
     {
         btnHideNavicon.interactable = false;
 
@@ -80,11 +81,12 @@ public class NaviconScreen : BlitzyUI.Screen
             currentAlphaTarget = darkAlphaTarget;
             targetPosition = posOnScreen;
 
-           UIManager.Instance.QueuePop(null);
+            UIManager.Instance.QueuePop(null);
+
+            callback?.Invoke();
         });
     }
 
-    public override void OnFocus() { }
-    public override void OnFocusLost() { }
-    private void OnDestroy() => btnHideNavicon.onClick.RemoveListener(OnHideNaviconButtonPressed);
+    public override void OnFocus() => btnHideNavicon.interactable = true;
+    public override void OnFocusLost() => btnHideNavicon.interactable = false;
 }

@@ -134,3 +134,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myScreenToPush: {fileID: 11400000, guid: cd084f7f4fb9b3346978e622772fc451, type: 2}
+  popCurrentScreen: 0
