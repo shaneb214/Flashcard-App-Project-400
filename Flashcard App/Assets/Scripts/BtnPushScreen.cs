@@ -14,7 +14,7 @@ public class BtnPushScreen : MonoBehaviour
     [Header("Pushing new screen")]
     [SerializeField] private ScreenPushData myScreenToPush;
     [Tooltip("If using base onbuttonclick and this is enabled, it will pop the current screen and not call its pop sequence")]
-    [SerializeField] protected bool popAndSkipPopSequence;
+    [SerializeField] protected bool popCurrentScreenAndSkipPopSequence;
 
     //Start.
     public virtual void Awake() => button = GetComponent<Button>();
@@ -22,7 +22,7 @@ public class BtnPushScreen : MonoBehaviour
 
     public virtual void OnButtonClick()
     {
-        if (popAndSkipPopSequence)
+        if (popCurrentScreenAndSkipPopSequence)
             UIManager.Instance.QueuePop();
 
         PushMyScreen();

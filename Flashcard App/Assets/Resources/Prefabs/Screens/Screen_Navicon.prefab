@@ -656,7 +656,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myScreenToPush: {fileID: 11400000, guid: 8ffcaf9bec0a69e429cc862c29202b3e, type: 2}
-  popAndSkipPopSequence: 0
+  popCurrentScreenAndSkipPopSequence: 0
+--- !u!114 &3857063600565881700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8909363877615967064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8b8a3044cfb9f1418404dff4e8d503e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myScreenToPush: {fileID: 11400000, guid: 1edc43abd6a9392429833702dc26c227, type: 2}
+  popCurrentScreenAndSkipPopSequence: 0
 --- !u!1001 &1648113725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -760,8 +774,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Navicon Button
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 375408662, guid: a66d82a7111a75f41a1e68524e65d199, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a66d82a7111a75f41a1e68524e65d199, type: 3}
+--- !u!1 &8909363877615967064 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8909363878115353445, guid: a66d82a7111a75f41a1e68524e65d199, type: 3}
+  m_PrefabInstance: {fileID: 1648113725}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8909363877615967065 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8909363878115353444, guid: a66d82a7111a75f41a1e68524e65d199, type: 3}

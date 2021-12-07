@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1222084996438715087}
   - component: {fileID: 1222084996438715086}
   m_Layer: 5
-  m_Name: Screen_TopBottomNavBars
+  m_Name: Screen_BottomNavBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myScreenToPush: {fileID: 11400000, guid: cd084f7f4fb9b3346978e622772fc451, type: 2}
-  popAndSkipPopSequence: 0
+  popCurrentScreenAndSkipPopSequence: 0
 --- !u!1 &3249833959003333741
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +603,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btnNewCard: {fileID: 5682660330731226479}
   btnMySets: {fileID: 8406630762788834655}
+  currentActiveButton: {fileID: 0}
+  lastActiveButton: {fileID: 0}
 --- !u!1 &3347322336034198587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,8 +1196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e6d1f814d9e78f4e9f36050bc4e0172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myScreenToPush: {fileID: 0}
-  popAndSkipPopSequence: 0
+  myScreenToPush: {fileID: 11400000, guid: a96b9be72ea064741923d161fd4cfb90, type: 2}
+  popCurrentScreenAndSkipPopSequence: 1
   txtButtonDescription: {fileID: 3347322337207680185}
   imgButton: {fileID: 3347322336034198585}
   notActiveAlpha: 0.7
@@ -1332,8 +1334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e6d1f814d9e78f4e9f36050bc4e0172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myScreenToPush: {fileID: 0}
-  popAndSkipPopSequence: 0
+  myScreenToPush: {fileID: 11400000, guid: fbb3476175b38b847b1befba3acc10b8, type: 2}
+  popCurrentScreenAndSkipPopSequence: 1
   txtButtonDescription: {fileID: 1441878362739471497}
   imgButton: {fileID: 1441878361752902665}
   notActiveAlpha: 0.7

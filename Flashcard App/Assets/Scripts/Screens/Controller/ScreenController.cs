@@ -13,6 +13,7 @@ public class ScreenController : MonoBehaviour
     [SerializeField] private ScreenPushData screenBottomNavBarData; //Here just in case I'll treat this as an actual screen.
     [SerializeField] private ScreenPushData screenCreateFlashcardPushData;
     [SerializeField] private ScreenPushData screenNaviconPushData;
+    [SerializeField] private ScreenPushData screenSetsView;
     [SerializeField] private ScreenPushData screen1PushData;
     [SerializeField] private ScreenPushData screen2PushData;
 

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class BtnBottomBar : BtnPushScreen
 {
-    public static event Action<BtnBottomBar> BottomBarClickedEvent;
+    public event Action<BtnBottomBar> BottomBarClickedEvent;
 
     [Header("Features of Button")]
     [SerializeField] private TextMeshProUGUI txtButtonDescription;
@@ -30,21 +30,19 @@ public class BtnBottomBar : BtnPushScreen
     public override void OnButtonClick()
     {
         BottomBarClickedEvent?.Invoke(this);
+
+        base.OnButtonClick();
     }
 
-    public void Activate()
+    public void SetMaxAlpha()
     {
-        button.interactable = true;
-
         //Set alpha to max.
         txtButtonDescription.alpha = 1f;
         imgButton.CrossFadeAlpha(1f, 0f, false);
     }
 
-    public void Deactivate()
+    public void SetLowAlpha()
     {
-        button.interactable = false;
-
         //Decrease alpha.
         txtButtonDescription.alpha = notActiveAlpha;
         imgButton.CrossFadeAlpha(notActiveAlpha, 0f, false);

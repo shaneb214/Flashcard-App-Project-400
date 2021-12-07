@@ -10,22 +10,34 @@ public class BottomBarController : MonoBehaviour
 {
     [SerializeField] private BtnBottomBar btnNewCard;
     [SerializeField] private BtnBottomBar btnMySets;
+    [SerializeField] private BtnBottomBar currentActiveButton;
+    [SerializeField] private BtnBottomBar lastActiveButton;
 
 
     private void Start()
     {
-        //btnNewCard.AddListenerToButtonClick()
+        btnNewCard.BottomBarClickedEvent += OnBottomBarButtonPressed;
+        btnMySets.BottomBarClickedEvent += OnBottomBarButtonPressed;
+
+        currentActiveButton = btnNewCard;
+
+        //Hard code reduce alpha of other buttons?
+        btnMySets.SetLowAlpha();
     }
 
     private void OnBottomBarButtonPressed(BtnBottomBar buttonPressed)
     {
+        lastActiveButton = currentActiveButton;
+        lastActiveButton.SetLowAlpha();
 
+        currentActiveButton = buttonPressed;
+        currentActiveButton.SetMaxAlpha();
     }
 
 
     private void OnDestroy()
     {
-       // BtnBottomBar.BottomBarClickedEvent -= OnBottomBarButtonPressed;
+        btnNewCard.BottomBarClickedEvent -= OnBottomBarButtonPressed;
+        btnMySets.BottomBarClickedEvent -= OnBottomBarButtonPressed;
     }
-
 }

@@ -325,8 +325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keepCached: 0
-  overrideManagedSorting: 0
-  overrideSortValue: 5
+  overrideManagedSorting: 1
+  overrideSortValue: 10
   rectTransform: {fileID: 2723191397231088301}
   btnPopMe: {fileID: 8686413980142200417}
 --- !u!222 &8062344093149725364
