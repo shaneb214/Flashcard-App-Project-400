@@ -8,7 +8,9 @@ public class ScreenController : MonoBehaviour
 {
     public static ScreenController Instance;
 
-    [Header("Screen data for pushing")] //Putting a few here for now for testing and stuff.
+    //Putting a few here for now for testing.
+    [Header("Screen data for pushing")] 
+    [SerializeField] private ScreenPushData screenBottomNavBarData; //Here just in case I'll treat this as an actual screen.
     [SerializeField] private ScreenPushData screenCreateFlashcardPushData;
     [SerializeField] private ScreenPushData screenNaviconPushData;
     [SerializeField] private ScreenPushData screen1PushData;
@@ -22,6 +24,8 @@ public class ScreenController : MonoBehaviour
 
     private void Start()
     {
+        //UIManager.Instance.QueuePush(screenTopBottomNavBarsData.ID, null, null);
+
         UIManager.Instance.QueuePush(screenCreateFlashcardPushData.ID, null, null);
         //UIManager.Instance.QueuePush(screen2PushData.ID, null, null);
     }

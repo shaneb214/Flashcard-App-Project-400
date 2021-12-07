@@ -11,7 +11,7 @@ using System;
 //Notes: 
 //Keep this screen cached I think.
 
-public class NaviconScreen : BlitzyUI.Screen
+public class Screen_Navicon : BlitzyUI.Screen
 {
     [Header("Target positions for movement")]
     private Vector3 posOffScreen;

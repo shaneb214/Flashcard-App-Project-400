@@ -16,7 +16,6 @@ public class BtnEnablePopUpScreen : BtnPushScreen
 
     public override void OnButtonClick()
     {
-        UIManager.Instance.GetTopScreen().StartPoppingSequence(callbackOnPopEnd: () => UIManager.Instance.QueuePush(myScreenToPush.ID, null, null));
-
+        UIManager.Instance.GetTopScreen().StartPoppingSequence(callbackOnPopEnd: () => PushMyScreen());
     }
 }

@@ -30,14 +30,24 @@ public class Flashcard
 
     //Tags? 
 
-    public Flashcard(string firstSide, string secondSide, string optionalComments, Color colour, AudioClip audioRecording)
+    public Flashcard(string nativeSide, string learningSide, string optionalComments, Color colour, AudioClip audioRecording)
     {
         id = Guid.NewGuid(); 
-        this.nativeSide = firstSide;
-        this.learningSide = secondSide;
+        this.nativeSide = nativeSide;
+        this.learningSide = learningSide;
         this.optionalComments = optionalComments;
         this.colour = colour;
         this.audioRecording = audioRecording;
+
+        FlashcardCreatedEvent?.Invoke(this);
+        Debug.Log($"New flashcard created: {this}");
+    }
+
+    public Flashcard(string nativeSide, string learningSide)
+    {
+        id = Guid.NewGuid();
+        this.nativeSide = nativeSide;
+        this.learningSide = learningSide;
 
         FlashcardCreatedEvent?.Invoke(this);
         Debug.Log($"New flashcard created: {this}");

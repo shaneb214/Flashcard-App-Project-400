@@ -5,25 +5,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestPopUpScreen : BlitzyUI.Screen
+public class Screen_TestPopUp : BlitzyUI.Screen
 {
-    RectTransform rectTransform;
-    [SerializeField] Button btnPopMe;
+    [SerializeField] private RectTransform rectTransform;
+    [SerializeField] private Button btnPopMe;
 
     public override bool AllowStartPoppingSequence { get => !LeanTween.isTweening(gameObject); set => base.AllowStartPoppingSequence = value; }
 
     private void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
         btnPopMe.onClick.AddListener(() => StartPoppingSequence());
     }
 
     private void Start()
     {
         rectTransform.localScale = Vector3.zero;
-
         LeanTween.scale(rectTransform, Vector3.one, 0.34f).setEaseOutBack();
-
     }
 
     public override void OnFocus()

@@ -482,8 +482,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keepCached: 0
-  overrideManagedSorting: 0
-  overrideSortValue: 0
+  overrideManagedSorting: 1
+  overrideSortValue: 4
   naviconObject: {fileID: 2025696886752851687}
   naviconTimeToMoveToTarget: 0.23
   moveTweenType: 16
@@ -664,6 +664,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1073982686}
     m_Modifications:
+    - target: {fileID: 375408662, guid: a66d82a7111a75f41a1e68524e65d199, type: 3}
+      propertyPath: myScreenToPush
+      value: 
+      objectReference: {fileID: 11400000, guid: 1edc43abd6a9392429833702dc26c227, type: 2}
     - target: {fileID: 375408662, guid: a66d82a7111a75f41a1e68524e65d199, type: 3}
       propertyPath: popAndSkipPopSequence
       value: 1
