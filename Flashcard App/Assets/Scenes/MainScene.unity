@@ -479,14 +479,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2da7a1497ac1af43b5309a5f6b57668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageProfilesListJSONPath: /JSON Data/LanguageProfiles/LanguageProfilesList.json
-  currentProfileJSONPath: /JSON Data/LanguageProfiles/CurrentLanguageProfile.json
+  languageProfilesListJSONPathPC: /JSON Data/LanguageProfiles/LanguageProfilesList.json
+  currentProfileJSONPathPC: /JSON Data/LanguageProfiles/CurrentLanguageProfile.json
+  languageProfilesListJSONPathMobile: /LanguageProfilesList.json
+  currentProfileJSONPathMobile: 
   userLanguageProfilesList: []
   userCurrentLanguageProfile:
     ID: currentprofileid1
     currentProfile: 1
-    nativeISO: en
-    learningISO: ru
+    nativeLanguage:
+      ISO: 
+      _name: 
+    learningLanguage:
+      ISO: 
+      _name: 
 --- !u!1 &1188239623
 GameObject:
   m_ObjectHideFlags: 0

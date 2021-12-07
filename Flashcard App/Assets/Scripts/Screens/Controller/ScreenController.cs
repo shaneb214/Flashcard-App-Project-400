@@ -25,6 +25,10 @@ public class ScreenController : MonoBehaviour
 
     private void Start()
     {
+        //If user has no language profile - first time using app? Load screen to create a profile and ensure they cant continue until they create one.
+        //Else - Load home screen / create flashcard screen.
+
+
         //UIManager.Instance.QueuePush(screenTopBottomNavBarsData.ID, null, null);
 
         UIManager.Instance.QueuePush(screenCreateFlashcardPushData.ID, null, null);

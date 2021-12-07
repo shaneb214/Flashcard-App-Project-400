@@ -9,18 +9,15 @@ public class LanguageProfile
     public string ID;
     public bool currentProfile;
 
-    //public Language nativeLanguage;
-    //public Language learningLanguage;
+    public Language nativeLanguage;
+    public Language learningLanguage;
 
-    public string nativeISO;
-    public string learningISO;
-
-    public LanguageProfile(string nativeISO, string learningISO, bool setCurrentProfile)
+    public LanguageProfile(Language nativeLanguage,Language learningLanguage, bool setCurrentProfile)
     {
         ID = Guid.NewGuid().ToString(); //So it saves to json.
 
-        this.nativeISO = nativeISO;
-        this.learningISO = learningISO;
+        this.nativeLanguage = nativeLanguage;
+        this.learningLanguage = learningLanguage;
 
         currentProfile = setCurrentProfile;
     }
