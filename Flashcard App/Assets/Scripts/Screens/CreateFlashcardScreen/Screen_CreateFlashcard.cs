@@ -9,9 +9,6 @@ using TMPro;
 
 public class Screen_CreateFlashcard : BlitzyUI.Screen
 {
-    [SerializeField] private Button btnCreateFlashcard;
-
-
     public override void OnSetup() { }
     public override void OnFocus() { }
     public override void OnFocusLost() { }

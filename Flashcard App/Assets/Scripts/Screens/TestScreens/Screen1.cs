@@ -4,6 +4,10 @@ using UnityEngine;
 using BlitzyUI;
 using UnityEngine.UI;
 
+//Order methods are called when screen is pushed -
+//Awake, On Setup, On Push, On Focus, Start.
+
+
 public class Screen1 : BlitzyUI.Screen
 {
     [SerializeField] private Button btnGoToScreen2;

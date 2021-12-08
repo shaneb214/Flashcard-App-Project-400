@@ -14,6 +14,8 @@ public class ScreenController : MonoBehaviour
     [SerializeField] private ScreenPushData screenCreateFlashcardPushData;
     [SerializeField] private ScreenPushData screenNaviconPushData;
     [SerializeField] private ScreenPushData screenSetsView;
+    [SerializeField] private ScreenPushData screenLanguageProfiles;
+    [SerializeField] private ScreenPushData screenCreateLanguageProfile;
     [SerializeField] private ScreenPushData screen1PushData;
     [SerializeField] private ScreenPushData screen2PushData;
 
@@ -28,10 +30,13 @@ public class ScreenController : MonoBehaviour
         //If user has no language profile - first time using app? Load screen to create a profile and ensure they cant continue until they create one.
         //Else - Load home screen / create flashcard screen.
 
+        UIManager.Instance.QueuePush(screenCreateFlashcardPushData.ID, null, null);
 
         //UIManager.Instance.QueuePush(screenTopBottomNavBarsData.ID, null, null);
 
-        UIManager.Instance.QueuePush(screenCreateFlashcardPushData.ID, null, null);
+        //UIManager.Instance.QueuePush(screenLanguageProfiles.ID, null, null);
+        //UIManager.Instance.QueuePush(screenCreateLanguageProfile.ID, null, null);
+
         //UIManager.Instance.QueuePush(screen2PushData.ID, null, null);
     }
 

@@ -11,6 +11,8 @@ using UnityEngine;
 //Ensure there's at least one profile saved before allowing user to make cards, do other stuff etc. 
 //Check for this in ScreenController? If no profiles - load create profile screen, otherwise load create card screen.
 
+//NOTE: I changed the script execution order for this script so it gets called before others. 
+
 public class LanguageProfileController : MonoBehaviour
 {
     public static LanguageProfileController Instance;
@@ -41,9 +43,6 @@ public class LanguageProfileController : MonoBehaviour
         // Find current language. 
 
         //LanguageProfile userCurrentLanguageProfile = ReadCurrentLanguageProfileFromJSON();
-
-        print(Application.persistentDataPath);
-        print(Application.dataPath);
 
         //Writing these to JSON at start - change later.
         CreateSampleProfilesAndSaveToJSON();
