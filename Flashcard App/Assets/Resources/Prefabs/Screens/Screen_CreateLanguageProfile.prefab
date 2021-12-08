@@ -95,6 +95,22 @@ MonoBehaviour:
   inputWindowRectTransform: {fileID: 7587706759180855330}
   inputWindowScaleTime: 0.45
   inputWindowTweenEase: 16
+--- !u!114 &6044768810772962068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3987081727100351157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4b515582700a04ea4eefb4e61cabe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CallPopSequence: 0
+  nativeLanguageDropdown: {fileID: 7587706759250603107}
+  learningLanguageDropdown: {fileID: 7587706760616394048}
+  setCurrentProfileToggle: {fileID: 6450415072604103556}
 --- !u!1001 &227330837679804506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -296,6 +312,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2578718069513322355, guid: 9504e619c29d3be448636765f1d8d960, type: 3}
+      propertyPath: m_Name
+      value: SelectLearningDropdown
+      objectReference: {fileID: 0}
     - target: {fileID: 2880471882523492392, guid: 9504e619c29d3be448636765f1d8d960, type: 3}
       propertyPath: m_Name
       value: btnCancel
@@ -313,5 +333,43 @@ PrefabInstance:
 --- !u!224 &7587706759180855330 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2578718068144892435, guid: 9504e619c29d3be448636765f1d8d960, type: 3}
+  m_PrefabInstance: {fileID: 5369840461687439921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7587706759250603107 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2578718068210413138, guid: 9504e619c29d3be448636765f1d8d960, type: 3}
+  m_PrefabInstance: {fileID: 5369840461687439921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac640f1e2188c0469ef9a82224b3042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7587706760616394048 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2578718069513322353, guid: 9504e619c29d3be448636765f1d8d960, type: 3}
+  m_PrefabInstance: {fileID: 5369840461687439921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac640f1e2188c0469ef9a82224b3042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6450415072604103556 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1369651903180497333, guid: 9504e619c29d3be448636765f1d8d960, type: 3}
+  m_PrefabInstance: {fileID: 5369840461687439921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3987081727100351157 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9066155926429511812, guid: 9504e619c29d3be448636765f1d8d960, type: 3}
   m_PrefabInstance: {fileID: 5369840461687439921}
   m_PrefabAsset: {fileID: 0}

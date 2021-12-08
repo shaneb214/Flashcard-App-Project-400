@@ -174,6 +174,8 @@ MonoBehaviour:
   screenCreateLanguageProfile: {fileID: 11400000, guid: 37901f99450d1bb479ac4073c8814d12, type: 2}
   screen1PushData: {fileID: 11400000, guid: a265d7c149c54854aa9c5fc0221fb213, type: 2}
   screen2PushData: {fileID: 11400000, guid: bd377ae19403c1449a56a5b96fb2df8f, type: 2}
+  screensToPushAtStart:
+  - {fileID: 11400000, guid: fbb3476175b38b847b1befba3acc10b8, type: 2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class DropDownSelectLanguage : MonoBehaviour
     [SerializeField] private string placeholderText;
 
     private bool OptionSelected { get { return myDropdown.captionText.text != placeholderText; } }
+    public Language GetLanguageSelected { get { return languageHolder.defaultLanguageList[myDropdown.value]; } }
 
     private void Awake() => myDropdown = GetComponent<TMP_Dropdown>();
     private void Start()

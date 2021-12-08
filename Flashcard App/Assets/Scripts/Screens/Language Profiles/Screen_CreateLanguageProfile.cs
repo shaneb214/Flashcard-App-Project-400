@@ -1,3 +1,4 @@
+using BlitzyUI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,7 +26,6 @@ public class Screen_CreateLanguageProfile : BlitzyUI.Screen
     {
         inputWindowRectTransform.localScale = Vector3.zero;
         LeanTween.scale(inputWindowRectTransform, Vector3.one, inputWindowScaleTime);
-        //LeanTween.scale(inputWindowRectTransform, Vector3.one, 2f);
     }
 
     public override void OnFocusLost()
@@ -47,7 +47,9 @@ public class Screen_CreateLanguageProfile : BlitzyUI.Screen
 
     public override void StartPoppingSequence(Action callbackOnPopEnd = null)
     {
-        
+        if (AllowStartPoppingSequence)
+        {
+            LeanTween.scale(inputWindowRectTransform, Vector3.zero, inputWindowScaleTime).setEase(inputWindowTweenEase).setOnComplete(() => UIManager.Instance.QueuePop(null));
+        }
     }
-
 }

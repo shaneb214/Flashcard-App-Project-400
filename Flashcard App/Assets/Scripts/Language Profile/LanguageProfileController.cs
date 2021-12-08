@@ -49,22 +49,34 @@ public class LanguageProfileController : MonoBehaviour
 
         //Save to memory.
         userLanguageProfilesList = ReadLanguageProfileListFromJSON();
-        userCurrentLanguageProfile = userLanguageProfilesList.Find(profile => profile.currentProfile == true);
+        userCurrentLanguageProfile = userLanguageProfilesList.Find(profile => profile.IsCurrentProfile == true);
     }
 
+    private void OnNewLanguageProfileCreated(LanguageProfile newProfile)
+    {
+        //Has user set the new profile to be the current profile? - Set it as so. 
+        if (newProfile.IsCurrentProfile)
+        {
+            userCurrentLanguageProfile.IsCurrentProfile = false;
+            userCurrentLanguageProfile = newProfile;
+        }
+
+        //Add to memory & save to JSON.
+        userLanguageProfilesList.Add(newProfile);
+        SaveListOfLanguageProfilesToJSON(userLanguageProfilesList);
+    }
 
     //Testing.
     private void CreateSampleProfilesAndSaveToJSON()
     {
         List<LanguageProfile> languageProfiles = new List<LanguageProfile>()
         {
-            new LanguageProfile(nativeLanguage: new Language("en","English"),learningLanguage: new Language("ru","Russian"),setCurrentProfile: true),
-            new LanguageProfile(nativeLanguage: new Language("en","English"),learningLanguage: new Language("ja","Japanese"),setCurrentProfile: false),
-            new LanguageProfile(nativeLanguage: new Language("en","English"),learningLanguage: new Language("it","Italian"),setCurrentProfile: false),
+            new LanguageProfile(nativeLanguage: new Language("en","English"),learningLanguage: new Language("ru","Russian"),IsCurrentProfile: true),
+            new LanguageProfile(nativeLanguage: new Language("en","English"),learningLanguage: new Language("ja","Japanese"),IsCurrentProfile: false),
+            new LanguageProfile(nativeLanguage: new Language("en","English"),learningLanguage: new Language("it","Italian"),IsCurrentProfile: false),
         };
         SaveListOfLanguageProfilesToJSON(languageProfiles);
     }
-
     private void SaveListOfLanguageProfilesToJSON(List<LanguageProfile> languageProfilesList)
     {
         string json = JSONHelper.ToJson(languageProfilesList);
@@ -123,4 +135,7 @@ public class LanguageProfileController : MonoBehaviour
         LanguageProfile currentLanguageProfile = JsonUtility.FromJson<LanguageProfile>(File.ReadAllText(Application.dataPath + currentProfileJSONPathPC));
         return currentLanguageProfile;
     }
+
+    private void OnEnable() => LanguageProfile.LanguageProfileCreatedEvent += OnNewLanguageProfileCreated;
+    private void OnDisable() => LanguageProfile.LanguageProfileCreatedEvent -= OnNewLanguageProfileCreated;
 }

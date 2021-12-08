@@ -1,5 +1,6 @@
 using UnityEngine;
 using BlitzyUI;
+using System.Collections.Generic;
 
 //To do: 
 //Make a stack on screens so that when you press back it loads the next screen on that stack.  
@@ -19,6 +20,11 @@ public class ScreenController : MonoBehaviour
     [SerializeField] private ScreenPushData screen1PushData;
     [SerializeField] private ScreenPushData screen2PushData;
 
+
+    //Testing.
+    [Header("Add Screens You Want To Push At Start")]
+    [SerializeField] private List<ScreenPushData> screensToPushAtStart;
+
     private void Awake()
     {
         if (Instance == null)
@@ -30,7 +36,10 @@ public class ScreenController : MonoBehaviour
         //If user has no language profile - first time using app? Load screen to create a profile and ensure they cant continue until they create one.
         //Else - Load home screen / create flashcard screen.
 
-        UIManager.Instance.QueuePush(screenCreateFlashcardPushData.ID, null, null);
+        screensToPushAtStart.ForEach(screenData => UIManager.Instance.QueuePush(screenData.ID, null, null, null));
+
+
+        //UIManager.Instance.QueuePush(screenCreateFlashcardPushData.ID, null, null);
 
         //UIManager.Instance.QueuePush(screenTopBottomNavBarsData.ID, null, null);
 
