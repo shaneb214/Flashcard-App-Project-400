@@ -9,38 +9,20 @@ using TMPro;
 
 public class Screen_CreateFlashcard : BlitzyUI.Screen
 {
-
-    [SerializeField] private TMP_InputField nativeLangInputField;
-    [SerializeField] private TMP_InputField learningLangInputField;
-
     [SerializeField] private Button btnCreateFlashcard;
 
 
-
-    public override void OnSetup()
-    {
-
-    }
-    public override void OnFocus()
-    {
-        
-    }
-
-    public override void OnFocusLost()
-    {
-        
-    }
+    public override void OnSetup() { }
+    public override void OnFocus() { }
+    public override void OnFocusLost() { }
 
     public override void OnPop()
     {
-
-
         PopFinished();
     }
 
     public override void OnPush(ScreenData data)
     {
-
         PushFinished();
     }
 }

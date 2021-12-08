@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 8953921898247866318}
   - component: {fileID: 2777528997571353948}
   - component: {fileID: 7283242315220289978}
+  - component: {fileID: 5339702008376702099}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -311,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 4f2b4874ffb6ed247b2a47f17f503387, type: 3}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -329,6 +330,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5339702008376702099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3815114155505221953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543170cc38ffa8a43a0c724e2aefd6be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imgFlag: {fileID: 7259220862064268850}
+  txtPlaceholder: {fileID: 5478551367987802723}
 --- !u!1 &4344790975363673507
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +410,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Type in English..
+  m_text: Type in X..
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9a940b10242ff9e4aa99aa5e6e91e81f, type: 2}
   m_sharedMaterial: {fileID: -4619257622809158593, guid: 9a940b10242ff9e4aa99aa5e6e91e81f, type: 2}
@@ -682,7 +697,7 @@ GameObject:
   - component: {fileID: 9030269574507311553}
   - component: {fileID: 7259220862064268850}
   m_Layer: 5
-  m_Name: Image
+  m_Name: imgFlag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
