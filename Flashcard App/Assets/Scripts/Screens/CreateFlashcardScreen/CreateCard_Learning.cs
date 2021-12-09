@@ -7,10 +7,24 @@ public class CreateCard_Learning : CreateCard
     private void Start()
     {
         LanguageProfile currentProfile = LanguageProfileController.Instance.userCurrentLanguageProfile;
+        UpdateDisplayBasedOnCurrentProfile(currentProfile);
+    }
 
+    private void UpdateDisplayBasedOnCurrentProfile(LanguageProfile currentProfile)
+    {
         Sprite nativeFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{currentProfile.learningLanguage.ISO}");
         string placeholderText = $"Type in {currentProfile.learningLanguage._name}..";
 
         UpdateDisplay(nativeFlagSprite, placeholderText);
     }
+
+    //React to new profile being selected by user & update display.
+    private void OnNewProfileSelected(LanguageProfile newSelectedProfile)
+    {
+        ClearUserInput();
+        UpdateDisplayBasedOnCurrentProfile(newSelectedProfile);
+    }
+
+    private void OnEnable() => LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnNewProfileSelected;
+    private void OnDisable() => LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnNewProfileSelected;
 }

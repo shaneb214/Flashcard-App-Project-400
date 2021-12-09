@@ -344,6 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imgFlag: {fileID: 7259220862064268850}
   txtPlaceholder: {fileID: 5478551367987802723}
+  txtUserInput: {fileID: 2401907067512493336}
 --- !u!1 &4344790975363673507
 GameObject:
   m_ObjectHideFlags: 0

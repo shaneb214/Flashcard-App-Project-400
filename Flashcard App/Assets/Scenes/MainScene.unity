@@ -490,7 +490,7 @@ MonoBehaviour:
   userLanguageProfilesList: []
   userCurrentLanguageProfile:
     ID: currentprofileid1
-    currentProfile: 1
+    IsCurrentProfile: 0
     nativeLanguage:
       ISO: 
       _name: 
@@ -638,7 +638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1222084996438715080, guid: acd564e8c5150154683c564ed37ee102, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1222084996438715080, guid: acd564e8c5150154683c564ed37ee102, type: 3}
       propertyPath: m_AnchorMax.x

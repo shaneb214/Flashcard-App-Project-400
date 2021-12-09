@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -17,16 +18,18 @@ public class LanguageProfileController : MonoBehaviour
 {
     public static LanguageProfileController Instance;
 
+    public event Action<LanguageProfile> UserSelectedNewProfileEvent;
+
     [Header("Storing JSON Location - Unity Editor & PC")]
     [SerializeField] private string languageProfilesListJSONPathPC;
     [SerializeField] private string currentProfileJSONPathPC;
     [Header("Storing JSON Location - Mobile")]
     [SerializeField] private string languageProfilesListJSONPathMobile;
     [SerializeField] private string currentProfileJSONPathMobile;
-
     [Header("User's language profile info")]
     [SerializeField] private List<LanguageProfile> userLanguageProfilesList;
     public LanguageProfile userCurrentLanguageProfile;
+
     public List<LanguageProfile> GetUserLanguageProfiles() => userLanguageProfilesList;
 
     private void Awake()
@@ -57,13 +60,28 @@ public class LanguageProfileController : MonoBehaviour
         //Has user set the new profile to be the current profile? - Set it as so. 
         if (newProfile.IsCurrentProfile)
         {
-            userCurrentLanguageProfile.IsCurrentProfile = false;
-            userCurrentLanguageProfile = newProfile;
+            SelectNewProfile(newProfile);
         }
 
         //Add to memory & save to JSON.
         userLanguageProfilesList.Add(newProfile);
         SaveListOfLanguageProfilesToJSON(userLanguageProfilesList);
+    }
+
+    public void SelectNewProfile(LanguageProfile newProfile)
+    {
+        //If user selects same profile, dont have to do anything.
+        if (newProfile == userCurrentLanguageProfile)
+            return;
+
+        //If there was a current profile, set that to not be the current profile anymore.
+        if(userCurrentLanguageProfile != null)
+            userCurrentLanguageProfile.IsCurrentProfile = false;
+
+        //Update current profile and raise event to notify certain UI objects.
+        userCurrentLanguageProfile = newProfile;
+        UserSelectedNewProfileEvent?.Invoke(userCurrentLanguageProfile);
+        print($"New Language Profile Was Selected: {newProfile}");
     }
 
     //Testing.

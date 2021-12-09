@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class LanguageProfile
+public class LanguageProfile 
 {
     public static event Action<LanguageProfile> LanguageProfileCreatedEvent;
 

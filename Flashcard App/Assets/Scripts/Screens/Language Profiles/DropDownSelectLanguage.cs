@@ -42,12 +42,12 @@ public class DropDownSelectLanguage : MonoBehaviour
        // myDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
     }
 
-    private void OnDropdownValueChanged(int newValue)
-    {
-        if(newValue != 0)
-        {
-            myDropdown.options.RemoveAt(0);
-            myDropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
-        }
-    }
+    //private void OnDropdownValueChanged(int newValue)
+    //{
+    //    if(newValue != 0)
+    //    {
+    //        myDropdown.options.RemoveAt(0);
+    //        myDropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
+    //    }
+    //}
 }
