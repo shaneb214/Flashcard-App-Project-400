@@ -38,7 +38,6 @@ public class LanguageProfileController : MonoBehaviour
         if (Instance == null)
             Instance = this;
     }
-
     private void Start()
     {
         userLanguageProfilesList = new List<LanguageProfile>();
@@ -49,7 +48,7 @@ public class LanguageProfileController : MonoBehaviour
         //LanguageProfile userCurrentLanguageProfile = ReadCurrentLanguageProfileFromJSON();
 
         //Writing these to JSON at start - change later.
-        //CreateSampleProfilesAndSaveToJSON();
+        CreateSampleProfilesAndSaveToJSON();
 
         //Save to memory.
         userLanguageProfilesList = ReadLanguageProfileListFromJSON();

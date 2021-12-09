@@ -15,7 +15,6 @@ public class BtnCreateFlashcard : MonoBehaviour
 {
     private Button myButton;
 
-    [Header("test")]
     [SerializeField] private TMP_InputField nativeLangInputField;
     [SerializeField] private TMP_InputField learningLangInputField;
 
