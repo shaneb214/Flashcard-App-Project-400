@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class SetsViewController : MonoBehaviour
 {
+    private string profileIDToShowSetsOf;
+
     [SerializeField] private Transform scrollViewContentTransform;
     [SerializeField] private SetDisplay setDisplayPrefab;
 
@@ -15,7 +17,8 @@ public class SetsViewController : MonoBehaviour
     //Start.
     private void Start()
     {
-        SpawnSetDisplayPrefabsForProfile(LanguageProfileController.Instance.userCurrentLanguageProfile);
+        //profileIDToShowSetsOf = LanguageProfileController.Instance.userCurrentLanguageProfile.ID;
+        //SpawnSetDisplayPrefabsForProfile(LanguageProfileController.Instance.userCurrentLanguageProfile);
     }
 
     //Spawning Set Display Prefabs.
@@ -41,6 +44,8 @@ public class SetsViewController : MonoBehaviour
     //Reacting to new profile being selected.
     private void OnUserSelectedNewProfile(LanguageProfile newProfile)
     {
+        profileIDToShowSetsOf = newProfile.ID;
+
         //Clear set displays if any.
         if (ScrollViewContainsItems)
             DestroyItemsInScrollView();
@@ -64,13 +69,18 @@ public class SetsViewController : MonoBehaviour
     {
         Set.SetCreatedEvent += OnNewSetCreated;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewProfile;
+
+        //Check if new user was selected while I was disabled.
+        LanguageProfile currentProfile = LanguageProfileController.Instance.userCurrentLanguageProfile;
+        if (profileIDToShowSetsOf != currentProfile.ID)
+            OnUserSelectedNewProfile(currentProfile);
     }
 
-    private void OnDestroy()
-    {
-        Set.SetCreatedEvent -= OnNewSetCreated;
-        LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnUserSelectedNewProfile;     
-    }
+    //private void OnDestroy()
+    //{
+    //    Set.SetCreatedEvent -= OnNewSetCreated;
+    //    LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnUserSelectedNewProfile;
+    //}
 
     private void OnDisable()
     {

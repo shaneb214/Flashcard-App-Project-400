@@ -49,7 +49,7 @@ public class LanguageProfileController : MonoBehaviour
         //LanguageProfile userCurrentLanguageProfile = ReadCurrentLanguageProfileFromJSON();
 
         //Writing these to JSON at start - change later.
-        CreateSampleProfilesAndSaveToJSON();
+        //CreateSampleProfilesAndSaveToJSON();
 
         //Save to memory.
         userLanguageProfilesList = ReadLanguageProfileListFromJSON();
@@ -65,7 +65,7 @@ public class LanguageProfileController : MonoBehaviour
 
         //Add to memory & save to JSON.
         userLanguageProfilesList.Add(newProfile);
-        SaveListOfLanguageProfilesToJSON(userLanguageProfilesList);
+        //SaveListOfLanguageProfilesToJSON(userLanguageProfilesList);
     }
 
     //Select new Profile passing in languageprofile object.
