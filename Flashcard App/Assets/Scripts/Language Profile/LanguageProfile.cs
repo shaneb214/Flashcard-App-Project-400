@@ -9,10 +9,14 @@ public class LanguageProfile
     public static event Action<LanguageProfile> LanguageProfileCreatedEvent;
 
     public string ID;
-    public bool IsCurrentProfile;
 
     public Language nativeLanguage;
     public Language learningLanguage;
+
+    public bool IsCurrentProfile;
+    public List<Set> setList;
+
+    public int NumberOfSets { get { return setList.Count; } }
 
     public LanguageProfile(Language nativeLanguage,Language learningLanguage, bool IsCurrentProfile)
     {
@@ -22,6 +26,8 @@ public class LanguageProfile
         this.learningLanguage = learningLanguage;
 
         this.IsCurrentProfile = IsCurrentProfile;
+
+        setList = new List<Set>();
 
         LanguageProfileCreatedEvent?.Invoke(this);
         Debug.Log($"New language profile created - {this}");

@@ -34,7 +34,7 @@ public class Screen_LanguageProfiles : BlitzyUI.Screen
 
         //Spawn prefab + pass in info so it can update its components.
         LanguageProfileDisplay spawnedLanguageProfileDisplay = Instantiate(languageProfilePrefab, scrollViewContentTransform);
-        spawnedLanguageProfileDisplay.UpdateDisplay(languageProfileToShow,nativeFlagSprite, learningFlagSprite, headingText);
+        spawnedLanguageProfileDisplay.UpdateDisplay(languageProfileToShow.ID,nativeFlagSprite, learningFlagSprite, headingText);
     }
 
 

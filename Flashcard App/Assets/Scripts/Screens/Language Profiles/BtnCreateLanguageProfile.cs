@@ -30,5 +30,9 @@ public class BtnCreateLanguageProfile : BtnPopScreen
             topScreen.StartPoppingSequence(null);
         else
             UIManager.Instance.QueuePop(null);
+
+        //So user can't select button twice. 
+        //Improve this some other time.
+        myButton.interactable = false;
     }
 }

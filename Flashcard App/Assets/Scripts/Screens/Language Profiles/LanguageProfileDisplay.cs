@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //Prefab which helps to display a language profile and clicking on this sets it as the current profile.
+//Script is given ID of language profile to determine which profile they are representing.
 //So far it shows names of languages and their flags.
 
 //TODO: Diplay stats - no. of cards, no. of sets, date created etc.
@@ -13,7 +14,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class LanguageProfileDisplay : MonoBehaviour
 {
-    private LanguageProfile myLanguageProfile;
+    private string myLanguageProfileID;
 
     [SerializeField] private Image imgNativeFlag;
     [SerializeField] private Image imgLearningFlag;
@@ -26,12 +27,12 @@ public class LanguageProfileDisplay : MonoBehaviour
 
     private void OnMyButtonClick()
     {
-        LanguageProfileController.Instance.SelectNewProfile(myLanguageProfile);
+        LanguageProfileController.Instance.SelectNewProfile(myLanguageProfileID);
     }
 
-    public void UpdateDisplay(LanguageProfile languageProfile,Sprite nativeFlagSprite,Sprite learningFlagSprite,string headingText)
+    public void UpdateDisplay(string profileID,Sprite nativeFlagSprite,Sprite learningFlagSprite,string headingText)
     {
-        myLanguageProfile = languageProfile;
+        myLanguageProfileID = profileID;
 
         this.imgNativeFlag.sprite = nativeFlagSprite;
         this.imgLearningFlag.sprite = learningFlagSprite;

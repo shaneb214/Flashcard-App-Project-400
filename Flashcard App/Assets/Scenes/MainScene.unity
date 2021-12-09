@@ -170,6 +170,7 @@ MonoBehaviour:
   screenCreateFlashcardPushData: {fileID: 11400000, guid: fbb3476175b38b847b1befba3acc10b8, type: 2}
   screenNaviconPushData: {fileID: 11400000, guid: cd084f7f4fb9b3346978e622772fc451, type: 2}
   screenSetsView: {fileID: 11400000, guid: a96b9be72ea064741923d161fd4cfb90, type: 2}
+  screenCreateSet: {fileID: 11400000, guid: fc2be5efc09535e4095930fcf87b9465, type: 2}
   screenLanguageProfiles: {fileID: 11400000, guid: 1edc43abd6a9392429833702dc26c227, type: 2}
   screenCreateLanguageProfile: {fileID: 11400000, guid: 37901f99450d1bb479ac4073c8814d12, type: 2}
   screen1PushData: {fileID: 11400000, guid: a265d7c149c54854aa9c5fc0221fb213, type: 2}
@@ -490,13 +491,14 @@ MonoBehaviour:
   userLanguageProfilesList: []
   userCurrentLanguageProfile:
     ID: currentprofileid1
-    IsCurrentProfile: 0
     nativeLanguage:
       ISO: 
       _name: 
     learningLanguage:
       ISO: 
       _name: 
+    IsCurrentProfile: 0
+    setList: []
 --- !u!1 &1188239623
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,6 +753,14 @@ PrefabInstance:
     - target: {fileID: 3347322337918656979, guid: acd564e8c5150154683c564ed37ee102, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5682660330731226479, guid: acd564e8c5150154683c564ed37ee102, type: 3}
+      propertyPath: popCurrentScreenAndSkipPopSequence
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406630762788834655, guid: acd564e8c5150154683c564ed37ee102, type: 3}
+      propertyPath: popCurrentScreenAndSkipPopSequence
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acd564e8c5150154683c564ed37ee102, type: 3}

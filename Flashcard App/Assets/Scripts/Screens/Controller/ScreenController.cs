@@ -15,6 +15,7 @@ public class ScreenController : MonoBehaviour
     [SerializeField] private ScreenPushData screenCreateFlashcardPushData;
     [SerializeField] private ScreenPushData screenNaviconPushData;
     [SerializeField] private ScreenPushData screenSetsView;
+    [SerializeField] private ScreenPushData screenCreateSet;
     [SerializeField] private ScreenPushData screenLanguageProfiles;
     [SerializeField] private ScreenPushData screenCreateLanguageProfile;
     [SerializeField] private ScreenPushData screen1PushData;

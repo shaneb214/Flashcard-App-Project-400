@@ -32,6 +32,7 @@ public class LanguageProfileController : MonoBehaviour
 
     public List<LanguageProfile> GetUserLanguageProfiles() => userLanguageProfilesList;
 
+    #region Start
     private void Awake()
     {
         if (Instance == null)
@@ -54,20 +55,20 @@ public class LanguageProfileController : MonoBehaviour
         userLanguageProfilesList = ReadLanguageProfileListFromJSON();
         userCurrentLanguageProfile = userLanguageProfilesList.Find(profile => profile.IsCurrentProfile == true);
     }
-
+    #endregion
+    #region New Language Profile Creation / Selection
     private void OnNewLanguageProfileCreated(LanguageProfile newProfile)
     {
         //Has user set the new profile to be the current profile? - Set it as so. 
         if (newProfile.IsCurrentProfile)
-        {
             SelectNewProfile(newProfile);
-        }
 
         //Add to memory & save to JSON.
         userLanguageProfilesList.Add(newProfile);
         SaveListOfLanguageProfilesToJSON(userLanguageProfilesList);
     }
 
+    //Select new Profile passing in languageprofile object.
     public void SelectNewProfile(LanguageProfile newProfile)
     {
         //If user selects same profile, dont have to do anything.
@@ -80,11 +81,26 @@ public class LanguageProfileController : MonoBehaviour
 
         //Update current profile and raise event to notify certain UI objects.
         userCurrentLanguageProfile = newProfile;
+        userCurrentLanguageProfile.IsCurrentProfile = true;
+
         UserSelectedNewProfileEvent?.Invoke(userCurrentLanguageProfile);
         print($"New Language Profile Was Selected: {newProfile}");
     }
 
-    //Testing.
+    //Select new Profile passing in ID. Finds profile based on ID.
+    public void SelectNewProfile(string ID)
+    {
+        LanguageProfile newProfile = userLanguageProfilesList.Find(profile => profile.ID == ID);
+        SelectNewProfile(newProfile);
+    }
+    #endregion
+    #region New Set Creation
+    private void OnNewSetCreated(Set newSet)
+    {
+        userCurrentLanguageProfile.setList.Add(newSet);
+    }
+    #endregion
+    #region Writing / Saving Data To Json
     private void CreateSampleProfilesAndSaveToJSON()
     {
         List<LanguageProfile> languageProfiles = new List<LanguageProfile>()
@@ -107,7 +123,7 @@ public class LanguageProfileController : MonoBehaviour
 
         //Old way - File.WriteAllText(Application.dataPath + languageProfilesListJSONPathPC, json);
         using (TextWriter writer = new StreamWriter(Application.dataPath + languageProfilesListJSONPathPC, false))
-        {
+        {           
             writer.WriteLine(json);
             writer.Close();
         }
@@ -115,8 +131,6 @@ public class LanguageProfileController : MonoBehaviour
 #elif UNITY_ANDROID
         File.WriteAllText(Application.persistentDataPath + languageProfilesListJSONPathMobile, json);
 #endif
-
-
     }
     private List<LanguageProfile> ReadLanguageProfileListFromJSON()
     {
@@ -153,7 +167,24 @@ public class LanguageProfileController : MonoBehaviour
         LanguageProfile currentLanguageProfile = JsonUtility.FromJson<LanguageProfile>(File.ReadAllText(Application.dataPath + currentProfileJSONPathPC));
         return currentLanguageProfile;
     }
+    #endregion
+    #region Event Subscribing / Unsubscribing.
+    private void OnEnable()
+    {
+        LanguageProfile.LanguageProfileCreatedEvent += OnNewLanguageProfileCreated;
+        Set.SetCreatedEvent += OnNewSetCreated;
+    }
 
-    private void OnEnable() => LanguageProfile.LanguageProfileCreatedEvent += OnNewLanguageProfileCreated;
-    private void OnDisable() => LanguageProfile.LanguageProfileCreatedEvent -= OnNewLanguageProfileCreated;
+    private void OnDisable()
+    {
+        LanguageProfile.LanguageProfileCreatedEvent -= OnNewLanguageProfileCreated;
+        Set.SetCreatedEvent -= OnNewSetCreated;
+    }
+    #endregion
+
+    //Application stops: Save all info to JSON?
+    private void OnApplicationQuit()
+    {
+        SaveListOfLanguageProfilesToJSON(userLanguageProfilesList);
+    }
 }
