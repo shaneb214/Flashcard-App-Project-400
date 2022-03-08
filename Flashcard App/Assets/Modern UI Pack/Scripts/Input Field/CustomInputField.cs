@@ -34,8 +34,8 @@ namespace Michsky.UI.ModernUIPack
             if (inputField == null) { inputField = gameObject.GetComponent<TMP_InputField>(); }
             if (inputFieldAnimator == null) { inputFieldAnimator = gameObject.GetComponent<Animator>(); }
 
-            inputField.onSelect.AddListener((string g) => AnimateIn());
-            inputField.onEndEdit.AddListener((string g) => AnimateOut());
+            inputField.onSelect.AddListener((string text) => AnimateIn());
+            inputField.onEndEdit.AddListener((string text) => AnimateOut());
             UpdateStateInstant();
         }
 
@@ -64,35 +64,37 @@ namespace Michsky.UI.ModernUIPack
 #endif
         }
 
-        public void AnimateIn() 
+        public void AnimateIn(bool forceAnimate = false) 
         {
             print("in");
             StopCoroutine("DisableAnimator");
-         
-            if (inputFieldAnimator.gameObject.activeInHierarchy == true) 
+
+            if (inputFieldAnimator.gameObject.activeInHierarchy == true)
             {
                 inputFieldAnimator.enabled = true;
-                if(inputField.text.Length == 0)
+                if (inputField.text.Length == 0 || forceAnimate)
                     inputFieldAnimator.Play(inAnim);
                 StartCoroutine("DisableAnimator");
             }
         }
 
-        public void AnimateOut(bool forceAnimate = false)
+        public void AnimateOut()
         {
             print("out");
             if (inputFieldAnimator.gameObject.activeInHierarchy == true)
             {
                 inputFieldAnimator.enabled = true;
-                if (inputField.text.Length == 0 || forceAnimate) 
-                    inputFieldAnimator.Play(outAnim); 
+                if (inputField.text.Length == 0)
+                    inputFieldAnimator.Play(outAnim);
                 StartCoroutine("DisableAnimator");
             }
         }
 
-        public void AnimateInstantOut()
+        public void AnimateInsantIn()
         {
-            inputFieldAnimator.Play(instaOutAnim);
+            inputFieldAnimator.enabled = true;
+            inputFieldAnimator.Play(instaInAnim);
+            StartCoroutine("DisableAnimator");
         }
 
         public void UpdateState()
