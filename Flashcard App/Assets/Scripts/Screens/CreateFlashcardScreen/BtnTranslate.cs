@@ -44,7 +44,8 @@ public class BtnTranslate : MonoBehaviour
                 if(translation != string.Empty)
                 {
                     inputFieldToAddTranslation.AnimateInsantIn();
-                    inputFieldToAddTranslation.inputField.SetTextWithoutNotify(translation);
+                    //inputFieldToAddTranslation.inputField.SetTextWithoutNotify(translation);
+                    inputFieldToAddTranslation.inputField.text = translation;
                 }
                 //Debug.Log(result.original + " => " + result.translated);
             }
