@@ -66,7 +66,6 @@ namespace Michsky.UI.ModernUIPack
 
         public void AnimateIn(bool forceAnimate = false) 
         {
-            print("in");
             StopCoroutine("DisableAnimator");
 
             if (inputFieldAnimator.gameObject.activeInHierarchy == true)
@@ -80,7 +79,6 @@ namespace Michsky.UI.ModernUIPack
 
         public void AnimateOut()
         {
-            print("out");
             if (inputFieldAnimator.gameObject.activeInHierarchy == true)
             {
                 inputFieldAnimator.enabled = true;
@@ -94,6 +92,13 @@ namespace Michsky.UI.ModernUIPack
         {
             inputFieldAnimator.enabled = true;
             inputFieldAnimator.Play(instaInAnim);
+            StartCoroutine("DisableAnimator");
+        }
+
+        public void AnimateInsantOut()
+        {
+            inputFieldAnimator.enabled = true;
+            inputFieldAnimator.Play(instaOutAnim);
             StartCoroutine("DisableAnimator");
         }
 

@@ -43,8 +43,6 @@ public class BtnTranslate : MonoBehaviour
 
                 if(translation != string.Empty)
                 {
-                    print($"translation was {translation}");
-
                     inputFieldToAddTranslation.AnimateInsantIn();
                     inputFieldToAddTranslation.inputField.SetTextWithoutNotify(translation);
                 }

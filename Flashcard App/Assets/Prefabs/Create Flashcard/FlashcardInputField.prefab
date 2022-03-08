@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65c7917835d8a04b94c8b906234b09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputText: {fileID: 99821702987073985}
+  inputField: {fileID: 0}
   inputFieldAnimator: {fileID: 118543858074918811}
   processSubmit: 0
   onSubmit:
