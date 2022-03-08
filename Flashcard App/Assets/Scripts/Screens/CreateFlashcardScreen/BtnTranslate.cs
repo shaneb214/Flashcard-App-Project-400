@@ -1,3 +1,4 @@
+using Michsky.UI.ModernUIPack;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ public class BtnTranslate : MonoBehaviour
     private Button button;
 
     [SerializeField] private TextMeshProUGUI txtTranslateFrom;
-    [SerializeField] private TMP_InputField inputField;
+    //[SerializeField] private TMP_InputField inputFieldToAddTranslation;
+    [SerializeField] private CustomInputField inputFieldToAddTranslation;
 
     private void Awake()
     {
@@ -21,16 +23,16 @@ public class BtnTranslate : MonoBehaviour
         button.onClick.AddListener(OnButtonClick);
     }
 
-    private void Start()
-    {
-        
-    }
+    private void Start() { }
+    private void OnEnable() { }
 
-    private void OnEnable()
+    private void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            inputFieldToAddTranslation.AnimateOut(forceAnimate: true);
+        }
     }
-
     private void OnButtonClick()
     {
         //Create animation for arrow.
@@ -48,7 +50,14 @@ public class BtnTranslate : MonoBehaviour
                     translation += result.translated;
                 }
 
-                inputField.text = translation;
+                if(translation != string.Empty)
+                {
+                    print($"translation was {translation}");
+                    // inputFieldToAddTranslation.AnimateOut(forceAnimate: true);
+                    //inputFieldToAddTranslation.inputField.text = translation;
+                    inputFieldToAddTranslation.inputField.SetTextWithoutNotify(translation);
+                    inputFieldToAddTranslation.AnimateOut(forceAnimate: true);
+                }
                 //Debug.Log(result.original + " => " + result.translated);
             }
         });

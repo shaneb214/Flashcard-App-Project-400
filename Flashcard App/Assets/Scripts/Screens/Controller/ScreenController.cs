@@ -23,8 +23,9 @@ public class ScreenController : MonoBehaviour
 
 
     //Testing.
-    [Header("Add Screens You Want To Push At Start")]
+    [Header("Screens To Push At Start")]
     [SerializeField] private List<ScreenPushData> screensToPushAtStart;
+    [SerializeField] private bool PushScreensAtStart;
 
     private void Awake()
     {
@@ -36,8 +37,8 @@ public class ScreenController : MonoBehaviour
     {
         //If user has no language profile - first time using app? Load screen to create a profile and ensure they cant continue until they create one.
         //Else - Load home screen / create flashcard screen.
-
-        screensToPushAtStart.ForEach(screenData => UIManager.Instance.QueuePush(screenData.ID, null, null, null));
+        if(PushScreensAtStart)
+            screensToPushAtStart.ForEach(screenData => UIManager.Instance.QueuePush(screenData.ID, null, null, null));
 
 
         //UIManager.Instance.QueuePush(screenCreateFlashcardPushData.ID, null, null);

@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myScreenToPush: {fileID: 11400000, guid: cd084f7f4fb9b3346978e622772fc451, type: 2}
-  popAndSkipPopSequence: 0
+  popCurrentScreenAndSkipPopSequence: 0
 --- !u!1 &4977801419576951245
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.37314528, b: 0.3962264, a: 1}
+  m_Color: {r: 0.2901961, g: 0.078431375, b: 0.54901963, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -7,7 +7,7 @@ namespace Michsky.UI.ModernUIPack
     public class UIManager : ScriptableObject
     {
         // Settings
-        [HideInInspector] public bool enableDynamicUpdate = true;
+        [HideInInspector] public bool enableDynamicUpdate = true; 
         [HideInInspector] public bool enableExtendedColorPicker = true;
         [HideInInspector] public bool editorHints = true;
 

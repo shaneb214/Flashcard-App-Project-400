@@ -5,7 +5,6 @@ using TMPro;
 
 namespace Michsky.UI.ModernUIPack
 {
-    [ExecuteInEditMode]
     public class UIManagerInputField : MonoBehaviour
     {
         [Header("Settings")]
