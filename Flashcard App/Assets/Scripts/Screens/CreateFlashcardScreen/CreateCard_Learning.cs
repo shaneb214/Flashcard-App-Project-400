@@ -23,8 +23,6 @@ public class CreateCard_Learning : CreateCard
     //React to new profile being selected by user & update display.
     private void OnNewProfileSelected(LanguageProfile newSelectedProfile)
     {
-        print("reacted to new profile selection");
-
         ClearUserInput();
         UpdateDisplayBasedOnCurrentProfile(newSelectedProfile);
     }
