@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5530727713460552539}
   - component: {fileID: 5530727713460552538}
   - component: {fileID: 7413079982539123311}
-  - component: {fileID: 8918980840176201793}
   m_Layer: 5
   m_Name: 'Bottom Bar '
   m_TagString: Untagged
@@ -105,22 +104,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &8918980840176201793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5530727713460552540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab82c64a3685d99488ea753aef9741c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  btnNewCard: {fileID: 3387956237439918686}
-  btnMySets: {fileID: 1545569658436512366}
-  currentActiveButton: {fileID: 0}
-  lastActiveButton: {fileID: 0}
 --- !u!222 &2026011290067208647
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -256,17 +239,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7940771602748064142, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
   m_PrefabInstance: {fileID: 2011262133322075996}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3387956237439918686 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3813705002262179074, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
-  m_PrefabInstance: {fileID: 2011262133322075996}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e6d1f814d9e78f4e9f36050bc4e0172, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2422926789875418988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -409,14 +381,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7940771602748064142, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
   m_PrefabInstance: {fileID: 2422926789875418988}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1545569658436512366 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3813705002262179074, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
-  m_PrefabInstance: {fileID: 2422926789875418988}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e6d1f814d9e78f4e9f36050bc4e0172, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
