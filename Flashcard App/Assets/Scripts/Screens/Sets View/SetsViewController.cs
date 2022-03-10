@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -11,24 +12,16 @@ public class SetsViewController : MonoBehaviour
 
     [SerializeField] private Transform scrollViewContentTransform;
     [SerializeField] private SetDisplay setDisplayPrefab;
+    [SerializeField] private TextMeshProUGUI txtNoSetsWarning;
 
-    private bool ScrollViewContainsItems { get { return scrollViewContentTransform.childCount > 0; } }
-
-    //Start.
-    private void Start()
-    {
-        //profileIDToShowSetsOf = LanguageProfileController.Instance.userCurrentLanguageProfile.ID;
-        //SpawnSetDisplayPrefabsForProfile(LanguageProfileController.Instance.userCurrentLanguageProfile);
-    }
+    private bool ScrollViewContainsSets { get { return scrollViewContentTransform.childCount > 0; } }
 
     //Spawning Set Display Prefabs.
     private void SpawnSetDisplayInScrollView(Set setToSpawn)
     {
-        string setName = setToSpawn._name;
-
         //Spawn prefab + pass in info so it can update its components.
         SetDisplay spawnedSetDisplay = Instantiate(setDisplayPrefab, scrollViewContentTransform);
-        spawnedSetDisplay.UpdateDisplay(setName);
+        spawnedSetDisplay.UpdateDisplay(setToSpawn._name);
     }
     private void SpawnSetDisplayPrefabsForProfile(LanguageProfile profile)
     {
@@ -40,14 +33,20 @@ public class SetsViewController : MonoBehaviour
     private void OnNewSetCreated(Set newSet)
     {
         SpawnSetDisplayInScrollView(newSet);
+        UpdateNoSetsWarning();
     }
+    private void UpdateNoSetsWarning()
+    {
+        txtNoSetsWarning.gameObject.SetActive(ScrollViewContainsSets == false);
+    }
+
     //Reacting to new profile being selected.
     private void OnUserSelectedNewProfile(LanguageProfile newProfile)
     {
         profileIDToShowSetsOf = newProfile.ID;
 
         //Clear set displays if any.
-        if (ScrollViewContainsItems)
+        if (ScrollViewContainsSets)
             DestroyItemsInScrollView();
 
         //Spawn new sets for current profile.
@@ -74,13 +73,9 @@ public class SetsViewController : MonoBehaviour
         LanguageProfile currentProfile = LanguageProfileController.Instance.userCurrentLanguageProfile;
         if (profileIDToShowSetsOf != currentProfile.ID)
             OnUserSelectedNewProfile(currentProfile);
-    }
 
-    //private void OnDestroy()
-    //{
-    //    Set.SetCreatedEvent -= OnNewSetCreated;
-    //    LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnUserSelectedNewProfile;
-    //}
+        UpdateNoSetsWarning();
+    }
 
     private void OnDisable()
     {

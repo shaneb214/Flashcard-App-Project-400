@@ -7,17 +7,25 @@ using UnityEngine.UI;
 //Attached to prefab to represent a set.
 //Shows set name, clicking on this will open the set and user can see the flashcards within.
 
-[RequireComponent(typeof(Button))]
 public class SetDisplay : MonoBehaviour
 {
-    private Button myButton;
+    [Header("Components")]
+    [SerializeField] private Button btnSelectSet;
     [SerializeField] private TextMeshProUGUI txtSetName;
+    [SerializeField] private TextMeshProUGUI txtCardCount;
+    [SerializeField] private TextMeshProUGUI txtSubsetCount;
 
     //Start.
-    private void Awake() => myButton = GetComponent<Button>();
-    private void Start() => myButton.onClick.AddListener(OnMyButtonClick);
+    private void Awake()
+    {
+    }
 
-    private void OnMyButtonClick()
+    private void Start()
+    {
+        btnSelectSet.onClick.AddListener(OnSelectSetButtonPressed);
+    }
+
+    private void OnSelectSetButtonPressed()
     {
         //Switch to flashcard display screen.
     }
