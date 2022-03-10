@@ -38,13 +38,13 @@ public class BtnTranslate : MonoBehaviour
             {
                 foreach (var result in results)
                 {
+                    //if (result.translated != string.Empty)
                     translation += result.translated;
                 }
 
-                if(translation != string.Empty)
+                if(translation.AllCharactersEmptyOrWhiteSpace() == false)
                 {
                     inputFieldToAddTranslation.AnimateInsantIn();
-                    //inputFieldToAddTranslation.inputField.SetTextWithoutNotify(translation);
                     inputFieldToAddTranslation.inputField.text = translation;
                 }
                 //Debug.Log(result.original + " => " + result.translated);

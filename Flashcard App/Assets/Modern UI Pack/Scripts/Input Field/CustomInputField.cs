@@ -23,7 +23,6 @@ namespace Michsky.UI.ModernUIPack
         [Header("Events")]
         public UnityEvent onSubmit;
 
-        // Hidden variables
         private string inAnim = "In";
         private string outAnim = "Out";
         private string instaInAnim = "Instant In";
@@ -118,6 +117,16 @@ namespace Michsky.UI.ModernUIPack
         {
             yield return new WaitForSeconds(1);
             inputFieldAnimator.enabled = false;
+        }
+
+        public void ClearText(bool updateInstant = false)
+        {
+            inputField.text = string.Empty;
+
+            if (updateInstant)
+                UpdateStateInstant();
+            else
+                UpdateState();
         }
     }
 }

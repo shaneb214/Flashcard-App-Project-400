@@ -52,8 +52,8 @@ namespace UniLang {
                     foreach (var v in (JArray)(json[0]))
                     {
                         results.Add(new TranslatedTextPair(
-                                (string)(v[1]),
-                                (string)(v[0])
+                                (v[1].ToString()),
+                                (v[0].ToString())
                             )
                         );
                     }

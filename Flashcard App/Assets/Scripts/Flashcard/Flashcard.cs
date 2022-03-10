@@ -19,8 +19,8 @@ public class Flashcard
     [SerializeField] private string learningSide;
     public string LearningSide { get => learningSide; set => learningSide = value; }
 
-    private string optionalComments;
-    public string OptionalComments { get => optionalComments; set => optionalComments = value; }
+    private string notes;
+    public string Notes { get => notes; set => notes = value; }
 
     private Color colour;
     public Color Colour { get => colour; set => colour = value; }
@@ -29,20 +29,6 @@ public class Flashcard
     public AudioClip AudioRecording { get => audioRecording; set => audioRecording = value; }
 
     //Tags? 
-
-    public Flashcard(string nativeSide, string learningSide, string optionalComments, Color colour, AudioClip audioRecording)
-    {
-        id = Guid.NewGuid(); 
-        this.nativeSide = nativeSide;
-        this.learningSide = learningSide;
-        this.optionalComments = optionalComments;
-        this.colour = colour;
-        this.audioRecording = audioRecording;
-
-        FlashcardCreatedEvent?.Invoke(this);
-        Debug.Log($"New flashcard created: {this}");
-    }
-
     public Flashcard(string nativeSide, string learningSide)
     {
         id = Guid.NewGuid();
@@ -52,6 +38,31 @@ public class Flashcard
         FlashcardCreatedEvent?.Invoke(this);
         Debug.Log($"New flashcard created: {this}");
     }
+    public Flashcard(string nativeSide, string learningSide,string notes)
+    {
+        id = Guid.NewGuid();
+        this.nativeSide = nativeSide;
+        this.learningSide = learningSide;
+        this.notes = notes;
+
+        FlashcardCreatedEvent?.Invoke(this);
+        Debug.Log($"New flashcard created: {this}");
+    }
+
+
+    public Flashcard(string nativeSide, string learningSide, string notes, Color colour, AudioClip audioRecording)
+    {
+        id = Guid.NewGuid(); 
+        this.nativeSide = nativeSide;
+        this.learningSide = learningSide;
+        this.notes = notes;
+        this.colour = colour;
+        this.audioRecording = audioRecording;
+
+        FlashcardCreatedEvent?.Invoke(this);
+        Debug.Log($"New flashcard created: {this}");
+    }
+
 
     public override string ToString()
     {

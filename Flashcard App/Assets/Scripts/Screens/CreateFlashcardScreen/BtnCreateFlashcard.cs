@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using Michsky.UI.ModernUIPack;
 
 //Part of create flashcard screen.
 //Will create a flashcard when pressed if two input fields (native / learning) have text.
@@ -15,15 +16,17 @@ public class BtnCreateFlashcard : MonoBehaviour
 {
     private Button myButton;
 
-    [SerializeField] private TMP_InputField nativeLangInputField;
-    [SerializeField] private TMP_InputField learningLangInputField;
+    [SerializeField] private CustomInputField nativeLangInputField;
+    [SerializeField] private CustomInputField learningLangInputField;
+    [SerializeField] private ModalWindow_CreateFlashcardNote createNoteModalWindow;
+    private string currentFlashcardNote;
 
     private bool CanCreateFlashcard
     { 
         get 
         {
-            return nativeLangInputField.text != string.Empty &&
-                   learningLangInputField.text != string.Empty;
+            return nativeLangInputField.inputField.text != string.Empty &&
+                   learningLangInputField.inputField.text != string.Empty;
 
         } 
     }
@@ -32,7 +35,13 @@ public class BtnCreateFlashcard : MonoBehaviour
     private void Awake() => myButton = GetComponent<Button>();
     private void Start()
     {
+        createNoteModalWindow.NoteCreatedEvent += OnFlashcardNoteCreated;
         myButton.onClick.AddListener(OnButtonClick);
+    }
+
+    private void OnFlashcardNoteCreated(string note)
+    {
+        currentFlashcardNote = note;
     }
 
     private void OnButtonClick()
@@ -40,11 +49,13 @@ public class BtnCreateFlashcard : MonoBehaviour
         if(CanCreateFlashcard)
         {
             //Create.
-            Flashcard newFlashcard = new Flashcard(nativeLangInputField.text, learningLangInputField.text);
+            Flashcard newFlashcard = new Flashcard(nativeLangInputField.inputField.text, learningLangInputField.inputField.text,currentFlashcardNote);
 
             //Reset Input Fields.
-            nativeLangInputField.text = string.Empty;
-            learningLangInputField.text = string.Empty;
+            createNoteModalWindow.ClearNoteText();
+            nativeLangInputField.ClearText();
+            learningLangInputField.ClearText();
+            currentFlashcardNote = string.Empty;
         }
     }
 }
