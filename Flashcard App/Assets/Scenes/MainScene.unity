@@ -130,10 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1566567979}
     m_Modifications:
-    - target: {fileID: 1345092426, guid: 7e624a7eacc76e3419be817a21b07d3f, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 58011040212842212, guid: 7e624a7eacc76e3419be817a21b07d3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -246,6 +242,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3545521071436764867, guid: 7e624a7eacc76e3419be817a21b07d3f, type: 3}
+      propertyPath: setDisplayPrefab
+      value: 
+      objectReference: {fileID: 3078004888994112390, guid: 8f8f0d07efc9e4949bc52135d618bcbe, type: 3}
     - target: {fileID: 5741173250176162130, guid: 7e624a7eacc76e3419be817a21b07d3f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
