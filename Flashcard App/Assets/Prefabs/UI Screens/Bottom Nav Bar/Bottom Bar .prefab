@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1083889042728838439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54325180506436258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8aeffc2cec6f34aaf753276f6eb4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myScreenToPush: {fileID: 11400000, guid: fbb3476175b38b847b1befba3acc10b8, type: 2}
+  popCurrentScreenAndSkipPopSequence: 1
+--- !u!114 &3124926988146451702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4230998962349800082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8aeffc2cec6f34aaf753276f6eb4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myScreenToPush: {fileID: 11400000, guid: a96b9be72ea064741923d161fd4cfb90, type: 2}
+  popCurrentScreenAndSkipPopSequence: 1
 --- !u!1 &5530727713460552540
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +255,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BottomBarButton (New Card)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3813705002262179074, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
 --- !u!1 &8492163760760655571 stripped
 GameObject:
@@ -237,6 +266,11 @@ GameObject:
 --- !u!224 &8492163760760655570 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7940771602748064142, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
+  m_PrefabInstance: {fileID: 2011262133322075996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &54325180506436258 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1956937422581972478, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
   m_PrefabInstance: {fileID: 2011262133322075996}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2422926789875418988
@@ -374,10 +408,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BottomBarButton (My Sets)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3813705002262179074, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
 --- !u!224 &5741173251120531170 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7940771602748064142, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
+  m_PrefabInstance: {fileID: 2422926789875418988}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4230998962349800082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1956937422581972478, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
   m_PrefabInstance: {fileID: 2422926789875418988}
   m_PrefabAsset: {fileID: 0}
