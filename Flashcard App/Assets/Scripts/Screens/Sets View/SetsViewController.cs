@@ -9,6 +9,7 @@ using UnityEngine;
 public class SetsViewController : MonoBehaviour
 {
     private string profileIDToShowSetsOf;
+    private string parentSetIDCurrentlyShowing;
 
     [SerializeField] private Transform scrollViewContentTransform;
     [SerializeField] private SetDisplay setDisplayPrefab;
@@ -25,8 +26,8 @@ public class SetsViewController : MonoBehaviour
     }
     private void SpawnSetDisplayPrefabsForProfile(LanguageProfile profile)
     {
-        List<Set> setList = profile.setList;
-        setList.ForEach(set => SpawnSetDisplayInScrollView(set));
+        //List<Set> setList = profile.setList;
+        //setList.ForEach(set => SpawnSetDisplayInScrollView(set));
     }
 
     //Reacting to new Set being created.

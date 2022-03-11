@@ -38,10 +38,12 @@ public class BtnTranslate : MonoBehaviour
             {
                 foreach (var result in results)
                 {
-                    //if (result.translated != string.Empty)
-                    translation += result.translated;
+                    print(result.translated.Length);
+                    if(!string.IsNullOrWhiteSpace(result.translated) && !string.IsNullOrEmpty(result.translated))
+                        translation += result.translated;
                 }
 
+                
                 if(translation.AllCharactersEmptyOrWhiteSpace() == false)
                 {
                     inputFieldToAddTranslation.AnimateInsantIn();

@@ -14,20 +14,20 @@ public class LanguageProfile
     public Language learningLanguage;
 
     public bool IsCurrentProfile;
-    public List<Set> setList;
 
-    public int NumberOfSets { get { return setList.Count; } }
+    public string userID;
 
     public LanguageProfile(Language nativeLanguage,Language learningLanguage, bool IsCurrentProfile)
     {
         ID = Guid.NewGuid().ToString(); //So it saves to json.
+        userID = UserDataHolder.Instance.CurrentUser.ID;
 
         this.nativeLanguage = nativeLanguage;
         this.learningLanguage = learningLanguage;
 
         this.IsCurrentProfile = IsCurrentProfile;
 
-        setList = new List<Set>();
+        //setList = new List<Set>();
 
         LanguageProfileCreatedEvent?.Invoke(this);
         Debug.Log($"New language profile created - {this}");

@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace UniLang {
     public class Translator : MonoBehaviour {
@@ -51,6 +52,12 @@ namespace UniLang {
 
                     foreach (var v in (JArray)(json[0]))
                     {
+                        //         \"​\"
+                        //         "\"​\""
+                        string test = v[1].ToString();
+                        test = test.Replace("\n\n", "\n");
+
+
                         results.Add(new TranslatedTextPair(
                                 (v[1].ToString()),
                                 (v[0].ToString())

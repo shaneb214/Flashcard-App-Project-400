@@ -4,8 +4,6 @@ using UnityEngine;
 
 //Set which holds a list of flashcards.
 
-//TODO: make set be able to hold other sets.
-
 [Serializable]
 public class Set
 {
@@ -15,7 +13,9 @@ public class Set
     public string ID;
     public string _name;
 
-    private List<Flashcard> flashcardList = new List<Flashcard>();
+    private string languageProfileID;
+    private string ParentSetID;
+    private bool IsParentSet { get { return ParentSetID == string.Empty; } }
 
     public Set(string name)
     {
@@ -32,16 +32,13 @@ public class Set
         ID = Guid.NewGuid().ToString();
 
         _name = name;
-        this.flashcardList = flashcardList;
 
         SetCreatedEvent?.Invoke(this);
         Debug.Log($"Set created: {this}");
     }
 
-    public int NumberOfFlashcards { get { return flashcardList.Count; } }
-
     public override string ToString()
     {
-        return $"{_name} <> No. of flashcards - {NumberOfFlashcards}";
+        return $"Set: {_name}";
     }
 }

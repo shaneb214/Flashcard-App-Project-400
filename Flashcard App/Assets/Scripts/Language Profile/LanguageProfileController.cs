@@ -96,7 +96,7 @@ public class LanguageProfileController : MonoBehaviour
     #region New Set Creation
     private void OnNewSetCreated(Set newSet)
     {
-        userCurrentLanguageProfile.setList.Add(newSet);
+        //userCurrentLanguageProfile.setList.Add(newSet);
     }
     #endregion
     #region Writing / Saving Data To Json
@@ -144,12 +144,6 @@ public class LanguageProfileController : MonoBehaviour
 #endif
         List<LanguageProfile> profiles = JSONHelper.FromJson<LanguageProfile>(json);
         return profiles;
-
-        //string json = File.ReadAllText(Application.dataPath + languageProfilesListJSONPathPC);
-
-        //List<LanguageProfile> profiles = JSONHelper.FromJson<LanguageProfile>(json);
-
-        //return profiles;
     }
     private void SaveEngRuAsCurrentLanguageProfileToJson()
     {
@@ -171,13 +165,13 @@ public class LanguageProfileController : MonoBehaviour
     private void OnEnable()
     {
         LanguageProfile.LanguageProfileCreatedEvent += OnNewLanguageProfileCreated;
-        Set.SetCreatedEvent += OnNewSetCreated;
+        //Set.SetCreatedEvent += OnNewSetCreated;
     }
 
     private void OnDisable()
     {
         LanguageProfile.LanguageProfileCreatedEvent -= OnNewLanguageProfileCreated;
-        Set.SetCreatedEvent -= OnNewSetCreated;
+        //Set.SetCreatedEvent -= OnNewSetCreated;
     }
     #endregion
 

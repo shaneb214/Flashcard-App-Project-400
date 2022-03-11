@@ -27,7 +27,8 @@ public class SetDisplay : MonoBehaviour
 
     private void OnSelectSetButtonPressed()
     {
-        //Switch to flashcard display screen.
+        //Enter set and display subsets and any flashcards within.
+        //
     }
 
     public void UpdateDisplay(string setName)
