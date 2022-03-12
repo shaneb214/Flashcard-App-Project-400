@@ -28,7 +28,7 @@ public class LanguageProfileController : MonoBehaviour
     [SerializeField] private string currentProfileJSONPathMobile;
     [Header("User's language profile info")]
     [SerializeField] private List<LanguageProfile> userLanguageProfilesList;
-    public LanguageProfile userCurrentLanguageProfile;
+    public LanguageProfile currentLanguageProfile;
 
     public List<LanguageProfile> GetUserLanguageProfiles() => userLanguageProfilesList;
 
@@ -52,7 +52,7 @@ public class LanguageProfileController : MonoBehaviour
 
         //Save to memory.
         userLanguageProfilesList = ReadLanguageProfileListFromJSON();
-        userCurrentLanguageProfile = userLanguageProfilesList.Find(profile => profile.IsCurrentProfile == true);
+        currentLanguageProfile = userLanguageProfilesList.Find(profile => profile.IsCurrentProfile == true);
     }
     #endregion
     #region New Language Profile Creation / Selection
@@ -71,18 +71,18 @@ public class LanguageProfileController : MonoBehaviour
     public void SelectNewProfile(LanguageProfile newProfile)
     {
         //If user selects same profile, dont have to do anything.
-        if (newProfile == userCurrentLanguageProfile)
+        if (newProfile == currentLanguageProfile)
             return;
 
         //If there was a current profile, set that to not be the current profile anymore.
-        if(userCurrentLanguageProfile != null)
-            userCurrentLanguageProfile.IsCurrentProfile = false;
+        if(currentLanguageProfile != null)
+            currentLanguageProfile.IsCurrentProfile = false;
 
         //Update current profile and raise event to notify certain UI objects.
-        userCurrentLanguageProfile = newProfile;
-        userCurrentLanguageProfile.IsCurrentProfile = true;
+        currentLanguageProfile = newProfile;
+        currentLanguageProfile.IsCurrentProfile = true;
 
-        UserSelectedNewProfileEvent?.Invoke(userCurrentLanguageProfile);
+        UserSelectedNewProfileEvent?.Invoke(currentLanguageProfile);
         print($"New Language Profile Was Selected: {newProfile}");
     }
 

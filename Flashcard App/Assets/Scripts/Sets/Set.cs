@@ -11,34 +11,24 @@ public class Set
 
     //Default set? Have this in some sort of controller maybe. 
     public string ID;
-    public string _name;
+    public string Name;
 
-    private string languageProfileID;
+    public string LanguageProfileID;
     private string ParentSetID;
     private bool IsParentSet { get { return ParentSetID == string.Empty; } }
 
-    public Set(string name)
+    public Set(string Name)
     {
         ID = Guid.NewGuid().ToString();
+        LanguageProfileID = LanguageProfileController.Instance.currentLanguageProfile.ID;
 
-        _name = name;
+        this.Name = Name;
 
         SetCreatedEvent?.Invoke(this);
         Debug.Log($"Set created: {this}");
     }
-
-    public Set(string name, List<Flashcard> flashcardList)
-    {
-        ID = Guid.NewGuid().ToString();
-
-        _name = name;
-
-        SetCreatedEvent?.Invoke(this);
-        Debug.Log($"Set created: {this}");
-    }
-
     public override string ToString()
     {
-        return $"Set: {_name}";
+        return $"Set: {Name}";
     }
 }

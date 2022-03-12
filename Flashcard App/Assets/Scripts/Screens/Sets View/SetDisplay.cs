@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,9 @@ using UnityEngine.UI;
 
 public class SetDisplay : MonoBehaviour
 {
+    public static Action<string> SetDisplayPressed;
+    private string setIDToRepresent;
+
     [Header("Components")]
     [SerializeField] private Button btnSelectSet;
     [SerializeField] private TextMeshProUGUI txtSetName;
@@ -28,11 +32,12 @@ public class SetDisplay : MonoBehaviour
     private void OnSelectSetButtonPressed()
     {
         //Enter set and display subsets and any flashcards within.
-        //
+        SetDisplayPressed?.Invoke(setIDToRepresent);
     }
 
-    public void UpdateDisplay(string setName)
+    public void UpdateDisplay(string setID,string setName)
     {
+        setIDToRepresent = setID;
         txtSetName.text = setName;
     }
 }

@@ -31,7 +31,7 @@ public class CreateCard_Learning : CreateCard
     {
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnNewProfileSelected;
 
-        LanguageProfile currentProfile = LanguageProfileController.Instance.userCurrentLanguageProfile;
+        LanguageProfile currentProfile = LanguageProfileController.Instance.currentLanguageProfile;
         if(profileIDToRepresent != currentProfile.ID)
             UpdateDisplayBasedOnCurrentProfile(currentProfile);
     }

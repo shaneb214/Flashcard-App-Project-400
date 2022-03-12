@@ -1,19 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 //Active in view sets screen - spawns in prefabs which show user the sets that are in their current language profile.
 
 public class SetsViewController : MonoBehaviour
 {
+    public static Action EnteredNonParentedSetsDisplayEvent;
+
     private string profileIDToShowSetsOf;
-    private string parentSetIDCurrentlyShowing;
+    [SerializeField] private string setIDCurrentlyShowing;
+    [SerializeField] private bool showingNonParentedSets; 
 
     [SerializeField] private Transform scrollViewContentTransform;
     [SerializeField] private SetDisplay setDisplayPrefab;
     [SerializeField] private TextMeshProUGUI txtNoSetsWarning;
+    [SerializeField] private Button btnCreateFlashcard;
 
     private bool ScrollViewContainsSets { get { return scrollViewContentTransform.childCount > 0; } }
 
@@ -22,7 +28,7 @@ public class SetsViewController : MonoBehaviour
     {
         //Spawn prefab + pass in info so it can update its components.
         SetDisplay spawnedSetDisplay = Instantiate(setDisplayPrefab, scrollViewContentTransform);
-        spawnedSetDisplay.UpdateDisplay(setToSpawn._name);
+        spawnedSetDisplay.UpdateDisplay(setToSpawn.ID,setToSpawn.Name);
     }
     private void SpawnSetDisplayPrefabsForProfile(LanguageProfile profile)
     {
@@ -36,6 +42,26 @@ public class SetsViewController : MonoBehaviour
         SpawnSetDisplayInScrollView(newSet);
         UpdateNoSetsWarning();
     }
+    private void OnSetDisplayPressed(string setIDPressed)
+    {
+        Set setPressed = SetsDataHolder.Instance.FindSetByID(setIDPressed);
+
+        setIDCurrentlyShowing = setIDPressed;
+        showingNonParentedSets = false;
+        //Go into set. 
+        //Change top bar heading text to set name.
+        //Enable make flashcard button.
+    }
+
+    private void ShowNonParentSetsScreen()
+    {
+        showingNonParentedSets = true;
+
+        btnCreateFlashcard.gameObject.SetActive(false);
+        setIDCurrentlyShowing = string.Empty;
+
+    }
+
     private void UpdateNoSetsWarning()
     {
         txtNoSetsWarning.gameObject.SetActive(ScrollViewContainsSets == false);
@@ -44,14 +70,14 @@ public class SetsViewController : MonoBehaviour
     //Reacting to new profile being selected.
     private void OnUserSelectedNewProfile(LanguageProfile newProfile)
     {
-        profileIDToShowSetsOf = newProfile.ID;
+        //profileIDToShowSetsOf = newProfile.ID;
 
         //Clear set displays if any.
-        if (ScrollViewContainsSets)
-            DestroyItemsInScrollView();
+       // if (ScrollViewContainsSets)
+            //DestroyItemsInScrollView();
 
         //Spawn new sets for current profile.
-        SpawnSetDisplayPrefabsForProfile(newProfile);
+        //SpawnSetDisplayPrefabsForProfile(newProfile);
     }
 
     //Clearing scroll view.
@@ -68,12 +94,20 @@ public class SetsViewController : MonoBehaviour
     private void OnEnable()
     {
         Set.SetCreatedEvent += OnNewSetCreated;
+        SetDisplay.SetDisplayPressed += OnSetDisplayPressed;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewProfile;
 
+        if(showingNonParentedSets)
+        {
+
+        }
+
+
+
         //Check if new user was selected while I was disabled.
-        LanguageProfile currentProfile = LanguageProfileController.Instance.userCurrentLanguageProfile;
-        if (profileIDToShowSetsOf != currentProfile.ID)
-            OnUserSelectedNewProfile(currentProfile);
+        //LanguageProfile currentProfile = LanguageProfileController.Instance.currentLanguageProfile;
+        //if (profileIDToShowSetsOf != currentProfile.ID)
+            //OnUserSelectedNewProfile(currentProfile);
 
         UpdateNoSetsWarning();
     }
@@ -81,6 +115,7 @@ public class SetsViewController : MonoBehaviour
     private void OnDisable()
     {
         Set.SetCreatedEvent -= OnNewSetCreated;
+        SetDisplay.SetDisplayPressed -= OnSetDisplayPressed;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnUserSelectedNewProfile;
     }
 }
