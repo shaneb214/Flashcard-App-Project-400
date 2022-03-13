@@ -5,6 +5,8 @@ using UnityEngine;
 public class SetsDataHolder : MonoBehaviour
 {
     public static SetsDataHolder Instance;
+
+    [Header("All sets")]
     [SerializeField] private List<Set> SetList;
 
     [Header("Storing JSON Location - Unity Editor & PC")]
@@ -28,28 +30,20 @@ public class SetsDataHolder : MonoBehaviour
 #elif UNITY_ANDROID
         jsonPath = Application.persistentDataPath + setsListJSONPathMobile;
 #endif
+
+        //Read from json.
+        SetList = JSONHelper.ReadListDataFromJSONFile<Set>(jsonPath);
     }
 
-    private void OnSetCreated(Set setCreated)
-    {
-        SetList.Add(setCreated);
-    }
+    private void OnSetCreated(Set setCreated) => SetList.Add(setCreated);
 
+    //Data retrieval.
     public List<Set> FindSetsByLangProfileID(string langProfileID) => SetList.FindAll(s => s.LanguageProfileID == langProfileID);
     public List<Set> FindSetsByParentID(string setParentID) => SetList.FindAll(s => s.ParentSetID == setParentID);
     public List<Set> FindSetsByParentID(string setParentID, string langProfileID) => SetList.FindAll(set => set.LanguageProfileID == langProfileID).FindAll(set => set.ParentSetID == setParentID);
     public Set FindSetByID(string ID) => SetList.Find(s => s.ID == ID);
-    
 
-
-    private void OnDestroy()
-    {
-        Set.SetCreatedEvent -= OnSetCreated;
-    }
-
-    private void OnApplicationQuit()
-    {
-        //Save sets to json.
-        JSONHelper.SaveListDataToJSON(SetList,jsonPath);
-    }
+    //Object end.
+    private void OnDestroy() => Set.SetCreatedEvent -= OnSetCreated;
+    private void OnApplicationQuit() => JSONHelper.SaveListDataToJSON(SetList, jsonPath);
 }

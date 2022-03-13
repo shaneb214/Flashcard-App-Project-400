@@ -20,14 +20,8 @@ public class SetDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtSubsetCount;
 
     //Start.
-    private void Awake()
-    {
-    }
-
-    private void Start()
-    {
-        btnSelectSet.onClick.AddListener(OnSelectSetButtonPressed);
-    }
+    private void Awake() { }
+    private void Start() => btnSelectSet.onClick.AddListener(OnSelectSetButtonPressed);
 
     private void OnSelectSetButtonPressed()
     {

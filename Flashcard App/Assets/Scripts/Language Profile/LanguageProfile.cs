@@ -16,6 +16,7 @@ public class LanguageProfile
     public bool IsCurrentProfile;
 
     public string userID;
+    public string defaultSetID;
 
     public LanguageProfile(Language nativeLanguage,Language learningLanguage, bool IsCurrentProfile)
     {
@@ -26,8 +27,7 @@ public class LanguageProfile
         this.learningLanguage = learningLanguage;
 
         this.IsCurrentProfile = IsCurrentProfile;
-
-        //setList = new List<Set>();
+        defaultSetID = string.Empty;
 
         LanguageProfileCreatedEvent?.Invoke(this);
         Debug.Log($"New language profile created - {this}");

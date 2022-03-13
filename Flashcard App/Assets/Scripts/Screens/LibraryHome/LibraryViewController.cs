@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class LibraryViewController : MonoBehaviour
 {
+    public static string DefaultSet;
     public static string SetIDCurrentlyShowing;
 
     [SerializeField] protected Transform scrollViewContentTransform;

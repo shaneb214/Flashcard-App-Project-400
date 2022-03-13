@@ -64,13 +64,7 @@ public class UserDataHolder : MonoBehaviour
         currentUser = JsonUtility.FromJson<User>(json);
     }
 
-    private void OnNewUserCreated(User newUser)
-    {
-        userList.Add(newUser);
-    }
+    private void OnNewUserCreated(User newUser) => userList.Add(newUser);
 
-    private void OnDestroy()
-    {
-        User.UserCreatedEvent -= OnNewUserCreated;
-    }
+    private void OnDestroy() => User.UserCreatedEvent -= OnNewUserCreated;
 }

@@ -11,6 +11,7 @@ using UnityEngine;
 // I'm writing 3 profiles to JSON at start every time - eventually have a check for if there is no profiles on device - prompt them to make one before they can continue.
 //Ensure there's at least one profile saved before allowing user to make cards, do other stuff etc. 
 //Check for this in ScreenController? If no profiles - load create profile screen, otherwise load create card screen.
+//Use JSONHelper methods here to read list of objects from jsonfile etc. since this script is doing that its own way. 
 
 //NOTE: I changed the script execution order for this script so it gets called before others. 
 
@@ -48,7 +49,7 @@ public class LanguageProfileController : MonoBehaviour
         //LanguageProfile userCurrentLanguageProfile = ReadCurrentLanguageProfileFromJSON();
 
         //Writing these to JSON at start - change later.
-        CreateSampleProfilesAndSaveToJSON();
+        //CreateSampleProfilesAndSaveToJSON();
 
         //Save to memory.
         userLanguageProfilesList = ReadLanguageProfileListFromJSON();
@@ -108,6 +109,7 @@ public class LanguageProfileController : MonoBehaviour
             new LanguageProfile(nativeLanguage: new Language("en","English"),learningLanguage: new Language("ja","Japanese"),IsCurrentProfile: false),
             new LanguageProfile(nativeLanguage: new Language("en","English"),learningLanguage: new Language("it","Italian"),IsCurrentProfile: false),
         };
+
         SaveListOfLanguageProfilesToJSON(languageProfiles);
     }
     private void SaveListOfLanguageProfilesToJSON(List<LanguageProfile> languageProfilesList)

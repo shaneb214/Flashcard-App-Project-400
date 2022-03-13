@@ -28,6 +28,9 @@ public class Flashcard
     private AudioClip audioRecording;
     public AudioClip AudioRecording { get => audioRecording; set => audioRecording = value; }
 
+    private string setID;
+    public string SetID { get => setID; set => setID = value; }
+
     //Tags? 
     public Flashcard(string nativeSide, string learningSide)
     {
@@ -38,12 +41,13 @@ public class Flashcard
         FlashcardCreatedEvent?.Invoke(this);
         Debug.Log($"New flashcard created: {this}");
     }
-    public Flashcard(string nativeSide, string learningSide,string notes)
+    public Flashcard(string nativeSide, string learningSide,string notes,string setID)
     {
         id = Guid.NewGuid();
         this.nativeSide = nativeSide;
         this.learningSide = learningSide;
         this.notes = notes;
+        this.setID = setID;
 
         FlashcardCreatedEvent?.Invoke(this);
         Debug.Log($"New flashcard created: {this}");
