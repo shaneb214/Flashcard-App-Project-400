@@ -827,6 +827,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7742874550472872054}
     m_Modifications:
+    - target: {fileID: 3124926988146451702, guid: e447d221ea53f9241bce0855815dea92, type: 3}
+      propertyPath: myScreenToPush
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d389027349fd3d47b7bc660d274da2c, type: 2}
     - target: {fileID: 5530727713460552540, guid: e447d221ea53f9241bce0855815dea92, type: 3}
       propertyPath: m_Name
       value: 'Bottom Bar '

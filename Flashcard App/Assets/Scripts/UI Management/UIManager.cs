@@ -100,7 +100,7 @@ namespace BlitzyUI
         /// Queue the screen to be pushed onto the screen stack. 
         /// Callback will be invoked when the screen is pushed to the stack.
         /// </summary>
-        public void QueuePush (BlitzyUI.Screen.ScreenID id, BlitzyUI.Screen.ScreenData data, string prefabName = null, PushedDelegate callback = null)
+        public void QueuePush (BlitzyUI.Screen.ScreenID id, BlitzyUI.Screen.ScreenData data = null, string prefabName = null, PushedDelegate callback = null)
         {
             string prefab = prefabName ?? id.defaultPrefabName;
             #if PRINT_QUEUE

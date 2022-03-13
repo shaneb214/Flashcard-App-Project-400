@@ -12,6 +12,9 @@ public class ModalWindow_CreateSet : CustomModalWindow
     [SerializeField] private Button btnCancelCreation;
     [SerializeField] private Button btnCreateSet;
 
+    private string parentID;
+    public string ParentID { get { return parentID; } set { parentID = value; } } 
+
     private bool CanCreateSet { get { return setNameInputField.inputField.text != string.Empty; } }
 
     public override void Awake() => base.Awake();
@@ -38,7 +41,8 @@ public class ModalWindow_CreateSet : CustomModalWindow
 
             //Create new set. 
             //Set as default where???
-            Set newSet = new Set(setName);
+            Set newSet = new Set(setName,LibraryViewController.SetIDCurrentlyShowing);
+
 
             CloseAndResetInputField();
         }

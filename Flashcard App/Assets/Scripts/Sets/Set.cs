@@ -14,14 +14,14 @@ public class Set
     public string Name;
 
     public string LanguageProfileID;
-    private string ParentSetID;
+    public string ParentSetID;
     private bool IsParentSet { get { return ParentSetID == string.Empty; } }
 
-    public Set(string Name)
+    public Set(string Name,string parentSetID)
     {
         ID = Guid.NewGuid().ToString();
         LanguageProfileID = LanguageProfileController.Instance.currentLanguageProfile.ID;
-
+        ParentSetID = parentSetID;
         this.Name = Name;
 
         SetCreatedEvent?.Invoke(this);

@@ -146,9 +146,8 @@ GameObject:
   - component: {fileID: 8057492986294723836}
   - component: {fileID: 8057492986294723810}
   - component: {fileID: 8057492986294723837}
-  - component: {fileID: 6060967210509467363}
   m_Layer: 5
-  m_Name: Top Bar (Sets View)
+  m_Name: Top Bar (Library Home)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,19 +212,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6060967210509467363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8057492986294723839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60d1060cb3664d64ab3d05364db412a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  txtTopBarHeading: {fileID: 8057492986566464249}
 --- !u!1 &8057492986566464251
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: My Sets
+  m_text: Library
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
   m_sharedMaterial: {fileID: 21131478253023500, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}

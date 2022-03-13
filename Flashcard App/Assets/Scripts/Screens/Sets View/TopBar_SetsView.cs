@@ -21,13 +21,10 @@ public class TopBar_SetsView : MonoBehaviour
     private void OnEnable()
     {
         SetDisplay.SetDisplayPressed += OnSetDisplayPressed;
-        SetsViewController.EnteredNonParentedSetsDisplayEvent += OnSwitchToNonParentedSetsDisplay;
     }
 
     private void OnDisable()
     {
         SetDisplay.SetDisplayPressed -= OnSetDisplayPressed;
-        SetsViewController.EnteredNonParentedSetsDisplayEvent -= OnSwitchToNonParentedSetsDisplay;
-
     }
 }

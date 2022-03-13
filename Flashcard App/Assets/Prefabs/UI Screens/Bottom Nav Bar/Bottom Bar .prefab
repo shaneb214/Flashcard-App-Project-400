@@ -294,7 +294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7940771602708274404, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
       propertyPath: m_text
-      value: My Sets
+      value: Library
       objectReference: {fileID: 0}
     - target: {fileID: 7940771602708274404, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
       propertyPath: m_fontSize
@@ -406,7 +406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7940771602748064143, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
       propertyPath: m_Name
-      value: BottomBarButton (My Sets)
+      value: BottomBarButton (My Library)
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3813705002262179074, guid: 1c7e363de2f1eeb42a161a95eec65719, type: 3}
