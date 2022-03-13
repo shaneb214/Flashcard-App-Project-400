@@ -25,6 +25,13 @@ public class LibraryViewController : MonoBehaviour
         }
     }
 
+    protected void SpawnSetDisplayInScrollView(Set setToSpawn)
+    {
+        //Spawn prefab + pass in info so it can update its components.
+        SetDisplay spawnedSetDisplay = Instantiate(setDisplayPrefab, scrollViewContentTransform);
+        spawnedSetDisplay.UpdateDisplay(setToSpawn.ID, setToSpawn.Name);
+    }
+
     public virtual void OnEnable() { }
     public virtual void OnDisable() { }
 }

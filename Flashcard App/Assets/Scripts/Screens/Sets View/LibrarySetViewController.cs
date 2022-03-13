@@ -12,14 +12,6 @@ public class LibrarySetViewController : LibraryViewController
 {
     [SerializeField] private TextMeshProUGUI txtTopBarHeader; //Make seperate script for this and make it react to event?
 
-    //Spawning Set Display Prefabs.
-    private void SpawnSetDisplayInScrollView(Set setToSpawn)
-    {
-        //Spawn prefab + pass in info so it can update its components.
-        SetDisplay spawnedSetDisplay = Instantiate(setDisplayPrefab, scrollViewContentTransform);
-        spawnedSetDisplay.UpdateDisplay(setToSpawn.ID,setToSpawn.Name);
-    }
-
     //Reacting to new Set being created.
     private void OnNewSetCreated(Set newSet)
     {

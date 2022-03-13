@@ -12,13 +12,7 @@ public class LibraryHomeViewController : LibraryViewController
 {
     [SerializeField] private ScreenPushData setsViewScreen;
 
-    //Spawning Set Display Prefabs.
-    private void SpawnSetDisplayInScrollView(Set setToSpawn)
-    {
-        //Spawn prefab + pass in info so it can update its components.
-        SetDisplay spawnedSetDisplay = Instantiate(setDisplayPrefab, scrollViewContentTransform);
-        spawnedSetDisplay.UpdateDisplay(setToSpawn.ID, setToSpawn.Name);
-    }
+
     private void SpawnSetDisplayPrefabsForProfile(LanguageProfile profile)
     {
         //List<Set> setList = profile.setList;
@@ -72,6 +66,10 @@ public class LibraryHomeViewController : LibraryViewController
         //LanguageProfile currentProfile = LanguageProfileController.Instance.currentLanguageProfile;
         //if (profileIDToShowSetsOf != currentProfile.ID)
         //OnUserSelectedNewProfile(currentProfile);
+
+        //Spawn sets with no parents.
+        SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing).ForEach(set => SpawnSetDisplayInScrollView(set));
+
 
         UpdateNoSetsWarning();
     }
