@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class FlashcardDataHolder : MonoBehaviour
 {
+    public static FlashcardDataHolder Instance;
+
     [SerializeField] private List<Flashcard> FlashcardList;
 
     [Header("Storing JSON Location - Unity Editor & PC")]
@@ -16,8 +18,11 @@ public class FlashcardDataHolder : MonoBehaviour
 
     string jsonPath;
 
+    //Start.
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
         Flashcard.FlashcardCreatedEvent += OnFlashcardCreated;
     }
 
@@ -30,8 +35,11 @@ public class FlashcardDataHolder : MonoBehaviour
 #endif
 
         //Read from json.
-        FlashcardList = JSONHelper.ReadListDataFromJSONFile<Flashcard>(jsonPath);
+        List<Flashcard> flashcardListFromJSON = JSONHelper.ReadListDataFromJSONFile<Flashcard>(jsonPath);
+        FlashcardList = flashcardListFromJSON == null ? new List<Flashcard>() : flashcardListFromJSON;
     }
+
+    public List<Flashcard> FindFlashcardsBySetID(string setID) => FlashcardList.FindAll(flashcard => flashcard.SetID == setID);
 
     private void OnFlashcardCreated(Flashcard flashcardCreated) => FlashcardList.Add(flashcardCreated);
 

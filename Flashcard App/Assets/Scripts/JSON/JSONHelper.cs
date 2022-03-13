@@ -9,7 +9,7 @@ public static class JSONHelper
     public static List<T> FromJson<T>(string json)
     {
         Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
-        return wrapper.Items;
+        return wrapper == null ? null : wrapper.Items;
     }
 
     [Serializable]

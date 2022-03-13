@@ -49,10 +49,13 @@ public class BtnCreateFlashcard : MonoBehaviour
         if(CanCreateFlashcard)
         {
             //Create.
-            Flashcard newFlashcard = new Flashcard(nativeLangInputField.inputField.text, learningLangInputField.inputField.text,currentFlashcardNote,LibraryViewController.DefaultSet);
+            Flashcard newFlashcard = new Flashcard
+                (nativeLangInputField.inputField.text, 
+                learningLangInputField.inputField.text,
+                currentFlashcardNote, 
+                LanguageProfileController.Instance.currentLanguageProfile.defaultSetID);
 
             //Reset Input Fields.
-            createNoteModalWindow.ClearNoteText();
             nativeLangInputField.ClearText();
             learningLangInputField.ClearText();
             currentFlashcardNote = string.Empty;

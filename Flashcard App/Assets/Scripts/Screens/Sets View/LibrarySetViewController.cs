@@ -22,9 +22,10 @@ public class LibrarySetViewController : LibraryViewController
         Set setPressed = SetsDataHolder.Instance.FindSetByID(setIDPressed);
         SetIDCurrentlyShowing = setIDPressed;
 
-        //Display data in set.
+        //Display data in set (subsets/flashcards).
         DestroyItemsInScrollView();
         SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing).ForEach(set => SpawnSetDisplayInScrollView(set));
+        FlashcardDataHolder.Instance.FindFlashcardsBySetID(SetIDCurrentlyShowing).ForEach(flashcard => SpawnFlashcardDisplayInScrollView(flashcard));
 
         txtTopBarHeader.text = $"../{SetsDataHolder.Instance.FindSetByID(SetIDCurrentlyShowing).Name}";
     }
@@ -42,11 +43,6 @@ public class LibrarySetViewController : LibraryViewController
         //SpawnSetDisplayPrefabsForProfile(newProfile);
     }
 
-    private void SpawnSubsetsOfParentSet()
-    {
-        SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing);
-    }
-
     public override void OnEnable()
     {
         Set.SetCreatedEvent += OnNewSetCreated;
@@ -56,6 +52,8 @@ public class LibrarySetViewController : LibraryViewController
         //Destroy all sets for now.
         DestroyItemsInScrollView();
         SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing).ForEach(set => SpawnSetDisplayInScrollView(set));
+        FlashcardDataHolder.Instance.FindFlashcardsBySetID(SetIDCurrentlyShowing).ForEach(flashcard => SpawnFlashcardDisplayInScrollView(flashcard));
+
 
         txtTopBarHeader.text = $"../{SetsDataHolder.Instance.FindSetByID(SetIDCurrentlyShowing).Name}";
     }

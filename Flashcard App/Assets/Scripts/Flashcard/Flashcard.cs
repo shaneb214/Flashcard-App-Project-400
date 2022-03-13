@@ -19,7 +19,7 @@ public class Flashcard
     [SerializeField] private string learningSide;
     public string LearningSide { get => learningSide; set => learningSide = value; }
 
-    private string notes;
+    [SerializeField] private string notes;
     public string Notes { get => notes; set => notes = value; }
 
     private Color colour;
@@ -28,7 +28,7 @@ public class Flashcard
     private AudioClip audioRecording;
     public AudioClip AudioRecording { get => audioRecording; set => audioRecording = value; }
 
-    private string setID;
+    [SerializeField] private string setID;
     public string SetID { get => setID; set => setID = value; }
 
     //Tags? 

@@ -1365,6 +1365,10 @@ PrefabInstance:
       value: 0.2901961
       objectReference: {fileID: 0}
     - target: {fileID: 4977801421457160139, guid: a59f3d1b9932c9c4eb7bf12ee3f98f1d, type: 3}
+      propertyPath: m_text
+      value: New Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977801421457160139, guid: a59f3d1b9932c9c4eb7bf12ee3f98f1d, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}

@@ -38,7 +38,6 @@ public class BtnTranslate : MonoBehaviour
             {
                 foreach (var result in results)
                 {
-                    print(result.translated.Length);
                     if(!string.IsNullOrWhiteSpace(result.translated) && !string.IsNullOrEmpty(result.translated))
                         translation += result.translated;
                 }

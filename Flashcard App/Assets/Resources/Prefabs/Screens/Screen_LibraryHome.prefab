@@ -318,6 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollViewContentTransform: {fileID: 4018413940420648817}
   setDisplayPrefab: {fileID: 3078004888994112390, guid: 8f8f0d07efc9e4949bc52135d618bcbe, type: 3}
+  flashcardDisplayPrefab: {fileID: 0}
   txtNoSetsWarning: {fileID: 1664835236747473772}
   setsViewScreen: {fileID: 11400000, guid: a96b9be72ea064741923d161fd4cfb90, type: 2}
 --- !u!1 &3586303976822487547
@@ -797,6 +798,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3586303976822487546}
     m_Modifications:
+    - target: {fileID: 2005062069, guid: 2e2417210e4d16c4e9ca6a2922ed4c5d, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2861567666866909480, guid: 2e2417210e4d16c4e9ca6a2922ed4c5d, type: 3}
       propertyPath: m_Name
       value: Bottom Button Holder
@@ -895,11 +900,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3279797158930823899, guid: 2e2417210e4d16c4e9ca6a2922ed4c5d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -100.5
+      value: 150.8
       objectReference: {fileID: 0}
     - target: {fileID: 3279797158930823899, guid: 2e2417210e4d16c4e9ca6a2922ed4c5d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 19.9
+      value: 17.4
       objectReference: {fileID: 0}
     - target: {fileID: 3279797158930823901, guid: 2e2417210e4d16c4e9ca6a2922ed4c5d, type: 3}
       propertyPath: m_Type

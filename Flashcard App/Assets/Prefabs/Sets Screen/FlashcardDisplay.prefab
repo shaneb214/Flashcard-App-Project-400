@@ -606,6 +606,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae92b023bdf3bbf45952aeacabe1a650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  txtNative: {fileID: 8011185790052452372}
+  txtLearning: {fileID: 8011185789812303391}
+  imgCardTagColour: {fileID: 8011185789440393673}
 --- !u!1 &8011185789812303389
 GameObject:
   m_ObjectHideFlags: 0
