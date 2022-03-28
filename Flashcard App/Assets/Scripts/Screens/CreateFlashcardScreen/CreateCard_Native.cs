@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class CreateCard_Native : CreateCard
 {
-    private string profileIDToRepresent;
-
     private void Start()
     {
-        //LanguageProfile currentProfile = LanguageProfileController.Instance.userCurrentLanguageProfile;
-        //UpdateDisplayBasedOnCurrentProfile(currentProfile);
+        UpdateDisplayBasedOnCurrentProfile(LanguageProfileController.Instance.currentLanguageProfile);
     }
 
     private void UpdateDisplayBasedOnCurrentProfile(LanguageProfile currentProfile)
@@ -31,10 +28,9 @@ public class CreateCard_Native : CreateCard
     {
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnNewProfileSelected;
 
-        LanguageProfile currentProfile = LanguageProfileController.Instance.currentLanguageProfile;
-        if (profileIDToRepresent != currentProfile.ID)
-            UpdateDisplayBasedOnCurrentProfile(currentProfile);
-
+        //LanguageProfile currentProfile = LanguageProfileController.Instance.currentLanguageProfile;
+        //if (profileIDToRepresent != currentProfile.ID)
+            //UpdateDisplayBasedOnCurrentProfile(currentProfile);
     }
 
     private void OnDisable() => LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnNewProfileSelected;

@@ -8,6 +8,7 @@ public class SetsDataHolder : MonoBehaviour
 
     [Header("All sets")]
     [SerializeField] private List<Set> SetList;
+    public bool UserHasSetsCreated { get { return SetList.Count > 0; } }
 
     [Header("Storing JSON Location - Unity Editor & PC")]
     [SerializeField] private string setsListJSONPathPC;

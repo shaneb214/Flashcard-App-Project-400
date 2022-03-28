@@ -7,6 +7,7 @@ using UnityEngine;
 public class LanguageProfile 
 {
     public static event Action<LanguageProfile> LanguageProfileCreatedEvent;
+    public static event Action<string> DefaultSetIDUpdated;
 
     public string ID;
 
@@ -16,7 +17,20 @@ public class LanguageProfile
     public bool IsCurrentProfile;
 
     public string userID;
-    public string defaultSetID;
+    [SerializeField] private string defaultSetID;
+    public string DefaultSetID 
+    {
+        get => defaultSetID;
+        set 
+        {
+            //New set ID? Update.
+            if(defaultSetID != value)
+            {
+                defaultSetID = value;
+                DefaultSetIDUpdated?.Invoke(defaultSetID);
+            }
+        }  
+    }
 
     public LanguageProfile(Language nativeLanguage,Language learningLanguage, bool IsCurrentProfile)
     {

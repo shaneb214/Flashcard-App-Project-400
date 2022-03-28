@@ -19,9 +19,10 @@ public class BtnCreateFlashcard : MonoBehaviour
     [SerializeField] private CustomInputField nativeLangInputField;
     [SerializeField] private CustomInputField learningLangInputField;
     [SerializeField] private ModalWindow_CreateFlashcardNote createNoteModalWindow;
+    [SerializeField] private CustomNotification notificationObject;
     private string currentFlashcardNote;
 
-    private bool CanCreateFlashcard
+    private bool InputFieldsContainText
     { 
         get 
         {
@@ -46,19 +47,26 @@ public class BtnCreateFlashcard : MonoBehaviour
 
     private void OnButtonClick()
     {
-        if(CanCreateFlashcard)
+        if(!InputFieldsContainText)
+            return;
+        if(!LanguageProfileController.Instance.UserHasDefaultSetSelected())
         {
+            //Display notification saying no set has been selected yet.
+            //notificationObject.OpenNotification();
+            return;
+        }
+
+
             //Create.
             Flashcard newFlashcard = new Flashcard
                 (nativeLangInputField.inputField.text, 
                 learningLangInputField.inputField.text,
                 currentFlashcardNote, 
-                LanguageProfileController.Instance.currentLanguageProfile.defaultSetID);
+                LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID);
 
             //Reset Input Fields.
             nativeLangInputField.ClearText();
             learningLangInputField.ClearText();
             currentFlashcardNote = string.Empty;
-        }
     }
 }

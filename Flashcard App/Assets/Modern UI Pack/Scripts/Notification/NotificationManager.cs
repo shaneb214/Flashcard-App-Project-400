@@ -25,7 +25,7 @@ namespace Michsky.UI.ModernUIPack
         public float timer = 3f;
         public bool useCustomContent = false;
         public bool useStacking = false;
-        [HideInInspector] public bool isOn;
+        [HideInInspector] public bool isOn = false;
         public StartBehaviour startBehaviour = StartBehaviour.Disable;
         public CloseBehaviour closeBehaviour = CloseBehaviour.Disable;
 
