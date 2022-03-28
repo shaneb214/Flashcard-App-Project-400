@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class ModalWindow_SelectDefaultSet : CustomModalWindow
 {
+    int defaultSetIndex;
+
     [Header("Components")]
     [SerializeField] private Transform scrollViewContentTransform;
     [SerializeField] private ScrollRect scrollRect;
@@ -25,10 +27,21 @@ public class ModalWindow_SelectDefaultSet : CustomModalWindow
 
     public override void Start() => base.Start();
 
-    private void SpawnSetDisplay(Set setToRepresent)
+    private void SpawnSetDisplay(Set setToRepresent,int index)
     {
         SetDisplayDefaultSelection spawnedSetDisplay = Instantiate(setDisplayPrefab, scrollViewContentTransform);
-        spawnedSetDisplay.UpdateDisplay(setToRepresent.ID, setToRepresent.Name);
+        spawnedSetDisplay.UpdateDisplay(setToRepresent.ID, setToRepresent.Name,index);
+    }
+
+    private void OnSetDisplaySelected(int indexOfSelection)
+    {
+        if(indexOfSelection != defaultSetIndex)
+        {
+            scrollViewContentTransform.GetChild(defaultSetIndex).GetComponent<SetDisplayDefaultSelection>().SetDefaultIconImage(enabled: false);
+
+            defaultSetIndex = indexOfSelection;
+            scrollViewContentTransform.GetChild(indexOfSelection).GetComponent<SetDisplayDefaultSelection>().SetDefaultIconImage(enabled: true);
+        }
     }
 
     private void DestroySetDisplaysInScrollView()
@@ -40,21 +53,28 @@ public class ModalWindow_SelectDefaultSet : CustomModalWindow
         }
     }
 
-
     private void OnEnable()
     {
+        SetDisplayDefaultSelection.SelectedEvent += OnSetDisplaySelected;
+
         List<Set> setsToDisplay = SetsDataHolder.Instance.FindSetsByLangProfileID(LanguageProfileController.Instance.currentLanguageProfile.ID);
         int defaultSetIndex = setsToDisplay.FindIndex(set => set.ID == LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID);
         Set defaultSet = setsToDisplay[defaultSetIndex];
         setsToDisplay.RemoveAt(defaultSetIndex);
         setsToDisplay.Insert(0, defaultSet);
 
-        setsToDisplay.ForEach(set => SpawnSetDisplay(set));
+        for (int i = 0; i < setsToDisplay.Count; i++)
+        {
+            SpawnSetDisplay(setsToDisplay[i], i);
+        }
+        //setsToDisplay.ForEach(set => SpawnSetDisplay(set));
 
+        defaultSetIndex = 0;
         scrollRect.verticalNormalizedPosition = 1f;
     }
     private void OnDisable() 
     {
         DestroySetDisplaysInScrollView();
+        SetDisplayDefaultSelection.SelectedEvent -= OnSetDisplaySelected;
     }
 }
