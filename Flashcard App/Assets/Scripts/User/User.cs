@@ -10,11 +10,13 @@ public class User
 
     public string ID;
     public string Name;
+    public string Email;
 
-    public User(string Name)
+    public User(string Name,string Email)
     {
         ID = Guid.NewGuid().ToString();
         this.Name = Name;
+        this.Email = Email;
 
         UserCreatedEvent?.Invoke(this);
     }

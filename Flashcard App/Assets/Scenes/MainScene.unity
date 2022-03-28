@@ -186,6 +186,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1566567979}
     m_Modifications:
+    - target: {fileID: 5741173251190294724, guid: 2847aa676b92e334ea8340c6dfc1616d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741173251190294724, guid: 2847aa676b92e334ea8340c6dfc1616d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741173251190294724, guid: 2847aa676b92e334ea8340c6dfc1616d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741173251190294724, guid: 2847aa676b92e334ea8340c6dfc1616d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7742874550472872054, guid: 2847aa676b92e334ea8340c6dfc1616d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -273,6 +289,22 @@ PrefabInstance:
     - target: {fileID: 7742874550472872055, guid: 2847aa676b92e334ea8340c6dfc1616d, type: 3}
       propertyPath: m_Name
       value: Screen_CreateFlashcard
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492163760695935220, guid: 2847aa676b92e334ea8340c6dfc1616d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492163760695935220, guid: 2847aa676b92e334ea8340c6dfc1616d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492163760695935220, guid: 2847aa676b92e334ea8340c6dfc1616d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492163760695935220, guid: 2847aa676b92e334ea8340c6dfc1616d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2847aa676b92e334ea8340c6dfc1616d, type: 3}

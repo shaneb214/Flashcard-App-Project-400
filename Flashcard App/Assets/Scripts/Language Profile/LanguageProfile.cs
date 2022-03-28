@@ -34,7 +34,7 @@ public class LanguageProfile
 
     public LanguageProfile(Language nativeLanguage,Language learningLanguage, bool IsCurrentProfile)
     {
-        ID = Guid.NewGuid().ToString(); //So it saves to json.
+        ID = Guid.NewGuid().ToString();
         userID = UserDataHolder.Instance.CurrentUser.ID;
 
         this.nativeLanguage = nativeLanguage;

@@ -30,8 +30,6 @@ public class BtnViewPreviousSet : MonoBehaviour
 
         SetHistoryLinkedList.AddLast(parentSetID);
         SetHistoryLinkedListNode = SetHistoryLinkedList.Last;
-
-        print($"node value = {SetsDataHolder.Instance.FindSetByID(SetHistoryLinkedListNode.Value)}");
     }
 
     private void OnViewPreviousSetButtonPress()

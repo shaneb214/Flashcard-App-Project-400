@@ -38,7 +38,7 @@ public class UserDataHolder : MonoBehaviour
 
     private User CreateDefaultUser()
     {
-        User defaultUser = new User("Shane");
+        User defaultUser = new User("Shane","shaneb214@gmail.com");
         currentUser = defaultUser;
         return defaultUser;
     }

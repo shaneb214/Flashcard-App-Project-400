@@ -79,7 +79,7 @@ public class CustomModalWindow : MonoBehaviour
 
     IEnumerator DisableObject()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.3f);
 
         if (closeBehaviour == CloseBehaviour.Disable) { gameObject.SetActive(false); }
         else if (closeBehaviour == CloseBehaviour.Destroy) { Destroy(gameObject); }

@@ -18,6 +18,7 @@ public class SetDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtSetName;
     [SerializeField] private TextMeshProUGUI txtCardCount;
     [SerializeField] private TextMeshProUGUI txtSubsetCount;
+    [SerializeField] private Image imgDefaultSetIcon;
 
     //Start.
     private void Awake() { }
@@ -33,5 +34,7 @@ public class SetDisplay : MonoBehaviour
     {
         setIDToRepresent = setID;
         txtSetName.text = setName;
+
+        imgDefaultSetIcon.enabled = LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID == setIDToRepresent ? true : false;
     }
 }

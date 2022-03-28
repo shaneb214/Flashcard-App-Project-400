@@ -10,6 +10,7 @@ public class ModalWindow_SelectDefaultSet : CustomModalWindow
 {
     [Header("Components")]
     [SerializeField] private Transform scrollViewContentTransform;
+    [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private Button btnOk;
 
     [Header("Prefabs to Spawn")]
@@ -40,13 +41,20 @@ public class ModalWindow_SelectDefaultSet : CustomModalWindow
     }
 
 
-    private void OnEnable() 
+    private void OnEnable()
     {
-        SetsDataHolder.Instance.FindSetsByLangProfileID(LanguageProfileController.Instance.currentLanguageProfile.ID).ForEach(set => SpawnSetDisplay(set));
+        List<Set> setsToDisplay = SetsDataHolder.Instance.FindSetsByLangProfileID(LanguageProfileController.Instance.currentLanguageProfile.ID);
+        int defaultSetIndex = setsToDisplay.FindIndex(set => set.ID == LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID);
+        Set defaultSet = setsToDisplay[defaultSetIndex];
+        setsToDisplay.RemoveAt(defaultSetIndex);
+        setsToDisplay.Insert(0, defaultSet);
+
+        setsToDisplay.ForEach(set => SpawnSetDisplay(set));
+
+        scrollRect.verticalNormalizedPosition = 1f;
     }
     private void OnDisable() 
-    { 
-
-    
+    {
+        DestroySetDisplaysInScrollView();
     }
 }
