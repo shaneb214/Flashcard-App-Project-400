@@ -15,6 +15,7 @@ public class BtnSelectSetForFlashcardCreation : MonoBehaviour
 
     [Header("Modal Window Objects To Activate")]
     [SerializeField] private ModalWindow_SelectDefaultSet modalWindow_SelectDefaultSet;
+    [SerializeField] private ModalWindow_CreateDefaultSet modalWindow_CreateDefaultSet;
 
     private void Awake()
     {
@@ -35,14 +36,9 @@ public class BtnSelectSetForFlashcardCreation : MonoBehaviour
     {
         if (SetsDataHolder.Instance.UserHasSetsCreated)
             modalWindow_SelectDefaultSet.AnimateWindow();
-
-
-        //Does user have any sets created? 
-        //Open select default set modal window.
-
-        //Otherwise open create default set window.  
+        else
+            modalWindow_CreateDefaultSet.AnimateWindow(); 
     }
-
 
     private void OnEnable()
     {
