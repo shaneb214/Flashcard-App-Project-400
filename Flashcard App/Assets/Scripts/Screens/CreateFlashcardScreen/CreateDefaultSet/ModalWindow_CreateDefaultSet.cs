@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//To do: create base class for a modal window where you create a set.
+
 public class ModalWindow_CreateDefaultSet : CustomModalWindow
 {
     [Header("Components")]

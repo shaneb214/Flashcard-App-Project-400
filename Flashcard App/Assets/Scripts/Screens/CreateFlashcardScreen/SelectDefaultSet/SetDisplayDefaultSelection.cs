@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class SetDisplayDefaultSelection : MonoBehaviour
 {
-    //public static Action<string> SetDisplayPressed;
     private string setIDToRepresent;
 
     [Header("Components")]
@@ -15,7 +14,6 @@ public class SetDisplayDefaultSelection : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtSetName;
     [SerializeField] private TextMeshProUGUI txtCardCount;
     [SerializeField] private TextMeshProUGUI txtSubsetCount;
-
 
     private void Awake() { }
     private void Start() => btnSelectSet.onClick.AddListener(OnSelectSetButtonPressed);

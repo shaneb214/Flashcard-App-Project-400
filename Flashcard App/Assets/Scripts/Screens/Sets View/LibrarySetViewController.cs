@@ -17,17 +17,17 @@ public class LibrarySetViewController : LibraryViewController
     {
         SpawnSetDisplayInScrollView(newSet);
     }
-    private void OnSetDisplayPressed(string setIDPressed)
+    public void DisplaySetContents(string setIDToShowContentsOf)
     {
-        Set setPressed = SetsDataHolder.Instance.FindSetByID(setIDPressed);
-        SetIDCurrentlyShowing = setIDPressed;
+        Set setPressed = SetsDataHolder.Instance.FindSetByID(setIDToShowContentsOf);
+        SetIDCurrentlyShowing = setIDToShowContentsOf;
 
         //Display data in set (subsets/flashcards).
         DestroyItemsInScrollView();
         SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing).ForEach(set => SpawnSetDisplayInScrollView(set));
         FlashcardDataHolder.Instance.FindFlashcardsBySetID(SetIDCurrentlyShowing).ForEach(flashcard => SpawnFlashcardDisplayInScrollView(flashcard));
 
-        txtTopBarHeader.text = $"../{SetsDataHolder.Instance.FindSetByID(SetIDCurrentlyShowing).Name}";
+        txtTopBarHeader.text = $"../{setPressed.Name}";
     }
 
     //Reacting to new profile being selected.
@@ -46,7 +46,7 @@ public class LibrarySetViewController : LibraryViewController
     public override void OnEnable()
     {
         Set.SetCreatedEvent += OnNewSetCreated;
-        SetDisplay.SetDisplayPressed += OnSetDisplayPressed;
+        SetDisplay.SetDisplayPressed += DisplaySetContents;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewProfile;
 
         //Destroy all sets for now.
@@ -60,7 +60,7 @@ public class LibrarySetViewController : LibraryViewController
     public override void OnDisable()
     {
         Set.SetCreatedEvent -= OnNewSetCreated;
-        SetDisplay.SetDisplayPressed -= OnSetDisplayPressed;
+        SetDisplay.SetDisplayPressed -= DisplaySetContents;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnUserSelectedNewProfile;
     }
 }

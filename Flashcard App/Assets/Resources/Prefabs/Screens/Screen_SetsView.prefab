@@ -731,6 +731,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2801153912947534976}
     m_Modifications:
+    - target: {fileID: 5531899997689607518, guid: 270e92da28da76b4286a200ac6f3c8ca, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 44.80005
+      objectReference: {fileID: 0}
     - target: {fileID: 6342315020552377265, guid: 270e92da28da76b4286a200ac6f3c8ca, type: 3}
       propertyPath: m_Name
       value: Top Bar (Sets View)
@@ -819,6 +823,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9105082260715115040, guid: 270e92da28da76b4286a200ac6f3c8ca, type: 3}
+      propertyPath: librarySetViewController
+      value: 
+      objectReference: {fileID: 3545521071436764867}
+    - target: {fileID: 9105082260715115040, guid: 270e92da28da76b4286a200ac6f3c8ca, type: 3}
+      propertyPath: libraryHomeScreenPushData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d389027349fd3d47b7bc660d274da2c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 270e92da28da76b4286a200ac6f3c8ca, type: 3}
 --- !u!224 &7190848515403066502 stripped

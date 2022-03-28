@@ -12,7 +12,6 @@ public class LibraryHomeViewController : LibraryViewController
 {
     [SerializeField] private ScreenPushData setsViewScreen;
 
-
     private void SpawnSetDisplayPrefabsForProfile(LanguageProfile profile)
     {
         //List<Set> setList = profile.setList;
@@ -70,7 +69,6 @@ public class LibraryHomeViewController : LibraryViewController
 
         //Spawn sets with no parents.
         SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing).ForEach(set => SpawnSetDisplayInScrollView(set));
-
 
         UpdateNoSetsWarning();
     }
