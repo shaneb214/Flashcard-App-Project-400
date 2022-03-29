@@ -7,10 +7,8 @@ using UnityEngine.UI;
 
 public class SetDisplayDefaultSelection : MonoBehaviour
 {
-    int indexInScrollView;
-    public static Action<int> SelectedEvent;
-
-    private string setIDToRepresent;
+    public Action<SetDisplayDefaultSelection> SetDisplaySelected;
+    public string setIDToRepresent;
 
     [Header("Components")]
     [SerializeField] private Button btnSelectSet;
@@ -26,16 +24,15 @@ public class SetDisplayDefaultSelection : MonoBehaviour
     {
         //Set default set as one just pressed.
         LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID = setIDToRepresent;
-        imgDefaultSetIcon.enabled = true;
+        SetDefaultIconImage(enabled: true);
 
-        SelectedEvent?.Invoke(indexInScrollView);
+        SetDisplaySelected?.Invoke(this);
     }
 
-    public void UpdateDisplay(string setID, string setName,int index)
+    public void UpdateDisplay(string setID, string setName)
     {
         setIDToRepresent = setID;
         txtSetName.text = setName;
-        indexInScrollView = index;
 
         imgDefaultSetIcon.enabled = LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID == setIDToRepresent ? true : false;
     }

@@ -676,6 +676,23 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &465789040944948570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4832494928132561584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b577dd03771fe4499618a2a468d191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollViewContentTransform: {fileID: 4832494928857897381}
+  scrollRect: {fileID: 4832494929672735526}
+  setDisplayPrefab: {fileID: 7821138310698583021, guid: 9eb76921bf1a6344aa50d236df1da58d, type: 3}
+  spawnedSetDisplayList: []
+  currentDefaultSetSpawnedDisplay: {fileID: 0}
 --- !u!1 &4960308025290236428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,6 +1721,8 @@ MonoBehaviour:
   scrollRect: {fileID: 4832494929672735526}
   btnOk: {fileID: 1523350069362005212}
   setDisplayPrefab: {fileID: 7821138310698583021, guid: 9eb76921bf1a6344aa50d236df1da58d, type: 3}
+  spawnedSetDisplayList: []
+  currentDefaultSetSpawnedDisplay: {fileID: 0}
 --- !u!1 &8601439631246699885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,6 +2003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b81715e0adb25e4a918e7a9481eff39, type: 3}
+--- !u!1 &4832494928132561584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1197231655840435943, guid: 1b81715e0adb25e4a918e7a9481eff39, type: 3}
+  m_PrefabInstance: {fileID: 6020489518062179415}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4832494928132561591 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1197231655840435936, guid: 1b81715e0adb25e4a918e7a9481eff39, type: 3}

@@ -13,6 +13,8 @@ public class LibraryViewController : MonoBehaviour
     [SerializeField] protected FlashcardDisplay flashcardDisplayPrefab;
     [SerializeField] protected TextMeshProUGUI txtNoSetsWarning;
 
+    [SerializeField] private List<SetDisplay> spawnedSetDisplayList = new List<SetDisplay>();
+
     public enum DisplayScreen { None, Home, SetView }
     public static DisplayScreen CurrentDisplayScreen;
 
@@ -32,7 +34,10 @@ public class LibraryViewController : MonoBehaviour
         //Spawn prefab + pass in info so it can update its components.
         SetDisplay spawnedSetDisplay = Instantiate(setDisplayPrefab, scrollViewContentTransform);
         spawnedSetDisplay.UpdateDisplay(setToSpawn.ID, setToSpawn.Name);
+        spawnedSetDisplayList.Add(spawnedSetDisplay);
     }
+
+    protected void ClearSpawnedSetDisplayList() => spawnedSetDisplayList.Clear();
 
     protected void SpawnFlashcardDisplayInScrollView(Flashcard flashcardToSpawn)
     {

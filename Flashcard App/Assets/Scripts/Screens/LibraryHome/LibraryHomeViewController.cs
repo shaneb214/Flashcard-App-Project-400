@@ -60,7 +60,6 @@ public class LibraryHomeViewController : LibraryViewController
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewProfile;
 
         SetIDCurrentlyShowing = string.Empty;
-        DestroyItemsInScrollView();
 
         //Check if new user was selected while I was disabled.
         //LanguageProfile currentProfile = LanguageProfileController.Instance.currentLanguageProfile;
@@ -75,6 +74,9 @@ public class LibraryHomeViewController : LibraryViewController
 
     public override void OnDisable()
     {
+        ClearSpawnedSetDisplayList();
+        DestroyItemsInScrollView();
+
         Set.SetCreatedEvent -= OnNewSetCreated;
         SetDisplay.SetDisplayPressed -= OnSetDisplayPressed;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnUserSelectedNewProfile;

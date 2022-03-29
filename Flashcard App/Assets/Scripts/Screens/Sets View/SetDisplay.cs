@@ -37,4 +37,6 @@ public class SetDisplay : MonoBehaviour
 
         imgDefaultSetIcon.enabled = LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID == setIDToRepresent ? true : false;
     }
+
+    public void SetDefaultIconImage(bool enabled) => imgDefaultSetIcon.enabled = enabled;
 }

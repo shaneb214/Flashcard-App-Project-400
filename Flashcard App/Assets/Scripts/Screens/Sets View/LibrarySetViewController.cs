@@ -49,16 +49,17 @@ public class LibrarySetViewController : LibraryViewController
         SetDisplay.SetDisplayPressed += DisplaySetContents;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewProfile;
 
-        //Destroy all sets for now.
-        DestroyItemsInScrollView();
         SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing).ForEach(set => SpawnSetDisplayInScrollView(set));
         FlashcardDataHolder.Instance.FindFlashcardsBySetID(SetIDCurrentlyShowing).ForEach(flashcard => SpawnFlashcardDisplayInScrollView(flashcard));
-
 
         txtTopBarHeader.text = $"../{SetsDataHolder.Instance.FindSetByID(SetIDCurrentlyShowing).Name}";
     }
     public override void OnDisable()
     {
+        //Destroy all sets/flashcards for now.
+        ClearSpawnedSetDisplayList();
+        DestroyItemsInScrollView();
+
         Set.SetCreatedEvent -= OnNewSetCreated;
         SetDisplay.SetDisplayPressed -= DisplaySetContents;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnUserSelectedNewProfile;
