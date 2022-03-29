@@ -34,7 +34,7 @@ public class LibrarySetViewController : LibraryViewController
 
         //Display data in set (subsets/flashcards).
         ClearScrollViewItems();
-        SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing, LanguageProfileController.Instance.currentLanguageProfile.ID).ForEach(set => SpawnSetDisplayInScrollView(set));
+        SetsDataHolder.Instance.FindSetsOfCurrentLanguageProfileByParentID(SetIDCurrentlyShowing);
         FlashcardDataHolder.Instance.FindFlashcardsBySetID(SetIDCurrentlyShowing).ForEach(flashcard => SpawnFlashcardDisplayInScrollView(flashcard));
 
         txtTopBarHeader.text = $"../{setPressed.Name}";
@@ -70,7 +70,7 @@ public class LibrarySetViewController : LibraryViewController
         SetDisplayLibrary.SetDisplaySelectedEvent += DisplaySetContents;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewProfile;
 
-        SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing,LanguageProfileController.Instance.currentLanguageProfile.ID).ForEach(set => SpawnSetDisplayInScrollView(set));
+        SetsDataHolder.Instance.FindSetsOfCurrentLanguageProfileByParentID(SetIDCurrentlyShowing);
         FlashcardDataHolder.Instance.FindFlashcardsBySetID(SetIDCurrentlyShowing).ForEach(flashcard => SpawnFlashcardDisplayInScrollView(flashcard));
 
         txtTopBarHeader.text = $"../{SetsDataHolder.Instance.FindSetByID(SetIDCurrentlyShowing).Name}";

@@ -73,7 +73,7 @@ public class LibraryHomeViewController : LibraryViewController
         //OnUserSelectedNewProfile(currentProfile);
 
         //Spawn sets with no parents.
-        List<Set> setsToSpawnList = SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing,LanguageProfileController.Instance.currentLanguageProfile.ID);
+        List<Set> setsToSpawnList = SetsDataHolder.Instance.FindSetsOfCurrentLanguageProfileByParentID(SetIDCurrentlyShowing);
         for (int i = 0; i < setsToSpawnList.Count; i++)
         {
             SpawnSetDisplayInScrollView(setsToSpawnList[i]);
