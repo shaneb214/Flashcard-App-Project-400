@@ -115,7 +115,7 @@ namespace Michsky.UI.ModernUIPack
 
         IEnumerator DisableAnimator()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1.2f);
             inputFieldAnimator.enabled = false;
         }
 
