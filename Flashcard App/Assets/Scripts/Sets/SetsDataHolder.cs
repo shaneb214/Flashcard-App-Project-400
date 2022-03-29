@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SetsDataHolder : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class SetsDataHolder : MonoBehaviour
     public List<Set> FindSetsByParentID(string setParentID) => SetList.FindAll(s => s.ParentSetID == setParentID);
     public List<Set> FindSetsByParentID(string setParentID, string langProfileID) => SetList.FindAll(set => set.LanguageProfileID == langProfileID).FindAll(set => set.ParentSetID == setParentID);
     public List<Set> FindSetsOfCurrentLanguageProfileByParentID(string setParentID) => SetList.FindAll(set => set.LanguageProfileID == LanguageProfileController.Instance.currentLanguageProfile.ID).FindAll(set => set.ParentSetID == setParentID);
+    public int GetSubsetCountOfSet(string setID) => SetList.Count(set => set.ParentSetID == setID);
     public Set FindSetByID(string ID) => SetList.Find(s => s.ID == ID);
 
     //Object end.

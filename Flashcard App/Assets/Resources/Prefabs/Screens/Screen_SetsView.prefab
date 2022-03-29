@@ -242,10 +242,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollViewContentTransform: {fileID: 2368586519762815499}
+  scrollRect: {fileID: 2368586518404749448}
   setDisplayPrefab: {fileID: 3078004888994112390, guid: 8f8f0d07efc9e4949bc52135d618bcbe, type: 3}
-  flashcardDisplayPrefab: {fileID: 7059328814661263645, guid: af65d102e8c534040924826decd4cb3c, type: 3}
   txtNoSetsWarning: {fileID: 2057250326}
   txtTopBarHeader: {fileID: 7190848515131316867}
+  flashcardDisplayPrefab: {fileID: 7059328814661263645, guid: af65d102e8c534040924826decd4cb3c, type: 3}
+  spawnedSetDisplayList: []
 --- !u!1 &2801153912947534977
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +721,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1197231655840435936, guid: 1b81715e0adb25e4a918e7a9481eff39, type: 3}
   m_PrefabInstance: {fileID: 3477767625969321977}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2368586518404749448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1197231657649315697, guid: 1b81715e0adb25e4a918e7a9481eff39, type: 3}
+  m_PrefabInstance: {fileID: 3477767625969321977}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2368586519762815499 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1197231656364969458, guid: 1b81715e0adb25e4a918e7a9481eff39, type: 3}

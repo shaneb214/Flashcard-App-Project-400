@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 //To do - 
 //Read from json to get flashcards already created.
@@ -40,6 +41,7 @@ public class FlashcardDataHolder : MonoBehaviour
     }
 
     public List<Flashcard> FindFlashcardsBySetID(string setID) => FlashcardList.FindAll(flashcard => flashcard.SetID == setID);
+    public int FlashcardCountOfSet(string setID) => FlashcardList.Count(flashcard => flashcard.SetID == setID);
 
     private void OnFlashcardCreated(Flashcard flashcardCreated) => FlashcardList.Add(flashcardCreated);
 

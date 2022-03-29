@@ -955,6 +955,7 @@ MonoBehaviour:
   currentUser:
     ID: 
     Name: 
+    Email: 
   userList: []
   userListJSONPathPC: /JSON Data/Users/UserList.json
   currentUserJSONPathPC: /JSON Data/Users/CurrentUser.json

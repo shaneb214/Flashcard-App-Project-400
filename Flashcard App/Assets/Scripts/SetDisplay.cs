@@ -35,6 +35,9 @@ public class SetDisplay : MonoBehaviour
         txtSetName.text = setName;
 
         imgDefaultSetIcon.enabled = LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID == setIDToRepresent ? true : false;
+
+        txtCardCount.text = $"{FlashcardDataHolder.Instance.FlashcardCountOfSet(setID)} Cards";
+        txtSubsetCount.text = $"{SetsDataHolder.Instance.GetSubsetCountOfSet(setID)} Sets";
     }
 
     public void SetDefaultIconImage(bool enabled) => imgDefaultSetIcon.enabled = enabled;
