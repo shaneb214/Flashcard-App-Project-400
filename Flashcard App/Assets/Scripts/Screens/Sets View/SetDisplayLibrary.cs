@@ -5,18 +5,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SetDisplayDefaultSelection : SetDisplay
+//Attached to prefab to represent a set.
+//Shows set name, clicking on this will open the set and user can see the flashcards within.
+
+public class SetDisplayLibrary : SetDisplay
 {
-    public Action<SetDisplayDefaultSelection> SetDisplaySelectedEvent;
+    public static Action<SetDisplayLibrary> SetDisplaySelectedEvent;
 
     public override void Start() => btnSelectSet.onClick.AddListener(OnSelectSetButtonPressed);
 
     private void OnSelectSetButtonPressed()
     {
-        //Set default set as one just pressed.
-        LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID = setIDToRepresent;
-        SetDefaultIconImage(enabled: true);
-
+        //Enter set and display subsets and any flashcards within.
         SetDisplaySelectedEvent?.Invoke(this);
     }
 }

@@ -10,24 +10,39 @@ using UnityEngine.UI;
 
 public class LibrarySetViewController : LibraryViewController
 {
-    [SerializeField] private TextMeshProUGUI txtTopBarHeader; //Make seperate script for this and make it react to event?
+    [SerializeField] private TextMeshProUGUI txtTopBarHeader; 
+    [SerializeField] protected FlashcardDisplay flashcardDisplayPrefab;
+    [SerializeField] private List<SetDisplayLibrary> spawnedSetDisplayList = new List<SetDisplayLibrary>();
 
     //Reacting to new Set being created.
     private void OnNewSetCreated(Set newSet)
     {
         SpawnSetDisplayInScrollView(newSet);
     }
-    public void DisplaySetContents(string setIDToShowContentsOf)
+    private void SpawnSetDisplayInScrollView(Set newSet)
     {
-        Set setPressed = SetsDataHolder.Instance.FindSetByID(setIDToShowContentsOf);
-        SetIDCurrentlyShowing = setIDToShowContentsOf;
+        SetDisplayLibrary spawnedSetDisplay = SpawnItemInScrollView(setDisplayPrefab);
+        spawnedSetDisplayList.Add(spawnedSetDisplay);
+
+        spawnedSetDisplay.UpdateDisplay(newSet.ID, newSet.Name);
+    }
+
+    public void DisplaySetContents(string setID)
+    {
+        Set setPressed = SetsDataHolder.Instance.FindSetByID(setID);
+        SetIDCurrentlyShowing = setID;
 
         //Display data in set (subsets/flashcards).
-        DestroyItemsInScrollView();
-        SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing).ForEach(set => SpawnSetDisplayInScrollView(set));
+        ClearScrollViewItems();
+        SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing, LanguageProfileController.Instance.currentLanguageProfile.ID).ForEach(set => SpawnSetDisplayInScrollView(set));
         FlashcardDataHolder.Instance.FindFlashcardsBySetID(SetIDCurrentlyShowing).ForEach(flashcard => SpawnFlashcardDisplayInScrollView(flashcard));
 
         txtTopBarHeader.text = $"../{setPressed.Name}";
+    }
+
+    public void DisplaySetContents(SetDisplayLibrary setDisplaySelected)
+    {
+        DisplaySetContents(setDisplaySelected.setIDToRepresent);    
     }
 
     //Reacting to new profile being selected.
@@ -43,13 +58,19 @@ public class LibrarySetViewController : LibraryViewController
         //SpawnSetDisplayPrefabsForProfile(newProfile);
     }
 
+    protected void SpawnFlashcardDisplayInScrollView(Flashcard flashcardToSpawn)
+    {
+        FlashcardDisplay spawnedFlashcardDisplay = SpawnItemInScrollView(flashcardDisplayPrefab);
+        spawnedFlashcardDisplay.UpdateDisplay(flashcardToSpawn);
+    }
+
     public override void OnEnable()
     {
         Set.SetCreatedEvent += OnNewSetCreated;
-        SetDisplay.SetDisplayPressed += DisplaySetContents;
+        SetDisplayLibrary.SetDisplaySelectedEvent += DisplaySetContents;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewProfile;
 
-        SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing).ForEach(set => SpawnSetDisplayInScrollView(set));
+        SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing,LanguageProfileController.Instance.currentLanguageProfile.ID).ForEach(set => SpawnSetDisplayInScrollView(set));
         FlashcardDataHolder.Instance.FindFlashcardsBySetID(SetIDCurrentlyShowing).ForEach(flashcard => SpawnFlashcardDisplayInScrollView(flashcard));
 
         txtTopBarHeader.text = $"../{SetsDataHolder.Instance.FindSetByID(SetIDCurrentlyShowing).Name}";
@@ -57,11 +78,11 @@ public class LibrarySetViewController : LibraryViewController
     public override void OnDisable()
     {
         //Destroy all sets/flashcards for now.
-        ClearSpawnedSetDisplayList();
-        DestroyItemsInScrollView();
+        spawnedSetDisplayList.Clear();
+        ClearScrollViewItems();
 
         Set.SetCreatedEvent -= OnNewSetCreated;
-        SetDisplay.SetDisplayPressed -= DisplaySetContents;
+        SetDisplayLibrary.SetDisplaySelectedEvent -= DisplaySetContents;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnUserSelectedNewProfile;
     }
 }

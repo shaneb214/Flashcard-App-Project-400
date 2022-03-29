@@ -9,9 +9,9 @@ public class TopBar_SetsView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI txtTopBarHeading;
 
-    private void OnSetDisplayPressed(string setID)
+    private void OnSetDisplayPressed(SetDisplayLibrary setDisplaySelected)
     {
-        txtTopBarHeading.text = $"../{SetsDataHolder.Instance.FindSetByID(setID).Name}";
+        txtTopBarHeading.text = $"../{SetsDataHolder.Instance.FindSetByID(setDisplaySelected.setIDToRepresent).Name}";
     }
     private void OnSwitchToNonParentedSetsDisplay()
     {
@@ -20,11 +20,11 @@ public class TopBar_SetsView : MonoBehaviour
 
     private void OnEnable()
     {
-        SetDisplay.SetDisplayPressed += OnSetDisplayPressed;
+        SetDisplayLibrary.SetDisplaySelectedEvent += OnSetDisplayPressed;
     }
 
     private void OnDisable()
     {
-        SetDisplay.SetDisplayPressed -= OnSetDisplayPressed;
+        SetDisplayLibrary.SetDisplaySelectedEvent -= OnSetDisplayPressed;
     }
 }

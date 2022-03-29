@@ -3,47 +3,34 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class LibraryViewController : MonoBehaviour
+public class LibraryViewController : ScrollViewItemManager
 {
-    public static string DefaultSet;
     public static string SetIDCurrentlyShowing;
 
-    [SerializeField] protected Transform scrollViewContentTransform;
-    [SerializeField] protected SetDisplay setDisplayPrefab;
-    [SerializeField] protected FlashcardDisplay flashcardDisplayPrefab;
+    [SerializeField] protected SetDisplayLibrary setDisplayPrefab;
     [SerializeField] protected TextMeshProUGUI txtNoSetsWarning;
 
-    [SerializeField] private List<SetDisplay> spawnedSetDisplayList = new List<SetDisplay>();
+    //protected void SpawnSetDisplayInScrollView(Set setToSpawn)
+    //{
+    //    //Spawn prefab + pass in info so it can update its components.
+    //    SetDisplayLibrary spawnedSetDisplay = SpawnItemInScrollView(setDisplayPrefab);
+    //    spawnedSetDisplay.UpdateDisplay(setToSpawn.ID, setToSpawn.Name);
+    //    spawnedSetDisplayList.Add(spawnedSetDisplay);
+    //    spawnedSetDisplay.SetDisplaySelectedEvent += OnSetDisplaySelected;
+    //}
 
-    public enum DisplayScreen { None, Home, SetView }
-    public static DisplayScreen CurrentDisplayScreen;
+    //protected void ClearSpawnedSetDisplayList() => spawnedSetDisplayList.Clear();
 
-    public bool ScrollViewContainsItems { get { return scrollViewContentTransform.childCount > 0; } }
+    //protected void SpawnFlashcardDisplayInScrollView(Flashcard flashcardToSpawn)
+    //{
+    //    FlashcardDisplay spawnedFlashcardDisplay = SpawnItemInScrollView(flashcardDisplayPrefab);
+    //    spawnedFlashcardDisplay.UpdateDisplay(flashcardToSpawn);
+    //}
 
-    protected void DestroyItemsInScrollView()
-    {
-        for (int i = 0; i < scrollViewContentTransform.childCount; i++)
-        {
-            Transform child = scrollViewContentTransform.GetChild(i);
-            Destroy(child.gameObject);
-        }
-    }
+    //private void OnSetDisplaySelected(SetDisplayLibrary setDisplaySelected)
+    //{
 
-    protected void SpawnSetDisplayInScrollView(Set setToSpawn)
-    {
-        //Spawn prefab + pass in info so it can update its components.
-        SetDisplay spawnedSetDisplay = Instantiate(setDisplayPrefab, scrollViewContentTransform);
-        spawnedSetDisplay.UpdateDisplay(setToSpawn.ID, setToSpawn.Name);
-        spawnedSetDisplayList.Add(spawnedSetDisplay);
-    }
-
-    protected void ClearSpawnedSetDisplayList() => spawnedSetDisplayList.Clear();
-
-    protected void SpawnFlashcardDisplayInScrollView(Flashcard flashcardToSpawn)
-    {
-        FlashcardDisplay spawnedFlashcardDisplay = Instantiate(flashcardDisplayPrefab, scrollViewContentTransform);
-        spawnedFlashcardDisplay.UpdateDisplay(flashcardToSpawn);
-    }
+    //}
 
     public virtual void OnEnable() { }
     public virtual void OnDisable() { }

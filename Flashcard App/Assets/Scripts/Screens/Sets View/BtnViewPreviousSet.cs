@@ -24,9 +24,9 @@ public class BtnViewPreviousSet : MonoBehaviour
         btnViewPreviousSet.onClick.AddListener(OnViewPreviousSetButtonPress);
     }
 
-    private void OnSetDisplayPressed(string setIDPressed)
+    private void OnSetDisplaySelected(SetDisplayLibrary setDisplaySelected)
     {
-        string parentSetID = SetsDataHolder.Instance.FindSetByID(setIDPressed).ParentSetID;
+        string parentSetID = SetsDataHolder.Instance.FindSetByID(setDisplaySelected.setIDToRepresent).ParentSetID;
 
         SetHistoryLinkedList.AddLast(parentSetID);
         SetHistoryLinkedListNode = SetHistoryLinkedList.Last;
@@ -49,12 +49,12 @@ public class BtnViewPreviousSet : MonoBehaviour
 
     private void OnEnable()
     {
-        SetDisplay.SetDisplayPressed += OnSetDisplayPressed;
+        SetDisplayLibrary.SetDisplaySelectedEvent += OnSetDisplaySelected;
     }
 
     private void OnDisable()
     {
         SetHistoryLinkedList.Clear();
-        SetDisplay.SetDisplayPressed -= OnSetDisplayPressed;
+        SetDisplayLibrary.SetDisplaySelectedEvent -= OnSetDisplaySelected;
     }
 }

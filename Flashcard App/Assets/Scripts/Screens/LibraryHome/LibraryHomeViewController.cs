@@ -12,11 +12,8 @@ public class LibraryHomeViewController : LibraryViewController
 {
     [SerializeField] private ScreenPushData setsViewScreen;
 
-    private void SpawnSetDisplayPrefabsForProfile(LanguageProfile profile)
-    {
-        //List<Set> setList = profile.setList;
-        //setList.ForEach(set => SpawnSetDisplayInScrollView(set));
-    }
+    [SerializeField] private List<SetDisplayLibrary> spawnedSetDisplayList = new List<SetDisplayLibrary>();
+    [SerializeField] private SetDisplayLibrary spawnedSetDisplayDefault;
 
     //Reacting to new Set being created.
     private void OnNewSetCreated(Set newSet)
@@ -24,10 +21,19 @@ public class LibraryHomeViewController : LibraryViewController
         SpawnSetDisplayInScrollView(newSet);
         UpdateNoSetsWarning();
     }
-    private void OnSetDisplayPressed(string setIDPressed)
+
+    private void SpawnSetDisplayInScrollView(Set newSet)
     {
-        Set setPressed = SetsDataHolder.Instance.FindSetByID(setIDPressed);
-        SetIDCurrentlyShowing = setIDPressed;
+        SetDisplayLibrary spawnedSetDisplay = SpawnItemInScrollView(setDisplayPrefab);
+        spawnedSetDisplayList.Add(spawnedSetDisplay);
+
+        spawnedSetDisplay.UpdateDisplay(newSet.ID, newSet.Name);
+    }
+
+    private void OnSetDisplaySelected(SetDisplayLibrary setDisplaySelected)
+    {
+        Set setPressed = SetsDataHolder.Instance.FindSetByID(setDisplaySelected.setIDToRepresent);
+        SetIDCurrentlyShowing = setDisplaySelected.setIDToRepresent;
 
         //Push screen to show set.
         UIManager.Instance.QueuePop();
@@ -56,7 +62,7 @@ public class LibraryHomeViewController : LibraryViewController
     public override void OnEnable()
     {
         Set.SetCreatedEvent += OnNewSetCreated;
-        SetDisplay.SetDisplayPressed += OnSetDisplayPressed;
+        SetDisplayLibrary.SetDisplaySelectedEvent += OnSetDisplaySelected;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewProfile;
 
         SetIDCurrentlyShowing = string.Empty;
@@ -67,18 +73,22 @@ public class LibraryHomeViewController : LibraryViewController
         //OnUserSelectedNewProfile(currentProfile);
 
         //Spawn sets with no parents.
-        SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing).ForEach(set => SpawnSetDisplayInScrollView(set));
+        List<Set> setsToSpawnList = SetsDataHolder.Instance.FindSetsByParentID(SetIDCurrentlyShowing,LanguageProfileController.Instance.currentLanguageProfile.ID);
+        for (int i = 0; i < setsToSpawnList.Count; i++)
+        {
+            SpawnSetDisplayInScrollView(setsToSpawnList[i]);
+        }
 
         UpdateNoSetsWarning();
     }
 
     public override void OnDisable()
     {
-        ClearSpawnedSetDisplayList();
-        DestroyItemsInScrollView();
+        spawnedSetDisplayList.Clear();
+        ClearScrollViewItems();
 
         Set.SetCreatedEvent -= OnNewSetCreated;
-        SetDisplay.SetDisplayPressed -= OnSetDisplayPressed;
+        SetDisplayLibrary.SetDisplaySelectedEvent -= OnSetDisplaySelected;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnUserSelectedNewProfile;
     }
 }
