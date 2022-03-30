@@ -1831,6 +1831,8 @@ MonoBehaviour:
   wallPos3: {fileID: 7592976665368734355}
   wallPos4: {fileID: 4715921101556297621}
   nextPlatformSpawnPos: {fileID: 6606877160437645650}
+  myTrigger: {fileID: 2669089081895858313}
+  testPrefab: {fileID: 2621063728601529719}
 --- !u!1 &8886304806686707484
 GameObject:
   m_ObjectHideFlags: 0

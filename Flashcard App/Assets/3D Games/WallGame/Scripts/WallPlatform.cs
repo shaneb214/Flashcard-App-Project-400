@@ -11,4 +11,24 @@ public class WallPlatform : MonoBehaviour
     [SerializeField] private Transform wallPos4;
 
     [SerializeField] private Transform nextPlatformSpawnPos;
+
+
+    [SerializeField] private SpawnNextPlatformTrigger myTrigger;
+    [SerializeField] private WallPlatform testPrefab;
+
+
+    private void Start()
+    {
+        myTrigger.PlayerHitTriggerEvent += OnPlayerHitLoadNextPlatformTrigger;
+    }
+
+    private void OnPlayerHitLoadNextPlatformTrigger()
+    {
+        Instantiate(testPrefab.gameObject, nextPlatformSpawnPos);
+    }
+
+    private void OnDestroy()
+    {
+        myTrigger.PlayerHitTriggerEvent -= OnPlayerHitLoadNextPlatformTrigger;
+    }
 }

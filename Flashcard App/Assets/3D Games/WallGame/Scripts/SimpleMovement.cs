@@ -53,7 +53,6 @@ public class SimpleMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //Hit solid wall. Stumble.
-
          if(collision.gameObject.CompareTag("RealWall"))
          {
             currentCharacterState = CharacterState.Fallover;
