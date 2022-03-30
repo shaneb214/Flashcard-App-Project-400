@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class SimpleMovement : MonoBehaviour
 {
-    private CharacterController characterController;
+    //private CharacterController characterController;
+    private Rigidbody rigidbody;
     private Animator animator;
     [SerializeField] private float movementSpeed;
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
+        //characterController = GetComponent<CharacterController>();
+        rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
+        Screen.orientation = ScreenOrientation.Landscape;
     }
 
     private void Update()
@@ -19,7 +23,9 @@ public class SimpleMovement : MonoBehaviour
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 1f);
         //Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 1f);
 
-        characterController.SimpleMove(input * movementSpeed);
+        rigidbody.velocity = input * movementSpeed;
+
+        //characterController.SimpleMove(input * movementSpeed);
     }
 
     private void OnCollisionEnter(Collision collision)
