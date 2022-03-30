@@ -10,8 +10,8 @@ public class SimpleMovement : MonoBehaviour
 
     [SerializeField] private float movementSpeed;
 
-
-    public enum CharacterState { Moving, Fallover}
+    Vector3 movementInput;
+    public enum CharacterState { Running,Rolling, Fallover}
     public CharacterState currentCharacterState;
 
     private void Awake()
@@ -27,30 +27,46 @@ public class SimpleMovement : MonoBehaviour
 
     private void Update()
     {
-        if(currentCharacterState == CharacterState.Moving)
+        switch (currentCharacterState)
         {
-            Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 1f);
-            //Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 1f);
+            case CharacterState.Running:
 
-            rb.velocity = input * movementSpeed;
+                movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 1f);
+                rb.velocity = movementInput * movementSpeed;
+                break;
+
+            case CharacterState.Rolling:
+
+                movementInput = new Vector3(0, 0, 1f);
+                rb.velocity = movementInput * movementSpeed;
+                break;
+
+            case CharacterState.Fallover:
+
+                break;
+            default:
+                break;
         }
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         //Hit solid wall. Stumble.
-        //Hit fake wall. Roll through.
-        //if(collision.contacts[0].normal.y <= 0.7f)
-        //{
-        //    print("fsafsaf");
-        //    animator.SetBool("Roll", true);
-        //}
+
+         if(collision.gameObject.CompareTag("RealWall"))
+         {
+            currentCharacterState = CharacterState.Fallover;
+            animator.SetBool("Fall", true);
+            animator.SetBool("Running", false);
+         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("FakeWall"))
         {
+            currentCharacterState = CharacterState.Rolling;
             animator.SetBool("Roll", true);
             animator.SetBool("Running", false);
         }
@@ -58,7 +74,20 @@ public class SimpleMovement : MonoBehaviour
 
     public void OnRollAnimationFinished()
     {
+        currentCharacterState = CharacterState.Running;
         animator.SetBool("Roll", false);
+        animator.SetBool("Running", true);
+    }
+
+    public void OnFallAnimationFinished()
+    {
+        animator.SetBool("Fall", false);
+        animator.SetBool("StandUp", true);
+    }
+    public void OnStandUpAnimationFinished()
+    {
+        currentCharacterState = CharacterState.Running;
+        animator.SetBool("StandUp", false);
         animator.SetBool("Running", true);
     }
 }
