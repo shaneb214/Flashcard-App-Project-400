@@ -20,11 +20,6 @@ public class SimpleMovement : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Start()
-    {
-        Screen.orientation = ScreenOrientation.Landscape;
-    }
-
     private void Update()
     {
         switch (currentCharacterState)
