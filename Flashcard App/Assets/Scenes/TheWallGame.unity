@@ -156,7 +156,7 @@ MonoBehaviour:
   flashcardsToGoThrough: []
   wallPlatform: {fileID: 2135042943}
   promptSetting: 1
-  repeatTimes: 1
+  repeatTimes: 2
 --- !u!4 &125343593
 Transform:
   m_ObjectHideFlags: 0

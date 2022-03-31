@@ -60,7 +60,7 @@ public static class ExtensionMethods
             System.Random rng = new System.Random();
             int randomIndex = rng.Next(0, list.Count);
 
-            while (indexesChosen.Contains(randomIndex))
+            while (indexesChosen.Contains(randomIndex) || randomIndex == indexToIgnore)
                 randomIndex = (randomIndex + 1) % list.Count;
 
             listToReturn.Add(list[randomIndex]);

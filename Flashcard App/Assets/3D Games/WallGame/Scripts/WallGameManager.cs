@@ -24,6 +24,8 @@ public class WallGameManager : MonoBehaviour
     private Func<Flashcard, string> GetPromptedBasedOnSetting;
     private Func<Flashcard, string> GetAnswerBasedOnSetting;
 
+    Queue<WallGameStruct> gameDataQueue = new Queue<WallGameStruct>();
+
     private void Start()
     {
         flashcardsToGoThrough.AddRange(new List<Flashcard>()
@@ -47,7 +49,7 @@ public class WallGameManager : MonoBehaviour
 
     private void GenerateDataForGame()
     {
-        List<WallGameStruct> wallGameDataList = new List<WallGameStruct>();
+        //List<WallGameStruct> wallGameDataList = new List<WallGameStruct>();
 
         switch (promptSetting)
         {
@@ -62,7 +64,6 @@ public class WallGameManager : MonoBehaviour
         }
 
         string prompted,corrrectAnswer;
-        List<string> wrongAnswers = new List<string>();
 
         for (int r = 0; r < repeatTimes; r++)
         {
@@ -77,11 +78,11 @@ public class WallGameManager : MonoBehaviour
                 List<string> wrongAnswersListBasedOnSetting = new List<string>();
                 for (int j = 0; j < wrongAnswersFlashcardList.Count; j++)
                 {
-                    wrongAnswers.Add(GetAnswerBasedOnSetting(wrongAnswersFlashcardList[j]));
+                    wrongAnswersListBasedOnSetting.Add(GetAnswerBasedOnSetting(wrongAnswersFlashcardList[j]));
                 }
 
-                WallGameStruct wallGameStruct = new WallGameStruct(prompted, corrrectAnswer, wrongAnswers);
-                wallGameDataList.Add(wallGameStruct);
+                WallGameStruct wallGameStruct = new WallGameStruct(prompted, corrrectAnswer, wrongAnswersListBasedOnSetting);
+                gameDataQueue.Enqueue(wallGameStruct);
             }
         }        
     }
