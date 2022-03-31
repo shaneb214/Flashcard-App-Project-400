@@ -8,7 +8,7 @@ public class WallPlatform : MonoBehaviour
     [SerializeField] private Transform[] wallSpawnPositions;
 
     [SerializeField] private Transform nextPlatformSpawnPos;
-    [SerializeField] private SpawnNextPlatformTrigger myTrigger;
+    [SerializeField] public SpawnNextPlatformTrigger myTrigger;
     [SerializeField] private WallPlatform testPrefab;
 
     [SerializeField] private FakeWall fakeWallPrefab;
@@ -30,7 +30,13 @@ public class WallPlatform : MonoBehaviour
         myTrigger.PlayerHitTriggerEvent -= OnPlayerHitLoadNextPlatformTrigger;
     }
 
-    public void SpawnWalls(string correctFlashcardText,string[] incorrectFlashcardText)
+    public WallPlatform SpawnNextPlatform(WallPlatform wallPlatformPrefab)
+    {
+        WallPlatform spawnedWallPlatform = Instantiate(wallPlatformPrefab, nextPlatformSpawnPos.position, Quaternion.identity);
+        return spawnedWallPlatform;
+    }
+
+    public void SpawnWalls(WallGameStruct wallGameStruct)
     {
         List<int> wallPositionIndexesList = new List<int>();
         for (int i = 0; i < wallSpawnPositions.Length; i++)
@@ -42,12 +48,12 @@ public class WallPlatform : MonoBehaviour
         int falseWallPositionIndex = Random.Range(0, wallPositionIndexesList.Count);
         wallPositionIndexesList.RemoveAt(falseWallPositionIndex);
 
-        SpawnWall(fakeWallPrefab, wallSpawnPositions[falseWallPositionIndex],correctFlashcardText);
+        SpawnWall(fakeWallPrefab, wallSpawnPositions[falseWallPositionIndex],wallGameStruct.correctAnswer);
 
-        for (int i = 0; i < incorrectFlashcardText.Length; i++)
+        for (int i = 0; i < wallGameStruct.wrongAnswers.Count; i++)
         {
             int randomRealWallPositionIndex = Random.Range(0, wallPositionIndexesList.Count);
-            SpawnWall(realWallPrefab, wallSpawnPositions[wallPositionIndexesList[randomRealWallPositionIndex]], incorrectFlashcardText[i]);
+            SpawnWall(realWallPrefab, wallSpawnPositions[wallPositionIndexesList[randomRealWallPositionIndex]], wallGameStruct.wrongAnswers[i]);
             wallPositionIndexesList.RemoveAt(randomRealWallPositionIndex);
         }
     }

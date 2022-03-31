@@ -5,33 +5,32 @@ using UnityEngine;
 
 public class WallGameManager : MonoBehaviour
 {
+    //Settings.
     private const int maxRepeatCardCount = 5;
     private const int realWallsCount = 3;
-
-    [SerializeField] private WallPlatform wallPlatformPrefab;
-
-    [SerializeField] private List<Flashcard> flashcardsToGoThrough = new List<Flashcard>();
-
-    [SerializeField] private WallPlatform wallPlatform;
-
     public enum PromptSetting { Learning,Native}
-
     [Header("Settings")]
     public PromptSetting promptSetting;
     [Range(1,maxRepeatCardCount)]
     [SerializeField] private int repeatTimes;
-
     private Func<Flashcard, string> GetPromptedBasedOnSetting;
     private Func<Flashcard, string> GetAnswerBasedOnSetting;
 
-    Queue<WallGameStruct> gameDataQueue = new Queue<WallGameStruct>();
+    [SerializeField] private List<Flashcard> flashcardsToGoThrough = new List<Flashcard>();
+
+    [Header("Prefabs")]
+    [SerializeField] private WallPlatform wallPlatformPrefab;
+
+    [SerializeField] private WallPlatform currentWallPlatform;
+
+    private Queue<WallGameStruct> gameDataQueue = new Queue<WallGameStruct>();
 
     private void Start()
     {
         flashcardsToGoThrough.AddRange(new List<Flashcard>()
         {
             new Flashcard("Hello", "привет"),
-            new Flashcard("Good afternoon", "добрый день"),
+            new Flashcard("Good day", "добрый день"),
             new Flashcard("Goodbye", "до свидания"),
             new Flashcard("Bye", "пока"),
             new Flashcard("My name is", "меня зовут"),
@@ -41,16 +40,33 @@ public class WallGameManager : MonoBehaviour
             new Flashcard("I understand", "я понимаю"),
         });
 
-
-        //wallPlatform.SpawnWalls("привет", new string[3] { "добрый день", "до свидания", "я хочу" });
-
         GenerateDataForGame();
+
+        SetUpCurrentPlatform();
+    }
+
+    private void OnPlayerHitSpawnNextPlatformTrigger()
+    {
+        //Not at end of queue.
+        if(gameDataQueue.Count > 0)
+        {
+            currentWallPlatform = currentWallPlatform.SpawnNextPlatform(wallPlatformPrefab);
+            SetUpCurrentPlatform();
+        }
+    }
+
+    private void SetUpCurrentPlatform()
+    {
+        WallGameStruct currentTest = gameDataQueue.Dequeue();
+        print(currentTest.prompted);
+        print(gameDataQueue.Count);
+
+        currentWallPlatform.SpawnWalls(currentTest);
+        currentWallPlatform.myTrigger.PlayerHitTriggerEvent += OnPlayerHitSpawnNextPlatformTrigger;
     }
 
     private void GenerateDataForGame()
     {
-        //List<WallGameStruct> wallGameDataList = new List<WallGameStruct>();
-
         switch (promptSetting)
         {
             case PromptSetting.Learning:
