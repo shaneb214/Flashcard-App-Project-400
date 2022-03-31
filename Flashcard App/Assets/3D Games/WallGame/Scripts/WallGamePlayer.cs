@@ -11,9 +11,11 @@ public class WallGamePlayer : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
 
+    [Header("Movement")]
     [SerializeField] private float movementSpeed;
+    [SerializeField] private FixedJoystick joystick;
+    private Vector3 movementInput;
 
-    Vector3 movementInput;
     public enum CharacterState { Idle,Running,Rolling, Fallover}
     public CharacterState currentCharacterState;
 
@@ -25,7 +27,7 @@ public class WallGamePlayer : MonoBehaviour
 
     private void Start()
     {
-       // EnterIdleState();
+        //EnterIdleState();
     }
 
     private void Update()
@@ -34,7 +36,7 @@ public class WallGamePlayer : MonoBehaviour
         {
             case CharacterState.Running:
 
-                movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 1f);
+                movementInput = new Vector3(joystick.Horizontal, 0, 1f);
                 rb.velocity = movementInput * movementSpeed;
                 break;
 
@@ -87,13 +89,13 @@ public class WallGamePlayer : MonoBehaviour
         animator.SetBool("Running", false);
     }
 
+    //Animation Events.
     public void OnRollAnimationFinished()
     {
         currentCharacterState = CharacterState.Running;
         animator.SetBool("Roll", false);
         animator.SetBool("Running", true);
     }
-
     public void OnFallAnimationFinished()
     {
         animator.SetBool("Fall", false);

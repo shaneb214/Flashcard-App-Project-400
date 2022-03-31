@@ -1410,7 +1410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0924646422c1844bbc4d95ccc1671e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 6.06
+  movementSpeed: 10
+  joystick: {fileID: 0}
   currentCharacterState: 0
 --- !u!54 &5997505317239690692
 Rigidbody:

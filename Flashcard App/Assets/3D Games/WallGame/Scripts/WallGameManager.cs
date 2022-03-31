@@ -25,17 +25,38 @@ public class WallGameManager : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] private WallPlatform wallPlatformPrefab;
+    [SerializeField] private EndPlatform endPlatformPrefab;
 
     [SerializeField] private WallPlatform currentWallPlatform;
 
     private Queue<WallGamePlatformData> gameDataQueue = new Queue<WallGamePlatformData>();
 
+    //Start.
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
 
         FakeWall.PlayerHitMeEvent += OnPlayerHitFakeWall;
+    }
+    private void Start()
+    {
+        flashcardsToGoThrough.AddRange(new List<Flashcard>()
+        {
+            new Flashcard("Hello", "привет"),
+            new Flashcard("Good day", "добрый день"),
+            new Flashcard("Goodbye", "до свидания"),
+            new Flashcard("Bye", "пока"),
+            new Flashcard("My name is", "меня зовут"),
+            //new Flashcard("I want", "я хочу"),
+            //new Flashcard("Could you..", "не могли бы вы.."),
+            //new Flashcard("Tell me", "скажи мне"),
+            //new Flashcard("I understand", "я понимаю"),
+        });
+
+        GenerateDataForGame();
+
+        SetUpCurrentPlatform();
     }
 
     public void OnPlayerHitFakeWall()
@@ -48,43 +69,20 @@ public class WallGameManager : MonoBehaviour
             currentWallPlatform = currentWallPlatform.SpawnNextPlatform(wallPlatformPrefab);
             SetUpCurrentPlatform();
         }
+        else
+        {
+            SpawnEndPlatform();
+        }
     }
 
-    public void SetPlayerPositionAndRotation(Vector3 position,Quaternion rotation)
+    public void SetPlayerPositionAndRotation(Vector3 position, Quaternion rotation)
     {
         player.transform.position = position;
         player.transform.rotation = rotation;
     }
 
-    private void Start()
-    {
-        flashcardsToGoThrough.AddRange(new List<Flashcard>()
-        {
-            new Flashcard("Hello", "привет"),
-            new Flashcard("Good day", "добрый день"),
-            new Flashcard("Goodbye", "до свидания"),
-            new Flashcard("Bye", "пока"),
-            new Flashcard("My name is", "меня зовут"),
-            new Flashcard("I want", "я хочу"),
-            new Flashcard("Could you..", "не могли бы вы.."),
-            new Flashcard("Tell me", "скажи мне"),
-            new Flashcard("I understand", "я понимаю"),
-        });
 
-        GenerateDataForGame();
-
-        SetUpCurrentPlatform();
-    }
-
-    private void OnPlayerHitSpawnNextPlatformTrigger()
-    {
-        //Not at end of queue.
-        if(gameDataQueue.Count > 0)
-        {
-            currentWallPlatform = currentWallPlatform.SpawnNextPlatform(wallPlatformPrefab);
-            SetUpCurrentPlatform();
-        }
-    }
+    private void SpawnEndPlatform() => Instantiate(endPlatformPrefab, currentWallPlatform.endPlatformSpawnPos.position, Quaternion.identity);
 
     private void SetUpCurrentPlatform()
     {

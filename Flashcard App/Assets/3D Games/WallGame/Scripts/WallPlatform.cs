@@ -8,12 +8,13 @@ public class WallPlatform : MonoBehaviour
     [SerializeField] private Transform[] wallSpawnPositions;
 
     [SerializeField] private Transform nextPlatformSpawnPos;
+    [SerializeField] public Transform endPlatformSpawnPos;
     [SerializeField] private Transform playerWrongAnswerResetPos;
-    [SerializeField] public SpawnNextPlatformTrigger myTrigger;
-    [SerializeField] private WallPlatform testPrefab;
 
+    [Header("Prefabs")]
     [SerializeField] private FakeWall fakeWallPrefab;
     [SerializeField] private RealWall realWallPrefab;
+    [SerializeField] private EndPlatform endPlatformPrefab;
 
     //Start.
     private void Awake() { }
