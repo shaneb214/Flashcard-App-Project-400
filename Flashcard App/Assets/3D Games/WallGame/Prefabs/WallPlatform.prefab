@@ -1826,13 +1826,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e721375aadf189d41bffe472f3388ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallPos1: {fileID: 6984609441327234699}
-  wallPos2: {fileID: 4686960267569139933}
-  wallPos3: {fileID: 7592976665368734355}
-  wallPos4: {fileID: 4715921101556297621}
+  wallSpawnPositions:
+  - {fileID: 6984609441327234699}
+  - {fileID: 4686960267569139933}
+  - {fileID: 7592976665368734355}
+  - {fileID: 4715921101556297621}
   nextPlatformSpawnPos: {fileID: 6606877160437645650}
   myTrigger: {fileID: 2669089081895858313}
   testPrefab: {fileID: 2621063728601529719}
+  fakeWallPrefab: {fileID: 3927786896741460340, guid: c454efbf46ba0da4daf9ffe7b9503478, type: 3}
+  realWallPrefab: {fileID: 7825644952103926860, guid: 86c49427ee780f542bf885bd055f947a, type: 3}
 --- !u!1 &8886304806686707484
 GameObject:
   m_ObjectHideFlags: 0
