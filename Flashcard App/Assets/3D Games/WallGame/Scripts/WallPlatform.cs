@@ -15,34 +15,16 @@ public class WallPlatform : MonoBehaviour
     [SerializeField] private FakeWall fakeWallPrefab;
     [SerializeField] private RealWall realWallPrefab;
 
+    //Start.
+    private void Awake() { }
+    private void Start() => WallGameManager.Instance.player.PlayerGettingUpAfterFallingEvent += OnPlayerGettingUpAfterFall;
 
-    private void Start()
-    {
-        //myTrigger.PlayerHitTriggerEvent += OnPlayerHitLoadNextPlatformTrigger;
-        RealWall.PlayerHitMeEvent += OnPlayerHitRealWall;
-    }
-
-    private void OnPlayerHitLoadNextPlatformTrigger()
-    {
-        //Instantiate(testPrefab.gameObject, nextPlatformSpawnPos);
-    }
-
-    private void OnPlayerHitRealWall()
-    {
-        WallGameManager.Instance.SetPlayerPositionAndRotation(playerWrongAnswerResetPos.position, playerWrongAnswerResetPos.transform.rotation);
-    }
-
-    private void OnDestroy()
-    {
-        //myTrigger.PlayerHitTriggerEvent -= OnPlayerHitLoadNextPlatformTrigger;
-    }
-
+    //Wall Spawning.
     public WallPlatform SpawnNextPlatform(WallPlatform wallPlatformPrefab)
     {
         WallPlatform spawnedWallPlatform = Instantiate(wallPlatformPrefab, nextPlatformSpawnPos.position, Quaternion.identity);
         return spawnedWallPlatform;
     }
-
     public void SpawnWalls(WallGamePlatformData wallGameStruct)
     {
         List<int> wallPositionIndexesList = new List<int>();
@@ -64,10 +46,13 @@ public class WallPlatform : MonoBehaviour
             wallPositionIndexesList.RemoveAt(randomRealWallPositionIndex);
         }
     }
-
     private void SpawnWall(Wall wall,Transform transform,string text)
     {
         Wall spawnedWall = Instantiate(wall, transform.position,Quaternion.identity);
         spawnedWall.SetText(text);
     }
+
+    //Resetting player position after fall.
+    private void OnPlayerGettingUpAfterFall() => WallGameManager.Instance.SetPlayerPositionAndRotation(playerWrongAnswerResetPos.position, playerWrongAnswerResetPos.transform.rotation);
+    private void OnDestroy() => WallGameManager.Instance.player.PlayerGettingUpAfterFallingEvent -= OnPlayerGettingUpAfterFall;
 }

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleMovement : MonoBehaviour
+public class WallGamePlayer : MonoBehaviour
 {
+    public Action PlayerGettingUpAfterFallingEvent;
+
     [Header("Components")]
     private Rigidbody rb;
     private Animator animator;
@@ -11,13 +14,18 @@ public class SimpleMovement : MonoBehaviour
     [SerializeField] private float movementSpeed;
 
     Vector3 movementInput;
-    public enum CharacterState { Running,Rolling, Fallover}
+    public enum CharacterState { Idle,Running,Rolling, Fallover}
     public CharacterState currentCharacterState;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+       // EnterIdleState();
     }
 
     private void Update()
@@ -36,35 +44,47 @@ public class SimpleMovement : MonoBehaviour
                 rb.velocity = movementInput * movementSpeed;
                 break;
 
-            case CharacterState.Fallover:
-                rb.velocity = Vector3.zero;
-
-                break;
             default:
+                rb.velocity = Vector3.zero;
                 break;
         }
 
     }
 
+    //Collision Detection.
     private void OnCollisionEnter(Collision collision)
     {
         //Hit solid wall. Stumble.
          if(collision.gameObject.CompareTag("RealWall"))
-         {
-            currentCharacterState = CharacterState.Fallover;
-            animator.SetBool("Fall", true);
-            animator.SetBool("Running", false);
-         }
+        {
+            EnterFalloverState();
+        }
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("FakeWall"))
+        if (other.CompareTag("FakeWall"))
         {
-            currentCharacterState = CharacterState.Rolling;
-            animator.SetBool("Roll", true);
-            animator.SetBool("Running", false);
+            EnterRollingState();
         }
+    }
+    //Entering States.
+    private void EnterFalloverState()
+    {
+        currentCharacterState = CharacterState.Fallover;
+        animator.SetBool("Fall", true);
+        animator.SetBool("Running", false);
+    }
+    private void EnterRollingState()
+    {
+        currentCharacterState = CharacterState.Rolling;
+        animator.SetBool("Roll", true);
+        animator.SetBool("Running", false);
+    }
+    private void EnterIdleState()
+    {
+        currentCharacterState = CharacterState.Idle;
+        animator.SetBool("Idle", true);
+        animator.SetBool("Running", false);
     }
 
     public void OnRollAnimationFinished()
@@ -78,6 +98,8 @@ public class SimpleMovement : MonoBehaviour
     {
         animator.SetBool("Fall", false);
         animator.SetBool("StandUp", true);
+
+        PlayerGettingUpAfterFallingEvent?.Invoke();
     }
     public void OnStandUpAnimationFinished()
     {

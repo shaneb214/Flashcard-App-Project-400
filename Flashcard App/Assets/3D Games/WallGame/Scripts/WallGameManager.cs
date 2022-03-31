@@ -8,7 +8,7 @@ public class WallGameManager : MonoBehaviour
     public static Action<WallGamePlatformData> PlatformDataDequeudEvent;
     public static WallGameManager Instance;
 
-    public SimpleMovement player;
+    public WallGamePlayer player;
 
     //Settings.
     private const int maxRepeatCardCount = 5;
