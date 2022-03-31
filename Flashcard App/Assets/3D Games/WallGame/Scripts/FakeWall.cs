@@ -12,6 +12,6 @@ public class FakeWall : Wall
         PlayerHitMeEvent?.Invoke();
 
         Destroy(gameObject);
-        Instantiate(destructibleWallPrefabs[UnityEngine.Random.Range(0, destructibleWallPrefabs.Length)], transform.position, Quaternion.identity);
+        Destroy(Instantiate(destructibleWallPrefabs[UnityEngine.Random.Range(0, destructibleWallPrefabs.Length)], transform.position, Quaternion.identity),WallGameDataSlinger.TimeToCleanUpSpawnedObjects);
     }
 }

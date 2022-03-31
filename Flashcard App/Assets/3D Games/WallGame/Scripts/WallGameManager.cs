@@ -5,23 +5,33 @@ using UnityEngine;
 
 public class WallGameManager : MonoBehaviour
 {
-    public static Action<WallGamePlatformData> PlatformDataDequeudEvent;
+    //Singleton.
     public static WallGameManager Instance;
+    //Events.
+    public static Action<WallGamePlatformData> PlatformDataDequeudEvent;
+    public static Action GameStartedEvent;
 
-    public WallGamePlayer player;
+    [Header("Player")]
+    [SerializeField] private WallGamePlayer playerPrefab;
+    public WallGamePlayer spawnedPlayer;
 
     //Settings.
-    private const int maxRepeatCardCount = 5;
-    private const int realWallsCount = 3;
     public enum PromptSetting { Learning,Native}
+
     [Header("Settings")]
-    public PromptSetting promptSetting;
-    [Range(1,maxRepeatCardCount)]
+    [Tooltip("Prompt the user with the native side or learning side")]
+    [SerializeField] private PromptSetting promptSetting;
+
+    [Tooltip("Number of times to repeat each card")]
+    [Range(1,WallGameDataSlinger.maxRepeatCardCount)]
     [SerializeField] private int repeatTimes;
+
     private Func<Flashcard, string> GetPromptedBasedOnSetting;
     private Func<Flashcard, string> GetAnswerBasedOnSetting;
 
+    //Flashcard data passed to and used by game.
     [SerializeField] private List<Flashcard> flashcardsToGoThrough = new List<Flashcard>();
+    private Queue<WallGamePlatformData> gameDataQueue = new Queue<WallGamePlatformData>();
 
     [Header("Prefabs")]
     [SerializeField] private WallPlatform wallPlatformPrefab;
@@ -29,7 +39,6 @@ public class WallGameManager : MonoBehaviour
 
     [SerializeField] private WallPlatform currentWallPlatform;
 
-    private Queue<WallGamePlatformData> gameDataQueue = new Queue<WallGamePlatformData>();
 
     //Start.
     private void Awake()
@@ -59,12 +68,20 @@ public class WallGameManager : MonoBehaviour
         SetUpCurrentPlatform();
     }
 
+    public void StartGame()
+    {
+        spawnedPlayer = Instantiate(playerPrefab, currentWallPlatform.playerSpawnPos.position, Quaternion.identity);
+
+        //Spawn UI.
+
+    }
+
     public void OnPlayerHitFakeWall()
     {
         //Not at end of queue.
         if (gameDataQueue.Count > 0)
         {
-            Destroy(currentWallPlatform, 2f);
+            Destroy(currentWallPlatform.gameObject, WallGameDataSlinger.TimeToCleanUpSpawnedObjects);
 
             currentWallPlatform = currentWallPlatform.SpawnNextPlatform(wallPlatformPrefab);
             SetUpCurrentPlatform();
@@ -77,10 +94,9 @@ public class WallGameManager : MonoBehaviour
 
     public void SetPlayerPositionAndRotation(Vector3 position, Quaternion rotation)
     {
-        player.transform.position = position;
-        player.transform.rotation = rotation;
+        spawnedPlayer.transform.position = position;
+        spawnedPlayer.transform.rotation = rotation;
     }
-
 
     private void SpawnEndPlatform() => Instantiate(endPlatformPrefab, currentWallPlatform.endPlatformSpawnPos.position, Quaternion.identity);
 
@@ -119,7 +135,7 @@ public class WallGameManager : MonoBehaviour
                 prompted = GetPromptedBasedOnSetting(flashcardsToGoThrough[i]);
                 corrrectAnswer = GetAnswerBasedOnSetting(flashcardsToGoThrough[i]);
 
-                List<Flashcard> wrongAnswersFlashcardList = flashcardsToGoThrough.GetItemsFromListIgnoringIndex(i, realWallsCount);
+                List<Flashcard> wrongAnswersFlashcardList = flashcardsToGoThrough.GetItemsFromListIgnoringIndex(i, WallGameDataSlinger.numWrongAnswersToShow);
                 List<string> wrongAnswersListBasedOnSetting = new List<string>();
                 for (int j = 0; j < wrongAnswersFlashcardList.Count; j++)
                 {
@@ -154,4 +170,11 @@ public struct WallGamePlatformData
         this.correctAnswer = correctAnswer;
         this.wrongAnswers = wrongAnswers;
     }
+}
+
+public class WallGameDataSlinger
+{
+    public const int maxRepeatCardCount = 5;
+    public const int numWrongAnswersToShow = 3;
+    public const float TimeToCleanUpSpawnedObjects = 1.5f;
 }

@@ -10,6 +10,7 @@ public class WallPlatform : MonoBehaviour
     [SerializeField] private Transform nextPlatformSpawnPos;
     [SerializeField] public Transform endPlatformSpawnPos;
     [SerializeField] private Transform playerWrongAnswerResetPos;
+    [SerializeField] public Transform playerSpawnPos;
 
     [Header("Prefabs")]
     [SerializeField] private FakeWall fakeWallPrefab;
@@ -18,7 +19,7 @@ public class WallPlatform : MonoBehaviour
 
     //Start.
     private void Awake() { }
-    private void Start() => WallGameManager.Instance.player.PlayerGettingUpAfterFallingEvent += OnPlayerGettingUpAfterFall;
+    private void Start() => WallGameManager.Instance.spawnedPlayer.PlayerGettingUpAfterFallingEvent += OnPlayerGettingUpAfterFall;
 
     //Wall Spawning.
     public WallPlatform SpawnNextPlatform(WallPlatform wallPlatformPrefab)
@@ -49,11 +50,11 @@ public class WallPlatform : MonoBehaviour
     }
     private void SpawnWall(Wall wall,Transform transform,string text)
     {
-        Wall spawnedWall = Instantiate(wall, transform.position,Quaternion.identity);
+        Wall spawnedWall = Instantiate(wall, transform.position,Quaternion.identity,this.transform);
         spawnedWall.SetText(text);
     }
 
     //Resetting player position after fall.
     private void OnPlayerGettingUpAfterFall() => WallGameManager.Instance.SetPlayerPositionAndRotation(playerWrongAnswerResetPos.position, playerWrongAnswerResetPos.transform.rotation);
-    private void OnDestroy() => WallGameManager.Instance.player.PlayerGettingUpAfterFallingEvent -= OnPlayerGettingUpAfterFall;
+    private void OnDestroy() => WallGameManager.Instance.spawnedPlayer.PlayerGettingUpAfterFallingEvent -= OnPlayerGettingUpAfterFall;
 }
