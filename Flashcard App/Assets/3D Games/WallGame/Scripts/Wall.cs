@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    public Action PlayerHitMeEvent;
-
     //Text for card.
     [SerializeField] private TextMeshPro txtWall;
 

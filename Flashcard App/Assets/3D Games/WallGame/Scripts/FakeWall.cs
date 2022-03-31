@@ -1,8 +1,10 @@
-
+using System;
 using UnityEngine;
 
 public class FakeWall : Wall
 {
+    public static Action PlayerHitMeEvent;
+
     [SerializeField] private GameObject[] destructibleWallPrefabs;
 
     private void OnTriggerEnter(Collider other)
@@ -10,6 +12,6 @@ public class FakeWall : Wall
         PlayerHitMeEvent?.Invoke();
 
         Destroy(gameObject);
-        Instantiate(destructibleWallPrefabs[Random.Range(0, destructibleWallPrefabs.Length)], transform.position, Quaternion.identity);
+        Instantiate(destructibleWallPrefabs[UnityEngine.Random.Range(0, destructibleWallPrefabs.Length)], transform.position, Quaternion.identity);
     }
 }

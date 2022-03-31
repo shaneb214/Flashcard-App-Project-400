@@ -9,5 +9,6 @@ public class SpawnNextPlatformTrigger : MonoBehaviour
     {
         //Don't need to check if its the player as it can be the only thing that can trigger this.
         PlayerHitTriggerEvent?.Invoke();
+        Destroy(gameObject);
     }
 }

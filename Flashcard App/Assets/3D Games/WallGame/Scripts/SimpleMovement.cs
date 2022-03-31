@@ -37,6 +37,7 @@ public class SimpleMovement : MonoBehaviour
                 break;
 
             case CharacterState.Fallover:
+                rb.velocity = Vector3.zero;
 
                 break;
             default:

@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class WallGameManager : MonoBehaviour
 {
+    public static Action<WallGamePlatformData> PlatformDataDequeudEvent;
+    public static WallGameManager Instance;
+
+    public SimpleMovement player;
+
     //Settings.
     private const int maxRepeatCardCount = 5;
     private const int realWallsCount = 3;
@@ -23,7 +28,33 @@ public class WallGameManager : MonoBehaviour
 
     [SerializeField] private WallPlatform currentWallPlatform;
 
-    private Queue<WallGameStruct> gameDataQueue = new Queue<WallGameStruct>();
+    private Queue<WallGamePlatformData> gameDataQueue = new Queue<WallGamePlatformData>();
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+
+        FakeWall.PlayerHitMeEvent += OnPlayerHitFakeWall;
+    }
+
+    public void OnPlayerHitFakeWall()
+    {
+        //Not at end of queue.
+        if (gameDataQueue.Count > 0)
+        {
+            Destroy(currentWallPlatform, 2f);
+
+            currentWallPlatform = currentWallPlatform.SpawnNextPlatform(wallPlatformPrefab);
+            SetUpCurrentPlatform();
+        }
+    }
+
+    public void SetPlayerPositionAndRotation(Vector3 position,Quaternion rotation)
+    {
+        player.transform.position = position;
+        player.transform.rotation = rotation;
+    }
 
     private void Start()
     {
@@ -57,12 +88,12 @@ public class WallGameManager : MonoBehaviour
 
     private void SetUpCurrentPlatform()
     {
-        WallGameStruct currentTest = gameDataQueue.Dequeue();
-        print(currentTest.prompted);
+        WallGamePlatformData currentPlatformData = gameDataQueue.Dequeue();
+        PlatformDataDequeudEvent?.Invoke(currentPlatformData);
+        print(currentPlatformData.prompted);
         print(gameDataQueue.Count);
 
-        currentWallPlatform.SpawnWalls(currentTest);
-        currentWallPlatform.myTrigger.PlayerHitTriggerEvent += OnPlayerHitSpawnNextPlatformTrigger;
+        currentWallPlatform.SpawnWalls(currentPlatformData);
     }
 
     private void GenerateDataForGame()
@@ -97,7 +128,7 @@ public class WallGameManager : MonoBehaviour
                     wrongAnswersListBasedOnSetting.Add(GetAnswerBasedOnSetting(wrongAnswersFlashcardList[j]));
                 }
 
-                WallGameStruct wallGameStruct = new WallGameStruct(prompted, corrrectAnswer, wrongAnswersListBasedOnSetting);
+                WallGamePlatformData wallGameStruct = new WallGamePlatformData(prompted, corrrectAnswer, wrongAnswersListBasedOnSetting);
                 gameDataQueue.Enqueue(wallGameStruct);
             }
         }        
@@ -113,13 +144,13 @@ public class WallGameManager : MonoBehaviour
     } 
 }
 
-public struct WallGameStruct
+public struct WallGamePlatformData
 {
     public string prompted;
     public string correctAnswer;
     public List<string> wrongAnswers;
 
-    public WallGameStruct(string prompted, string correctAnswer, List<string> wrongAnswers)
+    public WallGamePlatformData(string prompted, string correctAnswer, List<string> wrongAnswers)
     {
         this.prompted = prompted;
         this.correctAnswer = correctAnswer;

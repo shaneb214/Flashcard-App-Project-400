@@ -8,6 +8,7 @@ public class WallPlatform : MonoBehaviour
     [SerializeField] private Transform[] wallSpawnPositions;
 
     [SerializeField] private Transform nextPlatformSpawnPos;
+    [SerializeField] private Transform playerWrongAnswerResetPos;
     [SerializeField] public SpawnNextPlatformTrigger myTrigger;
     [SerializeField] private WallPlatform testPrefab;
 
@@ -17,7 +18,8 @@ public class WallPlatform : MonoBehaviour
 
     private void Start()
     {
-        myTrigger.PlayerHitTriggerEvent += OnPlayerHitLoadNextPlatformTrigger;
+        //myTrigger.PlayerHitTriggerEvent += OnPlayerHitLoadNextPlatformTrigger;
+        RealWall.PlayerHitMeEvent += OnPlayerHitRealWall;
     }
 
     private void OnPlayerHitLoadNextPlatformTrigger()
@@ -25,9 +27,14 @@ public class WallPlatform : MonoBehaviour
         //Instantiate(testPrefab.gameObject, nextPlatformSpawnPos);
     }
 
+    private void OnPlayerHitRealWall()
+    {
+        WallGameManager.Instance.SetPlayerPositionAndRotation(playerWrongAnswerResetPos.position, playerWrongAnswerResetPos.transform.rotation);
+    }
+
     private void OnDestroy()
     {
-        myTrigger.PlayerHitTriggerEvent -= OnPlayerHitLoadNextPlatformTrigger;
+        //myTrigger.PlayerHitTriggerEvent -= OnPlayerHitLoadNextPlatformTrigger;
     }
 
     public WallPlatform SpawnNextPlatform(WallPlatform wallPlatformPrefab)
@@ -36,7 +43,7 @@ public class WallPlatform : MonoBehaviour
         return spawnedWallPlatform;
     }
 
-    public void SpawnWalls(WallGameStruct wallGameStruct)
+    public void SpawnWalls(WallGamePlatformData wallGameStruct)
     {
         List<int> wallPositionIndexesList = new List<int>();
         for (int i = 0; i < wallSpawnPositions.Length; i++)
