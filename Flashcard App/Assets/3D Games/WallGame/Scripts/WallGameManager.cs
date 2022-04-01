@@ -39,7 +39,6 @@ public class WallGameManager : MonoBehaviour
 
     [SerializeField] private WallPlatform currentWallPlatform;
 
-
     //Start.
     private void Awake()
     {
@@ -64,16 +63,15 @@ public class WallGameManager : MonoBehaviour
         });
 
         GenerateDataForGame();
-
-        SetUpCurrentPlatform();
     }
 
     public void StartGame()
     {
+        GameStartedEvent?.Invoke();
+
+        currentWallPlatform = Instantiate(wallPlatformPrefab, Vector3.zero,Quaternion.identity);
         spawnedPlayer = Instantiate(playerPrefab, currentWallPlatform.playerSpawnPos.position, Quaternion.identity);
-
-        //Spawn UI.
-
+        SetUpCurrentPlatform();
     }
 
     public void OnPlayerHitFakeWall()
@@ -147,7 +145,6 @@ public class WallGameManager : MonoBehaviour
             }
         }        
     }
-
     private string GetNativeSideFromFlashcard(Flashcard flashcard) => flashcard.NativeSide;
     private string GetLearningSideFromFlashcard(Flashcard flashcard) => flashcard.LearningSide;
     private string GetRandomSideFromFlashcard(Flashcard flashcard) 

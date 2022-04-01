@@ -13,7 +13,7 @@ public class WallGamePlayer : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float movementSpeed;
-    [SerializeField] private FixedJoystick joystick;
+    private FixedJoystick joystick;
     private Vector3 movementInput;
 
     public enum CharacterState { Idle,Running,Rolling, Fallover}
@@ -23,6 +23,8 @@ public class WallGamePlayer : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
+        joystick = FindObjectOfType<FixedJoystick>();
     }
 
     private void Start()
