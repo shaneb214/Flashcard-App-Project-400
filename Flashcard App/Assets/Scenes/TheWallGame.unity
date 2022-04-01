@@ -818,6 +818,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da997fa252ad9d84b8ab2a7c7f1a2ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2021442763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1721183121635035746, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+  m_PrefabInstance: {fileID: 1618822913181720392}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2042146840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1802,6 +1813,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 905421592}
     m_Modifications:
+    - target: {fileID: 373997195196879680, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: btnBack
+      value: 
+      objectReference: {fileID: 2021442763}
     - target: {fileID: 1543425480276883115, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1863,6 +1878,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1618822911986292853, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618822911986292853, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -1887,7 +1906,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1618822912152929822, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618822912152929822, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618822912152929822, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1618822912290773720, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
@@ -1937,6 +1964,38 @@ PrefabInstance:
     - target: {fileID: 1618822912319832066, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618822912370536820, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: m_Value
+      value: 1.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618822912370536821, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: sliderEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618822912370536821, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: sliderEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618822912370536821, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: sliderEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 125343592}
+    - target: {fileID: 1618822912370536821, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: sliderEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618822912370536821, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: sliderEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnRepeatSettingValueChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618822912370536821, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: sliderEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WallGameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618822912370536821, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: sliderEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1618822912424057618, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
       propertyPath: m_AnchorMax.y

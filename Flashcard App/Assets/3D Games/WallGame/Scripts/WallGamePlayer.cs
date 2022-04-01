@@ -6,6 +6,7 @@ using UnityEngine;
 public class WallGamePlayer : MonoBehaviour
 {
     public Action PlayerGettingUpAfterFallingEvent;
+    public Action HitFakeWallEvent;
 
     [Header("Components")]
     private Rigidbody rb;
@@ -25,11 +26,6 @@ public class WallGamePlayer : MonoBehaviour
         animator = GetComponent<Animator>();
 
         joystick = FindObjectOfType<FixedJoystick>();
-    }
-
-    private void Start()
-    {
-        //EnterIdleState();
     }
 
     private void Update()
@@ -60,14 +56,15 @@ public class WallGamePlayer : MonoBehaviour
     {
         //Hit solid wall. Stumble.
          if(collision.gameObject.CompareTag("RealWall"))
-        {
+         {
             EnterFalloverState();
-        }
+         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("FakeWall"))
         {
+            HitFakeWallEvent?.Invoke();
             EnterRollingState();
         }
     }

@@ -16,15 +16,8 @@ public class WallGameManager : MonoBehaviour
     [SerializeField] private WallGamePlayer playerPrefab;
     public WallGamePlayer spawnedPlayer;
 
-    //Settings.
-    public enum PromptSetting { Learning,Native}
-
-    [Header("Settings")]
-    [Tooltip("Prompt the user with the native side or learning side")]
-    [SerializeField] private PromptSetting promptSetting;
-
     [Tooltip("Number of times to repeat each card")]
-    [Range(1,WallGameDataSlinger.maxRepeatCardCount)]
+    [Range(1,WallGameSettingss.maxRepeatCardCount)]
     [SerializeField] private int repeatTimes;
 
     private Func<Flashcard, string> GetPromptedBasedOnSetting;
@@ -46,8 +39,6 @@ public class WallGameManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
-
-        FakeWall.PlayerHitMeEvent += OnPlayerHitFakeWall;
     }
     private void Start()
     {
@@ -73,6 +64,7 @@ public class WallGameManager : MonoBehaviour
 
         currentWallPlatform = Instantiate(wallPlatformPrefab, Vector3.zero,Quaternion.identity);
         spawnedPlayer = Instantiate(playerPrefab, currentWallPlatform.playerSpawnPos.position, Quaternion.identity);
+        spawnedPlayer.HitFakeWallEvent += OnPlayerHitFakeWall;
         SetUpCurrentPlatform();
     }
 
@@ -81,14 +73,14 @@ public class WallGameManager : MonoBehaviour
         //Not at end of queue.
         if (gameDataQueue.Count > 0)
         {
-            Destroy(currentWallPlatform.gameObject, WallGameDataSlinger.TimeToCleanUpSpawnedObjects);
+            Destroy(currentWallPlatform.gameObject, WallGameSettingss.TimeToCleanUpSpawnedObjects);
 
             currentWallPlatform = currentWallPlatform.SpawnNextPlatform(wallPlatformPrefab);
             SetUpCurrentPlatform();
         }
         else
         {
-            Destroy(currentWallPlatform.gameObject, WallGameDataSlinger.TimeToCleanUpSpawnedObjects);
+            Destroy(currentWallPlatform.gameObject, WallGameSettingss.TimeToCleanUpSpawnedObjects);
 
             spawnedEndPlatform = SpawnEndPlatform();
             spawnedEndPlatform.endPlatformTrigger.PlayerHitTrigger += OnPlayerHitEndGameTrigger;
@@ -122,7 +114,7 @@ public class WallGameManager : MonoBehaviour
 
     private void GenerateDataForGame()
     {
-        switch (promptSetting)
+        switch (WallGameSettingss.promptSetting)
         {
             case PromptSetting.Learning:
                 GetPromptedBasedOnSetting = GetLearningSideFromFlashcard;
@@ -145,7 +137,7 @@ public class WallGameManager : MonoBehaviour
                 prompted = GetPromptedBasedOnSetting(flashcardsToGoThrough[i]);
                 corrrectAnswer = GetAnswerBasedOnSetting(flashcardsToGoThrough[i]);
 
-                List<Flashcard> wrongAnswersFlashcardList = flashcardsToGoThrough.GetItemsFromListIgnoringIndex(i, WallGameDataSlinger.numWrongAnswersToShow);
+                List<Flashcard> wrongAnswersFlashcardList = flashcardsToGoThrough.GetItemsFromListIgnoringIndex(i, WallGameSettingss.numWrongAnswersToShow);
                 List<string> wrongAnswersListBasedOnSetting = new List<string>();
                 for (int j = 0; j < wrongAnswersFlashcardList.Count; j++)
                 {
@@ -165,11 +157,6 @@ public class WallGameManager : MonoBehaviour
         int randomNumber = rng.Next(0, 2);
         return randomNumber == 0 ? flashcard.NativeSide : flashcard.LearningSide;
     }
-
-    private void OnDestroy()
-    {
-        FakeWall.PlayerHitMeEvent -= OnPlayerHitFakeWall;
-    }
 }
 
 public struct WallGamePlatformData
@@ -186,9 +173,15 @@ public struct WallGamePlatformData
     }
 }
 
-public class WallGameDataSlinger
+public enum PromptSetting { Learning, Native }
+
+public static class WallGameSettingss
 {
+    public const int minRepeatCardCount = 1;
     public const int maxRepeatCardCount = 5;
     public const int numWrongAnswersToShow = 3;
     public const float TimeToCleanUpSpawnedObjects = 1.5f;
+
+    public static int repeatCardAmount = minRepeatCardCount;
+    public static PromptSetting promptSetting = PromptSetting.Learning;
 }

@@ -3,15 +3,11 @@ using UnityEngine;
 
 public class FakeWall : Wall
 {
-    public static Action PlayerHitMeEvent;
-
     [SerializeField] private GameObject[] destructibleWallPrefabs;
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerHitMeEvent?.Invoke();
-
         Destroy(gameObject);
-        Destroy(Instantiate(destructibleWallPrefabs[UnityEngine.Random.Range(0, destructibleWallPrefabs.Length)], transform.position, Quaternion.identity),WallGameDataSlinger.TimeToCleanUpSpawnedObjects);
+        Destroy(Instantiate(destructibleWallPrefabs[UnityEngine.Random.Range(0, destructibleWallPrefabs.Length)], transform.position, Quaternion.identity),WallGameSettingss.TimeToCleanUpSpawnedObjects);
     }
 }
