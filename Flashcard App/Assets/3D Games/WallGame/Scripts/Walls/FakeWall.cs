@@ -8,6 +8,6 @@ public class FakeWall : Wall
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
-        Destroy(Instantiate(destructibleWallPrefabs[UnityEngine.Random.Range(0, destructibleWallPrefabs.Length)], transform.position, Quaternion.identity),WallGameSettingss.TimeToCleanUpSpawnedObjects);
+        Destroy(Instantiate(destructibleWallPrefabs[UnityEngine.Random.Range(0, destructibleWallPrefabs.Length)], transform.position, Quaternion.identity),3f);
     }
 }

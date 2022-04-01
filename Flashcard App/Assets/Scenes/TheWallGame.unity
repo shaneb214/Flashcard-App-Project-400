@@ -154,13 +154,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 6915843059151969551, guid: 881b311b0259feb4d8bb9f2e76b55e2e, type: 3}
   spawnedPlayer: {fileID: 1411182766}
-  promptSetting: 0
-  repeatTimes: 1
   flashcardsToGoThrough: []
   wallPlatformPrefab: {fileID: 2621063728601529719, guid: 2860b32ad0c852b48a368b0003ca66de, type: 3}
   endPlatformPrefab: {fileID: 1245995022016211335, guid: 242a14d804a0f3845976c946d96c3770, type: 3}
   currentWallPlatform: {fileID: 0}
   spawnedEndPlatform: {fileID: 0}
+  wallGameSettings: {fileID: 11400000, guid: 6ff6c16cb62b8dd47868926263e46a17, type: 2}
 --- !u!4 &125343593
 Transform:
   m_ObjectHideFlags: 0
@@ -1817,6 +1816,10 @@ PrefabInstance:
       propertyPath: btnBack
       value: 
       objectReference: {fileID: 2021442763}
+    - target: {fileID: 373997195196879680, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
+      propertyPath: wallGameSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ff6c16cb62b8dd47868926263e46a17, type: 2}
     - target: {fileID: 1543425480276883115, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1967,7 +1970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1618822912370536820, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
       propertyPath: m_Value
-      value: 1.03
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1618822912370536821, guid: 79e397298bc28da4f80bf7c73a46980a, type: 3}
       propertyPath: sliderEvent.m_PersistentCalls.m_Calls.Array.size

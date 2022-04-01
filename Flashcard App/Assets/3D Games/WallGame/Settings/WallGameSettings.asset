@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd6f6af743a0bb4289d29284009a1a9, type: 3}
   m_Name: WallGameSettings
   m_EditorClassIdentifier: 
-  minRepeatCardCount: 1
-  maxRepeatCardCount: 5
   numWrongAnswersToShow: 3
   TimeToCleanUpSpawnedObjects: 1.5
-  repeatCardAmount: 0
+  repeatCardAmount: 1
   promptSetting: 0

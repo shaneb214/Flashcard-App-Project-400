@@ -16,10 +16,6 @@ public class WallGameManager : MonoBehaviour
     [SerializeField] private WallGamePlayer playerPrefab;
     public WallGamePlayer spawnedPlayer;
 
-    [Tooltip("Number of times to repeat each card")]
-    [Range(1,WallGameSettingss.maxRepeatCardCount)]
-    [SerializeField] private int repeatTimes;
-
     private Func<Flashcard, string> GetPromptedBasedOnSetting;
     private Func<Flashcard, string> GetAnswerBasedOnSetting;
 
@@ -33,6 +29,9 @@ public class WallGameManager : MonoBehaviour
 
     [SerializeField] private WallPlatform currentWallPlatform;
     [SerializeField] private EndPlatform spawnedEndPlatform;
+
+    [Header("Settings")]
+    [SerializeField] private WallGameSettings wallGameSettings;
 
     //Start.
     private void Awake()
@@ -73,14 +72,14 @@ public class WallGameManager : MonoBehaviour
         //Not at end of queue.
         if (gameDataQueue.Count > 0)
         {
-            Destroy(currentWallPlatform.gameObject, WallGameSettingss.TimeToCleanUpSpawnedObjects);
+            Destroy(currentWallPlatform.gameObject, wallGameSettings.TimeToCleanUpSpawnedObjects);
 
             currentWallPlatform = currentWallPlatform.SpawnNextPlatform(wallPlatformPrefab);
             SetUpCurrentPlatform();
         }
         else
         {
-            Destroy(currentWallPlatform.gameObject, WallGameSettingss.TimeToCleanUpSpawnedObjects);
+            Destroy(currentWallPlatform.gameObject, wallGameSettings.TimeToCleanUpSpawnedObjects);
 
             spawnedEndPlatform = SpawnEndPlatform();
             spawnedEndPlatform.endPlatformTrigger.PlayerHitTrigger += OnPlayerHitEndGameTrigger;
@@ -114,7 +113,7 @@ public class WallGameManager : MonoBehaviour
 
     private void GenerateDataForGame()
     {
-        switch (WallGameSettingss.promptSetting)
+        switch (wallGameSettings.promptSetting)
         {
             case PromptSetting.Learning:
                 GetPromptedBasedOnSetting = GetLearningSideFromFlashcard;
@@ -128,7 +127,7 @@ public class WallGameManager : MonoBehaviour
 
         string prompted,corrrectAnswer;
 
-        for (int r = 0; r < repeatTimes; r++)
+        for (int r = 0; r < wallGameSettings.repeatCardAmount; r++)
         {
             flashcardsToGoThrough.Shuffle();
 
@@ -137,7 +136,7 @@ public class WallGameManager : MonoBehaviour
                 prompted = GetPromptedBasedOnSetting(flashcardsToGoThrough[i]);
                 corrrectAnswer = GetAnswerBasedOnSetting(flashcardsToGoThrough[i]);
 
-                List<Flashcard> wrongAnswersFlashcardList = flashcardsToGoThrough.GetItemsFromListIgnoringIndex(i, WallGameSettingss.numWrongAnswersToShow);
+                List<Flashcard> wrongAnswersFlashcardList = flashcardsToGoThrough.GetItemsFromListIgnoringIndex(i, wallGameSettings.numWrongAnswersToShow);
                 List<string> wrongAnswersListBasedOnSetting = new List<string>();
                 for (int j = 0; j < wrongAnswersFlashcardList.Count; j++)
                 {

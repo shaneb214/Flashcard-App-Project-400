@@ -9,6 +9,9 @@ public class WallGameSettingsUI : MonoBehaviour
     [SerializeField] private CustomDropdown promptSelectionDropdown;
     [SerializeField] private Button btnBack;
 
+    [Header("Settings to change")]
+    [SerializeField] WallGameSettings wallGameSettings;
+
     private void Awake()
     {
         btnBack.onClick.AddListener(OnBackButtonSelected);
@@ -16,8 +19,10 @@ public class WallGameSettingsUI : MonoBehaviour
 
     private void Start()
     {
-        repeatAmountSlider.minValue = WallGameSettingss.minRepeatCardCount;
-        repeatAmountSlider.maxValue = WallGameSettingss.maxRepeatCardCount;
+        repeatAmountSlider.minValue = WallGameSettings.minRepeatCardCount;
+        repeatAmountSlider.maxValue = WallGameSettings.maxRepeatCardCount;
+
+        repeatAmountSlider.mainSlider.value = wallGameSettings.repeatCardAmount;
 
 
         //LanguageProfile currentLanguageProfile = LanguageProfileController.Instance.currentLanguageProfile;
@@ -33,7 +38,7 @@ public class WallGameSettingsUI : MonoBehaviour
     private void OnBackButtonSelected()
     {
         //Update settings.
-        WallGameSettingss.repeatCardAmount = (int)repeatAmountSlider.mainSlider.value;
-        WallGameSettingss.promptSetting = (PromptSetting)promptSelectionDropdown.selectedItemIndex;
+        wallGameSettings.repeatCardAmount = (int)repeatAmountSlider.mainSlider.value;
+        wallGameSettings.promptSetting = (PromptSetting)promptSelectionDropdown.selectedItemIndex;
     }
 }
