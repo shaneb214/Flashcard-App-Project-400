@@ -164,7 +164,12 @@ public class WallGameManager : MonoBehaviour
         System.Random rng = new System.Random();
         int randomNumber = rng.Next(0, 2);
         return randomNumber == 0 ? flashcard.NativeSide : flashcard.LearningSide;
-    } 
+    }
+
+    private void OnDestroy()
+    {
+        FakeWall.PlayerHitMeEvent -= OnPlayerHitFakeWall;
+    }
 }
 
 public struct WallGamePlatformData

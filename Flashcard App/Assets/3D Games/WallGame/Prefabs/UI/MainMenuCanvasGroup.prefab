@@ -2498,6 +2498,7 @@ GameObject:
   - component: {fileID: 1618822912684936759}
   - component: {fileID: 1618822912684936758}
   - component: {fileID: 1618822912684936757}
+  - component: {fileID: 373997195196879680}
   m_Layer: 5
   m_Name: SettingsMenuHolder
   m_TagString: Untagged
@@ -2591,6 +2592,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &373997195196879680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618822912684936755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289bbefea0aeb7948a76a12a94209fcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repeatAmountSlider: {fileID: 1618822912370536821}
+  promptSelectionDropdown: {fileID: 1720553053152537929}
 --- !u!1 &1618822912736994689
 GameObject:
   m_ObjectHideFlags: 0
@@ -4245,7 +4260,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wall Dash
+  m_text: 'Wall Dash '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
   m_sharedMaterial: {fileID: 21131478253023500, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
@@ -4936,8 +4951,9 @@ MonoBehaviour:
   menuOffScreenTransform: {fileID: 1618822913627541898}
   mainMenuObject: {fileID: 1618822913050125559}
   settingsMenuObject: {fileID: 1618822912684936755}
-  menuCompleteMoveTime: 1
-  menuMoveType: 16
+  menuCompleteMoveTime: 0.45
+  menuMoveType: 14
+  mainMenuCharacter: {fileID: 0}
 --- !u!1 &1618822913617561388
 GameObject:
   m_ObjectHideFlags: 0
@@ -6230,7 +6246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114544219703512300, guid: 1190c8fdb950aad4a8076926f4a8b827, type: 3}
       propertyPath: m_text
-      value: Native
+      value: Item
       objectReference: {fileID: 0}
     - target: {fileID: 114544219703512300, guid: 1190c8fdb950aad4a8076926f4a8b827, type: 3}
       propertyPath: m_fontSize
@@ -6266,7 +6282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114726610096788064, guid: 1190c8fdb950aad4a8076926f4a8b827, type: 3}
       propertyPath: dropdownItems.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114726610096788064, guid: 1190c8fdb950aad4a8076926f4a8b827, type: 3}
       propertyPath: dropdownItems.Array.data[0].itemIcon
@@ -6296,10 +6312,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114805977690160460, guid: 1190c8fdb950aad4a8076926f4a8b827, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 114839204205883028, guid: 1190c8fdb950aad4a8076926f4a8b827, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a9697cb73fe5c01498e1074fd0c4d4ca, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 114839204205883028, guid: 1190c8fdb950aad4a8076926f4a8b827, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -6435,6 +6455,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 114992921545172100, guid: 1190c8fdb950aad4a8076926f4a8b827, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1190c8fdb950aad4a8076926f4a8b827, type: 3}
+--- !u!114 &1720553053152537929 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114726610096788064, guid: 1190c8fdb950aad4a8076926f4a8b827, type: 3}
+  m_PrefabInstance: {fileID: 1618822912658407209}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c6e5718ae5e9246af72590402986a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1543236272136101121 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224506986743456296, guid: 1190c8fdb950aad4a8076926f4a8b827, type: 3}
@@ -6470,6 +6501,34 @@ PrefabInstance:
     - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
       propertyPath: buttonText
       value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1618822913513021494}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnExitButtonSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WallGameMainMenuUIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 114649837067956828, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
       propertyPath: m_text
@@ -6623,7 +6682,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1746256365741306, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
       propertyPath: m_Name
-      value: btnPlay
+      value: btnSettings
       objectReference: {fileID: 0}
     - target: {fileID: 1746256365741306, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
       propertyPath: m_IsActive
@@ -6644,6 +6703,34 @@ PrefabInstance:
     - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
       propertyPath: buttonText
       value: Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1618822913513021494}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSettingsButtonSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WallGameMainMenuUIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 114649837067956828, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
       propertyPath: m_text
@@ -6818,6 +6905,34 @@ PrefabInstance:
     - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
       propertyPath: buttonText
       value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1618822913513021494}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPlayButtonSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WallGameMainMenuUIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 114649837067956828, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
       propertyPath: m_text
@@ -7235,6 +7350,34 @@ PrefabInstance:
     - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
       propertyPath: buttonText
       value: Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1618822913513021494}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBackToMainMenuButtonSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WallGameMainMenuUIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114604380074541702, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
+      propertyPath: clickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 114649837067956828, guid: 82f88af774792794bbcc4bed53218fa5, type: 3}
       propertyPath: m_text
