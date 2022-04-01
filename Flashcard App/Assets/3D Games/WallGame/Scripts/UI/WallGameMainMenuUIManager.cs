@@ -26,7 +26,12 @@ public class WallGameMainMenuUIManager : MonoBehaviour
 
     private void Start()
     {
-        
+        WallGameManager.GameEndedEvent += OnWallGameEnded;
+    }
+
+    private void OnWallGameEnded()
+    {
+        EnableMainMenu();
     }
 
     public void OnSettingsButtonSelected()
@@ -67,5 +72,10 @@ public class WallGameMainMenuUIManager : MonoBehaviour
         myCanvasGroup.alpha = 1;
         myCanvasGroup.interactable = true;
         myCanvasGroup.blocksRaycasts = true;
+    }
+
+    private void OnDestroy()
+    {
+        WallGameManager.GameEndedEvent -= OnWallGameEnded;
     }
 }

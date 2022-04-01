@@ -10,6 +10,7 @@ public class WallGameManager : MonoBehaviour
     //Events.
     public static Action<WallGamePlatformData> PlatformDataDequeudEvent;
     public static Action GameStartedEvent;
+    public static Action GameEndedEvent;
 
     [Header("Player")]
     [SerializeField] private WallGamePlayer playerPrefab;
@@ -38,6 +39,7 @@ public class WallGameManager : MonoBehaviour
     [SerializeField] private EndPlatform endPlatformPrefab;
 
     [SerializeField] private WallPlatform currentWallPlatform;
+    [SerializeField] private EndPlatform spawnedEndPlatform;
 
     //Start.
     private void Awake()
@@ -61,13 +63,13 @@ public class WallGameManager : MonoBehaviour
             //new Flashcard("Tell me", "скажи мне"),
             //new Flashcard("I understand", "я понимаю"),
         });
-
-        GenerateDataForGame();
     }
 
     public void StartGame()
     {
         GameStartedEvent?.Invoke();
+
+        GenerateDataForGame();
 
         currentWallPlatform = Instantiate(wallPlatformPrefab, Vector3.zero,Quaternion.identity);
         spawnedPlayer = Instantiate(playerPrefab, currentWallPlatform.playerSpawnPos.position, Quaternion.identity);
@@ -86,8 +88,18 @@ public class WallGameManager : MonoBehaviour
         }
         else
         {
-            SpawnEndPlatform();
+            Destroy(currentWallPlatform.gameObject, WallGameDataSlinger.TimeToCleanUpSpawnedObjects);
+
+            spawnedEndPlatform = SpawnEndPlatform();
+            spawnedEndPlatform.endPlatformTrigger.PlayerHitTrigger += OnPlayerHitEndGameTrigger;
         }
+    }
+
+    private void OnPlayerHitEndGameTrigger()
+    {
+        gameDataQueue.Clear();
+        GameEndedEvent?.Invoke();
+        Destroy(spawnedEndPlatform.gameObject);
     }
 
     public void SetPlayerPositionAndRotation(Vector3 position, Quaternion rotation)
@@ -96,7 +108,7 @@ public class WallGameManager : MonoBehaviour
         spawnedPlayer.transform.rotation = rotation;
     }
 
-    private void SpawnEndPlatform() => Instantiate(endPlatformPrefab, currentWallPlatform.endPlatformSpawnPos.position, Quaternion.identity);
+    private EndPlatform SpawnEndPlatform() => Instantiate(endPlatformPrefab, currentWallPlatform.endPlatformSpawnPos.position, Quaternion.identity);
 
     private void SetUpCurrentPlatform()
     {

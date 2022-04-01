@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class EndPlatform : MonoBehaviour
 {
-
-
-
-
+    public EndPlatformTrigger endPlatformTrigger;
 }
