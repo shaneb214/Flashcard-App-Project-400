@@ -30,7 +30,7 @@
             (
                 new Language() { ISO = "en", Name = "English" },
                 new Language() { ISO = "ru", Name = "Russian" },
-                new Language() { ISO = "it", Name = "Italian" }, 
+                new Language() { ISO = "it", Name = "Italian" },
                 new Language() { ISO = "ja", Name = "Japanese" }
             );
             context.SaveChanges();
