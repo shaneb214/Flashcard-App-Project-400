@@ -26,7 +26,6 @@ public class APIUtilities : MonoBehaviour
 
     public void AttemptToRegister(string email, string username, string password, string confirmPassword, Action successCallback, Action<string> failedCallback) => StartCoroutine(Register(email, username, password, confirmPassword, successCallback, failedCallback));
     public void AttemptToLogin(string email, string password, Action<Token> successCallback, Action<string> failedCallback) => StartCoroutine(Login(email, password, successCallback, failedCallback));
-
     private IEnumerator Register(string email, string username, string password, string confirmPassword, Action successCallback, Action<string> failedCallback)
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
@@ -74,6 +73,32 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
+
+    public void AttemptGetLanguages()
+    {
+        StartCoroutine(GetLanguages());
+    }
+
+    private IEnumerator GetLanguages()
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + "/api/Languages"))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+
+            }
+            else
+            {
+            }
+        }
+
+
+
+        yield return null;
+    }
+
 }
 
 [Serializable]

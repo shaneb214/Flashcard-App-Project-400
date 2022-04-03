@@ -37,6 +37,8 @@ namespace FlashcardAppWebAPI.Models
         public DbSet<Language> Languages { get; set; }
 
         public DbSet<LanguageProfile> LanguageProfiles { get; set; }
+
+        public System.Data.Entity.DbSet<FlashcardAppWebAPI.Models.ApplicationUser> ApplicationUsers { get; set; }
         //public DbSet<Set> Sets { get; set; }
 
         //public DbSet<Flashcard> Flashcards { get; set; }
