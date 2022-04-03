@@ -27,7 +27,7 @@ public class DropDownSelectLanguage : MonoBehaviour
 
         for (int i = 0; i < availableLanguages.Count; i++)
         {
-            dropdownOptionData.Add(new TMP_Dropdown.OptionData(availableLanguages[i]._name, Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{availableLanguages[i].ISO}")));
+            dropdownOptionData.Add(new TMP_Dropdown.OptionData(availableLanguages[i].Name, Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{availableLanguages[i].ISO}")));
         }
 
         myDropdown.options.Clear();

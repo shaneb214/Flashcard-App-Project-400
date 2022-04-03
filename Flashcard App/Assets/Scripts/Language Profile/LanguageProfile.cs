@@ -49,6 +49,6 @@ public class LanguageProfile
 
     public override string ToString()
     {
-        return $"{nativeLanguage._name} <> {learningLanguage._name}";
+        return $"{nativeLanguage.Name} <> {learningLanguage.Name}";
     }
 }

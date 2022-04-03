@@ -24,6 +24,12 @@ public class APIUtilities : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    //List<Language> myLanguages = new List<Language>(); 
+    //private IEnumerator Start()
+    //{
+    //    yield return GetLanguages(listFromAPI => myLanguages = listFromAPI);
+    //}
+
     public void AttemptToRegister(string email, string username, string password, string confirmPassword, Action successCallback, Action<string> failedCallback) => StartCoroutine(Register(email, username, password, confirmPassword, successCallback, failedCallback));
     public void AttemptToLogin(string email, string password, Action<Token> successCallback, Action<string> failedCallback) => StartCoroutine(Login(email, password, successCallback, failedCallback));
     private IEnumerator Register(string email, string username, string password, string confirmPassword, Action successCallback, Action<string> failedCallback)
@@ -74,12 +80,8 @@ public class APIUtilities : MonoBehaviour
         }
     }
 
-    public void AttemptGetLanguages()
-    {
-        StartCoroutine(GetLanguages());
-    }
 
-    private IEnumerator GetLanguages()
+    public IEnumerator GetLanguages(Action<List<Language>> returnCallback)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + "/api/Languages"))
         {
@@ -87,16 +89,16 @@ public class APIUtilities : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
+                string json = JSONHelper.ModifyJSONString(request.downloadHandler.text);
+                List<Language> languages = JSONHelper.FromJson<Language>(json);
 
+                returnCallback(languages);
             }
             else
             {
+                returnCallback(null);
             }
         }
-
-
-
-        yield return null;
     }
 
 }

@@ -398,6 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89751586f5746d743b0cd79e49037f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  languagesList: []
   defaultLanguageHolder: {fileID: 11400000, guid: 857811e63db8ef14dbd95886fce5c9df, type: 2}
 --- !u!1 &1093999863
 GameObject:
@@ -497,10 +498,10 @@ MonoBehaviour:
     ID: 
     nativeLanguage:
       ISO: 
-      _name: 
+      Name: 
     learningLanguage:
       ISO: 
-      _name: 
+      Name: 
     IsCurrentProfile: 0
     userID: 
     defaultSetID: 
@@ -760,7 +761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3820d57013530214fa5389200eb410b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ApiAddress: https://localhost:44306/api
 --- !u!1 &1566567975
 GameObject:
   m_ObjectHideFlags: 0
