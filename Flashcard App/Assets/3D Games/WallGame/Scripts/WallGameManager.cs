@@ -3,33 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PromptSetting { Learning, Native }
+
 public class WallGameManager : MonoBehaviour
 {
-    //Singleton.
+    [Header("Singleton")]
     public static WallGameManager Instance;
-    //Events.
+    [Header("Events")]
     public static Action<WallGamePlatformData> PlatformDataDequeudEvent;
     public static Action GameStartedEvent;
     public static Action GameEndedEvent;
-
     [Header("Player")]
     [SerializeField] private WallGamePlayer playerPrefab;
     public WallGamePlayer spawnedPlayer;
-
+    [Header("Delegates for Data Retrieval based on settings")]
     private Func<Flashcard, string> GetPromptedBasedOnSetting;
     private Func<Flashcard, string> GetAnswerBasedOnSetting;
-
-    //Flashcard data passed to and used by game.
+    [Header("Flashcard game data")]
     [SerializeField] private List<Flashcard> flashcardsToGoThrough = new List<Flashcard>();
     private Queue<WallGamePlatformData> gameDataQueue = new Queue<WallGamePlatformData>();
-
     [Header("Prefabs")]
     [SerializeField] private WallPlatform wallPlatformPrefab;
     [SerializeField] private EndPlatform endPlatformPrefab;
-
-    [SerializeField] private WallPlatform currentWallPlatform;
-    [SerializeField] private EndPlatform spawnedEndPlatform;
-
+    [Header("Spawned Platforms")]
+    private WallPlatform currentWallPlatform;
+    private EndPlatform spawnedEndPlatform;
     [Header("Settings")]
     [SerializeField] private WallGameSettings wallGameSettings;
 
@@ -41,6 +39,8 @@ public class WallGameManager : MonoBehaviour
     }
     private void Start()
     {
+        Screen.orientation = ScreenOrientation.Landscape;
+
         flashcardsToGoThrough.AddRange(new List<Flashcard>()
         {
             new Flashcard("Hello", "привет"),
@@ -170,17 +170,4 @@ public struct WallGamePlatformData
         this.correctAnswer = correctAnswer;
         this.wrongAnswers = wrongAnswers;
     }
-}
-
-public enum PromptSetting { Learning, Native }
-
-public static class WallGameSettingss
-{
-    public const int minRepeatCardCount = 1;
-    public const int maxRepeatCardCount = 5;
-    public const int numWrongAnswersToShow = 3;
-    public const float TimeToCleanUpSpawnedObjects = 1.5f;
-
-    public static int repeatCardAmount = minRepeatCardCount;
-    public static PromptSetting promptSetting = PromptSetting.Learning;
 }
