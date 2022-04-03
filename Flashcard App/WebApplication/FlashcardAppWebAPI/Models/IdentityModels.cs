@@ -33,7 +33,12 @@ namespace FlashcardAppWebAPI.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<CustomUser> CustomUser { get; set; }
+        public DbSet<CustomUser> CustomUsers { get; set; }
         public DbSet<Language> Languages { get; set; }
+
+        public DbSet<LanguageProfile> LanguageProfiles { get; set; }
+        //public DbSet<Set> Sets { get; set; }
+
+        //public DbSet<Flashcard> Flashcards { get; set; }
     }
 }

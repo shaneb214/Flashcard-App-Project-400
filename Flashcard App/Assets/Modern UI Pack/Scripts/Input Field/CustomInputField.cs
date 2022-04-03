@@ -28,6 +28,10 @@ namespace Michsky.UI.ModernUIPack
         private string instaInAnim = "Instant In";
         private string instaOutAnim = "Instant Out";
 
+        public string Text { get { return inputField.text; } set { inputField.text = value; } }
+
+        public bool InputFieldIsEmpty { get { return inputField.text == string.Empty; } }
+
         void Awake()
         {
             if (inputField == null) { inputField = gameObject.GetComponent<TMP_InputField>(); }

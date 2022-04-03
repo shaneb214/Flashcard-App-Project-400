@@ -26,9 +26,7 @@ namespace FlashcardAppWebAPI.Controllers
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
-        public AccountController()
-        {
-        }
+        public AccountController() { }
 
         public AccountController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
@@ -328,17 +326,25 @@ namespace FlashcardAppWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() { UserName = model.Username, Email = model.Email};
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-
-
-
 
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
+            }
+
+
+            CustomUser newUser = new CustomUser()
+            {
+                ID = user.Id
+            };
+
+            using (var db = ApplicationDbContext.Create())
+            {
+                db.CustomUsers.Add(newUser);
+                db.SaveChanges();
             }
 
             return Ok();
