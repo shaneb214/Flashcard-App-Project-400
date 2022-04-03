@@ -5,6 +5,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
+
+
+
 public class RegistrationScreenManager : MonoBehaviour
 {
     //Components.
@@ -68,10 +73,13 @@ public class RegistrationScreenManager : MonoBehaviour
 
     private void OnRegisterSuccessful() 
     {
+        print("User registered successfully.");
         SetVisualRegisteringProcess(false);  
     }
     private void OnRegisterUnsuccessful(string errorJson)
     {
+        print("User did NOT register.");
+
         btnRegister.enabled = true;
         errorMessage.EnableMessage(errorJson);
 

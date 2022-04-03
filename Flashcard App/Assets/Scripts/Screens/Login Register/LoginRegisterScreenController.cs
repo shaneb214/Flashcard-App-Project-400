@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class LoginRegisterScreenController : MonoBehaviour
 {
     [Header("Login Input Fields")]
-    [SerializeField] private CustomInputField emailInputField;
+    [SerializeField] private CustomInputField usernameInputField;
     [SerializeField] private CustomInputField passwordInputField;
 
     [Header("Buttons")]
@@ -21,13 +21,13 @@ public class LoginRegisterScreenController : MonoBehaviour
     [Header("Progress Bar")]
     [SerializeField] private UIManagerProgressBarLoop progressBarLoop;
 
-    [SerializeField] private bool IsAttemptingToLogin;
+    [SerializeField] private bool InProcessOfAttemptingToLogin;
 
     private bool CanAttemptToLogin 
     { 
         get 
         { 
-            return !emailInputField.InputFieldIsEmpty && 
+            return !usernameInputField.InputFieldIsEmpty && 
                    !passwordInputField.InputFieldIsEmpty; 
         } 
     }
@@ -46,15 +46,46 @@ public class LoginRegisterScreenController : MonoBehaviour
             return;
         }
 
-        IsAttemptingToLogin = true;
-        progressBarLoop.gameObject.SetActive(true);
+        if (errorMessage.IsActive)
+            errorMessage.Disable();
+
+        SetVisualRegisteringProcess(true);
+
+
+        APIUtilities.Instance.AttemptToLogin(usernameInputField.Text, passwordInputField.Text, OnLoginSuccessful, OnLoginUnsuccessful);
+
     }
     //private void OnRegisterButtonSelected() 
     //{ 
     
     //}
 
-    private void OnLoginSuccessful() { }
-    private void OnLoginUnsuccessful() { }
+    private void OnLoginSuccessful(Token token)
+    {
+        print($"User with id: {token.userID} logged in.");
+        print($"Token expires in {token.expires_in}");   
 
+        SetVisualRegisteringProcess(false);
+    }
+    private void OnLoginUnsuccessful(string errorJson)
+    {
+        print("Login was not successful.");
+        errorMessage.EnableMessage(errorJson);
+
+        SetVisualRegisteringProcess(false);
+    }
+
+    private void SetVisualRegisteringProcess(bool enable)
+    {
+        if (enable)
+        {
+            InProcessOfAttemptingToLogin = true;
+            progressBarLoop.gameObject.SetActive(enable);
+        }
+        else
+        {
+            InProcessOfAttemptingToLogin = false;
+            progressBarLoop.gameObject.SetActive(enable);
+        }
+    }
 }

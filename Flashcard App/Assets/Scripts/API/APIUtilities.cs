@@ -6,9 +6,14 @@ using UnityEngine.Networking;
 
 public class APIUtilities : MonoBehaviour
 {
+    //Singleton.
     public static APIUtilities Instance;
+    //Events.
+    public static Action<Token> UserLoggedInEvent;
+    public static Action UserRegisteredEvent;
 
-    public const string ApiAddress = "https://localhost:44306/api";
+
+    public const string ApiAddress = "https://localhost:44306";
 
     //Start.
     private void Awake()
@@ -30,13 +35,14 @@ public class APIUtilities : MonoBehaviour
         data.Add("Password", password);
         data.Add("ConfirmPassword", confirmPassword);
 
-        using (UnityWebRequest request = UnityWebRequest.Post(ApiAddress + "/Account/Register", data))
+        using (UnityWebRequest request = UnityWebRequest.Post(ApiAddress + "/api/Account/Register", data))
         {
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.Success)
             {
                 successCallback.Invoke();
+                UserRegisteredEvent?.Invoke();
             }
             else
             {
@@ -58,8 +64,9 @@ public class APIUtilities : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                //this should work....
-                successCallback.Invoke(JsonUtility.FromJson<Token>(request.downloadHandler.text));
+                Token userToken = JsonUtility.FromJson<Token>(request.downloadHandler.text);
+                successCallback.Invoke(userToken);
+                UserLoggedInEvent?.Invoke(userToken);
             }
             else
             {
@@ -67,5 +74,12 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
+}
 
+[Serializable]
+public class Token
+{
+    public string access_token;
+    public string userID;
+    public int expires_in;
 }
