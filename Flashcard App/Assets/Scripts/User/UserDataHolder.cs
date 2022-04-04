@@ -36,6 +36,12 @@ public class UserDataHolder : MonoBehaviour
         //SetCurrentUserFromJSON();
     }
 
+    public void SetCurrentUser(User user)
+    {
+        currentUser = user;
+    }
+
+
     private User CreateDefaultUser()
     {
         User defaultUser = new User("Shane","shaneb214@gmail.com");

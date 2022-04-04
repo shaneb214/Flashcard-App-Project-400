@@ -5,7 +5,7 @@ public class LanguageDataHolder : MonoBehaviour
 {
     public static LanguageDataHolder Instance;
 
-    [SerializeField] private List<Language> languagesList = new List<Language>();
+    [SerializeField] public List<Language> languagesList = new List<Language>();
 
     [Header("Default Languages")]
     [SerializeField] private DefaultLanguageHolder defaultLanguageHolder;

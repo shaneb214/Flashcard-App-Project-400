@@ -213,7 +213,7 @@ namespace Michsky.UI.ModernUIPack
             {
                 selectedText.text = dropdownTag;
                 currentListParent = transform.parent;
-                Debug.LogWarning("<b>[Dropdown]</b> There is no dropdown items in the list.", this);
+                //Debug.LogWarning("<b>[Dropdown]</b> There is no dropdown items in the list.", this);
                 return;
             }
 
