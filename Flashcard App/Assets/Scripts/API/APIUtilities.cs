@@ -181,7 +181,6 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
-
     public IEnumerator PostNewSet(Set set)
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
@@ -202,6 +201,29 @@ public class APIUtilities : MonoBehaviour
             else
             {
                 print("New set post Unsuccessful.");
+            }
+        }
+    }
+    public IEnumerator PostNewFlashcard(Flashcard flashcard)
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("Id", flashcard.Id);
+        data.Add("setID", flashcard.setID);
+        data.Add("nativeSide", flashcard.nativeSide);
+        data.Add("learningSide", flashcard.learningSide);
+        data.Add("notes", flashcard.notes);
+
+        using (UnityWebRequest request = UnityWebRequest.Post(ApiAddress + "/api/Flashcards", data))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                print("New flashcard posted.");
+            }
+            else
+            {
+                print("New flashcard post Unsuccessful.");
             }
         }
     }
