@@ -115,7 +115,9 @@ namespace FlashcardAppWebAPI.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = set.ID }, set);
+            return Ok();
+
+            //return CreatedAtRoute("DefaultApi", new { id = set.ID }, set);
         }
 
         // DELETE: api/Sets/5

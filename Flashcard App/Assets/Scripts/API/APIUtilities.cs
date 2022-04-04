@@ -81,6 +81,7 @@ public class APIUtilities : MonoBehaviour
     }
 
 
+    //Get data.
     public IEnumerator GetLanguages(Action<List<Language>> returnCallback)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + "/api/Languages"))
@@ -119,7 +120,6 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
-
     public IEnumerator GetSetsOfLanguageProfile(string languageProfileID)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/Sets?languageProfileID={languageProfileID}"))
@@ -138,7 +138,6 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
-
     public IEnumerator GetFlashcardsOfLanguageProfile(string languageProfileID)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/Flashcards?languageProfileID={languageProfileID}"))
@@ -158,6 +157,7 @@ public class APIUtilities : MonoBehaviour
         }
     }
 
+    //Post data.
     public IEnumerator PostNewLanguageProfile(string userID,LanguageProfile languageProfile)
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
@@ -173,17 +173,39 @@ public class APIUtilities : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-
+                print("New language profile posted.");
             }
             else
             {
-
+                print("Lanugage profile post Unsuccessful.");
             }
         }
-
-
-        yield return null;
     }
+
+    public IEnumerator PostNewSet(Set set)
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("ID", set.ID);
+        data.Add("Name", set.Name);
+        data.Add("LanguageProfileID", set.LanguageProfileID);
+        data.Add("ParentSetID", set.ParentSetID);
+        data.Add("IsDefaultSet", set.IsDefaultSet.ToString());
+
+        using (UnityWebRequest request = UnityWebRequest.Post(ApiAddress + "/api/Sets", data))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                print("New set posted.");
+            }
+            else
+            {
+                print("New set post Unsuccessful.");
+            }
+        }
+    }
+
 }
 
 [Serializable]

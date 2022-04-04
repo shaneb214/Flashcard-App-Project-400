@@ -30,6 +30,20 @@ public class Set
         SetCreatedEvent?.Invoke(this);
         Debug.Log($"Set created: {this}");
     }
+
+    public Set(string Name, string parentSetID, bool isDefaultSet,string languageProfileID)
+    {
+        ID = Guid.NewGuid().ToString();
+        ParentSetID = parentSetID;
+        this.Name = Name;
+        IsDefaultSet = isDefaultSet;
+        LanguageProfileID = languageProfileID;
+
+        SetCreatedEvent?.Invoke(this);
+        Debug.Log($"Set created: {this}");
+    }
+
+
     public override string ToString()
     {
         return $"Set: {Name}";
