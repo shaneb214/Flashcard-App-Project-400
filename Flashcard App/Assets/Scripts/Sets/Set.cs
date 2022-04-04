@@ -15,14 +15,17 @@ public class Set
 
     public string LanguageProfileID;
     public string ParentSetID;
-    private bool IsParentSet { get { return ParentSetID == string.Empty; } }
+    private bool IsParentSet { get { return ParentSetID == string.Empty || ParentSetID == null; } }
 
-    public Set(string Name,string parentSetID)
+    public bool IsDefaultSet;
+
+    public Set(string Name,string parentSetID,bool isDefaultSet)
     {
         ID = Guid.NewGuid().ToString();
         LanguageProfileID = LanguageProfileController.Instance.currentLanguageProfile.ID;
         ParentSetID = parentSetID;
         this.Name = Name;
+        IsDefaultSet = isDefaultSet;
 
         SetCreatedEvent?.Invoke(this);
         Debug.Log($"Set created: {this}");

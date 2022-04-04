@@ -102,7 +102,7 @@ public class APIUtilities : MonoBehaviour
     }
     public IEnumerator GetLanguageProfilesOfUser(string userID,Action<List<LanguageProfile>> returnCallback)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/CustomUsers/GetLanguageProfiles?id={userID}"))
+        using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/LanguageProfiles?userID={userID}"))
         {
             yield return request.SendWebRequest();
 
@@ -122,7 +122,7 @@ public class APIUtilities : MonoBehaviour
 
     public IEnumerator GetSetsOfLanguageProfile(string languageProfileID)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/Sets/GetSetsOfLanguageProfileID?languageProfileID={languageProfileID}"))
+        using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/Sets?languageProfileID={languageProfileID}"))
         {
             yield return request.SendWebRequest();
 

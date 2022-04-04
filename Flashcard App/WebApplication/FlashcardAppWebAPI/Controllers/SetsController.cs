@@ -36,20 +36,22 @@ namespace FlashcardAppWebAPI.Controllers
             return Ok(set);
         }
 
-        [Route("api/Sets/GetSetsOfLanguageProfileID")]
-        [ResponseType(typeof(IQueryable<Set>))]
-        public async Task<IHttpActionResult> GetSetsOfLanguageProfileID(string languageProfileID)
+        [ResponseType(typeof(List<Set>))]
+        public async Task<IHttpActionResult> GetSetsOfLanguageProfile(string languageProfileID)
         {
             LanguageProfile languageProfile = await db.LanguageProfiles.FindAsync(languageProfileID);
-            var sets = languageProfile.Sets;
 
-            if (sets == null)
+            List<Set> setsOfProfile = await GetSets().Where(set => set.LanguageProfileID == languageProfileID).ToListAsync();
+
+            if (setsOfProfile == null)
             {
                 return NotFound();
             }
 
-            return Ok(sets);
+            return Ok(setsOfProfile);
         }
+
+
 
         // PUT: api/Sets/5
         [ResponseType(typeof(void))]

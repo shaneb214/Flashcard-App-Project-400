@@ -37,18 +37,18 @@ namespace FlashcardAppWebAPI.Controllers
         }
 
 
-        [Route("api/CustomUsers/GetLanguageProfiles")]
-        [ResponseType(typeof(List<LanguageProfile>))]
-        public async Task<IHttpActionResult> GetCustomUserLanguageProfiles(string id)
-        {
-            CustomUser customUser = await db.CustomUsers.FindAsync(id);
-            if (customUser == null)
-            {
-                return NotFound();
-            }
+        //[Route("api/CustomUsers/GetLanguageProfiles")]
+        //[ResponseType(typeof(List<LanguageProfile>))]
+        //public async Task<IHttpActionResult> GetCustomUserLanguageProfiles(string id)
+        //{
+        //    CustomUser customUser = await db.CustomUsers.FindAsync(id);
+        //    if (customUser == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(customUser.LanguageProfiles);
-        }
+        //    //return Ok(customUser.LanguageProfiles);
+        //}
 
 
         // PUT: api/CustomUsers/5

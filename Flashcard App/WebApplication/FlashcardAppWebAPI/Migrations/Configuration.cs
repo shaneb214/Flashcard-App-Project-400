@@ -52,15 +52,14 @@
 
             //SETS.
 
-            //context.LanguageProfiles.Find("9b18fbf4-b158-4fa5-a6c7-860163c87863"). AddOrUpdate(new LanguageProfile()
+            //context.Sets.AddOrUpdate(new Set()
             //{
             //    ID = Guid.NewGuid().ToString(),
-            //    userID = "0ae94ef8-ecff-4d6a-a030-f2b573a797fa",
-            //    nativeLanguageISO = "en",
-            //    learningLanguageISO = "ru",
-            //    IsCurrentProfile = true
+            //    Name = "Animals",
+            //    LanguageProfileID = "cc3b0a6b-b418-4c1a-92cd-7b9fec687d51",
+            //    IsDefaultSet = true
             //});
-
+            //context.SaveChanges();
         }
     }
 }
