@@ -21,7 +21,10 @@ public class SetsDataHolder : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(this);
+        }
 
         Set.SetCreatedEvent += OnSetCreated;
     }
@@ -34,8 +37,10 @@ public class SetsDataHolder : MonoBehaviour
 #endif
 
         //Read from json.
-        SetList = JSONHelper.ReadListDataFromJSONFile<Set>(jsonPath);
+        //SetList = JSONHelper.ReadListDataFromJSONFile<Set>(jsonPath);
     }
+
+    public void UpdateSetsData(List<Set> sets) => SetList = sets; 
 
     private void OnSetCreated(Set setCreated) => SetList.Add(setCreated);
 

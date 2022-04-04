@@ -24,6 +24,8 @@ public class RegistrationScreenManager : MonoBehaviour
     [SerializeField] private ErrorMessage errorMessage;
     private const string errorMessageInputFieldEmpty = "All input fields must be filled!";
 
+    [SerializeField] private ScreenPushData createFirstProfileScreenPushData;
+
     private bool CanAttemptToRegister 
     { 
         get 
@@ -65,12 +67,17 @@ public class RegistrationScreenManager : MonoBehaviour
         }
     }
 
-
     private void OnRegisterSuccessful() 
     {
         print("User registered successfully.");
-        SetVisualRegisteringProcess(false);  
+        SetVisualRegisteringProcess(false);
+
+        APIUtilities.Instance.AttemptToLogin(usernameInputField.Text, passwordInputField.Text, null, null);
+
+        BlitzyUI.UIManager.Instance.QueuePop(); 
+        BlitzyUI.UIManager.Instance.QueuePush(createFirstProfileScreenPushData.ID); 
     }
+
     private void OnRegisterUnsuccessful(string errorJson)
     {
         print("User did NOT register.");

@@ -25,8 +25,8 @@ public class APIUtilities : MonoBehaviour
     }
 
     public void AttemptToRegister(string email, string username, string password, string confirmPassword, Action successCallback, Action<string> failedCallback) => StartCoroutine(Register(email, username, password, confirmPassword, successCallback, failedCallback));
-    public void AttemptToLogin(string email, string password, Action<Token> successCallback, Action<string> failedCallback) => StartCoroutine(Login(email, password, successCallback, failedCallback));
-    private IEnumerator Register(string email, string username, string password, string confirmPassword, Action successCallback, Action<string> failedCallback)
+    public void AttemptToLogin(string username, string password, Action<Token> successCallback, Action<string> failedCallback) => StartCoroutine(Login(username, password, successCallback, failedCallback));
+    public IEnumerator Register(string email, string username, string password, string confirmPassword, Action successCallback, Action<string> failedCallback)
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("Email", email);
@@ -40,16 +40,17 @@ public class APIUtilities : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                successCallback.Invoke();
+                successCallback?.Invoke();
                 UserRegisteredEvent?.Invoke();
+                //User newUser = new User(username, email);
             }
             else
             {
-                failedCallback.Invoke(request.downloadHandler.text);
+                failedCallback?.Invoke(request.downloadHandler.text);
             }
         }
     }
-    private IEnumerator Login(string username,string password, Action<Token> successCallback, Action<string> failedCallback)
+    public IEnumerator Login(string username,string password, Action<Token> successCallback, Action<string> failedCallback)
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("grant_type", "password");
@@ -58,24 +59,42 @@ public class APIUtilities : MonoBehaviour
 
         using (UnityWebRequest request = UnityWebRequest.Post($"{ApiAddress}/Token", data))
         {
-
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.Success)
             {
                 Token userToken = JsonUtility.FromJson<Token>(request.downloadHandler.text);
-                successCallback.Invoke(userToken);
+                successCallback?.Invoke(userToken);
                 UserLoggedInEvent?.Invoke(userToken);
             }
             else
             {
-                failedCallback.Invoke(request.downloadHandler.text);
+                failedCallback?.Invoke(request.downloadHandler.text);
             }
         }
     }
 
 
     //Get data.
+    public IEnumerator GetUser(string userID,Action<User> returnCallback)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/CustomUsers/GetUserDTO?id={userID}"))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                //string json = JSONHelper.ModifyJSONString(request.downloadHandler.text);
+                string json = request.downloadHandler.text;
+                User user = JsonUtility.FromJson<User>(json);
+                returnCallback(user);
+            }
+            else
+            {
+
+            }
+        }
+    }
     public IEnumerator GetLanguages(Action<List<Language>> returnCallback)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + "/api/Languages"))
@@ -114,7 +133,7 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
-    public IEnumerator GetSetsOfLanguageProfile(string languageProfileID)
+    public IEnumerator GetSetsOfLanguageProfile(string languageProfileID,Action<List<Set>> returnCallback)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/Sets?languageProfileID={languageProfileID}"))
         {
@@ -124,7 +143,7 @@ public class APIUtilities : MonoBehaviour
             {
                 string json = JSONHelper.ModifyJSONString(request.downloadHandler.text);
                 List<Set> setsOfLanguageProfile = JSONHelper.FromJson<Set>(json);
-
+                returnCallback?.Invoke(setsOfLanguageProfile);
             }
             else
             {
@@ -132,7 +151,7 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
-    public IEnumerator GetFlashcardsOfLanguageProfile(string languageProfileID)
+    public IEnumerator GetFlashcardsOfLanguageProfile(string languageProfileID,Action<List<Flashcard>> returnCallback)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/Flashcards?languageProfileID={languageProfileID}"))
         {
@@ -142,7 +161,7 @@ public class APIUtilities : MonoBehaviour
             {
                 string json = JSONHelper.ModifyJSONString(request.downloadHandler.text);
                 List<Flashcard> flashcardsOfLanguageProfile = JSONHelper.FromJson<Flashcard>(json);
-
+                returnCallback?.Invoke(flashcardsOfLanguageProfile);
             }
             else
             {

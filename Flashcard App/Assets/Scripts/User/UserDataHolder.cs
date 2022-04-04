@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -24,10 +25,21 @@ public class UserDataHolder : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(this);
+        }
 
-        User.UserCreatedEvent += OnNewUserCreated;
+        //User.UserCreatedEvent += SetCurrentUser;
+        //APIUtilities.UserLoggedInEvent += OnUserLoggedIn;
     }
+
+    private void OnUserLoggedIn(Token token)
+    {
+        StartCoroutine(APIUtilities.Instance.GetUser(token.userID, SetCurrentUser));
+    }
+
+
     private void Start()
     {
         //CreateDefaultUser();
@@ -36,11 +48,15 @@ public class UserDataHolder : MonoBehaviour
         //SetCurrentUserFromJSON();
     }
 
-    public void SetCurrentUser(User user)
-    {
-        currentUser = user;
-    }
+    public void SetCurrentUser(User user) => currentUser = user;
 
+    public void SaveUserToPlayerPrefs(string userID,string username,string email)
+    {
+        PlayerPrefs.SetString("ID", userID);
+        PlayerPrefs.SetString("Username", username);
+        PlayerPrefs.SetString("Email", email);
+        //PlayerPrefs.SetInt("Token")
+    }
 
     private User CreateDefaultUser()
     {
@@ -70,7 +86,14 @@ public class UserDataHolder : MonoBehaviour
         currentUser = JsonUtility.FromJson<User>(json);
     }
 
-    private void OnNewUserCreated(User newUser) => userList.Add(newUser);
+    //private void OnNewUserCreated(User newUser)
+    //{     
+    //    userList.Add(newUser);
+    //}
 
-    private void OnDestroy() => User.UserCreatedEvent -= OnNewUserCreated;
+    private void OnDestroy()
+    {
+        //APIUtilities.UserLoggedInEvent -= OnUserLoggedIn;
+        //User.UserCreatedEvent -= SetCurrentUser;
+    }
 }

@@ -12,7 +12,7 @@ public class LoginRegisterScreenController : MonoBehaviour
 
     [Header("Buttons")]
     [SerializeField] private Button btnLogin;
-    //[SerializeField] private Button btnGoToRegisterScreen;
+    [SerializeField] private Button btnGoToRegisterScreen;
 
     [Header("Error message")]
     [SerializeField] private ErrorMessage errorMessage;
@@ -22,6 +22,9 @@ public class LoginRegisterScreenController : MonoBehaviour
     [SerializeField] private UIManagerProgressBarLoop progressBarLoop;
 
     [SerializeField] private bool InProcessOfAttemptingToLogin;
+    private Coroutine attemptToLoginCoroutine;
+
+    [SerializeField] private ScreenPushData homeScreenPushData;
 
     private bool CanAttemptToLogin 
     { 
@@ -35,12 +38,12 @@ public class LoginRegisterScreenController : MonoBehaviour
     private void Awake()
     {
         btnLogin.onClick.AddListener(OnLoginButtonSelected);
-        //btnGoToRegisterScreen.onClick.AddListener(OnRegisterButtonSelected);
+        btnGoToRegisterScreen.onClick.AddListener(OnRegisterButtonSelected);
     }
 
-    private void OnLoginButtonSelected() 
+    private void OnLoginButtonSelected()
     {
-        if(!CanAttemptToLogin)
+        if (!CanAttemptToLogin)
         {
             errorMessage.EnableMessage(inputFieldsEmptyErrorMessage);
             return;
@@ -50,26 +53,50 @@ public class LoginRegisterScreenController : MonoBehaviour
             errorMessage.Disable();
 
         SetVisualRegisteringProcess(true);
-
-
-        APIUtilities.Instance.AttemptToLogin(usernameInputField.Text, passwordInputField.Text, OnLoginSuccessful, OnLoginUnsuccessful);
-
+        StartLoginAttemptCoroutine();
     }
-    //private void OnRegisterButtonSelected() 
-    //{ 
-    
-    //}
+
+
+    private void OnRegisterButtonSelected()
+    {
+        if(InProcessOfAttemptingToLogin)
+        {
+            StopLoginAttemptCoroutine();
+            SetVisualRegisteringProcess(false);
+        }
+
+        //Goes to register screen in another script.
+    }
 
     private void OnLoginSuccessful(Token token)
     {
         print($"User with id: {token.userID} logged in.");
         print($"Token expires in {token.expires_in}");
 
-        User loggedInUser = new User() { ID = token.userID, Name = usernameInputField.Text };
-        UserDataHolder.Instance.CurrentUser = loggedInUser;
+        //StartCoroutine(APIUtilities.Instance.GetUser(token.userID, UserDataHolder.Instance.SetCurrentUser));
+        PlayerPrefs.SetString("User_ID", token.userID);
+        PlayerPrefs.SetInt("Token_Expires", token.expires_in);
+
+
+        StartCoroutine(StartUserDataRetrievalCoroutine());
+    }
+
+    private IEnumerator StartUserDataRetrievalCoroutine()
+    {
+        string loggedInUserID = PlayerPrefs.GetString("User_ID");
+
+        //Load player data.
+        yield return StartCoroutine(APIUtilities.Instance.GetUser(loggedInUserID, UserDataHolder.Instance.SetCurrentUser));
+        yield return StartCoroutine(APIUtilities.Instance.GetLanguageProfilesOfUser(loggedInUserID, LanguageProfileController.Instance.UpdateLanguageProfilesData));
+        yield return StartCoroutine(APIUtilities.Instance.GetSetsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, SetsDataHolder.Instance.UpdateSetsData));
+        yield return StartCoroutine(APIUtilities.Instance.GetFlashcardsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, FlashcardDataHolder.Instance.UpdateFlashcardData));
+        
 
         SetVisualRegisteringProcess(false);
+        BlitzyUI.UIManager.Instance.QueuePop();
+        BlitzyUI.UIManager.Instance.QueuePush(homeScreenPushData.ID);
     }
+
     private void OnLoginUnsuccessful(string errorJson)
     {
         print("Login was not successful.");
@@ -90,5 +117,12 @@ public class LoginRegisterScreenController : MonoBehaviour
             InProcessOfAttemptingToLogin = false;
             progressBarLoop.gameObject.SetActive(enable);
         }
+    }
+
+    private void StartLoginAttemptCoroutine() => attemptToLoginCoroutine = StartCoroutine(APIUtilities.Instance.Login(usernameInputField.Text, passwordInputField.Text, OnLoginSuccessful, OnLoginUnsuccessful));
+    private void StopLoginAttemptCoroutine()
+    {
+        StopCoroutine(attemptToLoginCoroutine);
+        attemptToLoginCoroutine = null;
     }
 }

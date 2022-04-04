@@ -1566,9 +1566,11 @@ MonoBehaviour:
   usernameInputField: {fileID: 1097994922606680896}
   passwordInputField: {fileID: 1097994922438213878}
   btnLogin: {fileID: 2520285093827127367}
+  btnGoToRegisterScreen: {fileID: 1056622911445098723}
   errorMessage: {fileID: 8667145125308182008}
   progressBarLoop: {fileID: 5860320797491183806}
   InProcessOfAttemptingToLogin: 0
+  homeScreenPushData: {fileID: 11400000, guid: fbb3476175b38b847b1befba3acc10b8, type: 2}
 --- !u!1 &8702987937986498075
 GameObject:
   m_ObjectHideFlags: 0

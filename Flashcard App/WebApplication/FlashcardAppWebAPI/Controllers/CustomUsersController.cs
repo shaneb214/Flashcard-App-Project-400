@@ -36,6 +36,22 @@ namespace FlashcardAppWebAPI.Controllers
             return Ok(customUser);
         }
 
+        [Route("api/CustomUsers/GetUserDTO")]
+        [ResponseType(typeof(UserDTO))]
+        public async Task<IHttpActionResult> GetUserDTO(string id)
+        {
+            CustomUser customUser = await db.CustomUsers.FindAsync(id);           
+
+            if (customUser == null)
+            {
+                return NotFound();
+            }
+
+            UserDTO userDTO = new UserDTO() { ID = customUser.ID, Username = customUser.User.UserName, Email = customUser.User.Email };
+
+            return Ok(userDTO);
+        }
+
         // PUT: api/CustomUsers/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutCustomUser(string id, CustomUser customUser)

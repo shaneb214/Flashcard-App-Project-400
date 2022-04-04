@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 
@@ -38,14 +39,26 @@ public class LanguageProfileController : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(this);
+        }
     }
+
     private void Start()
     {
         //Save to memory.
         //userLanguageProfilesList = ReadLanguageProfileListFromJSON();
         //currentLanguageProfile = userLanguageProfilesList.Find(profile => profile.IsCurrentProfile == true);
     }
+
+    public void UpdateLanguageProfilesData(List<LanguageProfile> languageProfiles)
+    {
+        userLanguageProfilesList = languageProfiles;
+        currentLanguageProfile = languageProfiles.Single(profile => profile.IsCurrentProfile == true);
+    }
+
+
     #endregion
     #region New Language Profile Creation / Selection
     private void OnNewLanguageProfileCreated(LanguageProfile newProfile)

@@ -8,9 +8,15 @@ public class LoadUserDataScreenController : MonoBehaviour
 
     private IEnumerator Start()
     {
+        string loggedInUserID = UserDataHolder.Instance.CurrentUser.ID;
+
         //Load player data.
-        //yield return APIUtilities.Instance.
+        yield return StartCoroutine(APIUtilities.Instance.GetLanguageProfilesOfUser(loggedInUserID, LanguageProfileController.Instance.UpdateLanguageProfilesData));
 
         yield return null;
+
+        BlitzyUI.UIManager.Instance.QueuePop();
+        BlitzyUI.UIManager.Instance.QueuePush(homeScreen.ID);
+
     }
 }

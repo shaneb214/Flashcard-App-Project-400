@@ -36,9 +36,10 @@ public class FlashcardDataHolder : MonoBehaviour
 #endif
 
         //Read from json.
-        List<Flashcard> flashcardListFromJSON = JSONHelper.ReadListDataFromJSONFile<Flashcard>(jsonPath);
-        FlashcardList = flashcardListFromJSON == null ? new List<Flashcard>() : flashcardListFromJSON;
+        //List<Flashcard> flashcardListFromJSON = JSONHelper.ReadListDataFromJSONFile<Flashcard>(jsonPath);
+        //FlashcardList = flashcardListFromJSON == null ? new List<Flashcard>() : flashcardListFromJSON;
     }
+    public void UpdateFlashcardData(List<Flashcard> flashcards) => FlashcardList = flashcards;
 
     public List<Flashcard> FindFlashcardsBySetID(string setID) => FlashcardList.FindAll(flashcard => flashcard.setID == setID);
     public int FlashcardCountOfSet(string setID) => FlashcardList.Count(flashcard => flashcard.setID == setID);
