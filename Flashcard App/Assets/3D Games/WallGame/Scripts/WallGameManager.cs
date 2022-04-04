@@ -148,13 +148,13 @@ public class WallGameManager : MonoBehaviour
             }
         }        
     }
-    private string GetNativeSideFromFlashcard(Flashcard flashcard) => flashcard.NativeSide;
-    private string GetLearningSideFromFlashcard(Flashcard flashcard) => flashcard.LearningSide;
+    private string GetNativeSideFromFlashcard(Flashcard flashcard) => flashcard.nativeSide;
+    private string GetLearningSideFromFlashcard(Flashcard flashcard) => flashcard.learningSide;
     private string GetRandomSideFromFlashcard(Flashcard flashcard) 
     {
         System.Random rng = new System.Random();
         int randomNumber = rng.Next(0, 2);
-        return randomNumber == 0 ? flashcard.NativeSide : flashcard.LearningSide;
+        return randomNumber == 0 ? flashcard.nativeSide : flashcard.learningSide;
     }
 }
 

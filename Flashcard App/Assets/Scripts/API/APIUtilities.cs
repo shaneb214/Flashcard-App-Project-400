@@ -138,6 +138,52 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
+
+    public IEnumerator GetFlashcardsOfLanguageProfile(string languageProfileID)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/Flashcards?languageProfileID={languageProfileID}"))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string json = JSONHelper.ModifyJSONString(request.downloadHandler.text);
+                List<Flashcard> flashcardsOfLanguageProfile = JSONHelper.FromJson<Flashcard>(json);
+
+            }
+            else
+            {
+
+            }
+        }
+    }
+
+    public IEnumerator PostNewLanguageProfile(string userID,LanguageProfile languageProfile)
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("ID", languageProfile.ID);
+        data.Add("userID", userID);
+        data.Add("nativeLanguageISO", languageProfile.NativeLanguage.ISO);
+        data.Add("learningLanguageISO", languageProfile.LearningLanguage.ISO);
+        data.Add("IsCurrentProfile", languageProfile.IsCurrentProfile.ToString());
+
+        using (UnityWebRequest request = UnityWebRequest.Post(ApiAddress + "/api/PostLanguageProfile", data))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+
+        yield return null;
+    }
 }
 
 [Serializable]

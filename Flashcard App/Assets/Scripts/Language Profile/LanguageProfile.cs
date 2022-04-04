@@ -35,6 +35,9 @@ public class LanguageProfile
     public LanguageProfile(Language nativeLanguage,Language learningLanguage, bool IsCurrentProfile)
     {
         ID = Guid.NewGuid().ToString();
+
+
+        //FIX THIS UP DUE TO API?
         userID = UserDataHolder.Instance.CurrentUser.ID;
 
         this.NativeLanguage = nativeLanguage;

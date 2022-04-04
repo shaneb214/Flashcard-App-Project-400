@@ -40,8 +40,8 @@ public class FlashcardDataHolder : MonoBehaviour
         FlashcardList = flashcardListFromJSON == null ? new List<Flashcard>() : flashcardListFromJSON;
     }
 
-    public List<Flashcard> FindFlashcardsBySetID(string setID) => FlashcardList.FindAll(flashcard => flashcard.SetID == setID);
-    public int FlashcardCountOfSet(string setID) => FlashcardList.Count(flashcard => flashcard.SetID == setID);
+    public List<Flashcard> FindFlashcardsBySetID(string setID) => FlashcardList.FindAll(flashcard => flashcard.setID == setID);
+    public int FlashcardCountOfSet(string setID) => FlashcardList.Count(flashcard => flashcard.setID == setID);
 
     private void OnFlashcardCreated(Flashcard flashcardCreated) => FlashcardList.Add(flashcardCreated);
 

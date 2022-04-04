@@ -46,11 +46,13 @@ namespace FlashcardAppWebAPI.Models
 
 
         [ForeignKey("NativeLanguage")]
-        public string nativeLanguageISO { get; set; }   
+        public string nativeLanguageISO { get; set; }
+
         public virtual Language NativeLanguage { get; set; }
 
         [ForeignKey("LearningLanguage")]
         public string learningLanguageISO { get; set; }
+
         public virtual Language LearningLanguage { get; set; }
 
         public bool IsCurrentProfile { get; set; }
@@ -68,8 +70,11 @@ namespace FlashcardAppWebAPI.Models
         [JsonIgnore]
         public virtual LanguageProfile LanguageProfile { get; set; }
 
+        public virtual ICollection<Flashcard> Flashcards { get; set; }
+
+
         [ForeignKey("ParentSet")]
-        public string parentSetID { get; set; }
+        public string ParentSetID { get; set; }
         [JsonIgnore]
         public virtual Set ParentSet { get; set; }
 
@@ -79,8 +84,7 @@ namespace FlashcardAppWebAPI.Models
     public class Flashcard
     {
         [Key]
-        public string ID { get; set; }
-
+        public string Id { get; set; }
 
         [ForeignKey("Set")]
         public string setID { get; set; }

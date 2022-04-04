@@ -90,6 +90,7 @@ namespace FlashcardAppWebAPI.Controllers
         }
 
         // POST: api/LanguageProfiles
+        [Route("api/PostLanguageProfile")]
         [ResponseType(typeof(LanguageProfile))]
         public async Task<IHttpActionResult> PostLanguageProfile(LanguageProfile languageProfile)
         {
@@ -116,7 +117,9 @@ namespace FlashcardAppWebAPI.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = languageProfile.ID }, languageProfile);
+            return Ok();
+
+            //return CreatedAtRoute("api/LanguageProfiles", new { id = languageProfile.ID }, languageProfile);
         }
 
         // DELETE: api/LanguageProfiles/5

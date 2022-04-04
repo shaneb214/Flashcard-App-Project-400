@@ -60,6 +60,17 @@
             //    IsDefaultSet = true
             //});
             //context.SaveChanges();
+
+
+            //context.Flashcards.AddOrUpdate(new Flashcard()
+            //{
+            //    Id = Guid.NewGuid().ToString(),
+            //    setID = "9187b6b3-2602-4267-b7c4-1532a934aa93",
+            //    nativeSide = "Bear",
+            //    learningSide = "медведь",
+            //    notes = string.Empty
+            //});
+            //context.SaveChanges();
         }
     }
 }

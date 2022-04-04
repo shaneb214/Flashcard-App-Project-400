@@ -17,8 +17,8 @@ public class FlashcardDisplay : MonoBehaviour
 
     public void UpdateDisplay(Flashcard flashcard)
     {
-        txtNative.text = flashcard.NativeSide;
-        txtLearning.text = flashcard.LearningSide;
+        txtNative.text = flashcard.nativeSide;
+        txtLearning.text = flashcard.learningSide;
 
         //What to do here.
         //imgCardTagColour.color = flashcard.Colour;
