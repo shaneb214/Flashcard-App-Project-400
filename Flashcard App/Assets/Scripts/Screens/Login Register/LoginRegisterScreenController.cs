@@ -63,7 +63,10 @@ public class LoginRegisterScreenController : MonoBehaviour
     private void OnLoginSuccessful(Token token)
     {
         print($"User with id: {token.userID} logged in.");
-        print($"Token expires in {token.expires_in}");   
+        print($"Token expires in {token.expires_in}");
+
+        User loggedInUser = new User() { ID = token.userID, Name = usernameInputField.Text };
+        UserDataHolder.Instance.CurrentUser = loggedInUser;
 
         SetVisualRegisteringProcess(false);
     }

@@ -11,8 +11,8 @@ public class CreateCard_Learning : CreateCard
 
     private void UpdateDisplayBasedOnCurrentProfile(LanguageProfile currentProfile)
     {
-        Sprite learningFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{currentProfile.learningLanguage.ISO}");
-        string placeholderText = $"Enter word in {currentProfile.learningLanguage.Name}..";
+        Sprite learningFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{currentProfile.LearningLanguage.ISO}");
+        string placeholderText = $"Enter word in {currentProfile.LearningLanguage.Name}..";
 
         UpdateDisplay(learningFlagSprite, placeholderText);
     }

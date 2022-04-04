@@ -55,11 +55,11 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
-    private IEnumerator Login(string email,string password, Action<Token> successCallback, Action<string> failedCallback)
+    private IEnumerator Login(string username,string password, Action<Token> successCallback, Action<string> failedCallback)
     {
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("grant_type", "password");
-        data.Add("UserName", email);
+        data.Add("UserName", username);
         data.Add("Password", password);
 
         using (UnityWebRequest request = UnityWebRequest.Post($"{ApiAddress}/Token", data))
@@ -100,7 +100,44 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
+    public IEnumerator GetLanguageProfilesOfUser(string userID,Action<List<LanguageProfile>> returnCallback)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/CustomUsers/GetLanguageProfiles?id={userID}"))
+        {
+            yield return request.SendWebRequest();
 
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string json = JSONHelper.ModifyJSONString(request.downloadHandler.text);
+                List<LanguageProfile> languageProfilesOfUser = JSONHelper.FromJson<LanguageProfile>(json);
+
+                returnCallback?.Invoke(languageProfilesOfUser);
+            }
+            else
+            {
+                returnCallback?.Invoke(null);
+            }
+        }
+    }
+
+    public IEnumerator GetSetsOfLanguageProfile(string languageProfileID)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/Sets/GetSetsOfLanguageProfileID?languageProfileID={languageProfileID}"))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string json = JSONHelper.ModifyJSONString(request.downloadHandler.text);
+                List<Set> setsOfLanguageProfile = JSONHelper.FromJson<Set>(json);
+
+            }
+            else
+            {
+
+            }
+        }
+    }
 }
 
 [Serializable]

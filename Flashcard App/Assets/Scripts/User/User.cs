@@ -12,6 +12,7 @@ public class User
     public string Name;
     public string Email;
 
+    public User() { }
     public User(string Name,string Email)
     {
         ID = Guid.NewGuid().ToString();

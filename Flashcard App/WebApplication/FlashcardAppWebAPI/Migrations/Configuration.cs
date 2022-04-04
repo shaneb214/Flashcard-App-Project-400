@@ -26,6 +26,8 @@
 
             //IdentityResult result = await UserManager.
 
+            //LANGUAGES
+
             //context.Languages.AddOrUpdate
             //(
             //    new Language() { ISO = "en", Name = "English" },
@@ -34,6 +36,30 @@
             //    new Language() { ISO = "ja", Name = "Japanese" }
             //);
             //context.SaveChanges();
+
+            //LANG PROFILE
+
+            //context.LanguageProfiles.AddOrUpdate(new LanguageProfile()
+            //{
+            //    ID = Guid.NewGuid().ToString(),
+            //    userID = "0ae94ef8-ecff-4d6a-a030-f2b573a797fa",
+            //    nativeLanguageISO = "en",
+            //    learningLanguageISO = "ru",
+            //    IsCurrentProfile = true
+            //});
+
+            //context.SaveChanges();
+
+            //SETS.
+
+            //context.LanguageProfiles.Find("9b18fbf4-b158-4fa5-a6c7-860163c87863"). AddOrUpdate(new LanguageProfile()
+            //{
+            //    ID = Guid.NewGuid().ToString(),
+            //    userID = "0ae94ef8-ecff-4d6a-a030-f2b573a797fa",
+            //    nativeLanguageISO = "en",
+            //    learningLanguageISO = "ru",
+            //    IsCurrentProfile = true
+            //});
 
         }
     }

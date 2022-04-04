@@ -28,9 +28,9 @@ public class Screen_LanguageProfiles : BlitzyUI.Screen
 
     private void SpawnProfileDisplayInScrollView(LanguageProfile languageProfileToShow)
     {
-        Sprite nativeFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{languageProfileToShow.nativeLanguage.ISO}");
-        Sprite learningFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{languageProfileToShow.learningLanguage.ISO}");
-        string headingText = $"{languageProfileToShow.nativeLanguage.Name} - {languageProfileToShow.learningLanguage.Name}";
+        Sprite nativeFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{languageProfileToShow.NativeLanguage.ISO}");
+        Sprite learningFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{languageProfileToShow.LearningLanguage.ISO}");
+        string headingText = $"{languageProfileToShow.NativeLanguage.Name} - {languageProfileToShow.LearningLanguage.Name}";
 
         //Spawn prefab + pass in info so it can update its components.
         LanguageProfileDisplay spawnedLanguageProfileDisplay = Instantiate(languageProfilePrefab, scrollViewContentTransform);

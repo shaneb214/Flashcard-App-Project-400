@@ -11,8 +11,8 @@ public class LanguageProfile
 
     public string ID;
 
-    public Language nativeLanguage;
-    public Language learningLanguage;
+    public Language NativeLanguage;
+    public Language LearningLanguage;
 
     public bool IsCurrentProfile;
 
@@ -37,8 +37,8 @@ public class LanguageProfile
         ID = Guid.NewGuid().ToString();
         userID = UserDataHolder.Instance.CurrentUser.ID;
 
-        this.nativeLanguage = nativeLanguage;
-        this.learningLanguage = learningLanguage;
+        this.NativeLanguage = nativeLanguage;
+        this.LearningLanguage = learningLanguage;
 
         this.IsCurrentProfile = IsCurrentProfile;
         defaultSetID = string.Empty;
@@ -49,6 +49,6 @@ public class LanguageProfile
 
     public override string ToString()
     {
-        return $"{nativeLanguage.Name} <> {learningLanguage.Name}";
+        return $"{NativeLanguage.Name} <> {LearningLanguage.Name}";
     }
 }

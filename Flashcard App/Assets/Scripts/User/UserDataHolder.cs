@@ -10,7 +10,7 @@ public class UserDataHolder : MonoBehaviour
     public static UserDataHolder Instance;
 
     [SerializeField] private User currentUser;
-    public User CurrentUser => currentUser;
+    public User CurrentUser { get => currentUser; set { currentUser = value; } }
 
     [SerializeField] private List<User> userList;
 
@@ -33,7 +33,7 @@ public class UserDataHolder : MonoBehaviour
         //CreateDefaultUser();
         //SaveCurrentUserToJson();
 
-        SetCurrentUserFromJSON();
+        //SetCurrentUserFromJSON();
     }
 
     private User CreateDefaultUser()

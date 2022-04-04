@@ -28,7 +28,7 @@ public class LanguageProfileController : MonoBehaviour
     [SerializeField] private string languageProfilesListJSONPathMobile;
     [SerializeField] private string currentProfileJSONPathMobile;
     [Header("User's language profile info")]
-    [SerializeField] private List<LanguageProfile> userLanguageProfilesList;
+    [SerializeField] private List<LanguageProfile> userLanguageProfilesList = new List<LanguageProfile>();
     public LanguageProfile currentLanguageProfile;
 
     public List<LanguageProfile> GetUserLanguageProfiles() => userLanguageProfilesList;
@@ -42,19 +42,9 @@ public class LanguageProfileController : MonoBehaviour
     }
     private void Start()
     {
-        userLanguageProfilesList = new List<LanguageProfile>();
-
-        // Read language profiles from json. Store in list.
-        // Find current language. 
-
-        //LanguageProfile userCurrentLanguageProfile = ReadCurrentLanguageProfileFromJSON();
-
-        //Writing these to JSON at start - change later.
-        //CreateSampleProfilesAndSaveToJSON();
-
         //Save to memory.
-        userLanguageProfilesList = ReadLanguageProfileListFromJSON();
-        currentLanguageProfile = userLanguageProfilesList.Find(profile => profile.IsCurrentProfile == true);
+        //userLanguageProfilesList = ReadLanguageProfileListFromJSON();
+        //currentLanguageProfile = userLanguageProfilesList.Find(profile => profile.IsCurrentProfile == true);
     }
     #endregion
     #region New Language Profile Creation / Selection
