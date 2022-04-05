@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -66,6 +67,9 @@ public class APIUtilities : MonoBehaviour
                 Token userToken = JsonUtility.FromJson<Token>(request.downloadHandler.text);
                 successCallback?.Invoke(userToken);
                 UserLoggedInEvent?.Invoke(userToken);
+
+                PlayerPrefs.SetString("User_ID", userToken.userID);
+                PlayerPrefs.SetInt("Token_Expires", userToken.expires_in);
             }
             else
             {
@@ -237,6 +241,28 @@ public class APIUtilities : MonoBehaviour
             else
             {
                 print("New flashcard post Unsuccessful.");
+            }
+        }
+    }
+
+
+
+    //Put data / modify data.
+    public IEnumerator PutLanguageProfile(string langProfileID,LanguageProfile languageProfile,Action successCallback,Action failureCallback)
+    {
+        string json = JsonUtility.ToJson(languageProfile);
+
+        using (UnityWebRequest request = UnityWebRequest.Put(ApiAddress + $"/api/LanguageProfiles/{langProfileID}",json))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                successCallback?.Invoke();
+            }
+            else
+            {
+                failureCallback?.Invoke();
             }
         }
     }

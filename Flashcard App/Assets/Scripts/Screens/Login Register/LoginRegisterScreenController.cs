@@ -74,9 +74,8 @@ public class LoginRegisterScreenController : MonoBehaviour
         print($"Token expires in {token.expires_in}");
 
         //StartCoroutine(APIUtilities.Instance.GetUser(token.userID, UserDataHolder.Instance.SetCurrentUser));
-        PlayerPrefs.SetString("User_ID", token.userID);
-        PlayerPrefs.SetInt("Token_Expires", token.expires_in);
-
+        //PlayerPrefs.SetString("User_ID", token.userID);
+        //PlayerPrefs.SetInt("Token_Expires", token.expires_in);
 
         StartCoroutine(StartUserDataRetrievalCoroutine());
     }
@@ -86,6 +85,7 @@ public class LoginRegisterScreenController : MonoBehaviour
         string loggedInUserID = PlayerPrefs.GetString("User_ID");
 
         //Load player data.
+        yield return StartCoroutine(APIUtilities.Instance.GetLanguages(LanguageDataHolder.Instance.UpdateLanguagesList));
         yield return StartCoroutine(APIUtilities.Instance.GetUser(loggedInUserID, UserDataHolder.Instance.SetCurrentUser));
         yield return StartCoroutine(APIUtilities.Instance.GetLanguageProfilesOfUser(loggedInUserID, LanguageProfileController.Instance.UpdateLanguageProfilesData));
         yield return StartCoroutine(APIUtilities.Instance.GetSetsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, SetsDataHolder.Instance.UpdateSetsData));

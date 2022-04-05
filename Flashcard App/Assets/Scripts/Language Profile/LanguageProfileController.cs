@@ -55,7 +55,7 @@ public class LanguageProfileController : MonoBehaviour
     public void UpdateLanguageProfilesData(List<LanguageProfile> languageProfiles)
     {
         userLanguageProfilesList = languageProfiles;
-        currentLanguageProfile = languageProfiles.Single(profile => profile.IsCurrentProfile == true);
+        currentLanguageProfile = languageProfiles.SingleOrDefault(profile => profile.IsCurrentProfile == true);
     }
 
 

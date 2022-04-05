@@ -70,13 +70,26 @@ public class RegistrationScreenManager : MonoBehaviour
     private void OnRegisterSuccessful() 
     {
         print("User registered successfully.");
-        SetVisualRegisteringProcess(false);
 
-        APIUtilities.Instance.AttemptToLogin(usernameInputField.Text, passwordInputField.Text, null, null);
-
-        BlitzyUI.UIManager.Instance.QueuePop(); 
-        BlitzyUI.UIManager.Instance.QueuePush(createFirstProfileScreenPushData.ID); 
+        StartCoroutine(StartAPIDataRetrievalAfterRegistering());
     }
+
+    private IEnumerator StartAPIDataRetrievalAfterRegistering()
+    {
+        //Login as newly registered user.
+        yield return StartCoroutine(APIUtilities.Instance.Login(usernameInputField.Text, passwordInputField.Text, null, null));
+        string loggedInUserID = PlayerPrefs.GetString("User_ID");
+
+        //Sling api data to language list and current user. 
+        yield return StartCoroutine(APIUtilities.Instance.GetLanguages(LanguageDataHolder.Instance.UpdateLanguagesList));
+        yield return StartCoroutine(APIUtilities.Instance.GetUser(loggedInUserID, UserDataHolder.Instance.SetCurrentUser));
+
+
+        SetVisualRegisteringProcess(false);
+        BlitzyUI.UIManager.Instance.QueuePop();
+        BlitzyUI.UIManager.Instance.QueuePush(createFirstProfileScreenPushData.ID);
+    }
+
 
     private void OnRegisterUnsuccessful(string errorJson)
     {

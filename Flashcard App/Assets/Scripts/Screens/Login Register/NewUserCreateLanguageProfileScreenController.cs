@@ -20,23 +20,16 @@ public class NewUserCreateLanguageProfileScreenController : MonoBehaviour
         btnCreate.onClick.AddListener(OnCreateButtonSelected);
     }
 
-    private IEnumerator Start()
+    private void Start()
     {
-        yield return APIUtilities.Instance.GetLanguages(LanguageDataHolder.Instance.UpdateLanguagesList);
-
         //Languages read from database.
         List<Language> languages = LanguageDataHolder.Instance.languagesList;
-
-        //Sprite nativeFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{currentLanguageProfile.nativeLanguage.ISO}");
-        //Sprite learningFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{currentLanguageProfile.learningLanguage.ISO}");
 
         for (int i = 0; i < languages.Count; i++)
         {
             nativeLanguageDropdown.CreateNewItem(languages[i].Name, Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{languages[i].ISO}"));
             learningLanguageDropdown.CreateNewItem(languages[i].Name, Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{languages[i].ISO}"));
         }
-
-        //nativeLanguageDropdown.item
     }
 
     private void OnBackButtonSelected()

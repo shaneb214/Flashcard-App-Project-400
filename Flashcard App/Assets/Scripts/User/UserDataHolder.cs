@@ -50,14 +50,6 @@ public class UserDataHolder : MonoBehaviour
 
     public void SetCurrentUser(User user) => currentUser = user;
 
-    public void SaveUserToPlayerPrefs(string userID,string username,string email)
-    {
-        PlayerPrefs.SetString("ID", userID);
-        PlayerPrefs.SetString("Username", username);
-        PlayerPrefs.SetString("Email", email);
-        //PlayerPrefs.SetInt("Token")
-    }
-
     private User CreateDefaultUser()
     {
         User defaultUser = new User("Shane","shaneb214@gmail.com");

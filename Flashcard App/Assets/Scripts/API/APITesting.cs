@@ -6,11 +6,25 @@ using UnityEngine.Networking;
 
 public class APITesting : MonoBehaviour
 {
-    void Start()
+    IEnumerator Start()
     {
         string userID = "0ae94ef8-ecff-4d6a-a030-f2b573a797fa";
-        string languageProfileID = "cc3b0a6b-b418-4c1a-92cd-7b9fec687d51";
+        string RussianLanguageProfileID = "cc3b0a6b-b418-4c1a-92cd-7b9fec687d51";
+        string ItalianLanguageProfileID = "c061745a-e3d1-4a46-b0f0-93c24fd2f815";
         string animalsSetID = "9187b6b3-2602-4267-b7c4-1532a934aa93";
+
+        //PUT / MODIFY.
+        yield return StartCoroutine(APIUtilities.Instance.GetLanguageProfilesOfUser(userID,LanguageProfileController.Instance.UpdateLanguageProfilesData));
+
+        List<LanguageProfile> languageProfiles = LanguageProfileController.Instance.GetUserLanguageProfiles();
+        LanguageProfile russianProfile = languageProfiles[1];
+        russianProfile.IsCurrentProfile = true;
+        LanguageProfile italianProfile = languageProfiles[0];
+
+
+
+        //yield return StartCoroutine(APIUtilities.Instance.PutLanguageProfile(russianProfile.ID, russianProfile));
+
 
         /////POSTS.
         //Works.

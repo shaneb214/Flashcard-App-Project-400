@@ -53,6 +53,43 @@ namespace FlashcardAppWebAPI.Controllers
         }
 
 
+        //[Route("api/LanguageProfiles/SetCurrentProfile")]
+        //[ResponseType(typeof(void))]
+        //public async Task<IHttpActionResult>SetCurrentProfile(string newCurrentLanguageProfileID, string previousCurrentLanguageProfileID = null)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    LanguageProfile newCurrentLanguageProfile = await db.LanguageProfiles.FindAsync(newCurrentLanguageProfileID);
+        //    LanguageProfile previousCurrentLanguageProfile = await db.LanguageProfiles.FindAsync(previousCurrentLanguageProfileID);
+
+
+
+        //    if (previousCurrentLanguageProfile != null)
+        //        db.Entry(previousCurrentLanguageProfile).State = EntityState.Modified;
+
+        //    db.Entry(newCurrentLanguageProfile).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await db.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!LanguageProfileExists(newCurrentLanguageProfile.ID))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // PUT: api/LanguageProfiles/5
         [ResponseType(typeof(void))]
@@ -67,6 +104,10 @@ namespace FlashcardAppWebAPI.Controllers
             {
                 return BadRequest();
             }
+
+            //Had to assign this as both iso's were null.
+            languageProfile.learningLanguageISO = languageProfile.LearningLanguage.ISO;
+            languageProfile.nativeLanguageISO = languageProfile.NativeLanguage.ISO;
 
             db.Entry(languageProfile).State = EntityState.Modified;
 

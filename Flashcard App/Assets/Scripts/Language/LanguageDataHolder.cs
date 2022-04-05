@@ -13,7 +13,10 @@ public class LanguageDataHolder : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
-            Instance = this; 
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
     }
 
     public void UpdateLanguagesList(List<Language> languages)
