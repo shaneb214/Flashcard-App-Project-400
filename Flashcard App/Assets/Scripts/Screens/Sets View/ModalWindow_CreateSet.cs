@@ -43,6 +43,9 @@ public class ModalWindow_CreateSet : CustomModalWindow
             //Set as default where???
             Set newSet = new Set(setName,LibraryViewController.SetIDCurrentlyShowing,setDefaultSet);
 
+            if(setDefaultSet)
+                SetsDataHolder.Instance.SetDefaultSetBasedOnID(newSet.ID);
+
             CloseAndResetInputField();
         }
         else

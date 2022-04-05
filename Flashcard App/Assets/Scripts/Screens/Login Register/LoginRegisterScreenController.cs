@@ -26,6 +26,11 @@ public class LoginRegisterScreenController : MonoBehaviour
 
     [SerializeField] private ScreenPushData homeScreenPushData;
 
+    //Testing.
+    [SerializeField] private bool AutoLogin;
+    [SerializeField] private string autoLoginUsername;
+    [SerializeField] private string autoLoginPassword;
+
     private bool CanAttemptToLogin 
     { 
         get 
@@ -39,6 +44,16 @@ public class LoginRegisterScreenController : MonoBehaviour
     {
         btnLogin.onClick.AddListener(OnLoginButtonSelected);
         btnGoToRegisterScreen.onClick.AddListener(OnRegisterButtonSelected);
+    }
+
+    private void Start()
+    {
+        if(AutoLogin)
+        {
+            usernameInputField.Text = autoLoginUsername;
+            passwordInputField.Text = autoLoginPassword;
+            OnLoginButtonSelected();
+        }
     }
 
     private void OnLoginButtonSelected()

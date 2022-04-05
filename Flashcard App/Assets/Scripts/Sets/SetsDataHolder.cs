@@ -52,6 +52,7 @@ public class SetsDataHolder : MonoBehaviour
             OnSetCreated += PostSetToAPI;
 
         OnSetCreated += SaveSetToMemory;
+        OnSetCreated += CheckToAssignNewDefaultSetOnSetCreation;
 
         Set.SetCreatedEvent += OnSetCreated;
     }
@@ -73,6 +74,27 @@ public class SetsDataHolder : MonoBehaviour
         Set defaultSet = SetList.SingleOrDefault(Set => Set.IsDefaultSet == true);
         if(defaultSet != null)
             defaultSetID = defaultSet.ID;
+    }
+    private void CheckToAssignNewDefaultSetOnSetCreation(Set createdSet)
+    {
+        //New set not marked as default? Don't need to do anything.
+        if(createdSet.IsDefaultSet == false)
+            return;
+
+        //If this set is the first one created.. mark its id.
+        string previousDefaultSetID = defaultSetID;
+        if (previousDefaultSetID == string.Empty || previousDefaultSetID == null)
+        {
+            defaultSetID = createdSet.ID;
+            return;
+        }
+
+        //Otherwise there is another set that is marked as default. Switch around.
+        Set previousDefaultSet = SetList.Find(set => set.ID == defaultSetID);
+        previousDefaultSet.IsDefaultSet = false;
+
+        //Update previous default set on API side. 
+        APIUtilities.Instance.ModifyDefaultSetValue(previousDefaultSet);
     }
 
     public void SetDefaultSetBasedOnID(string setID)
