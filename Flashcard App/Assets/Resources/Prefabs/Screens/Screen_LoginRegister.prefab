@@ -1571,7 +1571,7 @@ MonoBehaviour:
   progressBarLoop: {fileID: 5860320797491183806}
   InProcessOfAttemptingToLogin: 0
   homeScreenPushData: {fileID: 11400000, guid: fbb3476175b38b847b1befba3acc10b8, type: 2}
-  AutoLogin: 1
+  AutoLogin: 0
   autoLoginUsername: shaneb
   autoLoginPassword: password123
 --- !u!1 &8702987937986498075

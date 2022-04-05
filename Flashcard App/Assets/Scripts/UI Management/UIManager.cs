@@ -56,7 +56,6 @@ namespace BlitzyUI
 
         public Vector2 ReferenceResolution { get { return _rootCanvasScalar.referenceResolution; } }
         public bool CurrentScreenIsLastOnStack() => _stack.Count == 1;
-        //public Screen Get
 
         private enum State
         {
