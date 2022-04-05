@@ -85,11 +85,11 @@ public class LoginRegisterScreenController : MonoBehaviour
         string loggedInUserID = PlayerPrefs.GetString("User_ID");
 
         //Load player data.
-        yield return StartCoroutine(APIUtilities.Instance.GetLanguages(LanguageDataHolder.Instance.UpdateLanguagesList));
-        yield return StartCoroutine(APIUtilities.Instance.GetUser(loggedInUserID, UserDataHolder.Instance.SetCurrentUser));
-        yield return StartCoroutine(APIUtilities.Instance.GetLanguageProfilesOfUser(loggedInUserID, LanguageProfileController.Instance.UpdateLanguageProfilesData));
-        yield return StartCoroutine(APIUtilities.Instance.GetSetsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, SetsDataHolder.Instance.UpdateSetsData));
-        yield return StartCoroutine(APIUtilities.Instance.GetFlashcardsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, FlashcardDataHolder.Instance.UpdateFlashcardList));
+        yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetLanguages(LanguageDataHolder.Instance.UpdateLanguagesList));
+        yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetUser(loggedInUserID, UserDataHolder.Instance.SetCurrentUser));
+        yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetLanguageProfilesOfUser(loggedInUserID, LanguageProfileController.Instance.UpdateLanguageProfilesData));
+        yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetSetsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, SetsDataHolder.Instance.UpdateSetsData));
+        yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetFlashcardsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, FlashcardDataHolder.Instance.UpdateFlashcardList));
         
 
         SetVisualRegisteringProcess(false);
@@ -119,7 +119,7 @@ public class LoginRegisterScreenController : MonoBehaviour
         }
     }
 
-    private void StartLoginAttemptCoroutine() => attemptToLoginCoroutine = StartCoroutine(APIUtilities.Instance.Login(usernameInputField.Text, passwordInputField.Text, OnLoginSuccessful, OnLoginUnsuccessful));
+    private void StartLoginAttemptCoroutine() => attemptToLoginCoroutine = StartCoroutine(APIUtilities.Instance.IEnumerator_Login(usernameInputField.Text, passwordInputField.Text, OnLoginSuccessful, OnLoginUnsuccessful));
     private void StopLoginAttemptCoroutine()
     {
         StopCoroutine(attemptToLoginCoroutine);

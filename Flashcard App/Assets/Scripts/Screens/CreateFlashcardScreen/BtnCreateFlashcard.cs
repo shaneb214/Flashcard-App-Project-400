@@ -62,7 +62,7 @@ public class BtnCreateFlashcard : MonoBehaviour
                 (nativeLangInputField.inputField.text, 
                 learningLangInputField.inputField.text,
                 currentFlashcardNote, 
-                SetsDataHolder.Instance.defaultSet.ID);
+                SetsDataHolder.Instance.DefaultSetID);
 
             //Reset Input Fields.
             nativeLangInputField.ClearText();

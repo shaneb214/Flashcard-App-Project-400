@@ -10,7 +10,7 @@ public class APIDataSlinger : MonoBehaviour
 
     IEnumerator Start()
     {
-        yield return APIUtilities.Instance.GetLanguages(LanguageDataHolder.Instance.UpdateLanguagesList);
+        yield return APIUtilities.Instance.IEnumerator_GetLanguages(LanguageDataHolder.Instance.UpdateLanguagesList);
     }
 
     public void SlingDataToDataHolders()

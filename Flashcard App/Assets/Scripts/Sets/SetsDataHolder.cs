@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class SetsDataHolder : MonoBehaviour
 {
     public static SetsDataHolder Instance;
+
+    public static event Action<string> DefaultSetIDUpdatedEvent;
 
     [Header("All sets")]
     public List<Set> SetList;
@@ -16,9 +19,26 @@ public class SetsDataHolder : MonoBehaviour
     [Header("Storing JSON Location - Mobile")]
     [SerializeField] private string setsListJSONPathMobile;
 
-    public Set defaultSet;
+    private string defaultSetID;
+    public string DefaultSetID 
+    { 
+        get => defaultSetID;
+        set 
+        {
 
-    string jsonPath;
+            //New set ID? Update.
+            if (defaultSetID != value)
+            {
+                defaultSetID = value;
+                DefaultSetIDUpdatedEvent?.Invoke(defaultSetID);
+            }
+        }
+    }
+    private string jsonPath;
+
+    [Header("API Settings")]
+    [SerializeField] private bool PostNewSetsToAPI;
+    private Action<Set> OnSetCreated;
 
     private void Awake()
     {
@@ -27,6 +47,11 @@ public class SetsDataHolder : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+
+        if (PostNewSetsToAPI)
+            OnSetCreated += PostSetToAPI;
+
+        OnSetCreated += SaveSetToMemory;
 
         Set.SetCreatedEvent += OnSetCreated;
     }
@@ -45,7 +70,7 @@ public class SetsDataHolder : MonoBehaviour
     public void UpdateSetsData(List<Set> sets)
     {
         SetList = sets;
-        defaultSet = SetList.SingleOrDefault(Set => Set.IsDefaultSet == true);
+        DefaultSetID = SetList.SingleOrDefault(Set => Set.IsDefaultSet == true).ID;
     }
 
     public void SetDefaultSetBasedOnID(string setID)
@@ -56,11 +81,12 @@ public class SetsDataHolder : MonoBehaviour
             previousDefaultSet.IsDefaultSet = false;
         }
 
-        defaultSet = SetList.Find(set => set.ID == setID);
-        defaultSet.IsDefaultSet = true;
+        Set newDefaultSet = SetList.Find(set => set.ID == setID);
+        DefaultSetID = newDefaultSet.ID;
+        newDefaultSet.IsDefaultSet = true;
     }
-
-    private void OnSetCreated(Set setCreated) => SetList.Add(setCreated);
+    private void SaveSetToMemory(Set createdSet) => SetList.Add(createdSet);
+    private void PostSetToAPI(Set createdSet) => APIUtilities.Instance.PostNewSet(createdSet);
 
     //Data retrieval.
     public List<Set> FindSetsByLangProfileID(string langProfileID) => SetList.FindAll(s => s.LanguageProfileID == langProfileID);

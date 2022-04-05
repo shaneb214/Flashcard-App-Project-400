@@ -34,7 +34,7 @@ public class SetDisplay : MonoBehaviour
         setIDToRepresent = setID;
         txtSetName.text = setName;
 
-        imgDefaultSetIcon.enabled = SetsDataHolder.Instance.defaultSet.ID == setIDToRepresent ? true : false;
+        imgDefaultSetIcon.enabled = SetsDataHolder.Instance.DefaultSetID == setIDToRepresent ? true : false;
 
         txtCardCount.text = $"{FlashcardDataHolder.Instance.FlashcardCountOfSet(setID)} Cards";
         txtSubsetCount.text = $"{SetsDataHolder.Instance.GetSubsetCountOfSet(setID)} Sets";

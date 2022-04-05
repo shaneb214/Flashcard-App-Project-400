@@ -20,9 +20,7 @@ public class BtnSelectSetForFlashcardCreation : MonoBehaviour
     private void Awake()
     {
         myButton = GetComponent<Button>();
-        myButton.onClick.AddListener(OnMyButtonPressed);
-
-        LanguageProfile.DefaultSetIDUpdated += UpdateTextDisplay; 
+        myButton.onClick.AddListener(OnMyButtonPressed); 
     }
 
     //When user selects 
@@ -42,14 +40,14 @@ public class BtnSelectSetForFlashcardCreation : MonoBehaviour
 
     private void OnEnable()
     {
-        LanguageProfile.DefaultSetIDUpdated += UpdateTextDisplay;
+        SetsDataHolder.DefaultSetIDUpdatedEvent += UpdateTextDisplay;
 
-        string currentDefaultSetID = SetsDataHolder.Instance.defaultSet.ID;
+        string currentDefaultSetID = SetsDataHolder.Instance.DefaultSetID;
         UpdateTextDisplay(currentDefaultSetID);
     }
 
     private void OnDisable()
     {
-        LanguageProfile.DefaultSetIDUpdated -= UpdateTextDisplay;
+        SetsDataHolder.DefaultSetIDUpdatedEvent -= UpdateTextDisplay;
     }
 }

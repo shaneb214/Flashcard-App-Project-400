@@ -505,7 +505,6 @@ MonoBehaviour:
       Name: 
     IsCurrentProfile: 0
     userID: 
-    defaultSetID: 
 --- !u!1 &1142165604
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +551,7 @@ MonoBehaviour:
   SetList: []
   setsListJSONPathPC: /JSON Data/Sets/Sets.json
   setsListJSONPathMobile: /Sets.json
+  PostNewSetsToAPI: 1
 --- !u!1 &1188239623
 GameObject:
   m_ObjectHideFlags: 0

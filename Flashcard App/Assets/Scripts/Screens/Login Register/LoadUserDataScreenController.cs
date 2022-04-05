@@ -11,7 +11,7 @@ public class LoadUserDataScreenController : MonoBehaviour
         string loggedInUserID = UserDataHolder.Instance.CurrentUser.ID;
 
         //Load player data.
-        yield return StartCoroutine(APIUtilities.Instance.GetLanguageProfilesOfUser(loggedInUserID, LanguageProfileController.Instance.UpdateLanguageProfilesData));
+        yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetLanguageProfilesOfUser(loggedInUserID, LanguageProfileController.Instance.UpdateLanguageProfilesData));
 
         yield return null;
 

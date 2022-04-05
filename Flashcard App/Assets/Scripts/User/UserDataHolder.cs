@@ -36,7 +36,7 @@ public class UserDataHolder : MonoBehaviour
 
     private void OnUserLoggedIn(Token token)
     {
-        StartCoroutine(APIUtilities.Instance.GetUser(token.userID, SetCurrentUser));
+        StartCoroutine(APIUtilities.Instance.IEnumerator_GetUser(token.userID, SetCurrentUser));
     }
 
 

@@ -24,13 +24,13 @@ public class ModalWindow_SelectDefaultSet : CustomModalWindow
 
     private void OnOkButtonSelected()
     {
-        string currentDefaultSetID = SetsDataHolder.Instance.defaultSet.ID;
+        string currentDefaultSetID = SetsDataHolder.Instance.DefaultSetID;
 
         //Has user selected new set to be their default set? - Update API.
         if (currentDefaultSetID != defaultSetIDOnEnable)
         {
             Set oldDefaultSet = SetsDataHolder.Instance.FindSetByID(defaultSetIDOnEnable);
-            Set newDefaultSet = SetsDataHolder.Instance.defaultSet;
+            Set newDefaultSet = SetsDataHolder.Instance.FindSetByID(currentDefaultSetID);
 
             APIUtilities.Instance.ModifyDefaultSetValue(oldDefaultSet);
             APIUtilities.Instance.ModifyDefaultSetValue(newDefaultSet);
@@ -41,7 +41,7 @@ public class ModalWindow_SelectDefaultSet : CustomModalWindow
 
     private void OnEnable()
     {
-        defaultSetIDOnEnable = SetsDataHolder.Instance.defaultSet.ID;
+        defaultSetIDOnEnable = SetsDataHolder.Instance.DefaultSetID;
     }
     private void OnDisable()
     {

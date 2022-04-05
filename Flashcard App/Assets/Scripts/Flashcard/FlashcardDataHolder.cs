@@ -64,7 +64,7 @@ public class FlashcardDataHolder : MonoBehaviour
 
     //Saving to memory / API.
     private void SaveFlashcardToMemory(Flashcard flashcard) => FlashcardList.Add(flashcard);
-    private void PostFlashcardToApi(Flashcard flashcardCreated) => StartCoroutine(APIUtilities.Instance.PostNewFlashcard(flashcardCreated));
+    private void PostFlashcardToApi(Flashcard flashcardCreated) => StartCoroutine(APIUtilities.Instance.IEnumerator_PostNewFlashcard(flashcardCreated));
 
     //Object end.
     private void OnDestroy() => Flashcard.FlashcardCreatedEvent -= OnFlashcardCreated;
