@@ -44,7 +44,7 @@ public class BtnSelectSetForFlashcardCreation : MonoBehaviour
     {
         LanguageProfile.DefaultSetIDUpdated += UpdateTextDisplay;
 
-        string currentDefaultSetID = LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID;
+        string currentDefaultSetID = SetsDataHolder.Instance.defaultSet.ID;
         UpdateTextDisplay(currentDefaultSetID);
     }
 

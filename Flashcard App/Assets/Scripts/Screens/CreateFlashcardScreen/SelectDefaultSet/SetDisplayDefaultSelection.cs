@@ -14,7 +14,7 @@ public class SetDisplayDefaultSelection : SetDisplay
     private void OnSelectSetButtonPressed()
     {
         //Set default set as one just pressed.
-        LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID = setIDToRepresent;
+        SetsDataHolder.Instance.SetDefaultSetBasedOnID(setIDToRepresent);
         SetDefaultIconImage(enabled: true);
 
         SetDisplaySelectedEvent?.Invoke(this);

@@ -446,6 +446,7 @@ MonoBehaviour:
   FlashcardList: []
   flashcardListJSONPathPC: /JSON Data/Flashcards/Flashcards.json
   flashcardListJSONPathMobile: /Flashcards.json
+  PostNewFlashcardsToAPI: 1
 --- !u!1 &1127861747
 GameObject:
   m_ObjectHideFlags: 0

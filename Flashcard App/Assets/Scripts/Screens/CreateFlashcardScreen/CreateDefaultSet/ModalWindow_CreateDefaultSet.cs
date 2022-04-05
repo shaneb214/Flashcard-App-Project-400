@@ -36,8 +36,8 @@ public class ModalWindow_CreateDefaultSet : CustomModalWindow
             string setName = setNameInputField.inputField.text;
 
             //Create new set. 
-            Set newSet = new Set(setName, string.Empty,true);
-            LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID = newSet.ID;
+            Set newSet = new Set(setName, string.Empty,true,LanguageProfileController.Instance.currentLanguageProfile.ID);
+            SetsDataHolder.Instance.defaultSet = newSet;
 
             CloseAndResetInputField();
         }

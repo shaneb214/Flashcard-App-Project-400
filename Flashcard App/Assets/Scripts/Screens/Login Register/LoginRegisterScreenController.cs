@@ -89,7 +89,7 @@ public class LoginRegisterScreenController : MonoBehaviour
         yield return StartCoroutine(APIUtilities.Instance.GetUser(loggedInUserID, UserDataHolder.Instance.SetCurrentUser));
         yield return StartCoroutine(APIUtilities.Instance.GetLanguageProfilesOfUser(loggedInUserID, LanguageProfileController.Instance.UpdateLanguageProfilesData));
         yield return StartCoroutine(APIUtilities.Instance.GetSetsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, SetsDataHolder.Instance.UpdateSetsData));
-        yield return StartCoroutine(APIUtilities.Instance.GetFlashcardsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, FlashcardDataHolder.Instance.UpdateFlashcardData));
+        yield return StartCoroutine(APIUtilities.Instance.GetFlashcardsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, FlashcardDataHolder.Instance.UpdateFlashcardList));
         
 
         SetVisualRegisteringProcess(false);

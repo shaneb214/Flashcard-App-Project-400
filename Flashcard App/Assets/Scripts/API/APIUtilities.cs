@@ -223,6 +223,8 @@ public class APIUtilities : MonoBehaviour
     }
     public IEnumerator PostNewFlashcard(Flashcard flashcard)
     {
+        string json = JsonUtility.ToJson(flashcard);
+
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("Id", flashcard.Id);
         data.Add("setID", flashcard.setID);
@@ -265,6 +267,29 @@ public class APIUtilities : MonoBehaviour
                 failureCallback?.Invoke();
             }
         }
+    }
+
+    public IEnumerator PutSet(string setID, Set set, Action successCallback, Action failureCallback)
+    {
+        string json = JsonUtility.ToJson(set);
+
+        using (UnityWebRequest request = UnityWebRequest.Put(ApiAddress + $"/api/Sets/{setID}", json))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                successCallback?.Invoke();
+            }
+            else
+            {
+                failureCallback?.Invoke();
+            }
+        }
+    }
+    public void ModifySet(string setID, Set set, Action successCallback, Action failureCallback)
+    {
+        StartCoroutine(PutSet(setID, set, successCallback, failureCallback));
     }
 }
 

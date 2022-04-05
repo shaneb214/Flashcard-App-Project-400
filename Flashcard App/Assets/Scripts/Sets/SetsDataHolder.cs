@@ -8,13 +8,15 @@ public class SetsDataHolder : MonoBehaviour
     public static SetsDataHolder Instance;
 
     [Header("All sets")]
-    [SerializeField] private List<Set> SetList;
+    public List<Set> SetList;
     public bool UserHasSetsCreated { get { return SetList.Count > 0; } }
 
     [Header("Storing JSON Location - Unity Editor & PC")]
     [SerializeField] private string setsListJSONPathPC;
     [Header("Storing JSON Location - Mobile")]
     [SerializeField] private string setsListJSONPathMobile;
+
+    public Set defaultSet;
 
     string jsonPath;
 
@@ -40,7 +42,23 @@ public class SetsDataHolder : MonoBehaviour
         //SetList = JSONHelper.ReadListDataFromJSONFile<Set>(jsonPath);
     }
 
-    public void UpdateSetsData(List<Set> sets) => SetList = sets; 
+    public void UpdateSetsData(List<Set> sets)
+    {
+        SetList = sets;
+        defaultSet = SetList.SingleOrDefault(Set => Set.IsDefaultSet == true);
+    }
+
+    public void SetDefaultSetBasedOnID(string setID)
+    {
+        Set previousDefaultSet = SetList.SingleOrDefault(Set => Set.IsDefaultSet == true);
+        if(previousDefaultSet != null)
+        {
+            previousDefaultSet.IsDefaultSet = false;
+        }
+
+        defaultSet = SetList.Find(set => set.ID == setID);
+        defaultSet.IsDefaultSet = true;
+    }
 
     private void OnSetCreated(Set setCreated) => SetList.Add(setCreated);
 

@@ -33,7 +33,7 @@ public class LanguageProfileController : MonoBehaviour
     public LanguageProfile currentLanguageProfile;
 
     public List<LanguageProfile> GetUserLanguageProfiles() => userLanguageProfilesList;
-    public bool UserHasDefaultSetSelected() => currentLanguageProfile.DefaultSetID != string.Empty;
+    //public bool UserHasDefaultSetSelected() => currentLanguageProfile.DefaultSetID != string.Empty;
 
     #region Start
     private void Awake()

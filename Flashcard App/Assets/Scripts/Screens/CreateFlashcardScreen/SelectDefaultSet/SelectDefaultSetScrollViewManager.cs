@@ -42,7 +42,7 @@ public class SelectDefaultSetScrollViewManager : ScrollViewItemManager
             SpawnSetDisplay(setsToDisplay[i]);
         }
 
-        currentDefaultSetSpawnedDisplay = spawnedSetDisplayList.Find(sd => sd.setIDToRepresent == LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID);
+        currentDefaultSetSpawnedDisplay = spawnedSetDisplayList.Find(sd => sd.setIDToRepresent == SetsDataHolder.Instance.defaultSet.ID);
 
         SetScrollRectPosition(1f);
     }
