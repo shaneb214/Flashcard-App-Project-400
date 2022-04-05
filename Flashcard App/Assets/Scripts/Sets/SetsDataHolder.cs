@@ -70,7 +70,9 @@ public class SetsDataHolder : MonoBehaviour
     public void UpdateSetsData(List<Set> sets)
     {
         SetList = sets;
-        DefaultSetID = SetList.SingleOrDefault(Set => Set.IsDefaultSet == true).ID;
+        Set defaultSet = SetList.SingleOrDefault(Set => Set.IsDefaultSet == true);
+        if(defaultSet != null)
+            defaultSetID = defaultSet.ID;
     }
 
     public void SetDefaultSetBasedOnID(string setID)
