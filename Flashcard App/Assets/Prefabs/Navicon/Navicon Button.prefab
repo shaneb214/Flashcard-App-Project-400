@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myScreenToPush: {fileID: 11400000, guid: a265d7c149c54854aa9c5fc0221fb213, type: 2}
-  popCurrentScreen: 1
+  popCurrentScreenAndSkipPopSequence: 0
 --- !u!1 &8909363878425634337
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,8 +279,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lanuguage Profiles
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9a940b10242ff9e4aa99aa5e6e91e81f, type: 2}
-  m_sharedMaterial: {fileID: -4619257622809158593, guid: 9a940b10242ff9e4aa99aa5e6e91e81f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
+  m_sharedMaterial: {fileID: 21131478253023500, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
