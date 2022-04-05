@@ -19,7 +19,7 @@ public class SetsDataHolder : MonoBehaviour
     [Header("Storing JSON Location - Mobile")]
     [SerializeField] private string setsListJSONPathMobile;
 
-    private string defaultSetID;
+    [SerializeField] private string defaultSetID;
     public string DefaultSetID 
     { 
         get => defaultSetID;
@@ -51,8 +51,8 @@ public class SetsDataHolder : MonoBehaviour
         if (PostNewSetsToAPI)
             OnSetCreated += PostSetToAPI;
 
-        OnSetCreated += SaveSetToMemory;
         OnSetCreated += CheckToAssignNewDefaultSetOnSetCreation;
+        OnSetCreated += SaveSetToMemory;
 
         Set.SetCreatedEvent += OnSetCreated;
     }
@@ -92,6 +92,8 @@ public class SetsDataHolder : MonoBehaviour
         //Otherwise there is another set that is marked as default. Switch around.
         Set previousDefaultSet = SetList.Find(set => set.ID == defaultSetID);
         previousDefaultSet.IsDefaultSet = false;
+
+        defaultSetID = createdSet.ID;
 
         //Update previous default set on API side. 
         APIUtilities.Instance.ModifyDefaultSetValue(previousDefaultSet);

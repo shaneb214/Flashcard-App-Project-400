@@ -136,5 +136,23 @@ namespace Michsky.UI.ModernUIPack
             yield return new WaitForSeconds(0.5f);
             switchAnimator.enabled = false;
         }
+
+        private void OnEnable()
+        {
+            if (switchAnimator == null) { switchAnimator = gameObject.GetComponent<Animator>(); }
+            if (switchButton == null)
+            {
+                switchButton = gameObject.GetComponent<Button>();
+                switchButton.onClick.AddListener(AnimateSwitch);
+
+                if (enableSwitchSounds == true && useClickSound == true)
+                {
+                    switchButton.onClick.AddListener(delegate
+                    {
+                        soundSource.PlayOneShot(clickSound);
+                    });
+                }
+            }
+        }
     }
 }

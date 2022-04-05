@@ -23,7 +23,7 @@ public class BtnSelectSetForFlashcardCreation : MonoBehaviour
         myButton.onClick.AddListener(OnMyButtonPressed); 
     }
 
-    //When user selects 
+    //When user selects.
     private void UpdateTextDisplay(string newDefaultSetID)
     {
         Set newDefaultSet = SetsDataHolder.Instance.FindSetByID(newDefaultSetID);
