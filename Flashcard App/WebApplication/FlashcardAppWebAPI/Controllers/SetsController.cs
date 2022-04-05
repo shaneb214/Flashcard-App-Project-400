@@ -51,7 +51,38 @@ namespace FlashcardAppWebAPI.Controllers
             return Ok(setsOfProfile);
         }
 
+        [Route("api/Sets/ModifyDefaultSetValue")]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> ModifyDefaultSet(Set setToModify)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            Set set = await db.Sets.FindAsync(setToModify.ID);
+            set.IsDefaultSet = setToModify.IsDefaultSet;
+
+            db.Entry(set).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (SetExists(set.ID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok();
+        }
 
         // PUT: api/Sets/5
         [ResponseType(typeof(void))]

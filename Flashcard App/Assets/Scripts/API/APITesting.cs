@@ -12,6 +12,7 @@ public class APITesting : MonoBehaviour
         string RussianLanguageProfileID = "cc3b0a6b-b418-4c1a-92cd-7b9fec687d51";
         string ItalianLanguageProfileID = "c061745a-e3d1-4a46-b0f0-93c24fd2f815";
         string animalsSetID = "9187b6b3-2602-4267-b7c4-1532a934aa93";
+        string birdsSetID = "7ef4ac81-5ba1-4b45-b5bf-6b9ad83b15a9";
 
         yield return null;
 
@@ -23,12 +24,15 @@ public class APITesting : MonoBehaviour
         //LanguageProfile italianProfile = languageProfiles[0];
 
 
-        yield return StartCoroutine(APIUtilities.Instance.GetSetsOfLanguageProfile(RussianLanguageProfileID,SetsDataHolder.Instance.UpdateSetsData));
-        List<Set> sets = SetsDataHolder.Instance.SetList;
-        Set animalsSet = sets.Find(set => set.ID == animalsSetID);
-        animalsSet.IsDefaultSet = false;
+        //yield return StartCoroutine(APIUtilities.Instance.GetSetsOfLanguageProfile(RussianLanguageProfileID,SetsDataHolder.Instance.UpdateSetsData));
+        //List<Set> sets = SetsDataHolder.Instance.SetList;
+        //Set animalsSet = sets.Find(set => set.ID == animalsSetID);
+        //Set birdsSet = sets.Find(set => set.ID == birdsSetID);
+        //animalsSet.IsDefaultSet = false;
+        //birdsSet.IsDefaultSet = true;
 
-        yield return StartCoroutine(APIUtilities.Instance.PutSet(animalsSetID, animalsSet,null,null));
+        //APIUtilities.Instance.ModifyDefaultSetValue(animalsSet,null,null);
+        //APIUtilities.Instance.ModifyDefaultSetValue(birdsSet,null,null);
 
 
         //yield return StartCoroutine(APIUtilities.Instance.PutLanguageProfile(russianProfile.ID, russianProfile));

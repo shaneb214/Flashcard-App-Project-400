@@ -271,9 +271,16 @@ public class APIUtilities : MonoBehaviour
 
     public IEnumerator PutSet(string setID, Set set, Action successCallback, Action failureCallback)
     {
+        if (set.ParentSetID == string.Empty)
+        {
+            set.ParentSetID = null;
+        }
+
+        byte[] test = Encoding.UTF8.GetBytes(JsonUtility.ToJson(set));
+
         string json = JsonUtility.ToJson(set);
 
-        using (UnityWebRequest request = UnityWebRequest.Put(ApiAddress + $"/api/Sets/{setID}", json))
+        using (UnityWebRequest request = UnityWebRequest.Put(ApiAddress + $"/api/Sets/{setID}", test))
         {
             yield return request.SendWebRequest();
 
@@ -287,9 +294,38 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
-    public void ModifySet(string setID, Set set, Action successCallback, Action failureCallback)
+    public void ModifySet(string setID, Set set, Action successCallback = null, Action failureCallback = null)
     {
         StartCoroutine(PutSet(setID, set, successCallback, failureCallback));
+    }
+
+    public void ModifyDefaultSetValue(Set set, Action successCallback = null, Action failureCallback = null)
+    {
+        StartCoroutine(ModifyDefaultSet(set, successCallback, failureCallback));
+    }
+
+    public IEnumerator ModifyDefaultSet(Set set, Action successCallback = null, Action failureCallback = null)
+    {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("ID", set.ID);
+        data.Add("Name", set.Name);
+        data.Add("LanguageProfileID", set.LanguageProfileID);
+        data.Add("ParentSetID", set.ParentSetID);
+        data.Add("IsDefaultSet", set.IsDefaultSet.ToString());
+
+        using (UnityWebRequest request = UnityWebRequest.Post(ApiAddress + $"/api/Sets/ModifyDefaultSetValue",data))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                successCallback?.Invoke();
+            }
+            else
+            {
+                failureCallback?.Invoke();
+            }
+        }
     }
 }
 

@@ -32,8 +32,8 @@ public class ModalWindow_SelectDefaultSet : CustomModalWindow
             Set oldDefaultSet = SetsDataHolder.Instance.FindSetByID(defaultSetIDOnEnable);
             Set newDefaultSet = SetsDataHolder.Instance.defaultSet;
 
-            APIUtilities.Instance.ModifySet(oldDefaultSet.ID, oldDefaultSet, null, null);
-            APIUtilities.Instance.ModifySet(newDefaultSet.ID, newDefaultSet, null, null);
+            APIUtilities.Instance.ModifyDefaultSetValue(oldDefaultSet);
+            APIUtilities.Instance.ModifyDefaultSetValue(newDefaultSet);
         }
 
         CloseWindow();
