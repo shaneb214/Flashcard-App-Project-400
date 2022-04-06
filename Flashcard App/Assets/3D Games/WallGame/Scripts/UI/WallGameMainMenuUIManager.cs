@@ -48,6 +48,7 @@ public class WallGameMainMenuUIManager : MonoBehaviour
     public void OnExitButtonSelected() 
     {
         SceneManager.LoadScene(1);
+        Screen.orientation = ScreenOrientation.Portrait;
     }
 
     public void OnBackToMainMenuButtonSelected()

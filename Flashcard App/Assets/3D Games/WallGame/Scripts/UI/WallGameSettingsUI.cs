@@ -25,14 +25,14 @@ public class WallGameSettingsUI : MonoBehaviour
         repeatAmountSlider.mainSlider.value = wallGameSettings.repeatCardAmount;
 
 
-        //LanguageProfile currentLanguageProfile = LanguageProfileController.Instance.currentLanguageProfile;
+        LanguageProfile currentLanguageProfile = LanguageProfileController.Instance.currentLanguageProfile;
 
-        //Sprite nativeFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{currentLanguageProfile.nativeLanguage.ISO}");
-        //Sprite learningFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{currentLanguageProfile.learningLanguage.ISO}");
+        Sprite learningFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{currentLanguageProfile.LearningLanguage.ISO}");
+        Sprite nativeFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{currentLanguageProfile.NativeLanguage.ISO}");
 
         //PASS SPRITES INTO HERE.
-        promptSelectionDropdown.CreateNewItem("Learning", null);
-        promptSelectionDropdown.CreateNewItem("Native", null);
+        promptSelectionDropdown.CreateNewItem("Learning", learningFlagSprite);
+        promptSelectionDropdown.CreateNewItem("Native", nativeFlagSprite);
     }
 
     private void OnBackButtonSelected()
