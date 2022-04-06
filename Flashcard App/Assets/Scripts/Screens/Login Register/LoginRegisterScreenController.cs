@@ -2,6 +2,7 @@ using Michsky.UI.ModernUIPack;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoginRegisterScreenController : MonoBehaviour
@@ -67,7 +68,7 @@ public class LoginRegisterScreenController : MonoBehaviour
         if (errorMessage.IsActive)
             errorMessage.Disable();
 
-        SetVisualRegisteringProcess(true);
+        SetVisualLoggingInProcess(true);
         StartLoginAttemptCoroutine();
     }
 
@@ -77,7 +78,7 @@ public class LoginRegisterScreenController : MonoBehaviour
         if(InProcessOfAttemptingToLogin)
         {
             StopLoginAttemptCoroutine();
-            SetVisualRegisteringProcess(false);
+            SetVisualLoggingInProcess(false);
         }
 
         //Goes to register screen in another script.
@@ -107,9 +108,11 @@ public class LoginRegisterScreenController : MonoBehaviour
         yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetFlashcardsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, FlashcardDataHolder.Instance.UpdateFlashcardList));
         
 
-        SetVisualRegisteringProcess(false);
-        BlitzyUI.UIManager.Instance.QueuePop();
-        BlitzyUI.UIManager.Instance.QueuePush(homeScreenPushData.ID);
+        SetVisualLoggingInProcess(false);
+
+        SceneManager.LoadScene("MainScene");
+        //BlitzyUI.UIManager.Instance.QueuePop();
+        //BlitzyUI.UIManager.Instance.QueuePush(homeScreenPushData.ID);
     }
 
     private void OnLoginUnsuccessful(string errorJson)
@@ -117,18 +120,20 @@ public class LoginRegisterScreenController : MonoBehaviour
         print("Login was not successful.");
         errorMessage.EnableMessage(errorJson);
 
-        SetVisualRegisteringProcess(false);
+        SetVisualLoggingInProcess(false);
     }
 
-    private void SetVisualRegisteringProcess(bool enable)
+    private void SetVisualLoggingInProcess(bool enable)
     {
         if (enable)
         {
+            btnLogin.interactable = false;
             InProcessOfAttemptingToLogin = true;
             progressBarLoop.gameObject.SetActive(enable);
         }
         else
         {
+            btnLogin.interactable = true;
             InProcessOfAttemptingToLogin = false;
             progressBarLoop.gameObject.SetActive(enable);
         }

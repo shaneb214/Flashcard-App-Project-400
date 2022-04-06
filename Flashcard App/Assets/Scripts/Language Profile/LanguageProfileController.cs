@@ -32,8 +32,11 @@ public class LanguageProfileController : MonoBehaviour
     [SerializeField] private List<LanguageProfile> userLanguageProfilesList = new List<LanguageProfile>();
     public LanguageProfile currentLanguageProfile;
 
+    [Header("API Settings")]
+    [SerializeField] private bool PostNewLanguageProfilesToAPI;
+    private Action<LanguageProfile> OnLanguageProfileCreated;
+
     public List<LanguageProfile> GetUserLanguageProfiles() => userLanguageProfilesList;
-    //public bool UserHasDefaultSetSelected() => currentLanguageProfile.DefaultSetID != string.Empty;
 
     #region Start
     private void Awake()
@@ -43,6 +46,14 @@ public class LanguageProfileController : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+
+        if (PostNewLanguageProfilesToAPI)
+            OnLanguageProfileCreated += PostLanguageProfileToAPI;
+
+        OnLanguageProfileCreated += CheckToAssignNewCurrentLanguageProfile;
+        OnLanguageProfileCreated += SaveLanguageProfileToMemory;
+
+        LanguageProfile.LanguageProfileCreatedEvent += OnLanguageProfileCreated;
     }
 
     private void Start()
@@ -52,12 +63,35 @@ public class LanguageProfileController : MonoBehaviour
         //currentLanguageProfile = userLanguageProfilesList.Find(profile => profile.IsCurrentProfile == true);
     }
 
+    private void PostLanguageProfileToAPI(LanguageProfile languageProfile) => APIUtilities.Instance.PostNewLanguageProfile(UserDataHolder.Instance.CurrentUser.ID,languageProfile);
+    private void SaveLanguageProfileToMemory(LanguageProfile languageProfile) => userLanguageProfilesList.Add(languageProfile);
+    private void CheckToAssignNewCurrentLanguageProfile(LanguageProfile newLanguageProfile)
+    {
+        //New profile not marked as current profile? Don't need to do anything.
+        if (newLanguageProfile.IsCurrentProfile == false)
+            return;
+
+        //Check if there is another Profile that is marked as current profile. Switch around.
+        LanguageProfile previousLanguageProfile = userLanguageProfilesList.Find(profile => profile.ID == newLanguageProfile.ID);
+        if (previousLanguageProfile == null)
+        {
+            currentLanguageProfile = newLanguageProfile;
+            return;
+        }
+
+        //Switch around.
+        previousLanguageProfile.IsCurrentProfile = false;
+        currentLanguageProfile = newLanguageProfile;
+
+        //Update previous current lang profile on API side. 
+        //APIUtilities.Instance.ModifyLanguageCurrentLanguageProfile(previousLanguageProfile);
+    }
+
     public void UpdateLanguageProfilesData(List<LanguageProfile> languageProfiles)
     {
         userLanguageProfilesList = languageProfiles;
         currentLanguageProfile = languageProfiles.SingleOrDefault(profile => profile.IsCurrentProfile == true);
     }
-
 
     #endregion
     #region New Language Profile Creation / Selection
@@ -96,12 +130,6 @@ public class LanguageProfileController : MonoBehaviour
     {
         LanguageProfile newProfile = userLanguageProfilesList.Find(profile => profile.ID == ID);
         SelectNewProfile(newProfile);
-    }
-    #endregion
-    #region New Set Creation
-    private void OnNewSetCreated(Set newSet)
-    {
-        //userCurrentLanguageProfile.setList.Add(newSet);
     }
     #endregion
     #region Writing / Saving Data To Json
@@ -170,20 +198,25 @@ public class LanguageProfileController : MonoBehaviour
     #region Event Subscribing / Unsubscribing.
     private void OnEnable()
     {
-        LanguageProfile.LanguageProfileCreatedEvent += OnNewLanguageProfileCreated;
+        //LanguageProfile.LanguageProfileCreatedEvent += OnNewLanguageProfileCreated;
         //Set.SetCreatedEvent += OnNewSetCreated;
     }
 
     private void OnDisable()
     {
-        LanguageProfile.LanguageProfileCreatedEvent -= OnNewLanguageProfileCreated;
+        //LanguageProfile.LanguageProfileCreatedEvent -= OnNewLanguageProfileCreated;
         //Set.SetCreatedEvent -= OnNewSetCreated;
     }
     #endregion
 
+    private void OnDestroy()
+    {
+        LanguageProfile.LanguageProfileCreatedEvent -= OnLanguageProfileCreated;
+    }
+
     //Application stops: Save all info to JSON?
     private void OnApplicationQuit()
     {
-        SaveListOfLanguageProfilesToJSON(userLanguageProfilesList);
+        //SaveListOfLanguageProfilesToJSON(userLanguageProfilesList);
     }
 }

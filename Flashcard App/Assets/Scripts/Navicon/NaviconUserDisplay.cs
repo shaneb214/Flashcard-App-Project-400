@@ -10,7 +10,7 @@ public class NaviconUserDisplay : MonoBehaviour
 
     private void OnEnable()
     {
-        txtUserGreeting.text = $"Hello {UserDataHolder.Instance.CurrentUser.Username}";
+        txtUserGreeting.text = $"Hello \n {UserDataHolder.Instance.CurrentUser.Username}";
     }
 
 }

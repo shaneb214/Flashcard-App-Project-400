@@ -10,7 +10,6 @@ using UnityEngine.UI;
 
 public class SetDisplay : MonoBehaviour
 {
-    //public Action<SetDisplay> SetDisplaySelected;
     public string setIDToRepresent;
 
     [Header("Components")]
@@ -23,11 +22,6 @@ public class SetDisplay : MonoBehaviour
     //Start.
     public virtual void Awake() { }
     public virtual void Start() { } 
-
-    //private void OnSelectSetButtonPressed()
-    //{
-    //    //SetDisplaySelected?.Invoke(this);
-    //}
 
     public virtual void UpdateDisplay(string setID, string setName)
     {

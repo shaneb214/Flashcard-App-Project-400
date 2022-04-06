@@ -67,6 +67,14 @@ public class ScreenController : MonoBehaviour
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        if(Instance = this)
+        {
+            Instance = null;
+        }
+    }
 }
 
 //Code for minimising on android:

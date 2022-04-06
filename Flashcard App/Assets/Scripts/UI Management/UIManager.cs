@@ -66,7 +66,8 @@ namespace BlitzyUI
 
         private void Awake() 
         {
-            if (Instance == null) {
+            if (Instance == null) 
+            {
                 Instance = this;
             }
 
@@ -85,6 +86,9 @@ namespace BlitzyUI
             //{
             //    Object.Destroy(child.gameObject);
             //}
+
+            //CustomSceneManager.MainSceneLoadedEvent += OnMainSceneLoaded;
+
         }
 
         private void OnDestroy() 

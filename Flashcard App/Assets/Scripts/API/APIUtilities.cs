@@ -223,6 +223,7 @@ public class APIUtilities : MonoBehaviour
     }
 
     //Post data.
+    public void PostNewLanguageProfile(string userID, LanguageProfile languageProfile) => StartCoroutine(IEnumerator_PostNewLanguageProfile(userID, languageProfile));
     public IEnumerator IEnumerator_PostNewLanguageProfile(string userID,LanguageProfile languageProfile)
     {
         Dictionary<string, string> data = new Dictionary<string, string>();

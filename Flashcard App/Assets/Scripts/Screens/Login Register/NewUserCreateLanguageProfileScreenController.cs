@@ -2,6 +2,7 @@ using Michsky.UI.ModernUIPack;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NewUserCreateLanguageProfileScreenController : MonoBehaviour
@@ -10,13 +11,15 @@ public class NewUserCreateLanguageProfileScreenController : MonoBehaviour
     [SerializeField] private CustomDropdown nativeLanguageDropdown;
     [SerializeField] private CustomDropdown learningLanguageDropdown;
 
-    [Header("Buttons")]
+    [Header("Back To Register Screen")]
     [SerializeField] private Button btnBack;
+    [SerializeField] private ScreenPushData registerScreenPushData;
+
     [SerializeField] private Button btnCreate;
 
     private void Awake()
     {
-        btnBack.onClick.AddListener(OnBackButtonSelected);
+        //btnBack.onClick.AddListener(OnBackButtonSelected);
         btnCreate.onClick.AddListener(OnCreateButtonSelected);
     }
 
@@ -38,6 +41,11 @@ public class NewUserCreateLanguageProfileScreenController : MonoBehaviour
     }
     private void OnCreateButtonSelected()
     {
+        Language selectedNativeLanguage = LanguageDataHolder.Instance.languagesList[nativeLanguageDropdown.selectedItemIndex];
+        Language selectedLearningLanguage = LanguageDataHolder.Instance.languagesList[learningLanguageDropdown.selectedItemIndex];
 
+        LanguageProfile languageProfile = new LanguageProfile(selectedNativeLanguage, selectedLearningLanguage, true);
+
+        SceneManager.LoadScene("MainScene");
     }
 }

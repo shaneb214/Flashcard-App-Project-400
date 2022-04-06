@@ -39,25 +39,16 @@ public class ModalWindow_CreateSet : CustomModalWindow
             string setName = setNameInputField.inputField.text;
 
             //Fix this up some other time. Maybe remove the switch if they have no other sets.
-
-
             bool setDefaultSet;
             if (!SetsDataHolder.Instance.UserHasSetsCreated)
                 setDefaultSet = true;
             else
                 setDefaultSet = defaultSetSwitch.isOn;
             
-            //!SetsDataHolder.Instance.UserHasSetsCreated ? true : defaultSetSwitch.isOn;
-
-            //if (!SetsDataHolder.Instance.UserHasSetsCreated)
-            //    setDefaultSet = true;
 
             //Create new set. 
             //Set as default where???
             Set newSet = new Set(setName,LibraryViewController.SetIDCurrentlyShowing,setDefaultSet);
-
-            //if (setDefaultSet)
-            //    SetsDataHolder.Instance.SetDefaultSetBasedOnID(newSet.ID);
 
             CloseAndResetInputField();
         }
