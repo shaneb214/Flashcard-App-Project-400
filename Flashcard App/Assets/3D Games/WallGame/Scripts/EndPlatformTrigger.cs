@@ -10,6 +10,5 @@ public class EndPlatformTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerHitTrigger?.Invoke();
-        print("PLAYER");
     }
 }

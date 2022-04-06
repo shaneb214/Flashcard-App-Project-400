@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TheWallGame.unity
+    path: Assets/Scenes/WallDash.unity
     guid: e70c922f0f7771943a4c381078f3be36
   - enabled: 1
     path: Assets/Scenes/MainScene.unity

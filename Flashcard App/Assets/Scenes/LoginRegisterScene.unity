@@ -380,7 +380,6 @@ MonoBehaviour:
     ID: 
     Username: 
     Email: 
-  userList: []
   userListJSONPathPC: /JSON Data/Users/UserList.json
   currentUserJSONPathPC: /JSON Data/Users/CurrentUser.json
   userListJSONPathMobile: /UserList.json

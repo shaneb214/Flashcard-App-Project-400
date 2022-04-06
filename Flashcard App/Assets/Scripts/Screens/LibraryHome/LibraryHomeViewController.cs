@@ -61,6 +61,8 @@ public class LibraryHomeViewController : LibraryViewController
     //Event subscribing / unsubscribing.
     public override void OnEnable()
     {
+        base.OnEnable();
+
         Set.SetCreatedEvent += OnNewSetCreated;
         SetDisplayLibrary.SetDisplaySelectedEvent += OnSetDisplaySelected;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewProfile;
@@ -84,6 +86,8 @@ public class LibraryHomeViewController : LibraryViewController
 
     public override void OnDisable()
     {
+        base.OnDisable();
+
         spawnedSetDisplayList.Clear();
         ClearScrollViewItems();
 

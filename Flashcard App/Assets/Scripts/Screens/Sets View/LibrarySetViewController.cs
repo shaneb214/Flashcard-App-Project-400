@@ -66,6 +66,8 @@ public class LibrarySetViewController : LibraryViewController
 
     public override void OnEnable()
     {
+        base.OnEnable();
+
         Set.SetCreatedEvent += OnNewSetCreated;
         SetDisplayLibrary.SetDisplaySelectedEvent += DisplaySetContents;
         LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewProfile;
@@ -77,6 +79,8 @@ public class LibrarySetViewController : LibraryViewController
     }
     public override void OnDisable()
     {
+        base.OnDisable();
+
         //Destroy all sets/flashcards for now.
         spawnedSetDisplayList.Clear();
         ClearScrollViewItems();

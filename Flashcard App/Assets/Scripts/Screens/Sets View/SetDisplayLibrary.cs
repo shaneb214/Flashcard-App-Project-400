@@ -10,13 +10,23 @@ using UnityEngine.UI;
 
 public class SetDisplayLibrary : SetDisplay
 {
+    [SerializeField] private Button btnPlaySet;
     public static Action<SetDisplayLibrary> SetDisplaySelectedEvent;
+    public static Action<string> SetDisplayPlaySetSelectedEvent;
 
-    public override void Start() => btnSelectSet.onClick.AddListener(OnSelectSetButtonPressed);
+    public override void Start()
+    {
+        btnSelectSet.onClick.AddListener(OnSelectSetButtonPressed);
+        btnPlaySet.onClick.AddListener(OnPlaySetButtonPressed);
+    }
 
     private void OnSelectSetButtonPressed()
     {
         //Enter set and display subsets and any flashcards within.
         SetDisplaySelectedEvent?.Invoke(this);
+    }
+    private void OnPlaySetButtonPressed()
+    {
+        SetDisplayPlaySetSelectedEvent?.Invoke(setIDToRepresent);
     }
 }
