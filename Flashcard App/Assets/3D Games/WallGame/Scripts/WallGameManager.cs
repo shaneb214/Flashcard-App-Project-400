@@ -31,6 +31,8 @@ public class WallGameManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private WallGameSettings wallGameSettings;
 
+    private WallGameFlashcardDataSlinger wallGameFlashcardDataSlinger;
+
     //Start.
     private void Awake()
     {
@@ -41,18 +43,21 @@ public class WallGameManager : MonoBehaviour
     {
         Screen.orientation = ScreenOrientation.Landscape;
 
-        flashcardsToGoThrough.AddRange(new List<Flashcard>()
-        {
-            new Flashcard("Hello", "привет"),
-            new Flashcard("Good day", "добрый день"),
-            new Flashcard("Goodbye", "до свидания"),
-            new Flashcard("Bye", "пока"),
-            new Flashcard("My name is", "меня зовут"),
-            //new Flashcard("I want", "я хочу"),
-            //new Flashcard("Could you..", "не могли бы вы.."),
-            //new Flashcard("Tell me", "скажи мне"),
-            //new Flashcard("I understand", "я понимаю"),
-        });
+        wallGameFlashcardDataSlinger = FindObjectOfType<WallGameFlashcardDataSlinger>();
+        flashcardsToGoThrough.AddRange(wallGameFlashcardDataSlinger.flashcardData);
+
+        //flashcardsToGoThrough.AddRange(new List<Flashcard>()
+        //{
+        //    new Flashcard("Hello", "привет"),
+        //    new Flashcard("Good day", "добрый день"),
+        //    new Flashcard("Goodbye", "до свидания"),
+        //    new Flashcard("Bye", "пока"),
+        //    new Flashcard("My name is", "меня зовут"),
+        //    //new Flashcard("I want", "я хочу"),
+        //    //new Flashcard("Could you..", "не могли бы вы.."),
+        //    //new Flashcard("Tell me", "скажи мне"),
+        //    //new Flashcard("I understand", "я понимаю"),
+        //});
     }
 
     public void StartGame()
@@ -155,6 +160,11 @@ public class WallGameManager : MonoBehaviour
         System.Random rng = new System.Random();
         int randomNumber = rng.Next(0, 2);
         return randomNumber == 0 ? flashcard.nativeSide : flashcard.learningSide;
+    }
+
+    private void OnDestroy()
+    {
+        wallGameFlashcardDataSlinger.Destroy();
     }
 }
 

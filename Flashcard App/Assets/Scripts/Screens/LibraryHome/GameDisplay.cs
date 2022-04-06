@@ -23,6 +23,7 @@ public class GameDisplay : MonoBehaviour
     [SerializeField] private Color gameUnavailableColour;
 
     private bool canPlay;
+    private string setId;
 
     private void Awake()
     {
@@ -33,13 +34,18 @@ public class GameDisplay : MonoBehaviour
     {
         if(canPlay)
         {
+            List<Flashcard> flashcardsOfSet = FlashcardDataHolder.Instance.FindFlashcardsBySetID(setId);
+
+            GameObject dataSlingerObject = new GameObject("WallDashFlashcardDataSlinger");
+            WallGameFlashcardDataSlinger dataSlingerComponent = dataSlingerObject.AddComponent<WallGameFlashcardDataSlinger>();
+            dataSlingerComponent.RecieveFlashcardData(flashcardsOfSet);
             SceneManager.LoadScene("WallDash");
         }
-        //send over data?
     }
 
-    public void UpdateDisplayInfoForGame(GameDisplayInfo gameDisplayInfo)
+    public void UpdateDisplayInfoForGame(GameDisplayInfo gameDisplayInfo,string setID)
     {
+        this.setId = setID;
         txtGameName.text = gameDisplayInfo.GameName;
         txtGameRequirement.text = gameDisplayInfo.MinimumRequirementsDescription;
         imgGame.sprite = gameDisplayInfo.gameSprite;

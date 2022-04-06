@@ -20,5 +20,5 @@ public class ModalWindow_SelectGameToPlay : CustomModalWindow
         CloseWindow();
     }
 
-    public void InformScrollViewManagerOfWhatSetIsAttemptingToBePlayed(string setID) => selectGameScrollViewManager.CurrentSetChosenToPlay = setID;
+    public void InformScrollViewManagerOfWhatSetIsAttemptingToBePlayed(string setID) => selectGameScrollViewManager.CurrentSetIDChosenToPlay = setID;
 }

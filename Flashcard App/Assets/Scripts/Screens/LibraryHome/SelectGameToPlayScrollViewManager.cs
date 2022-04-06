@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SelectGameToPlayScrollViewManager : ScrollViewItemManager
 {
-    public string CurrentSetChosenToPlay;
+    public string CurrentSetIDChosenToPlay;
 
     [Header("Prefab Spawning")]
     [SerializeField] private GameDisplay gameDisplayPrefab;
@@ -15,11 +15,11 @@ public class SelectGameToPlayScrollViewManager : ScrollViewItemManager
     private void OnEnable()
     {
         GameDisplay spawnedGameDisplay = SpawnItemInScrollView(gameDisplayPrefab);
-        spawnedGameDisplay.UpdateDisplayInfoForGame(wallGameDisplayInfo);
+        spawnedGameDisplay.UpdateDisplayInfoForGame(wallGameDisplayInfo,CurrentSetIDChosenToPlay);
 
         //Determine if game is available to play?
-        Set setToPlay = SetsDataHolder.Instance.FindSetByID(CurrentSetChosenToPlay);
-        bool canPlay = FlashcardDataHolder.Instance.FindFlashcardsBySetID(CurrentSetChosenToPlay).Count >= wallGameDisplayInfo.gameSettings.MinimumCardRequirementToPlay;
+        Set setToPlay = SetsDataHolder.Instance.FindSetByID(CurrentSetIDChosenToPlay);
+        bool canPlay = FlashcardDataHolder.Instance.FindFlashcardsBySetID(CurrentSetIDChosenToPlay).Count >= wallGameDisplayInfo.gameSettings.MinimumCardRequirementToPlay;
 
         spawnedGameDisplay.UpdateAvailabilityDisplay(canPlay);
     }
