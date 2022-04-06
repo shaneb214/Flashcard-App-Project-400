@@ -46,6 +46,8 @@ public class LanguageProfileController : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+        else
+            Destroy(gameObject);
 
         if (PostNewLanguageProfilesToAPI)
             OnLanguageProfileCreated += PostLanguageProfileToAPI;

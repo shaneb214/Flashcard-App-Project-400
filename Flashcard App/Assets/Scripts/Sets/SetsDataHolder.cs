@@ -47,6 +47,8 @@ public class SetsDataHolder : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+        else
+            Destroy(gameObject);
 
         if (PostNewSetsToAPI)
             OnSetCreated += PostSetToAPI;

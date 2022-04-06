@@ -1,18 +1,26 @@
 using BlitzyUI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class BtnLogout : BtnPushScreen
+public class BtnLogout : MonoBehaviour
 {
-    public override void OnButtonClick()
+    public static event Action UserLoggedOutEvent;
+
+    private Button button;
+
+    private void Awake()
     {
-        base.OnButtonClick();
+        button = GetComponent<Button>();
+        button.onClick.AddListener(OnButtonSelected);
+    }
 
-        //if (popCurrentScreenAndSkipPopSequence)
-        //    UIManager.Instance.QueuePop();
-
-        //UIManager.Instance.QueuePop();
-        //PushMyScreen();
+    private void OnButtonSelected()
+    {
+        SceneManager.LoadScene("LoginRegisterScene");
+        UserLoggedOutEvent?.Invoke();
     }
 }

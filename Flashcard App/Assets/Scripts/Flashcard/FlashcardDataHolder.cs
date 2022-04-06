@@ -32,6 +32,8 @@ public class FlashcardDataHolder : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+        else
+            Destroy(gameObject);
     }
 
     private void Start()

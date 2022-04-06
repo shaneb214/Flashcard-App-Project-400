@@ -17,6 +17,8 @@ public class LanguageDataHolder : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+        else
+            Destroy(gameObject);
     }
 
     public void UpdateLanguagesList(List<Language> languages)

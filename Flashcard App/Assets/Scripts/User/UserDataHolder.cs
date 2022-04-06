@@ -13,7 +13,7 @@ public class UserDataHolder : MonoBehaviour
     [SerializeField] private User currentUser;
     public User CurrentUser { get => currentUser; set { currentUser = value; } }
 
-    [SerializeField] private List<User> userList;
+    //[SerializeField] private List<User> userList;
 
     [Header("Storing JSON Location - Unity Editor & PC")]
     [SerializeField] private string userListJSONPathPC;
@@ -29,33 +29,16 @@ public class UserDataHolder : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+        else
+            Destroy(gameObject);
 
-        //User.UserCreatedEvent += SetCurrentUser;
-        //APIUtilities.UserLoggedInEvent += OnUserLoggedIn;
+        BtnLogout.UserLoggedOutEvent += OnUserLoggedOut;
     }
 
-    private void OnUserLoggedIn(Token token)
-    {
-        StartCoroutine(APIUtilities.Instance.IEnumerator_GetUser(token.userID, SetCurrentUser));
-    }
-
-
-    private void Start()
-    {
-        //CreateDefaultUser();
-        //SaveCurrentUserToJson();
-
-        //SetCurrentUserFromJSON();
-    }
-
+    private void OnUserLoggedOut() => currentUser = null;
     public void SetCurrentUser(User user) => currentUser = user;
 
-    private User CreateDefaultUser()
-    {
-        User defaultUser = new User("Shane","shaneb214@gmail.com");
-        currentUser = defaultUser;
-        return defaultUser;
-    }
+    //Json.
     private void SaveCurrentUserToJson()
     {
         string userAsJSON = JsonUtility.ToJson(currentUser);
@@ -78,14 +61,9 @@ public class UserDataHolder : MonoBehaviour
         currentUser = JsonUtility.FromJson<User>(json);
     }
 
-    //private void OnNewUserCreated(User newUser)
-    //{     
-    //    userList.Add(newUser);
-    //}
-
     private void OnDestroy()
     {
-        //APIUtilities.UserLoggedInEvent -= OnUserLoggedIn;
-        //User.UserCreatedEvent -= SetCurrentUser;
+
+        BtnLogout.UserLoggedOutEvent -= OnUserLoggedOut;
     }
 }
