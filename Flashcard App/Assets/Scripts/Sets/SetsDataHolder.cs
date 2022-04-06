@@ -57,7 +57,15 @@ public class SetsDataHolder : MonoBehaviour
         OnSetCreated += SaveSetToMemory;
 
         Set.SetCreatedEvent += OnSetCreated;
+        BtnLogout.UserLoggedOutEvent += ClearSetsDataFromMemory;
     }
+
+    private void ClearSetsDataFromMemory()
+    {
+        defaultSetID = null;
+        SetList.Clear();
+    }
+
     private void Start() 
     {
 #if UNITY_EDITOR
@@ -125,6 +133,11 @@ public class SetsDataHolder : MonoBehaviour
     public Set FindSetByID(string ID) => SetList.Find(s => s.ID == ID);
 
     //Object end.
-    private void OnDestroy() => Set.SetCreatedEvent -= OnSetCreated;
+    private void OnDestroy()
+    {
+        Set.SetCreatedEvent -= OnSetCreated;
+        BtnLogout.UserLoggedOutEvent -= ClearSetsDataFromMemory;
+    }
+
     private void OnApplicationQuit() => JSONHelper.SaveListDataToJSON(SetList, jsonPath);
 }

@@ -50,6 +50,12 @@ public class FlashcardDataHolder : MonoBehaviour
             OnFlashcardCreated += PostFlashcardToApi;
 
         Flashcard.FlashcardCreatedEvent += OnFlashcardCreated;
+        BtnLogout.UserLoggedOutEvent += ClearFlashcardDataFromMemory;
+    }
+
+    private void ClearFlashcardDataFromMemory()
+    {
+        FlashcardList.Clear();
     }
 
     public void UpdateFlashcardList(List<Flashcard> flashcards) => FlashcardList = flashcards;
@@ -69,6 +75,11 @@ public class FlashcardDataHolder : MonoBehaviour
     private void PostFlashcardToApi(Flashcard flashcardCreated) => StartCoroutine(APIUtilities.Instance.IEnumerator_PostNewFlashcard(flashcardCreated));
 
     //Object end.
-    private void OnDestroy() => Flashcard.FlashcardCreatedEvent -= OnFlashcardCreated;
+    private void OnDestroy()
+    {
+        Flashcard.FlashcardCreatedEvent -= OnFlashcardCreated;
+        BtnLogout.UserLoggedOutEvent -= ClearFlashcardDataFromMemory;
+    }
+
     private void OnApplicationQuit() => JSONHelper.SaveListDataToJSON(FlashcardList, jsonPath);
 }

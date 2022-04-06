@@ -56,13 +56,13 @@ public class LanguageProfileController : MonoBehaviour
         OnLanguageProfileCreated += SaveLanguageProfileToMemory;
 
         LanguageProfile.LanguageProfileCreatedEvent += OnLanguageProfileCreated;
+        BtnLogout.UserLoggedOutEvent += ClearLanguageProfileDataFromMemory;
     }
 
-    private void Start()
+    private void ClearLanguageProfileDataFromMemory()
     {
-        //Save to memory.
-        //userLanguageProfilesList = ReadLanguageProfileListFromJSON();
-        //currentLanguageProfile = userLanguageProfilesList.Find(profile => profile.IsCurrentProfile == true);
+        currentLanguageProfile = null;
+        userLanguageProfilesList.Clear();
     }
 
     private void PostLanguageProfileToAPI(LanguageProfile languageProfile) => APIUtilities.Instance.PostNewLanguageProfile(UserDataHolder.Instance.CurrentUser.ID,languageProfile);
@@ -214,6 +214,7 @@ public class LanguageProfileController : MonoBehaviour
     private void OnDestroy()
     {
         LanguageProfile.LanguageProfileCreatedEvent -= OnLanguageProfileCreated;
+        BtnLogout.UserLoggedOutEvent -= ClearLanguageProfileDataFromMemory;
     }
 
     //Application stops: Save all info to JSON?
