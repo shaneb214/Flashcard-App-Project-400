@@ -886,7 +886,7 @@ MonoBehaviour:
       Name: 
     IsCurrentProfile: 0
     userID: 
-  PostNewLanguageProfilesToAPI: 0
+  PostNewLanguageProfilesToAPI: 1
 --- !u!4 &2005719992
 Transform:
   m_ObjectHideFlags: 0

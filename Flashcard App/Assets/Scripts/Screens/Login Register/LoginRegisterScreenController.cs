@@ -25,8 +25,6 @@ public class LoginRegisterScreenController : MonoBehaviour
     [SerializeField] private bool InProcessOfAttemptingToLogin;
     private Coroutine attemptToLoginCoroutine;
 
-    [SerializeField] private ScreenPushData homeScreenPushData;
-
     //Testing.
     [SerializeField] private bool AutoLogin;
     [SerializeField] private string autoLoginUsername;
@@ -111,8 +109,6 @@ public class LoginRegisterScreenController : MonoBehaviour
         SetVisualLoggingInProcess(false);
 
         SceneManager.LoadScene("MainScene");
-        //BlitzyUI.UIManager.Instance.QueuePop();
-        //BlitzyUI.UIManager.Instance.QueuePush(homeScreenPushData.ID);
     }
 
     private void OnLoginUnsuccessful(string errorJson)

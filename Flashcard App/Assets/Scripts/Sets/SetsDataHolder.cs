@@ -25,7 +25,6 @@ public class SetsDataHolder : MonoBehaviour
         get => defaultSetID;
         set 
         {
-
             //New set ID? Update.
             if (defaultSetID != value)
             {
@@ -53,8 +52,8 @@ public class SetsDataHolder : MonoBehaviour
         if (PostNewSetsToAPI)
             OnSetCreated += PostSetToAPI;
 
-        OnSetCreated += CheckToAssignNewDefaultSetOnSetCreation;
         OnSetCreated += SaveSetToMemory;
+        OnSetCreated += CheckToAssignNewDefaultSetOnSetCreation;
 
         Set.SetCreatedEvent += OnSetCreated;
         BtnLogout.UserLoggedOutEvent += ClearSetsDataFromMemory;
@@ -83,7 +82,7 @@ public class SetsDataHolder : MonoBehaviour
         SetList = sets;
         Set defaultSet = SetList.SingleOrDefault(Set => Set.IsDefaultSet == true);
         if(defaultSet != null)
-            defaultSetID = defaultSet.ID;
+            DefaultSetID = defaultSet.ID;
     }
     private void CheckToAssignNewDefaultSetOnSetCreation(Set createdSet)
     {
@@ -95,7 +94,7 @@ public class SetsDataHolder : MonoBehaviour
         string previousDefaultSetID = defaultSetID;
         if (previousDefaultSetID == string.Empty || previousDefaultSetID == null)
         {
-            defaultSetID = createdSet.ID;
+            DefaultSetID = createdSet.ID;
             return;
         }
 
@@ -103,7 +102,7 @@ public class SetsDataHolder : MonoBehaviour
         Set previousDefaultSet = SetList.Find(set => set.ID == defaultSetID);
         previousDefaultSet.IsDefaultSet = false;
 
-        defaultSetID = createdSet.ID;
+        DefaultSetID = createdSet.ID;
 
         //Update previous default set on API side. 
         APIUtilities.Instance.ModifyDefaultSetValue(previousDefaultSet);
