@@ -87,7 +87,6 @@ public class LoginRegisterScreenController : MonoBehaviour
         print($"User with id: {token.userID} logged in.");
         print($"Token expires in {token.expires_in}");
 
-        //StartCoroutine(APIUtilities.Instance.GetUser(token.userID, UserDataHolder.Instance.SetCurrentUser));
         //PlayerPrefs.SetString("User_ID", token.userID);
         //PlayerPrefs.SetInt("Token_Expires", token.expires_in);
 

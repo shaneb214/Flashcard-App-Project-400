@@ -74,11 +74,12 @@ public class APIUtilities : MonoBehaviour
             if (request.result == UnityWebRequest.Result.Success)
             {
                 Token userToken = JsonUtility.FromJson<Token>(request.downloadHandler.text);
-                successCallback?.Invoke(userToken);
-                UserLoggedInEvent?.Invoke(userToken);
 
                 PlayerPrefs.SetString("User_ID", userToken.userID);
                 PlayerPrefs.SetInt("Token_Expires", userToken.expires_in);
+
+                successCallback?.Invoke(userToken);
+                UserLoggedInEvent?.Invoke(userToken);
 
                 #if PRINT_API_RESULTS
                 print("API: User Logged In.");
