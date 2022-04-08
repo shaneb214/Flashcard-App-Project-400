@@ -25,6 +25,11 @@ public class LibrarySetViewController : LibraryViewController
         spawnedSetDisplayList.Add(spawnedSetDisplay);
 
         spawnedSetDisplay.UpdateDisplay(newSet.ID, newSet.Name);
+        
+        if(newSet.IsDefaultSet)
+        {
+            SetsDataHolder.DefaultSetIDUpdatedEvent += spawnedSetDisplay.OnDefaultSetUpdated;
+        }
     }
 
     public void DisplaySetContents(string setID)

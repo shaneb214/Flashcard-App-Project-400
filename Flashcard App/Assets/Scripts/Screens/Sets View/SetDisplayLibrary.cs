@@ -29,4 +29,9 @@ public class SetDisplayLibrary : SetDisplay
     {
         SetDisplayPlaySetSelectedEvent?.Invoke(setIDToRepresent);
     }
+
+    private void OnDisable()
+    {
+        SetsDataHolder.DefaultSetIDUpdatedEvent -= OnDefaultSetUpdated;
+    }
 }

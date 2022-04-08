@@ -36,4 +36,9 @@ public class SetDisplay : MonoBehaviour
 
     public void SetDefaultIconImage(bool enabled) => imgDefaultSetIcon.enabled = enabled;
 
+    //Set display might need to listen out for new default set being selected from an event in setsdatacontroller.
+    public void OnDefaultSetUpdated(string newDefaultSetID)
+    {
+        SetDefaultIconImage(false);
+    }
 }

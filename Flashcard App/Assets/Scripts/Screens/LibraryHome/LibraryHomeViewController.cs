@@ -28,6 +28,11 @@ public class LibraryHomeViewController : LibraryViewController
         spawnedSetDisplayList.Add(spawnedSetDisplay);
 
         spawnedSetDisplay.UpdateDisplay(newSet.ID, newSet.Name);
+
+        if (newSet.IsDefaultSet)
+        {
+            SetsDataHolder.DefaultSetIDUpdatedEvent += spawnedSetDisplay.OnDefaultSetUpdated;
+        }
     }
 
     private void OnSetDisplaySelected(SetDisplayLibrary setDisplaySelected)
