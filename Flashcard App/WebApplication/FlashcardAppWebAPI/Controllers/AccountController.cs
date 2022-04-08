@@ -16,6 +16,8 @@ using Microsoft.Owin.Security.OAuth;
 using FlashcardAppWebAPI.Models;
 using FlashcardAppWebAPI.Providers;
 using FlashcardAppWebAPI.Results;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace FlashcardAppWebAPI.Controllers
 {
@@ -323,7 +325,14 @@ namespace FlashcardAppWebAPI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                //List<ModelErrorCollection> errors = ModelState.Select(x => x.Value.Errors)
+                //       .Where(y => y.Count > 0)
+                //       .ToList();
+                var validationErrors = ModelState.Values.Where(E => E.Errors.Count > 0)
+                    .SelectMany(E => E.Errors)
+                    .Select(E => E.ErrorMessage)
+                    .ToList();
+                return BadRequest(validationErrors[0]);
             }
 
             var user = new ApplicationUser() { UserName = model.Username, Email = model.Email};

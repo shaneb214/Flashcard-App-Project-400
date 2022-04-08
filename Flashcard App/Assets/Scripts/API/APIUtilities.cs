@@ -52,7 +52,7 @@ public class APIUtilities : MonoBehaviour
             }
             else
             {
-                failedCallback?.Invoke(request.downloadHandler.text);
+                failedCallback?.Invoke(GetRegisterErrorDescriptionFromAPIError(request.downloadHandler.text));
 
                 #if PRINT_API_RESULTS
                 print("API: User Did Not Register");
@@ -87,7 +87,7 @@ public class APIUtilities : MonoBehaviour
             }
             else
             {
-                failedCallback?.Invoke(request.downloadHandler.text);
+                failedCallback?.Invoke(GetLoginErrorDescriptionFromAPIError(request.downloadHandler.text));
 
                 #if PRINT_API_RESULTS
                 print("API: User Did Not Login");
@@ -366,6 +366,24 @@ public class APIUtilities : MonoBehaviour
                 #endif
             }
         }
+    }
+
+    //private string GetRegisterErrorDescriptionFromAPIError(string errorJson)
+    //{
+    //    Dictionary<string, object> errorDict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(errorJson);
+    //    return errorDict["error_description"].ToString();
+    //}
+
+    private string GetLoginErrorDescriptionFromAPIError(string errorJson)
+    {
+        Dictionary<string, object> errorDict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(errorJson);
+        return errorDict["error_description"].ToString();
+    }
+
+    private string GetRegisterErrorDescriptionFromAPIError(string errorJson)
+    {
+        Dictionary<string, object> errorDict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(errorJson);
+        return errorDict["Message"].ToString();
     }
 }
 
