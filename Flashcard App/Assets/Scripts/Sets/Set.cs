@@ -22,7 +22,7 @@ public class Set
     public Set(string Name,string parentSetID,bool isDefaultSet)
     {
         ID = Guid.NewGuid().ToString();
-        LanguageProfileID = LanguageProfileController.Instance.currentLanguageProfile.ID;
+        LanguageProfileID = LanguageProfileController.Instance.CurrentLanguageProfile.ID;
         ParentSetID = parentSetID;
         this.Name = Name;
         IsDefaultSet = isDefaultSet;

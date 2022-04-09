@@ -16,6 +16,10 @@ public class BtnEnableLanguageProfilesScreen : BtnPushScreen
 
     public override void OnButtonClick()
     {
-        UIManager.Instance.GetTopScreen().StartPoppingSequence(callbackOnPopEnd: () => PushMyScreen());
+        UIManager.Instance.GetTopScreen().StartPoppingSequence(callbackOnPopEnd: delegate()
+        {
+            UIManager.Instance.QueuePop();
+            PushMyScreen();      
+        });
     }
 }

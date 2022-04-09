@@ -51,15 +51,15 @@ public class FlashcardDataHolder : MonoBehaviour
 
         Flashcard.FlashcardCreatedEvent += OnFlashcardCreated;
         BtnLogout.UserLoggedOutEvent += ClearFlashcardDataFromMemory;
+        LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnNewLanguageProfileSelected;
     }
 
-    private void ClearFlashcardDataFromMemory()
-    {
-        FlashcardList.Clear();
-    }
+    private void OnNewLanguageProfileSelected(LanguageProfile languageProfile) => APIUtilities.Instance.GetFlashcardsOfLanguageProfile(languageProfile.ID, UpdateFlashcardList);
 
+    //Modifying flashcard data in memory.
+    private void ClearFlashcardDataFromMemory() => FlashcardList.Clear();
     public void UpdateFlashcardList(List<Flashcard> flashcards) => FlashcardList = flashcards;
-
+    //Retrieval.
     public List<Flashcard> FindFlashcardsBySetID(string setID) => FlashcardList.FindAll(flashcard => flashcard.setID == setID);
     public int FlashcardCountOfSet(string setID) => FlashcardList.Count(flashcard => flashcard.setID == setID);
 
@@ -79,6 +79,7 @@ public class FlashcardDataHolder : MonoBehaviour
     {
         Flashcard.FlashcardCreatedEvent -= OnFlashcardCreated;
         BtnLogout.UserLoggedOutEvent -= ClearFlashcardDataFromMemory;
+        LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnNewLanguageProfileSelected;
     }
 
     private void OnApplicationQuit() => JSONHelper.SaveListDataToJSON(FlashcardList, jsonPath);

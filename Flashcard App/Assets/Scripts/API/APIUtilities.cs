@@ -175,6 +175,34 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
+
+    public void GetSetsOfUser(string userID, Action<List<Set>> returnCallback) => StartCoroutine(IEnumerator_GetSetsOfUser(userID, returnCallback));
+    public IEnumerator IEnumerator_GetSetsOfUser(string userID,Action<List<Set>> returnCallback)
+    {
+        using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/Sets/GetSetsOfUser?userID={userID}"))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string json = JSONHelper.ModifyJSONString(request.downloadHandler.text);
+                List<Set> setsOfUser = JSONHelper.FromJson<Set>(json);
+                returnCallback?.Invoke(setsOfUser);
+
+                #if PRINT_API_RESULTS
+                print("API: Got Sets Of User.");
+                #endif
+            }
+            else
+            {
+                #if PRINT_API_RESULTS
+                print("API: Did Not Get Sets Of User.");
+                #endif
+            }
+        }
+    }
+
+    public void GetSetsOfLanguageProfile(string languageProfileID, Action<List<Set>> returnCallback) => StartCoroutine(IEnumerator_GetSetsOfLanguageProfile(languageProfileID, returnCallback));
     public IEnumerator IEnumerator_GetSetsOfLanguageProfile(string languageProfileID,Action<List<Set>> returnCallback)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/Sets?languageProfileID={languageProfileID}"))
@@ -199,6 +227,7 @@ public class APIUtilities : MonoBehaviour
             }
         }
     }
+    public void GetFlashcardsOfLanguageProfile(string languageProfileID, Action<List<Flashcard>> returnCallback) => StartCoroutine(IEnumerator_GetFlashcardsOfLanguageProfile(languageProfileID, returnCallback));
     public IEnumerator IEnumerator_GetFlashcardsOfLanguageProfile(string languageProfileID,Action<List<Flashcard>> returnCallback)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(ApiAddress + $"/api/Flashcards?languageProfileID={languageProfileID}"))
@@ -309,6 +338,7 @@ public class APIUtilities : MonoBehaviour
     }
 
     //Put data / modify data.
+    public void ModifyLanguageProfile(string langProfileID, LanguageProfile languageProfile, Action successCallback = null, Action failureCallback = null) => StartCoroutine(IEnumerator_PutLanguageProfile(langProfileID,languageProfile,successCallback,failureCallback));
     public IEnumerator IEnumerator_PutLanguageProfile(string langProfileID,LanguageProfile languageProfile,Action successCallback,Action failureCallback)
     {
         string json = JsonUtility.ToJson(languageProfile);

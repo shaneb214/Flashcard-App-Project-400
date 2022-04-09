@@ -51,6 +51,26 @@ namespace FlashcardAppWebAPI.Controllers
             return Ok(setsOfProfile);
         }
 
+        [Route("api/Sets/GetSetsOfUser")]
+        [ResponseType(typeof(List<Set>))]
+        public async Task<IHttpActionResult> GetSetsOfUser(string userID)
+        {
+            List<Set> setListOfUser = new List<Set> { };
+            List<LanguageProfile> languageProfilesOfUser = await db.LanguageProfiles.Where(profile => profile.userID == userID).ToListAsync();
+
+            foreach (var profile in languageProfilesOfUser)
+            {
+                setListOfUser.AddRange(await GetSets().Where(set => set.LanguageProfileID == profile.ID).ToListAsync());
+            }
+
+            if (setListOfUser == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(setListOfUser);
+        }
+
         [Route("api/Sets/ModifyDefaultSetValue")]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> ModifyDefaultSet(Set setToModify)

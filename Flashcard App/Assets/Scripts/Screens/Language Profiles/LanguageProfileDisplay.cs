@@ -18,7 +18,7 @@ public class LanguageProfileDisplay : MonoBehaviour
 
     [SerializeField] private Image imgNativeFlag;
     [SerializeField] private Image imgLearningFlag;
-    [SerializeField] private Image imgCurrentSet;
+    [SerializeField] private Image imgCurrentProfile;
     [SerializeField] private TextMeshProUGUI txtProfileLanguages;
     [SerializeField] private TextMeshProUGUI txtProfileCardSetCount;
     private Button btnSelectProfile;
@@ -30,7 +30,7 @@ public class LanguageProfileDisplay : MonoBehaviour
     private void OnMyButtonClick()
     {
         //Enable icon.
-        LanguageProfileController.Instance.SelectNewProfile(myLanguageProfileID);
+        MarkAsCurrentLanguageProfile();
     }
 
     public void UpdateDisplay(LanguageProfile languageProfile)
@@ -47,5 +47,31 @@ public class LanguageProfileDisplay : MonoBehaviour
         int setCountOfProfile = SetsDataHolder.Instance.GetSetCountOfLanguageProfile(myLanguageProfileID);
         int flashcardCountOfProfile = SetsDataHolder.Instance.GetFlashcardCountOfLanguageProfile(myLanguageProfileID);
         txtProfileCardSetCount.text = $"{setCountOfProfile} Sets - {flashcardCountOfProfile} Cards";
+
+        imgCurrentProfile.enabled = languageProfile.IsCurrentProfile;
+    }
+
+    public void MarkAsCurrentLanguageProfile()
+    {
+        SetCurrentProfileIconImage(true);
+        LanguageProfileController.Instance.SelectNewProfile(myLanguageProfileID);
+        LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnNewLanguageProfileSelected;
+    }
+    public void MarkAsNotCurrentLanguageProfile()
+    {
+        SetCurrentProfileIconImage(false);
+        LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnNewLanguageProfileSelected;
+    }
+
+    public void SetCurrentProfileIconImage(bool enabled) => imgCurrentProfile.enabled = enabled;
+
+    public void OnNewLanguageProfileSelected(LanguageProfile newLanguageProfile)
+    {
+        MarkAsNotCurrentLanguageProfile();
+    }
+
+    private void OnDisable()
+    {
+        LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnNewLanguageProfileSelected;
     }
 }

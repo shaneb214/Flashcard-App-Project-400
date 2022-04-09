@@ -7,12 +7,16 @@ public class LanguageProfileScreenController : ScrollViewItemManager
     [Header("Prefab To Spawn")]
     [SerializeField] private LanguageProfileDisplay languageProfileDisplayPrefab;
 
-
     private void SpawnLanguageProfileDisplayInScrollView(LanguageProfile languageProfile)
     {
         //Spawn prefab + pass in info so it can update its components.
         LanguageProfileDisplay spawnedLanguageProfileDisplay = SpawnItemInScrollView(languageProfileDisplayPrefab);
         spawnedLanguageProfileDisplay.UpdateDisplay(languageProfile);
+
+        if (languageProfile.IsCurrentProfile)
+        {
+            LanguageProfileController.Instance.UserSelectedNewProfileEvent += spawnedLanguageProfileDisplay.OnNewLanguageProfileSelected;
+        }
     }
 
     private void OnEnable()
@@ -26,5 +30,4 @@ public class LanguageProfileScreenController : ScrollViewItemManager
     {
         ClearScrollViewItems();
     }
-
 }

@@ -25,7 +25,7 @@ public class WallGameSettingsUI : MonoBehaviour
         repeatAmountSlider.mainSlider.value = wallGameSettings.repeatCardAmount;
 
 
-        LanguageProfile currentLanguageProfile = LanguageProfileController.Instance.currentLanguageProfile;
+        LanguageProfile currentLanguageProfile = LanguageProfileController.Instance.CurrentLanguageProfile;
 
         Sprite learningFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{currentLanguageProfile.LearningLanguage.ISO}");
         Sprite nativeFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{currentLanguageProfile.NativeLanguage.ISO}");

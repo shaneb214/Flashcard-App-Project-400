@@ -22,6 +22,7 @@ public class LanguageProfileController : MonoBehaviour
 
     public event Action<LanguageProfile> UserSelectedNewProfileEvent;
 
+
     [Header("Storing JSON Location - Unity Editor & PC")]
     [SerializeField] private string languageProfilesListJSONPathPC;
     [SerializeField] private string currentProfileJSONPathPC;
@@ -30,7 +31,23 @@ public class LanguageProfileController : MonoBehaviour
     [SerializeField] private string currentProfileJSONPathMobile;
     [Header("User's language profile info")]
     [SerializeField] private List<LanguageProfile> userLanguageProfilesList = new List<LanguageProfile>();
-    public LanguageProfile currentLanguageProfile;
+
+
+    private LanguageProfile currentLanguageProfile;
+    public LanguageProfile CurrentLanguageProfile
+    {
+        get => currentLanguageProfile;
+        set
+        {
+            //New set ID? Update.
+            if (currentLanguageProfile != value)
+            {
+                currentLanguageProfile = value;
+                UserSelectedNewProfileEvent?.Invoke(currentLanguageProfile);
+            }
+        }
+    }
+
 
     [Header("API Settings")]
     [SerializeField] private bool PostNewLanguageProfilesToAPI;
@@ -74,19 +91,19 @@ public class LanguageProfileController : MonoBehaviour
             return;
 
         //Check if there is another Profile that is marked as current profile. Switch around.
-        LanguageProfile previousLanguageProfile = userLanguageProfilesList.Find(profile => profile.ID == newLanguageProfile.ID);
-        if (previousLanguageProfile == null)
+        LanguageProfile previousCurrentLanguageProfile = userLanguageProfilesList.Find(profile => profile.IsCurrentProfile == true);
+        if (previousCurrentLanguageProfile == null)
         {
-            currentLanguageProfile = newLanguageProfile;
+            CurrentLanguageProfile = newLanguageProfile;
             return;
         }
 
         //Switch around.
-        previousLanguageProfile.IsCurrentProfile = false;
-        currentLanguageProfile = newLanguageProfile;
+        previousCurrentLanguageProfile.IsCurrentProfile = false;
+        CurrentLanguageProfile = newLanguageProfile;
 
         //Update previous current lang profile on API side. 
-        //APIUtilities.Instance.ModifyLanguageCurrentLanguageProfile(previousLanguageProfile);
+        APIUtilities.Instance.ModifyLanguageProfile(previousCurrentLanguageProfile.ID,previousCurrentLanguageProfile);
     }
 
     public void UpdateLanguageProfilesData(List<LanguageProfile> languageProfiles)
@@ -97,16 +114,15 @@ public class LanguageProfileController : MonoBehaviour
 
     #endregion
     #region New Language Profile Creation / Selection
-    private void OnNewLanguageProfileCreated(LanguageProfile newProfile)
-    {
-        //Has user set the new profile to be the current profile? - Set it as so. 
-        if (newProfile.IsCurrentProfile)
-            SelectNewProfile(newProfile);
+    //private void OnNewLanguageProfileCreated(LanguageProfile newProfile)
+    //{
+    //    //Has user set the new profile to be the current profile? - Set it as so. 
+    //    if (newProfile.IsCurrentProfile)
+    //        SelectNewProfile(newProfile);
 
-        //Add to memory & save to JSON.
-        userLanguageProfilesList.Add(newProfile);
-        //SaveListOfLanguageProfilesToJSON(userLanguageProfilesList);
-    }
+    //    //Add to memory.
+    //    userLanguageProfilesList.Add(newProfile);
+    //}
 
     //Select new Profile passing in languageprofile object.
     public void SelectNewProfile(LanguageProfile newProfile)
@@ -115,15 +131,19 @@ public class LanguageProfileController : MonoBehaviour
         if (newProfile == currentLanguageProfile)
             return;
 
-        //If there was a current profile, set that to not be the current profile anymore.
+        //If there was a current profile, set that to not be the current profile anymore and update API.
         if(currentLanguageProfile != null)
+        {
             currentLanguageProfile.IsCurrentProfile = false;
+            APIUtilities.Instance.ModifyLanguageProfile(currentLanguageProfile.ID, currentLanguageProfile);
+        }
 
-        //Update current profile and raise event to notify certain UI objects.
-        currentLanguageProfile = newProfile;
+        //Update current profile which raises event to notify certain UI objects.
+        CurrentLanguageProfile = newProfile;
         currentLanguageProfile.IsCurrentProfile = true;
 
-        UserSelectedNewProfileEvent?.Invoke(currentLanguageProfile);
+        APIUtilities.Instance.ModifyLanguageProfile(currentLanguageProfile.ID, currentLanguageProfile);
+
         print($"New Language Profile Was Selected: {newProfile}");
     }
 

@@ -467,7 +467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imgNativeFlag: {fileID: 5292328244376069055}
   imgLearningFlag: {fileID: 5292328245426333264}
-  imgCurrentSet: {fileID: 5292328244115644975}
+  imgCurrentProfile: {fileID: 5292328244115644975}
   txtProfileLanguages: {fileID: 5292328244916499217}
   txtProfileCardSetCount: {fileID: 5292328244311139295}
 --- !u!1 &5292328244835181922

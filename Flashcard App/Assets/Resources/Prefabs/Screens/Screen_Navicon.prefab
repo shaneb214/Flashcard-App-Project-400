@@ -922,6 +922,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btnLanguageProfiles
       objectReference: {fileID: 0}
+    - target: {fileID: 8909363878425634339, guid: a66d82a7111a75f41a1e68524e65d199, type: 3}
+      propertyPath: m_text
+      value: Language Profiles
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 375408662, guid: a66d82a7111a75f41a1e68524e65d199, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a66d82a7111a75f41a1e68524e65d199, type: 3}

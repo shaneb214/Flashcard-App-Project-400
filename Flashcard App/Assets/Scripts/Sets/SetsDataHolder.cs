@@ -4,6 +4,10 @@ using UnityEngine;
 using System.Linq;
 using System;
 
+
+//Listen to new profile selected event to download sets for that profile? 
+
+
 public class SetsDataHolder : MonoBehaviour
 {
     public static SetsDataHolder Instance;
@@ -57,6 +61,7 @@ public class SetsDataHolder : MonoBehaviour
 
         Set.SetCreatedEvent += OnSetCreated;
         BtnLogout.UserLoggedOutEvent += ClearSetsDataFromMemory;
+        LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewLanguageProfile;
     }
 
     private void ClearSetsDataFromMemory()
@@ -76,6 +81,9 @@ public class SetsDataHolder : MonoBehaviour
         //Read from json.
         //SetList = JSONHelper.ReadListDataFromJSONFile<Set>(jsonPath);
     }
+
+    //On new language profile selection.
+    private void OnUserSelectedNewLanguageProfile(LanguageProfile languageProfile) => APIUtilities.Instance.GetSetsOfLanguageProfile(languageProfile.ID, UpdateSetsData);
 
     public void UpdateSetsData(List<Set> sets)
     {
@@ -127,7 +135,7 @@ public class SetsDataHolder : MonoBehaviour
     public List<Set> FindSetsByLangProfileID(string langProfileID) => SetList.FindAll(s => s.LanguageProfileID == langProfileID);
     public List<Set> FindSetsByParentID(string setParentID) => SetList.FindAll(s => s.ParentSetID == setParentID);
     public List<Set> FindSetsByParentID(string setParentID, string langProfileID) => SetList.FindAll(set => set.LanguageProfileID == langProfileID).FindAll(set => set.ParentSetID == setParentID);
-    public List<Set> FindSetsOfCurrentLanguageProfileByParentID(string setParentID) => SetList.FindAll(set => set.LanguageProfileID == LanguageProfileController.Instance.currentLanguageProfile.ID).FindAll(set => set.ParentSetID == setParentID);
+    public List<Set> FindSetsOfCurrentLanguageProfileByParentID(string setParentID) => SetList.FindAll(set => set.LanguageProfileID == LanguageProfileController.Instance.CurrentLanguageProfile.ID).FindAll(set => set.ParentSetID == setParentID);
     public int GetSubsetCountOfSet(string setID) => SetList.Count(set => set.ParentSetID == setID);
     public int GetSetCountOfLanguageProfile(string languageProfileID) => SetList.FindAll(set => set.LanguageProfileID == languageProfileID).Count;
     public int GetFlashcardCountOfLanguageProfile(string languageProfileID)
@@ -146,7 +154,6 @@ public class SetsDataHolder : MonoBehaviour
     {
         Set.SetCreatedEvent -= OnSetCreated;
         BtnLogout.UserLoggedOutEvent -= ClearSetsDataFromMemory;
+        LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnUserSelectedNewLanguageProfile;
     }
-
-    private void OnApplicationQuit() => JSONHelper.SaveListDataToJSON(SetList, jsonPath);
 }

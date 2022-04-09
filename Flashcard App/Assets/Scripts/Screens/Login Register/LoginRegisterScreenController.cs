@@ -101,8 +101,12 @@ public class LoginRegisterScreenController : MonoBehaviour
         yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetLanguages(LanguageDataHolder.Instance.UpdateLanguagesList));
         yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetUser(loggedInUserID, UserDataHolder.Instance.SetCurrentUser));
         yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetLanguageProfilesOfUser(loggedInUserID, LanguageProfileController.Instance.UpdateLanguageProfilesData));
-        yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetSetsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, SetsDataHolder.Instance.UpdateSetsData));
-        yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetFlashcardsOfLanguageProfile(LanguageProfileController.Instance.currentLanguageProfile.ID, FlashcardDataHolder.Instance.UpdateFlashcardList));
+
+        //LanguageProfileController.Instance.GetUserLanguageProfiles().ForEach(profile => )
+
+
+        yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetSetsOfLanguageProfile(LanguageProfileController.Instance.CurrentLanguageProfile.ID, SetsDataHolder.Instance.UpdateSetsData));
+        yield return StartCoroutine(APIUtilities.Instance.IEnumerator_GetFlashcardsOfLanguageProfile(LanguageProfileController.Instance.CurrentLanguageProfile.ID, FlashcardDataHolder.Instance.UpdateFlashcardList));
         
 
         SetVisualLoggingInProcess(false);

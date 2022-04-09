@@ -29,7 +29,7 @@ public class BtnTranslate : MonoBehaviour
         //Create animation for arrow.
         //Dont call translate if it's already in process of translating.
 
-        Translator translator = Translator.Create(LanguageProfileController.Instance.currentLanguageProfile.NativeLanguage.ISO, LanguageProfileController.Instance.currentLanguageProfile.LearningLanguage.ISO);
+        Translator translator = Translator.Create(LanguageProfileController.Instance.CurrentLanguageProfile.NativeLanguage.ISO, LanguageProfileController.Instance.CurrentLanguageProfile.LearningLanguage.ISO);
         translator.Run(txtTranslateFrom.text, (results) =>
         {
             string translation = string.Empty;

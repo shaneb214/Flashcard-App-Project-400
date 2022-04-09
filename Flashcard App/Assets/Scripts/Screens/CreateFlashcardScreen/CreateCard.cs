@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class CreateCard : MonoBehaviour
 {
+    protected string profileIDToRepresent;
+
     [SerializeField] protected Image imgFlag;
     [SerializeField] protected TextMeshProUGUI txtPlaceholder;
     [SerializeField] protected TextMeshProUGUI txtUserInput;

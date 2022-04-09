@@ -31,7 +31,7 @@ public class SelectDefaultSetScrollViewManager : ScrollViewItemManager
 
     private void OnEnable()
     {      
-        List<Set> setsToDisplay = SetsDataHolder.Instance.FindSetsByLangProfileID(LanguageProfileController.Instance.currentLanguageProfile.ID);
+        List<Set> setsToDisplay = SetsDataHolder.Instance.FindSetsByLangProfileID(LanguageProfileController.Instance.CurrentLanguageProfile.ID);
         //int defaultSetIndex = setsToDisplay.FindIndex(set => set.ID == LanguageProfileController.Instance.currentLanguageProfile.DefaultSetID);
         //Set defaultSet = setsToDisplay[defaultSetIndex];
         //setsToDisplay.RemoveAt(defaultSetIndex);
