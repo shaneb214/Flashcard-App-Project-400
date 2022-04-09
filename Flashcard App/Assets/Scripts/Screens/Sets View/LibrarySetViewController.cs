@@ -80,7 +80,9 @@ public class LibrarySetViewController : LibraryViewController
         SetsDataHolder.Instance.FindSetsOfCurrentLanguageProfileByParentID(SetIDCurrentlyShowing).ForEach(set => SpawnSetDisplayInScrollView(set));
         FlashcardDataHolder.Instance.FindFlashcardsBySetID(SetIDCurrentlyShowing).ForEach(flashcard => SpawnFlashcardDisplayInScrollView(flashcard));
 
-        txtTopBarHeader.text = $"../{SetsDataHolder.Instance.FindSetByID(SetIDCurrentlyShowing).Name}";
+        Set setCurrentlyShowing = SetsDataHolder.Instance.FindSetByID(SetIDCurrentlyShowing);
+        if(setCurrentlyShowing != null)
+            txtTopBarHeader.text = $"../{setCurrentlyShowing.Name}";
     }
     public override void OnDisable()
     {

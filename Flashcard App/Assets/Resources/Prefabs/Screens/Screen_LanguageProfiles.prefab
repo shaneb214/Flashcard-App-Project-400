@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 1512137435129096467}
   - component: {fileID: 1512137435129096464}
   - component: {fileID: 1512137435129096465}
-  - component: {fileID: 362128799473572290}
+  - component: {fileID: 1105168537}
   m_Layer: 5
   m_Name: btnCreateProfile
   m_TagString: Untagged
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &362128799473572290
+--- !u!114 &1105168537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,10 +226,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1512137435129096471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32c2e34ea6a7524e8d2b17a1dcb97b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 14c6087bb4617f343b525218b26d1e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modalWindow_CreateSet: {fileID: 5391236748896953690}
+  modalWindowToShow: {fileID: 0}
 --- !u!1 &1512137435776780221
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,6 +902,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1455269919091853841}
     m_Modifications:
+    - target: {fileID: 3124926988146451702, guid: e447d221ea53f9241bce0855815dea92, type: 3}
+      propertyPath: myScreenToPush
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d389027349fd3d47b7bc660d274da2c, type: 2}
     - target: {fileID: 5530727713460552540, guid: e447d221ea53f9241bce0855815dea92, type: 3}
       propertyPath: m_Name
       value: 'Bottom Bar '
@@ -1438,14 +1442,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3982850754999079840, guid: 227c83ea07fcf474aa2a1f83dfc76782, type: 3}
   m_PrefabInstance: {fileID: 9119702315918074199}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5391236748896953690 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3773512578342470669, guid: 227c83ea07fcf474aa2a1f83dfc76782, type: 3}
-  m_PrefabInstance: {fileID: 9119702315918074199}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6536c8d24aeb61247bd9814ade8a6989, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

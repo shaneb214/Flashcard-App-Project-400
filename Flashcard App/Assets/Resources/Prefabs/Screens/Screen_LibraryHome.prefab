@@ -830,6 +830,10 @@ PrefabInstance:
       propertyPath: modalWindow_CreateSet
       value: 
       objectReference: {fileID: 5275715646478535893}
+    - target: {fileID: 8531879171414517865, guid: 2e2417210e4d16c4e9ca6a2922ed4c5d, type: 3}
+      propertyPath: modalWindowToShow
+      value: 
+      objectReference: {fileID: 5275715646478535893}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e2417210e4d16c4e9ca6a2922ed4c5d, type: 3}
 --- !u!224 &2101162673195109227 stripped

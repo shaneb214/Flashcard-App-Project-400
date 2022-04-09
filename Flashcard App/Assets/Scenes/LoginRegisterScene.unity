@@ -2616,16 +2616,6 @@ MonoBehaviour:
   languageProfilesListJSONPathMobile: /LanguageProfilesList.json
   currentProfileJSONPathMobile: 
   userLanguageProfilesList: []
-  currentLanguageProfile:
-    ID: 
-    NativeLanguage:
-      ISO: 
-      Name: 
-    LearningLanguage:
-      ISO: 
-      Name: 
-    IsCurrentProfile: 0
-    userID: 
   PostNewLanguageProfilesToAPI: 1
 --- !u!4 &2005719992
 Transform:
