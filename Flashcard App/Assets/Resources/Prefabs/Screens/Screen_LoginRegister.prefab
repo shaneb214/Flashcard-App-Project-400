@@ -1570,7 +1570,7 @@ MonoBehaviour:
   errorMessage: {fileID: 8667145125308182008}
   progressBarLoop: {fileID: 5860320797491183806}
   InProcessOfAttemptingToLogin: 0
-  AutoLogin: 1
+  AutoLogin: 0
   autoLoginUsername: shaneb
   autoLoginPassword: password123
 --- !u!1 &8702987937986498075

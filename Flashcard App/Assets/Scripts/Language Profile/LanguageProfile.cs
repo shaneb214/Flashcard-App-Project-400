@@ -22,8 +22,6 @@ public class LanguageProfile
     {
         ID = Guid.NewGuid().ToString();
 
-
-        //FIX THIS UP DUE TO API?
         userID = UserDataHolder.Instance.CurrentUser.ID;
 
         this.NativeLanguage = nativeLanguage;

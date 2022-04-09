@@ -24,10 +24,15 @@ public class LanguageProfileScreenController : ScrollViewItemManager
         //Spawn in language profile prefabs for each profile.
         List<LanguageProfile> userLanguageProfiles = LanguageProfileController.Instance.GetUserLanguageProfiles();
         userLanguageProfiles.ForEach(profile => SpawnLanguageProfileDisplayInScrollView(profile));
+
+        LanguageProfile.LanguageProfileCreatedEvent += OnNewLanguageProfileCreated;
     }
+
+    private void OnNewLanguageProfileCreated(LanguageProfile newLanguageProfile) => SpawnLanguageProfileDisplayInScrollView(newLanguageProfile);
 
     private void OnDisable()
     {
         ClearScrollViewItems();
+        LanguageProfile.LanguageProfileCreatedEvent -= OnNewLanguageProfileCreated;
     }
 }
