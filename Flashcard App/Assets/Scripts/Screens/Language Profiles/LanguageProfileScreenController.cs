@@ -10,13 +10,9 @@ public class LanguageProfileScreenController : ScrollViewItemManager
 
     private void SpawnLanguageProfileDisplayInScrollView(LanguageProfile languageProfile)
     {
-        Sprite nativeFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{languageProfile.NativeLanguage.ISO}");
-        Sprite learningFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{languageProfile.LearningLanguage.ISO}");
-        string headingText = $"{languageProfile.NativeLanguage.Name} - {languageProfile.LearningLanguage.Name}";
-
         //Spawn prefab + pass in info so it can update its components.
         LanguageProfileDisplay spawnedLanguageProfileDisplay = SpawnItemInScrollView(languageProfileDisplayPrefab);
-        spawnedLanguageProfileDisplay.UpdateDisplay(languageProfile.ID, nativeFlagSprite, learningFlagSprite, headingText);
+        spawnedLanguageProfileDisplay.UpdateDisplay(languageProfile);
     }
 
     private void OnEnable()

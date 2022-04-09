@@ -301,7 +301,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Flashcard App
+  m_text: Flashify
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
   m_sharedMaterial: {fileID: 21131478253023500, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
@@ -1570,7 +1570,7 @@ MonoBehaviour:
   errorMessage: {fileID: 8667145125308182008}
   progressBarLoop: {fileID: 5860320797491183806}
   InProcessOfAttemptingToLogin: 0
-  AutoLogin: 0
+  AutoLogin: 1
   autoLoginUsername: shaneb
   autoLoginPassword: password123
 --- !u!1 &8702987937986498075

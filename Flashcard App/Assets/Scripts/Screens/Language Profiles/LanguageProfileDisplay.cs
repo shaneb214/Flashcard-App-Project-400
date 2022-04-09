@@ -18,24 +18,34 @@ public class LanguageProfileDisplay : MonoBehaviour
 
     [SerializeField] private Image imgNativeFlag;
     [SerializeField] private Image imgLearningFlag;
-    [SerializeField] private TextMeshProUGUI txtHeading;
-    private Button myButton;
+    [SerializeField] private Image imgCurrentSet;
+    [SerializeField] private TextMeshProUGUI txtProfileLanguages;
+    [SerializeField] private TextMeshProUGUI txtProfileCardSetCount;
+    private Button btnSelectProfile;
 
     //Start.
-    private void Awake() => myButton = GetComponent<Button>();
-    private void Start() => myButton.onClick.AddListener(OnMyButtonClick);
+    private void Awake() => btnSelectProfile = GetComponent<Button>();
+    private void Start() => btnSelectProfile.onClick.AddListener(OnMyButtonClick);
 
     private void OnMyButtonClick()
     {
+        //Enable icon.
         LanguageProfileController.Instance.SelectNewProfile(myLanguageProfileID);
     }
 
-    public void UpdateDisplay(string profileID,Sprite nativeFlagSprite,Sprite learningFlagSprite,string headingText)
+    public void UpdateDisplay(LanguageProfile languageProfile)
     {
-        myLanguageProfileID = profileID;
+        myLanguageProfileID = languageProfile.ID;
+
+        Sprite nativeFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{languageProfile.NativeLanguage.ISO}");
+        Sprite learningFlagSprite = Resources.Load<Sprite>($"Prefabs/Sprites/Flags/{languageProfile.LearningLanguage.ISO}");
 
         this.imgNativeFlag.sprite = nativeFlagSprite;
         this.imgLearningFlag.sprite = learningFlagSprite;
-        txtHeading.text = headingText;
+        txtProfileLanguages.text = languageProfile.ToString();
+
+        int setCountOfProfile = SetsDataHolder.Instance.GetSetCountOfLanguageProfile(myLanguageProfileID);
+        int flashcardCountOfProfile = SetsDataHolder.Instance.GetFlashcardCountOfLanguageProfile(myLanguageProfileID);
+        txtProfileCardSetCount.text = $"{setCountOfProfile} Sets - {flashcardCountOfProfile} Cards";
     }
 }

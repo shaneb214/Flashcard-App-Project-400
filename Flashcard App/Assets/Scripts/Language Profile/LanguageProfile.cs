@@ -17,20 +17,6 @@ public class LanguageProfile
     public bool IsCurrentProfile;
 
     public string userID;
-    //[SerializeField] private string defaultSetID = string.Empty;
-    //public string DefaultSetID 
-    //{
-    //    get => defaultSetID;
-    //    set 
-    //    {
-    //        //New set ID? Update.
-    //        if(defaultSetID != value)
-    //        {
-    //            defaultSetID = value;
-    //            DefaultSetIDUpdated?.Invoke(defaultSetID);
-    //        }
-    //    }  
-    //}
 
     public LanguageProfile(Language nativeLanguage,Language learningLanguage, bool IsCurrentProfile)
     {
@@ -44,7 +30,6 @@ public class LanguageProfile
         this.LearningLanguage = learningLanguage;
 
         this.IsCurrentProfile = IsCurrentProfile;
-        //defaultSetID = string.Empty;
 
         LanguageProfileCreatedEvent?.Invoke(this);
         Debug.Log($"New language profile created - {this}");
@@ -52,6 +37,6 @@ public class LanguageProfile
 
     public override string ToString()
     {
-        return $"{NativeLanguage.Name} <> {LearningLanguage.Name}";
+        return $"{NativeLanguage.Name} - {LearningLanguage.Name}";
     }
 }
