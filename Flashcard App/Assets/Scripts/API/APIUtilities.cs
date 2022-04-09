@@ -368,18 +368,11 @@ public class APIUtilities : MonoBehaviour
         }
     }
 
-    //private string GetRegisterErrorDescriptionFromAPIError(string errorJson)
-    //{
-    //    Dictionary<string, object> errorDict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(errorJson);
-    //    return errorDict["error_description"].ToString();
-    //}
-
     private string GetLoginErrorDescriptionFromAPIError(string errorJson)
     {
         Dictionary<string, object> errorDict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(errorJson);
         return errorDict["error_description"].ToString();
     }
-
     private string GetRegisterErrorDescriptionFromAPIError(string errorJson)
     {
         Dictionary<string, object> errorDict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(errorJson);

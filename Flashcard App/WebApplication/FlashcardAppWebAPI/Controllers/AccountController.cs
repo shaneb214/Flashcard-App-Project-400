@@ -325,9 +325,6 @@ namespace FlashcardAppWebAPI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //List<ModelErrorCollection> errors = ModelState.Select(x => x.Value.Errors)
-                //       .Where(y => y.Count > 0)
-                //       .ToList();
                 var validationErrors = ModelState.Values.Where(E => E.Errors.Count > 0)
                     .SelectMany(E => E.Errors)
                     .Select(E => E.ErrorMessage)

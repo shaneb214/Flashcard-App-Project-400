@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b8a3044cfb9f1418404dff4e8d503e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myScreenToPush: {fileID: 11400000, guid: 1edc43abd6a9392429833702dc26c227, type: 2}
+  myScreenToPush: {fileID: 0}
   popCurrentScreenAndSkipPopSequence: 0
 --- !u!114 &1528230393
 MonoBehaviour:
@@ -683,8 +683,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e371237d9c12b834d90659bc4b07bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myScreenToPush: {fileID: 11400000, guid: 5d3fe03ad7b309c4f89bc4600ee2364b, type: 2}
-  popCurrentScreenAndSkipPopSequence: 1
 --- !u!1001 &1648113725
 PrefabInstance:
   m_ObjectHideFlags: 0

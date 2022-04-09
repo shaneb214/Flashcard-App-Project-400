@@ -12,28 +12,6 @@ public class LibraryViewController : ScrollViewItemManager
 
     [SerializeField] protected ModalWindow_SelectGameToPlay ModalWindow_SelectGameToPlay;
 
-    //protected void SpawnSetDisplayInScrollView(Set setToSpawn)
-    //{
-    //    //Spawn prefab + pass in info so it can update its components.
-    //    SetDisplayLibrary spawnedSetDisplay = SpawnItemInScrollView(setDisplayPrefab);
-    //    spawnedSetDisplay.UpdateDisplay(setToSpawn.ID, setToSpawn.Name);
-    //    spawnedSetDisplayList.Add(spawnedSetDisplay);
-    //    spawnedSetDisplay.SetDisplaySelectedEvent += OnSetDisplaySelected;
-    //}
-
-    //protected void ClearSpawnedSetDisplayList() => spawnedSetDisplayList.Clear();
-
-    //protected void SpawnFlashcardDisplayInScrollView(Flashcard flashcardToSpawn)
-    //{
-    //    FlashcardDisplay spawnedFlashcardDisplay = SpawnItemInScrollView(flashcardDisplayPrefab);
-    //    spawnedFlashcardDisplay.UpdateDisplay(flashcardToSpawn);
-    //}
-
-    //private void OnSetDisplaySelected(SetDisplayLibrary setDisplaySelected)
-    //{
-
-    //}
-
     private void OnSetDisplayPlaySetSelected(string setID)
     {
         ModalWindow_SelectGameToPlay.InformScrollViewManagerOfWhatSetIsAttemptingToBePlayed(setID);
