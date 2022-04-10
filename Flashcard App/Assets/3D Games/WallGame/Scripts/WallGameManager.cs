@@ -96,6 +96,7 @@ public class WallGameManager : MonoBehaviour
         gameDataQueue.Clear();
         GameEndedEvent?.Invoke();
         Destroy(spawnedEndPlatform.gameObject);
+        Destroy(spawnedPlayer.gameObject);
     }
 
     public void SetPlayerPositionAndRotation(Vector3 position, Quaternion rotation)
