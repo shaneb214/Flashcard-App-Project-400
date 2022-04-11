@@ -8,5 +8,9 @@ public class WallGameFlashcardDataSlinger : MonoBehaviour
 
     private void Awake() => DontDestroyOnLoad(this);
     public void RecieveFlashcardData(List<Flashcard> flashcardList) => flashcardData = flashcardList;
-    public void Destroy() => Destroy(gameObject);
+    public void Destroy()
+    {
+        if(gameObject)
+            Destroy(gameObject);
+    }
 }
