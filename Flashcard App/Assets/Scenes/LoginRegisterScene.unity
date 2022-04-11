@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 340249472}
   - component: {fileID: 340249471}
   m_Layer: 0
-  m_Name: ScreenController
+  m_Name: ScreenPushOnSceneLoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,19 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da42782aa37b2340a732e20876a4766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenBottomNavBarData: {fileID: 11400000, guid: efbe2c9a917af80429dd957af016194a, type: 2}
-  screenCreateFlashcardPushData: {fileID: 11400000, guid: fbb3476175b38b847b1befba3acc10b8, type: 2}
-  screenNaviconPushData: {fileID: 11400000, guid: cd084f7f4fb9b3346978e622772fc451, type: 2}
-  screenLibraryHome: {fileID: 0}
-  screenSetsView: {fileID: 11400000, guid: a96b9be72ea064741923d161fd4cfb90, type: 2}
-  screenCreateSet: {fileID: 11400000, guid: fc2be5efc09535e4095930fcf87b9465, type: 2}
-  screenLanguageProfiles: {fileID: 11400000, guid: 1edc43abd6a9392429833702dc26c227, type: 2}
-  screenCreateLanguageProfile: {fileID: 0}
-  screen1PushData: {fileID: 11400000, guid: a265d7c149c54854aa9c5fc0221fb213, type: 2}
-  screen2PushData: {fileID: 11400000, guid: bd377ae19403c1449a56a5b96fb2df8f, type: 2}
-  screensToPushAtStart:
+  screensToPush:
   - {fileID: 11400000, guid: 5d3fe03ad7b309c4f89bc4600ee2364b, type: 2}
-  PushScreensAtStart: 1
+  PushScreens: 1
 --- !u!4 &340249472
 Transform:
   m_ObjectHideFlags: 0

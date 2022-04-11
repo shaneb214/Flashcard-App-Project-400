@@ -71,6 +71,29 @@
             //    notes = string.Empty
             //});
             //context.SaveChanges();
+
+
+            context.Languages.AddOrUpdate(
+                new Language() { ISO = "cs", Name = "Czech" },
+                new Language() { ISO = "de", Name = "German" },
+                new Language() { ISO = "es", Name = "Spanish" },
+                new Language() { ISO = "fi", Name = "Finnish" },
+                new Language() { ISO = "da", Name = "Danish" },
+                new Language() { ISO = "sv", Name = "Swedish" },
+                new Language() { ISO = "fr", Name = "French" },
+                new Language() { ISO = "cy", Name = "Welsh" },
+                new Language() { ISO = "ga", Name = "Irish" },
+                new Language() { ISO = "ko", Name = "Korean" },
+                new Language() { ISO = "nl", Name = "Dutch" },
+                new Language() { ISO = "pl", Name = "Polish" },
+                new Language() { ISO = "pt", Name = "Portuguese" },
+                new Language() { ISO = "ro", Name = "Romanian" },
+                new Language() { ISO = "uk", Name = "Ukrainian" },
+                new Language() { ISO = "af", Name = "Afrikaans" },
+                new Language() { ISO = "ar", Name = "Arabic" },
+                new Language() { ISO = "sr", Name = "Serbian" }
+                );
+            context.SaveChanges();
         }
     }
 }
