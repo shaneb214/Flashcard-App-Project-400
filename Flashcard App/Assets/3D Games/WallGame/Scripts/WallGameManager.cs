@@ -29,7 +29,7 @@ public class WallGameManager : MonoBehaviour
     private WallPlatform currentWallPlatform;
     private EndPlatform spawnedEndPlatform;
     [Header("Settings")]
-    [SerializeField] private WallGameSettings wallGameSettings;
+    [SerializeField] private WallDashSettings wallGameSettings;
 
     private WallGameFlashcardDataSlinger wallGameFlashcardDataSlinger;
 
@@ -149,11 +149,12 @@ public class WallGameManager : MonoBehaviour
                     wrongAnswersListBasedOnSetting.Add(GetAnswerBasedOnSetting(wrongAnswersFlashcardList[j]));
                 }
 
-                WallGamePlatformData wallGameStruct = new WallGamePlatformData(prompted, corrrectAnswer, wrongAnswersListBasedOnSetting);
-                gameDataQueue.Enqueue(wallGameStruct);
+                WallGamePlatformData platformData = new WallGamePlatformData(prompted, corrrectAnswer, wrongAnswersListBasedOnSetting);
+                gameDataQueue.Enqueue(platformData);
             }
         }        
     }
+
     private string GetNativeSideFromFlashcard(Flashcard flashcard) => flashcard.nativeSide;
     private string GetLearningSideFromFlashcard(Flashcard flashcard) => flashcard.learningSide;
     private string GetRandomSideFromFlashcard(Flashcard flashcard) 

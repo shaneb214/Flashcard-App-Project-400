@@ -50,19 +50,6 @@ public class LibraryHomeViewController : LibraryViewController
         txtNoSetsWarning.gameObject.SetActive(ScrollViewContainsItems == false);
     }
 
-    //Reacting to new profile being selected.
-    private void OnUserSelectedNewProfile(LanguageProfile newProfile)
-    {
-        //profileIDToShowSetsOf = newProfile.ID;
-
-        //Clear set displays if any.
-        // if (ScrollViewContainsSets)
-        //DestroyItemsInScrollView();
-
-        //Spawn new sets for current profile.
-        //SpawnSetDisplayPrefabsForProfile(newProfile);
-    }
-
     //Event subscribing / unsubscribing.
     public override void OnEnable()
     {
@@ -70,14 +57,8 @@ public class LibraryHomeViewController : LibraryViewController
 
         Set.SetCreatedEvent += OnNewSetCreated;
         SetDisplayLibrary.SetDisplaySelectedEvent += OnSetDisplaySelected;
-        LanguageProfileController.Instance.UserSelectedNewProfileEvent += OnUserSelectedNewProfile;
 
         SetIDCurrentlyShowing = string.Empty;
-
-        //Check if new user was selected while I was disabled.
-        //LanguageProfile currentProfile = LanguageProfileController.Instance.currentLanguageProfile;
-        //if (profileIDToShowSetsOf != currentProfile.ID)
-        //OnUserSelectedNewProfile(currentProfile);
 
         //Spawn sets with no parents.
         List<Set> setsToSpawnList = SetsDataHolder.Instance.FindSetsOfCurrentLanguageProfileByParentID(SetIDCurrentlyShowing);
@@ -98,6 +79,5 @@ public class LibraryHomeViewController : LibraryViewController
 
         Set.SetCreatedEvent -= OnNewSetCreated;
         SetDisplayLibrary.SetDisplaySelectedEvent -= OnSetDisplaySelected;
-        LanguageProfileController.Instance.UserSelectedNewProfileEvent -= OnUserSelectedNewProfile;
     }
 }

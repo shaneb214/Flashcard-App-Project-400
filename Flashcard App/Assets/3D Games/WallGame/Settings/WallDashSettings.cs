@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WallGameSettings", menuName = "ScriptableObjects/WallGameSettings", order = 1)]
-public class WallGameSettings : GameSettings
+[CreateAssetMenu(fileName = "WallDashSettings", menuName = "ScriptableObjects/WallDashSettings", order = 1)]
+public class WallDashSettings : GameSettings
 {
     public const int minRepeatCardCount = 1;
     public const int maxRepeatCardCount = 5;

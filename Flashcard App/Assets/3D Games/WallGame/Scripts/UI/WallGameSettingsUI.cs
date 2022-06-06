@@ -10,7 +10,7 @@ public class WallGameSettingsUI : MonoBehaviour
     [SerializeField] private Button btnBack;
 
     [Header("Settings to change")]
-    [SerializeField] WallGameSettings wallGameSettings;
+    [SerializeField] WallDashSettings wallGameSettings;
 
     private void Awake()
     {
@@ -19,8 +19,8 @@ public class WallGameSettingsUI : MonoBehaviour
 
     private void Start()
     {
-        repeatAmountSlider.minValue = WallGameSettings.minRepeatCardCount;
-        repeatAmountSlider.maxValue = WallGameSettings.maxRepeatCardCount;
+        repeatAmountSlider.minValue = WallDashSettings.minRepeatCardCount;
+        repeatAmountSlider.maxValue = WallDashSettings.maxRepeatCardCount;
 
         repeatAmountSlider.mainSlider.value = wallGameSettings.repeatCardAmount;
 

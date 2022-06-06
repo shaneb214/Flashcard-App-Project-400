@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcd6f6af743a0bb4289d29284009a1a9, type: 3}
-  m_Name: WallGameSettings
+  m_Name: WallDashSettings
   m_EditorClassIdentifier: 
   MinimumCardRequirementToPlay: 5
   numWrongAnswersToShow: 3

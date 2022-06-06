@@ -18,7 +18,6 @@ namespace BlitzyUI
         public bool overrideManagedSorting;
         public int overrideSortValue;
 
-
         public delegate void ScreenDelegate (Screen screen);
         public event ScreenDelegate PushFinishedEvent;
         public event ScreenDelegate PopFinishedEvent;
@@ -79,13 +78,13 @@ namespace BlitzyUI
             callbackOnPopEnd?.Invoke();
         } 
 
-        protected void PushFinished ()
+        protected void PushFinished()
         {
             if (PushFinishedEvent != null)
                 PushFinishedEvent(this);
         }
 
-        protected void PopFinished ()
+        protected void PopFinished()
         {
             if (PopFinishedEvent != null)
                 PopFinishedEvent(this);

@@ -45,6 +45,7 @@ namespace BlitzyUI
         public bool inputOrderFixEnabled = true;
 
         private CanvasScaler _rootCanvasScalar;
+        //String is prefab name
         private Dictionary<string, Screen> _cache;
         private Queue<QueuedScreen> _queue;
         [SerializeField] private List<Screen> _stack;
@@ -308,7 +309,6 @@ namespace BlitzyUI
                 // Push screen.
                 QueuedScreenPush queuedPush = (QueuedScreenPush)queued;
                 Screen screenInstance;
-
 
                 //Is the screen I'm pushing cached (part of cached dict. therefore disabled in hierarchy)?
                 //If yes.. Don't instantiate a new screen, just re-enable cached screen.

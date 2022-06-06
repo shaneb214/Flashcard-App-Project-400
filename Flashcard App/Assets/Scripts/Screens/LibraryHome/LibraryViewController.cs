@@ -18,7 +18,6 @@ public class LibraryViewController : ScrollViewItemManager
         ModalWindow_SelectGameToPlay.AnimateWindow();
     }
 
-
     public virtual void OnEnable() { SetDisplayLibrary.SetDisplayPlaySetSelectedEvent += OnSetDisplayPlaySetSelected; }
     public virtual void OnDisable() { SetDisplayLibrary.SetDisplayPlaySetSelectedEvent -= OnSetDisplayPlaySetSelected; }
 }

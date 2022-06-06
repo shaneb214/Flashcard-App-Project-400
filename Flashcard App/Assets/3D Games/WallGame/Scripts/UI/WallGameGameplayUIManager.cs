@@ -28,5 +28,6 @@ public class WallGameGameplayUIManager : MonoBehaviour
     private void OnDestroy()
     {
         WallGameManager.GameStartedEvent -= OnWallGameStarted;
+        WallGameManager.GameEndedEvent -= OnWallGameEnded;
     }
 }

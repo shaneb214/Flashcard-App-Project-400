@@ -114,15 +114,6 @@ public class LanguageProfileController : MonoBehaviour
 
     #endregion
     #region New Language Profile Creation / Selection
-    //private void OnNewLanguageProfileCreated(LanguageProfile newProfile)
-    //{
-    //    //Has user set the new profile to be the current profile? - Set it as so. 
-    //    if (newProfile.IsCurrentProfile)
-    //        SelectNewProfile(newProfile);
-
-    //    //Add to memory.
-    //    userLanguageProfilesList.Add(newProfile);
-    //}
 
     //Select new Profile passing in languageprofile object.
     public void SelectNewProfile(LanguageProfile newProfile)
